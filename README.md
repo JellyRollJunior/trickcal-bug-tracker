@@ -16,6 +16,7 @@
 ```bash
 $ pnpm create vite
 ```
+8. add shared dependency to client
 
 # Repo structure
 
