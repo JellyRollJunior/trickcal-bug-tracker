@@ -17,6 +17,10 @@
 5. Setup shared package with tsconfig & Zod
 6. Setup server package
     - TS/Zod from catalog, TSX for --watch
+7. Setup React TypeScript client 
+```bash
+$ pnpm create vite
+```
 
 # Repo structure
 
