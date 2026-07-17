@@ -12,3 +12,17 @@
 1. Init pnpm at root
 2. Follow guide to install TurboRepo [here](https://turborepo.dev/docs/getting-started/add-to-existing-repository)
     - Replace next.js outputs with node outputs (dist)
+
+# Repo structure
+
+root/
+├── pnpm-workspace.yaml
+├── turbo.json
+├── tsconfig.base.json
+├── tsconfig.json
+├── package.json
+├── packages/
+│   └── shared/
+└── apps/
+    ├── server/
+    └── client/
