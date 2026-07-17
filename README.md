@@ -15,6 +15,8 @@
 3. Standardize external package versions using pnpm workspace catalogs
 4. Install TS and create TS configs at root
 5. Setup shared package with tsconfig & Zod
+6. Setup server package
+    - TS/Zod from catalog, TSX for --watch
 
 # Repo structure
 

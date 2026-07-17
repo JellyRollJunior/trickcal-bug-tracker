@@ -3,11 +3,16 @@
   "version": "0.0.1",
   "scripts": {
     "build": "tsc --build",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/server.ts"
   },
   "license": "ISC",
   "packageManager": "pnpm@10.30.2",
+  "devDependencies": {
+    "tsx": "^4.23.1",
+    "typescript": "catalog:"
+  },
   "dependencies": {
-    "@trickcal-bug-tracker/shared": "workspace:*"
+    "@trickcal-bug-tracker/shared": "workspace:*",
+    "zod": "catalog:"
   }
 }
