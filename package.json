@@ -2,15 +2,12 @@
   "name": "@trickcal-bug-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "license": "ISC",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",

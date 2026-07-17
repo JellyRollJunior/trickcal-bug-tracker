@@ -12,7 +12,9 @@
 1. Init pnpm at root
 2. Follow guide to install TurboRepo [here](https://turborepo.dev/docs/getting-started/add-to-existing-repository)
     - Replace next.js outputs with node outputs (dist)
-3. Install TS and create TS configs at root
+3. Standardize external package versions using pnpm workspace catalogs
+4. Install TS and create TS configs at root
+5. Setup shared package with tsconfig & Zod
 
 # Repo structure
 

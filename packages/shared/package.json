@@ -2,6 +2,8 @@
   "name": "@trickcal-bug-tracker/shared",
   "version": "0.0.1",
   "description": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.30.2",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,9 +17,10 @@
     "build": "tsc --build",
     "dev": "tsc --build --watch"
   },
-  "license": "ISC",
-  "packageManager": "pnpm@10.30.2",
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
   "dependencies": {
-    "zod": "^4.4.3"
+    "zod": "catalog:"
   }
 }

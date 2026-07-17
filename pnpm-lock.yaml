@@ -4,6 +4,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    typescript:
+      specifier: ^7.0.2
+      version: 7.0.2
+    zod:
+      specifier: ^4.4.3
+      version: 4.4.3
+
 importers:
 
   .:
@@ -15,11 +24,21 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2
 
+  apps/server:
+    dependencies:
+      '@trickcal-bug-tracker/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+
   packages/shared:
     dependencies:
       zod:
-        specifier: ^4.4.3
+        specifier: 'catalog:'
         version: 4.4.3
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
 
 packages:
 

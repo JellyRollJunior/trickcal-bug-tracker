@@ -1,7 +1,10 @@
 packages:
-  - "packages/*"
   - "apps/*"
+  - "packages/*"
 allowBuilds:
   "@prisma/engines": true
   esbuild: true
   prisma: true
+catalog:
+  typescript: "^7.0.2"
+  zod: "^4.4.3"

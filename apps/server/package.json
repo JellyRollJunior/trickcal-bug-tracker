@@ -1,0 +1,13 @@
+{
+  "name": "@trickcal-bug-tracker/server",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsx watch src/index.ts"
+  },
+  "license": "ISC",
+  "packageManager": "pnpm@10.30.2",
+  "dependencies": {
+    "@trickcal-bug-tracker/shared": "workspace:*"
+  }
+}
