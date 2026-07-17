@@ -1,17 +1,13 @@
 {
-  "name": "client",
+  "name": "@trickcal-bug-tracker/client",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
@@ -30,5 +26,10 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.62.0",
     "vite": "^8.1.1"
+  },
+  "dependencies": {
+    "@trickcal-bug-tracker/shared": "workspace:*",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }

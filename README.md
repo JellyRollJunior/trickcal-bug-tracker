@@ -2,11 +2,6 @@
 
 # todo
 
-1. setup turbo repo workspace
-2. setup client package
-3. setup server package
-4. setup shared package
-
 # Setting up a TS turborepo workspace with pnpm
 
 1. Init pnpm at root
@@ -17,7 +12,7 @@
 5. Setup shared package with tsconfig & Zod
 6. Setup server package
     - TS/Zod from catalog, TSX for --watch
-7. Setup React TypeScript client 
+7. Setup React TypeScript client  (with react compiler wow neato!)
 ```bash
 $ pnpm create vite
 ```
