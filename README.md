@@ -35,7 +35,7 @@ root/
     - Vitest w/ jsdom (render React components) & userEvent
     - Shared folder as dependency
 - Server
-    - TypeScript, Express, Zod, Cors
+    - TypeScript, Express, Zod, Cors, Prisma ORM
     - Dotenv entry file
     - Jest supertest
     - Shared folder as dependency
@@ -74,6 +74,10 @@ $ turbo start
     - Configure tsconfig.json with paths
 3. Setup vitest and vitest.config.ts
 4. Setup dotenv entry file
+5. Install Prisma using this guide [here](https://www.prisma.io/docs/prisma-orm/quickstart/postgresql#1-create-a-new-project)
+    - remove output location
+6. Manually create .env file with the following variables
+    - PORT, DATABASE_URL
 
 ### Shared setup
 
