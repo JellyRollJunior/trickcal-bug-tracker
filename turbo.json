@@ -9,6 +9,15 @@
       "dependsOn": ["^build"],
       "persistent": true,
       "cache": false
+    },
+    "lint": {},
+    "test": {
+      "cache": false
+    },
+    "preview": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
     }
   }
 }
