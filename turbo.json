@@ -14,7 +14,7 @@
     "test": {
       "cache": false
     },
-    "preview": {
+    "start": {
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true

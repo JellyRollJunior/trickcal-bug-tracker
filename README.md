@@ -1,9 +1,28 @@
-# trickcal-bug-tracker
+## trickcal-bug-tracker
+
+Typescript React Express monorepo v2
+
+### Repo structure
+
+```
+root/
+├── pnpm-workspace.yaml
+├── turbo.json
+├── tsconfig.base.json
+├── tsconfig.json
+├── package.json
+├── packages/
+│   └── shared/
+└── apps/
+    ├── server/
+    └── client/
+```
 
 #### Includes
 
 - Root
     - PNPM package manager
+    - TurboRepo monorepo
     - Workspace linking client/server/shared
     - Standardized TypeScript/Zod/Prettier version through workspace catalog
     - base TypeScript config
@@ -21,6 +40,15 @@
     - Shared folder as dependency
 - Shared
     - Typescript, Zod
+
+### Scripts
+
+```bash
+$ turbo dev
+$ turbo build
+$ turbo test
+$ turbo start
+```
 
 ### Workspace setup
 
@@ -49,19 +77,3 @@
 
 1. Install dependencies
 2. Add shared as workspace dependencies for client/server
-
-### Repo structure
-
-```
-root/
-├── pnpm-workspace.yaml
-├── turbo.json
-├── tsconfig.base.json
-├── tsconfig.json
-├── package.json
-├── packages/
-│   └── shared/
-└── apps/
-    ├── server/
-    └── client/
-```
