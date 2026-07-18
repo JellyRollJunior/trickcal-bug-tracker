@@ -18,6 +18,7 @@
     "dev": "tsc --build --watch"
   },
   "devDependencies": {
+    "prettier": "catalog:",
     "typescript": "catalog:"
   },
   "dependencies": {
