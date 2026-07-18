@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router-dom';
-import { App } from './App.tsx';
+import { App } from '@/app/App.tsx';
 
 const routes: RouteObject[] = [
   {
