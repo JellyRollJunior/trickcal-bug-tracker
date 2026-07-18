@@ -1,4 +1,4 @@
-## trickcal-bug-tracker
+## Trickcal Bug Tracker
 
 Typescript React Express monorepo v2
 
