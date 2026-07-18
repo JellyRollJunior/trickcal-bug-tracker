@@ -1,19 +1,26 @@
 {
   "name": "@trickcal-bug-tracker/server",
   "version": "0.0.1",
-  "scripts": {
-    "build": "tsc --build",
-    "dev": "tsx watch src/server.ts"
-  },
   "license": "ISC",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/src/server.js"
+  },
   "packageManager": "pnpm@10.30.2",
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.13.3",
+    "dotenv": "^17.4.2",
     "prettier": "catalog:",
     "tsx": "^4.23.1",
     "typescript": "catalog:"
   },
   "dependencies": {
     "@trickcal-bug-tracker/shared": "workspace:*",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
     "zod": "catalog:"
   }
 }

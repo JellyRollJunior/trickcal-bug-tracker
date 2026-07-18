@@ -22,7 +22,7 @@
 - Shared
     - Typescript, Zod
 
-# Setting up a TS turborepo workspace with pnpm
+### Workspace setup
 
 1. Init pnpm at root
 2. Follow guide to install TurboRepo [here](https://turborepo.dev/docs/getting-started/add-to-existing-repository)
@@ -30,16 +30,20 @@
 3. Standardize external package versions using pnpm workspace catalogs
 4. Install TS and create TS configs at root
 
-# Client setup
+### Client setup
 
 1. Follow guide [here](https://github.com/JellyRollJunior/typescript-react-express-template)
     - Template outdated, use `$ pnpm create vite`
     - Path aliasing outdated -> use files found in this repo: tsconfig.json, tsconfig.app.json, vite.config.ts, vitest.config.ts
     - Vitest config outdated -> use files found in this repo: vitest.config.ts
 
-# Server setup
+### Server setup
 
-# Repo structure
+### Shared setup
+1. Install dependencies
+2. Add shared as workspace dependencies for client/server
+
+### Repo structure
 
 ```
 root/
