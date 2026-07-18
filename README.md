@@ -39,7 +39,14 @@
 
 ### Server setup
 
+1. Install dependencies + types
+2. Configure path aliasing
+    - Install tsc-alias
+    - Configure tsconfig.json with paths
+3. Setup vitest and vitest.config.ts
+
 ### Shared setup
+
 1. Install dependencies
 2. Add shared as workspace dependencies for client/server
 
