@@ -36,6 +36,7 @@ root/
     - Shared folder as dependency
 - Server
     - TypeScript, Express, Zod, Cors
+    - Dotenv entry file
     - Jest supertest
     - Shared folder as dependency
 - Shared
@@ -72,6 +73,7 @@ $ turbo start
     - Install tsc-alias
     - Configure tsconfig.json with paths
 3. Setup vitest and vitest.config.ts
+4. Setup dotenv entry file
 
 ### Shared setup
 
