@@ -5,7 +5,13 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+
+    /* Path aliases */
+    "paths": {
+      "@/*": ["./src/*"],
+      "@root/*": ["./*"]
+    }
   },
   "include": ["src"],
   "references": [
