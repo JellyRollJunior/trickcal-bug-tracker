@@ -7,4 +7,9 @@ const postSignupRequestBodySchema = z.object({
     name: userSchemas.nameSchema,
 });
 
-export { postSignupRequestBodySchema };
+const postLoginRequestBodySchema = z.object({
+    username: z.string().min(1).max(50),
+    password: z.string().min(8).max(128),
+});
+
+export { postSignupRequestBodySchema, postLoginRequestBodySchema };
