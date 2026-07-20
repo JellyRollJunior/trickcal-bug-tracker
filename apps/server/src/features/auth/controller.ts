@@ -1,7 +1,8 @@
 import type { User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
-import * as userQueries from '@/features/users/queries.js';
 import bcrypt from 'bcryptjs';
+import { mapUserToDto } from '@/features/users/mapper.js';
+import * as userQueries from '@/features/users/queries.js';
 
 const postSignup = async (
     req: Request<{}, {}, Pick<User, 'username' | 'password' | 'name'>>,
@@ -17,7 +18,7 @@ const postSignup = async (
             name,
         });
 
-        res.json(newUser);
+        res.json(mapUserToDto(newUser));
     } catch (error) {
         next(error);
     }
