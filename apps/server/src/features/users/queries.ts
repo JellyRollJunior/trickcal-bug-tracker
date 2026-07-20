@@ -1,6 +1,19 @@
 import { prisma } from '@/db/prisma.js';
 import { User } from '@prisma/client';
 
+const getUserById = async ({ id }: Pick<User, 'id'>) => {
+    try {
+        const data = await prisma.user.findFirst({
+            where: {
+                id: id,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to fetch user');
+    }
+};
+
 const getUserByUsername = async ({ username }: Pick<User, 'username'>) => {
     try {
         const data = await prisma.user.findFirst({
@@ -64,4 +77,10 @@ const createGithubUser = async ({
     }
 };
 
-export { getUserByUsername, getUserByGithubId, createUser, createGithubUser };
+export {
+    getUserById,
+    getUserByUsername,
+    getUserByGithubId,
+    createUser,
+    createGithubUser,
+};
