@@ -39,7 +39,7 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
         ) => {
             // Executed after LocalStrategy. Parameters sent through LocalStrategy done callback
             if (error) return next(error);
-            if (!userTokenPayload) return next(new AuthenticationError(info?.message ?? 'Internal server error'));
+            if (!userTokenPayload) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate user'));
             
             // auth successful - sign token
             const token = signToken(userTokenPayload);
@@ -49,4 +49,24 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
     authMiddleware(req, res, next);
 };
 
-export { postSignup, postLogin };
+const getGithubCallback = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const authMiddleware = passport.authenticate(
+        'github',
+        { failureRedirect: '/' },
+        (error: Error, user: Express.User, info: { message?: string }) => {
+            // Executed after GithubStrategy
+            if (error) return next(error);
+            if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with GitHub'));
+            
+            const token = signToken(user);
+            res.json({ message: 'GitHub authentication success', token })
+        }
+    );
+    authMiddleware(req, res, next);
+};
+
+export { postSignup, postLogin, getGithubCallback };
