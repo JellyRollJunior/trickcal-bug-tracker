@@ -36,12 +36,12 @@ const passwordSchema = z
         message: `password ${INVALID_CHARACTER_ERROR_MESSAGE}`,
     });
 
-const displayNameSchema = z
+const nameSchema = z
     .string()
     .min(1)
     .max(16)
     .regex(/^[^<>]*$/, {
-        message: `displayName ${INVALID_CHARACTER_ERROR_MESSAGE}`,
+        message: `name ${INVALID_CHARACTER_ERROR_MESSAGE}`,
     });
 
-export { usernameSchema, passwordSchema, displayNameSchema };
+export { usernameSchema, passwordSchema, nameSchema };

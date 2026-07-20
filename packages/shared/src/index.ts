@@ -1,1 +1,4 @@
-// export from here
+export * from './errors/AuthenticationError.js'
+export * from './errors/BaseError.js'
+export * from './errors/ValidationError.js'
+export * from './errors/mapper.js'
