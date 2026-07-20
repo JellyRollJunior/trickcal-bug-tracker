@@ -2,6 +2,9 @@ import type { User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { mapUserToDto } from '@/features/users/mapper.js';
+import { passport } from '@/features/auth/passport/passport.js';
+import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import { signToken } from '@/features/auth/passport/signToken.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const postSignup = async (
@@ -24,4 +27,26 @@ const postSignup = async (
     }
 };
 
-export { postSignup };
+/* Authenticate credentials & issue jwt on successful authentication */
+const postLogin = async (req: Request, res: Response, next: NextFunction) => {
+    const authMiddleware = passport.authenticate(
+        'local',
+        { session: false },
+        (
+            error: Error | null,
+            userTokenPayload: Express.User | false,
+            info: { message?: string } | null
+        ) => {
+            // Executed after LocalStrategy. Parameters sent through LocalStrategy done callback
+            if (error) return next(error);
+            if (!userTokenPayload) return next(new AuthenticationError(info?.message ?? 'Internal server error'));
+            
+            // auth successful - sign token
+            const token = signToken(userTokenPayload);
+            res.json({ message: 'Authentication success', token });
+        }
+    );
+    authMiddleware(req, res, next);
+};
+
+export { postSignup, postLogin };
