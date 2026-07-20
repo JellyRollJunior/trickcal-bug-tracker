@@ -12,4 +12,10 @@ model User {
   password String?
   name     String
   githubId String? @unique
+  role     Role    @default(MEMBER)
+}
+
+enum Role {
+  ADMIN
+  MEMBER
 }
