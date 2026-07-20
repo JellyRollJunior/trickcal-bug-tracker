@@ -18,68 +18,11 @@ root/
     └── client/
 ```
 
-#### Includes
+## Endpoints
 
-- Root
-    - PNPM package manager
-    - TurboRepo monorepo
-    - Workspace linking client/server/shared
-    - Standardized TypeScript/Zod/Prettier version through workspace catalog
-    - base TypeScript config
-- Client
-    - Vite Typescript, React, React compiler
-    - React Router, TailwindCSS, Zod
-    - Prettier Tailwind Config
-    - Path Aliasing
-        - @: './src'
-    - Vitest w/ jsdom (render React components) & userEvent
-    - Shared folder as dependency
-- Server
-    - TypeScript, Express, Zod, Cors, Prisma ORM
-    - Dotenv entry file
-    - Jest supertest
-    - Shared folder as dependency
-- Shared
-    - Typescript, Zod
-
-### Scripts
-
-```bash
-$ turbo dev
-$ turbo build
-$ turbo test
-$ turbo start
-```
-
-### Workspace setup
-
-1. Init pnpm at root
-2. Follow guide to install TurboRepo [here](https://turborepo.dev/docs/getting-started/add-to-existing-repository)
-    - Replace next.js outputs with node outputs (dist)
-3. Standardize external package versions using pnpm workspace catalogs
-4. Install TS and create TS configs at root
-
-### Client setup
-
-1. Follow guide [here](https://github.com/JellyRollJunior/typescript-react-express-template)
-    - Template outdated, use `$ pnpm create vite`
-    - Path aliasing outdated -> use files found in this repo: tsconfig.json, tsconfig.app.json, vite.config.ts, vitest.config.ts
-    - Vitest config outdated -> use files found in this repo: vitest.config.ts
-
-### Server setup
-
-1. Install dependencies + types
-2. Configure path aliasing
-    - Install tsc-alias
-    - Configure tsconfig.json with paths
-3. Setup vitest and vitest.config.ts
-4. Setup dotenv entry file
-5. Install Prisma using this guide [here](https://www.prisma.io/docs/prisma-orm/quickstart/postgresql#1-create-a-new-project)
-    - remove output location
-6. Manually create .env file with the following variables
-    - PORT, DATABASE_URL
-
-### Shared setup
-
-1. Install dependencies
-2. Add shared as workspace dependencies for client/server
+| Method | URI                   | Function                   | Body (inputs)                   | Outputs         | Notes                                                                           |
+| ------ | --------------------- | -------------------------- | ------------------------------- | --------------- | ------------------------------------------------------------------------------- |
+| POST   | /auth/signup          | Signup                     | username, password, displayName | { displayName } | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
+| POST   | /auth/login           | Login                      | username, password              | { token }       |                                                                                 |
+| POST   | /auth/github          | GitHub oauth2 login/signup |                                 |                 | Login with GitHub oauth. Creates an account if no account exists                |
+| POST   | /auth/github/callback | GitHub oauth2 callback     |                                 | { token }       | Callback to receive token after successful authorization                        |
