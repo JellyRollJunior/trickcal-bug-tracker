@@ -26,3 +26,8 @@ root/
 | POST   | /auth/login           | Login                      | username, password              | { token }       |                                                                                 |
 | POST   | /auth/github          | GitHub oauth2 login/signup |                                 |                 | Login with GitHub oauth. Creates an account if no account exists                |
 | POST   | /auth/github/callback | GitHub oauth2 callback     |                                 | { token }       | Callback to receive token after successful authorization                        |
+
+## Learning Outcomes
+- Prisma indexing
+    - foreign keys not indexed by default
+    - indexing based on actual query patterns, not defensively on every column

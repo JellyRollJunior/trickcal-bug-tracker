@@ -13,9 +13,98 @@ model User {
   name     String
   githubId String? @unique
   role     Role    @default(MEMBER)
+
+  boards             Board[]  @relation(name: "owner")
+  collaboratorBoards Board[]  @relation(name: "BoardCollaborators")
+  tickets            Ticket[]
+  assignedTickets    Ticket[] @relation(name: "assignedTickets")
+}
+
+model Board {
+  id           String   @id @default(uuid())
+  ownerId      String
+  creationDate DateTime @default(now())
+  lastUpdate   DateTime @updatedAt
+  name         String
+  description  String
+
+  sections Section[]
+
+  owner         User   @relation(name: "owner", fields: [ownerId], references: [id])
+  collaborators User[] @relation(name: "BoardCollaborators")
+}
+
+model Section {
+  id           String   @id @default(uuid())
+  boardId      String
+  order        String
+  creationDate DateTime @default(now())
+  lastUpdate   DateTime @updatedAt
+  name         String
+
+  tickets Ticket[]
+
+  board Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  @@index([boardId])
+}
+
+model Ticket {
+  id              String    @id @default(uuid())
+  order           String
+  sectionId       String
+  issueType       IssueType
+  category        Category
+  creationDate    DateTime  @default(now())
+  lastUpdate      DateTime  @updatedAt
+  reporterId      String
+  assignedTo      String?
+  priority        Priority  @default(LOW)
+  severity        Severity  @default(TRIVIAL)
+  reproducibility Boolean   @default(false)
+  summary         String
+  description     String
+
+  section  Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  reporter User    @relation(fields: [reporterId], references: [id])
+  assignee User?   @relation(name: "assignedTickets", fields: [assignedTo], references: [id])
+
+  @@index([sectionId])
+  @@index([assignedTo])
 }
 
 enum Role {
   ADMIN
   MEMBER
+}
+
+enum IssueType {
+  BUG
+  FEATURE_REQUEST
+  TASK
+  IMPROVEMENT
+}
+
+enum Category {
+  SERVER
+  CLIENT
+  DATABASE
+  INFRA
+  OTHER
+}
+
+enum Priority {
+  LOWEST
+  LOW
+  MEDIUM
+  HIGH
+  HIGHEST
+}
+
+enum Severity {
+  TRIVIAL
+  MINOR
+  MAJOR
+  CRITICAL
+  BLOCKER
 }
