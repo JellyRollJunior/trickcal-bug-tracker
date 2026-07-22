@@ -3,7 +3,19 @@ import { Request, Response, NextFunction } from 'express';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import * as boardQueries from '@/features/boards/board.queries.js';
 
-const postBoard = async (
+const getBoards = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user?.id
+        if (!userId) throw new AuthenticationError();
+
+        const data = await boardQueries.getBoards({id: userId})
+        res.json(data);
+    } catch (error) {
+        next(error)
+    }
+}
+
+const postBoards = async (
     req: Request<{}, {}, Pick<Board, 'name' | 'description'>>,
     res: Response,
     next: NextFunction
@@ -20,4 +32,4 @@ const postBoard = async (
     }
 };
 
-export { postBoard };
+export { getBoards, postBoards };

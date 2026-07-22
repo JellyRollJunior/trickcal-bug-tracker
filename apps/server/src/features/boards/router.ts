@@ -7,11 +7,12 @@ import * as boardController from '@/features/boards/controller.js';
 
 const boardRouter: Router = CreateRouter();
 
+boardRouter.get('/', requireAuth, boardController.getBoards);
 boardRouter.post(
     '/',
-    validate(postBoardsSchema),
     requireAuth,
-    boardController.postBoard
+    validate(postBoardsSchema),
+    boardController.postBoards
 );
 
 export { boardRouter };
