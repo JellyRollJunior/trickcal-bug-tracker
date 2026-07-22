@@ -6,6 +6,7 @@ const validateRequestBody = <T>(
     validationSchema: ZodType<T, unknown>
 ): RequestHandler => {
     return (req: Request, _res: Response, next: NextFunction) => {
+        if (!req.body) req.body = {};
         const data = validationSchema.parse(req.body);
         req.body = data;
         next();
