@@ -32,3 +32,7 @@ root/
     - foreign keys not indexed by default
     - indexing based on actual query patterns, not defensively on every column
 - Prisma nested creates
+
+## TODO
+- post board
+    -  validate body

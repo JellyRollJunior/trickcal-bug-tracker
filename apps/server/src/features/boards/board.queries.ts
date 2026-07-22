@@ -1,5 +1,5 @@
+import type { Board, User } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
-import { Board, User } from '@prisma/client';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 
 const getBoards = async ({ id: userId }: Pick<User, 'id'>) => {
@@ -21,14 +21,14 @@ const getBoards = async ({ id: userId }: Pick<User, 'id'>) => {
 
 /* Create board with default sections */
 const createBoard = async ({
-    id: userId,
+    ownerId,
     name,
     description,
-}: Pick<User, 'id'> & Pick<Board, 'name' | 'description'>) => {
+}: { ownerId: User['id'] } & Pick<Board, 'name' | 'description'>) => {
     try {
         const data = await prisma.board.create({
             data: {
-                ownerId: userId,
+                ownerId: ownerId,
                 name: name,
                 description: description,
                 sections: {
