@@ -1,6 +1,7 @@
 import type { Board, User } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
+import { boardInclude } from '@/features/boards/select.js';
 
 const getBoards = async ({ userId }: { userId: User['id'] }) => {
     try {
@@ -54,29 +55,7 @@ const getBoardById = async ({ boardId }: { boardId: Board['id'] }) => {
             where: {
                 id: boardId,
             },
-            include: {
-                sections: {
-                    include: {
-                        tickets: {
-                            orderBy: {
-                                order: 'asc',
-                            },
-                        },
-                    },
-                    orderBy: {
-                        order: 'asc',
-                    },
-                },
-                collaborators: {
-                    select: {
-                        id: true,
-                        name: true,
-                    },
-                    orderBy: {
-                        name: 'asc',
-                    },
-                },
-            },
+            include: boardInclude
         });
         return data;
     } catch (error) {
