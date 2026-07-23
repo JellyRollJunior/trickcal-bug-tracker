@@ -26,14 +26,19 @@ root/
 | POST   | /auth/login           | Login                      | username, password              | { token }       |                                                                                 |
 | POST   | /auth/github          | GitHub oauth2 login/signup |                                 |                 | Login with GitHub oauth. Creates an account if no account exists                |
 | POST   | /auth/github/callback | GitHub oauth2 callback     |                                 | { token }       | Callback to receive token after successful authorization                        |
+| GET    | /boards               | get boards                 |                                 | { token }       |                                                                                 |
+| POST   | /boards               | create boards              |                                 | { token }       |                                                                                 |
+| GET    | /boards/:boardId      | get board by id            |                                 | { token }       |                                                                                 |
 
 ## Learning Outcomes
+
 - Prisma indexing
     - foreign keys not indexed by default
     - indexing based on actual query patterns, not defensively on every column
 - Prisma nested creates
 
 ## TODO
+
 - error handler
     - database error
 
@@ -42,19 +47,14 @@ root/
 - Right now tickets has no select, so it pulls every field on Ticket — which is probably fine, since Ticket doesn't have obviously sensitive fields like User does. But it does mean you're fetching description (potentially large text) for every ticket just to render a Kanban card, when your card UI likely only needs id, summary, priority, severity, assignee, order for the board view itself:
 
 - shared
-    - type checks selects/includes -> shared types  
+    - type checks selects/includes -> shared types
 
 - later
-    -   set token to proper  expire time
-
-
+    - set token to proper expire time
 
 ## Process
+
 - get board route
-    - setup controller
-    - setup route
-    - permission check
-    - shared types
     - dto mapper
 
 - board summary shared (for get /boards post /boards)
@@ -64,14 +64,16 @@ root/
     - create 404 error
 
 ## template
+
 const getBoard = async (
-    req: Request<{}, {}, {}>,
-    res: Response,
-    next: NextFunction
+req: Request<{}, {}, {}>,
+res: Response,
+next: NextFunction
 ) => {
-    try {
+try {
 
     } catch (error) {
         next(error)
     }
+
 };

@@ -14,8 +14,8 @@ const ticketSelect = Prisma.validator<Prisma.TicketSelect>()({
     reproducibility: true,
     summary: true,
     description: true,
-    assignee: { select: userSummarySelect },
     reporter: { select: userSummarySelect },
+    assignee: { select: userSummarySelect },
 });
 
 const sectionSelect = Prisma.validator<Prisma.SectionSelect>()({

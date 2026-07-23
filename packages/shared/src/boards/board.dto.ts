@@ -1,13 +1,17 @@
-import { SectionDto } from "./section.dto";
+import { UserDto } from '../users/user.dto.js';
+import { SectionDto } from './section.dto.js';
 
-type BoardDto = {
+type BoardSummaryDto = {
     id: string;
-    ownerId: string;
     creationDate: string;
     lastUpdate: string;
     name: string;
     description: string;
-    sections: SectionDto[];
-}
+    owner: UserDto;
+};
 
-export { BoardDto }
+type BoardDto = BoardSummaryDto & {
+    sections: SectionDto[];
+};
+
+export { BoardDto };
