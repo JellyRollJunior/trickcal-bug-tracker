@@ -36,18 +36,18 @@ root/
     - foreign keys not indexed by default
     - indexing based on actual query patterns, not defensively on every column
 - Prisma nested creates
+- Solidify TypeScript data return workflow
+    - DB object in Prisma Schema - Type name: Base
+    - Query object with extras - Type name: BaseWithExtras
+        - Query using custom reusable selects w/ Prisma Validator
+        - Create intermediate types w/ Prisma GetPayload
+    - Manipulate data, do logic with data, etc.
+    - Map BaseWithExtras to dto & send to user - Type name: BaseDto or BaseWithExtrasDto
 
 ## TODO
 
 - error handler
     - database error
-
-- if null -> return 404 board not found
-- get board by ID authorization check?
-- Right now tickets has no select, so it pulls every field on Ticket — which is probably fine, since Ticket doesn't have obviously sensitive fields like User does. But it does mean you're fetching description (potentially large text) for every ticket just to render a Kanban card, when your card UI likely only needs id, summary, priority, severity, assignee, order for the board view itself:
-
-- shared
-    - type checks selects/includes -> shared types
 
 - later
     - set token to proper expire time
