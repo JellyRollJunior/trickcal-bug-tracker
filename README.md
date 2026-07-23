@@ -46,3 +46,32 @@ root/
 
 - later
     -   set token to proper  expire time
+
+
+
+## Process
+- get board route
+    - setup controller
+    - setup route
+    - permission check
+    - shared types
+    - dto mapper
+
+- board summary shared (for get /boards post /boards)
+    - dto mapper
+
+- Errors
+    - create 404 error
+
+## template
+const getBoard = async (
+    req: Request<{}, {}, {}>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+
+    } catch (error) {
+        next(error)
+    }
+};

@@ -1,6 +1,6 @@
 import type { Board } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import { AuthenticationError, BaseError } from '@trickcal-bug-tracker/shared';
 import * as boardQueries from '@/features/boards/board.queries.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,4 +32,23 @@ const postBoards = async (
     }
 };
 
-export { getBoards, postBoards };
+const getBoard = async (
+    req: Request<{ boardId: Board['id'] }, {}, {}>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
+        const boardId = req.params.boardId;
+
+        const data = await boardQueries.getBoardById({ userId, boardId });
+        if (!data) throw new BaseError('404 Not Found', 'Board not found', 404);
+
+        res.json(data);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { getBoards, postBoards, getBoard };

@@ -49,13 +49,23 @@ const createBoard = async ({
     }
 };
 
-const getBoardById = async ({ boardId }: { boardId: Board['id'] }) => {
+const getBoardById = async ({
+    userId,
+    boardId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+}) => {
     try {
-        const data = await prisma.board.findUnique({
+        const data = await prisma.board.findFirst({
             where: {
                 id: boardId,
+                OR: [
+                    { ownerId: userId },
+                    { collaborators: { some: { id: userId } } },
+                ],
             },
-            include: boardInclude
+            include: boardInclude,
         });
         return data;
     } catch (error) {
