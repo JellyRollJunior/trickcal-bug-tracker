@@ -1,7 +1,7 @@
 import type { Board, User } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
-import { boardInclude } from '@/features/boards/select.js';
+import { boardSelect } from '@/features/boards/select.js';
 
 const getBoards = async ({ userId }: { userId: User['id'] }) => {
     try {
@@ -65,7 +65,7 @@ const getBoardById = async ({
                     { collaborators: { some: { id: userId } } },
                 ],
             },
-            include: boardInclude,
+            select: boardSelect,
         });
         return data;
     } catch (error) {

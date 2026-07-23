@@ -18,13 +18,25 @@ const ticketSelect = Prisma.validator<Prisma.TicketSelect>()({
     reporter: { select: userSummarySelect },
 });
 
-const sectionInclude = Prisma.validator<Prisma.SectionInclude>()({
+const sectionSelect = Prisma.validator<Prisma.SectionSelect>()({
+    id: true,
+    boardId: true,
+    order: true,
+    creationDate: true,
+    lastUpdate: true,
+    name: true,
     tickets: { select: ticketSelect, orderBy: { order: 'asc' } },
 });
 
-const boardInclude = Prisma.validator<Prisma.BoardInclude>()({
-    sections: { include: sectionInclude, orderBy: { order: 'asc' } },
+const boardSelect = Prisma.validator<Prisma.BoardSelect>()({
+    id: true,
+    creationDate: true,
+    lastUpdate: true,
+    name: true,
+    description: true,
+    owner: { select: userSummarySelect },
+    sections: { select: sectionSelect, orderBy: { order: 'asc' } },
     collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
 });
 
-export { ticketSelect, sectionInclude, boardInclude };
+export { ticketSelect, sectionSelect, boardSelect };

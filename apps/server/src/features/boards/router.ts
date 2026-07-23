@@ -14,5 +14,6 @@ boardRouter.post(
     validate(postBoardsSchema),
     boardController.postBoards
 );
+boardRouter.get('/:boardId', requireAuth, boardController.getBoard);
 
 export { boardRouter };
