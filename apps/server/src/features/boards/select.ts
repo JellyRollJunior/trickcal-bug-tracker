@@ -26,6 +26,10 @@ type TicketWithParticipants = Prisma.TicketGetPayload<{
     include: typeof ticketInclude;
 }>;
 
+type SectionWithTickets = Prisma.SectionGetPayload<{
+    include: typeof sectionInclude;
+}>
+
 type BoardWithParticipants = Prisma.BoardGetPayload<{
     include: typeof boardInclude;
 }>;
@@ -35,4 +39,4 @@ type BoardWithSectionsAndTickets = Prisma.BoardGetPayload<{
 }>;
 
 export { ticketInclude, sectionInclude, boardInclude, boardWithSectionsAndTicketsInclude };
-export type { TicketWithParticipants, BoardWithParticipants, BoardWithSectionsAndTickets };
+export type { TicketWithParticipants, SectionWithTickets, BoardWithParticipants, BoardWithSectionsAndTickets };

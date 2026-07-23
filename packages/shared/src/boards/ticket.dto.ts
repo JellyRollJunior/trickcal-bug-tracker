@@ -6,8 +6,8 @@ type TicketDto = {
     order: string;
     issueType: 'BUG' | 'FEATURE_REQUEST' | 'TASK' | 'IMPROVEMENT';
     category: 'SERVER' | 'CLIENT' | 'DATABASE' | 'INFRA' | 'OTHER';
-    creationDate: Date;
-    lastUpdate: Date;
+    creationDate: string;
+    lastUpdate: string;
     priority: 'LOWEST' | 'LOW' | 'MEDIUM' | 'HIGH' | 'HIGHEST';
     severity: 'TRIVIAL' | 'MINOR' | 'MAJOR' | 'CRITICAL' | 'BLOCKER';
     reproducibility: boolean;

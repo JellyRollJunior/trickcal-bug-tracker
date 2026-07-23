@@ -54,12 +54,6 @@ root/
 
 ## Process
 
-- get board route
-    - dto mapper
-
-- board summary shared (for get /boards post /boards)
-    - dto mapper
-
 - Errors
     - create 404 error
 
