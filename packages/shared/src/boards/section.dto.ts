@@ -1,6 +1,6 @@
 import { TicketDto } from './ticket.dto.js';
 
-type Section = {
+type SectionDto = {
     id: string;
     boardId: string;
     order: string;
@@ -10,4 +10,4 @@ type Section = {
     tickets: TicketDto[];
 };
 
-export { Section };
+export { SectionDto };

@@ -1,13 +1,13 @@
-import { Section } from "./section.dto";
+import { SectionDto } from "./section.dto";
 
-type Board = {
+type BoardDto = {
     id: string;
     ownerId: string;
     creationDate: string;
     lastUpdate: string;
     name: string;
     description: string;
-    sections: Section[];
+    sections: SectionDto[];
 }
 
-export { Board }
+export { BoardDto }

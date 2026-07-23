@@ -51,19 +51,19 @@ model Section {
 
 model Ticket {
   id              String    @id @default(uuid())
-  order           String
   sectionId       String
+  order           String
   issueType       IssueType
   category        Category
   creationDate    DateTime  @default(now())
   lastUpdate      DateTime  @updatedAt
-  reporterId      String
-  assignedTo      String?
   priority        Priority  @default(LOW)
   severity        Severity  @default(TRIVIAL)
   reproducibility Boolean   @default(false)
   summary         String
   description     String
+  reporterId      String
+  assignedTo      String?
 
   section  Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   reporter User    @relation(fields: [reporterId], references: [id])

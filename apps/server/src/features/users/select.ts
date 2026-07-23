@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 const userSummarySelect = Prisma.validator<Prisma.UserSelect>()({
     id: true,
     name: true,
+    role: true,
 });
 
 type UserSummary = Prisma.UserGetPayload<{ select: typeof userSummarySelect }>;
