@@ -4,7 +4,7 @@ import { env } from '@/config/env.js';
 
 const signToken = (userTokenPayload: TokenPayload) => {
     const options = {
-        expiresIn: 60 * 60,
+        expiresIn: 60 * 60 * 24 * 31,
     };
     const token = jwt.sign(userTokenPayload, env.tokenSecret ?? '', options);
     return token;

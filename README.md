@@ -34,5 +34,21 @@ root/
 - Prisma nested creates
 
 ## TODO
-- post board
-    -  validate body
+- get board
+    - select ticket
+    - select section
+    - select board (collaborators)
+- error handler
+    - database error
+- user select
+    - usage in getboardbyId
+    - PRISMA VALIDATOR?
+
+- if null -> return 404 board not found
+- get board by ID authorization check?
+- include assignee
+- Right now tickets has no select, so it pulls every field on Ticket — which is probably fine, since Ticket doesn't have obviously sensitive fields like User does. But it does mean you're fetching description (potentially large text) for every ticket just to render a Kanban card, when your card UI likely only needs id, summary, priority, severity, assignee, order for the board view itself:
+
+
+- later
+    -   set token to proper  expire time

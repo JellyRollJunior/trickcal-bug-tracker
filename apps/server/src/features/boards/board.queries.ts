@@ -2,7 +2,7 @@ import type { Board, User } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 
-const getBoards = async ({ id: userId }: Pick<User, 'id'>) => {
+const getBoards = async ({ userId }: { userId: User['id'] }) => {
     try {
         const data = await prisma.board.findMany({
             where: {
@@ -21,14 +21,14 @@ const getBoards = async ({ id: userId }: Pick<User, 'id'>) => {
 
 /* Create board with default sections */
 const createBoard = async ({
-    ownerId,
+    userId,
     name,
     description,
-}: { ownerId: User['id'] } & Pick<Board, 'name' | 'description'>) => {
+}: { userId: User['id'] } & Pick<Board, 'name' | 'description'>) => {
     try {
         const data = await prisma.board.create({
             data: {
-                ownerId: ownerId,
+                ownerId: userId,
                 name: name,
                 description: description,
                 sections: {
@@ -48,4 +48,40 @@ const createBoard = async ({
     }
 };
 
-export { getBoards, createBoard };
+const getBoardById = async ({ boardId }: { boardId: Board['id'] }) => {
+    try {
+        const data = await prisma.board.findUnique({
+            where: {
+                id: boardId,
+            },
+            include: {
+                sections: {
+                    include: {
+                        tickets: {
+                            orderBy: {
+                                order: 'asc',
+                            },
+                        },
+                    },
+                    orderBy: {
+                        order: 'asc',
+                    },
+                },
+                collaborators: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                    orderBy: {
+                        name: 'asc',
+                    },
+                },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch board');
+    }
+};
+
+export { getBoards, createBoard, getBoardById };
