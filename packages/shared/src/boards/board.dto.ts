@@ -14,4 +14,4 @@ type BoardDto = BoardSummaryDto & {
     sections: SectionDto[];
 };
 
-export { BoardDto };
+export { BoardSummaryDto, BoardDto };

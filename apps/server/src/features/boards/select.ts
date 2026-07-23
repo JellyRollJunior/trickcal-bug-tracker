@@ -39,4 +39,17 @@ const boardSelect = Prisma.validator<Prisma.BoardSelect>()({
     collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
 });
 
-export { ticketSelect, sectionSelect, boardSelect };
+const boardSummarySelect = Prisma.validator<Prisma.BoardSelect>()({
+    id: true,
+    creationDate: true,
+    lastUpdate: true,
+    name: true,
+    description: true,
+    owner: { select: userSummarySelect },
+})
+
+type BoardSummary = Prisma.BoardGetPayload<{ select: typeof boardSummarySelect }>;
+type BoardSectionsTickets = Prisma.BoardGetPayload<{ select: typeof boardSelect }>;
+
+export { ticketSelect, sectionSelect, boardSelect, boardSummarySelect };
+export type { BoardSummary, BoardSectionsTickets }
