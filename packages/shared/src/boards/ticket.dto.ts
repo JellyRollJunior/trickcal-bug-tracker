@@ -6,15 +6,15 @@ type TicketDto = {
     order: string;
     issueType: 'BUG' | 'FEATURE_REQUEST' | 'TASK' | 'IMPROVEMENT';
     category: 'SERVER' | 'CLIENT' | 'DATABASE' | 'INFRA' | 'OTHER';
-    creationDate: string;
-    lastUpdate: string;
+    creationDate: Date;
+    lastUpdate: Date;
     priority: 'LOWEST' | 'LOW' | 'MEDIUM' | 'HIGH' | 'HIGHEST';
     severity: 'TRIVIAL' | 'MINOR' | 'MAJOR' | 'CRITICAL' | 'BLOCKER';
     reproducibility: boolean;
     summary: string;
     description: string;
     reporter: UserDto;
-    asignee: UserDto | null;
+    assignee: UserDto | null;
 };
 
 export type { TicketDto };

@@ -4,8 +4,8 @@ type SectionDto = {
     id: string;
     boardId: string;
     order: string;
-    creationDate: string;
-    lastUpdate: string;
+    creationDate: Date;
+    lastUpdate: Date;
     name: string;
     tickets: TicketDto[];
 };

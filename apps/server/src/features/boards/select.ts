@@ -1,55 +1,38 @@
 import { Prisma } from '@prisma/client';
 import { userSummarySelect } from '@/features/users/select.js';
 
-const ticketSelect = Prisma.validator<Prisma.TicketSelect>()({
-    id: true,
-    sectionId: true,
-    order: true,
-    issueType: true,
-    category: true,
-    creationDate: true,
-    lastUpdate: true,
-    priority: true,
-    severity: true,
-    reproducibility: true,
-    summary: true,
-    description: true,
+const ticketInclude = Prisma.validator<Prisma.TicketInclude>()({
     reporter: { select: userSummarySelect },
     assignee: { select: userSummarySelect },
 });
 
-const sectionSelect = Prisma.validator<Prisma.SectionSelect>()({
-    id: true,
-    boardId: true,
-    order: true,
-    creationDate: true,
-    lastUpdate: true,
-    name: true,
-    tickets: { select: ticketSelect, orderBy: { order: 'asc' } },
+const sectionInclude = Prisma.validator<Prisma.SectionInclude>()({
+    tickets: { include: ticketInclude, orderBy: { order: 'asc' } },
 });
 
-const boardSelect = Prisma.validator<Prisma.BoardSelect>()({
-    id: true,
-    creationDate: true,
-    lastUpdate: true,
-    name: true,
-    description: true,
+const boardInclude = Prisma.validator<Prisma.BoardInclude>()({
     owner: { select: userSummarySelect },
-    sections: { select: sectionSelect, orderBy: { order: 'asc' } },
     collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
 });
 
-const boardSummarySelect = Prisma.validator<Prisma.BoardSelect>()({
-    id: true,
-    creationDate: true,
-    lastUpdate: true,
-    name: true,
-    description: true,
+const boardWithSectionsAndTicketsInclude = Prisma.validator<Prisma.BoardInclude>()({
     owner: { select: userSummarySelect },
-})
+    collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
+    sections: { include: sectionInclude, orderBy: { order: 'asc' } },
+});
 
-type BoardSummary = Prisma.BoardGetPayload<{ select: typeof boardSummarySelect }>;
-type BoardSectionsTickets = Prisma.BoardGetPayload<{ select: typeof boardSelect }>;
 
-export { ticketSelect, sectionSelect, boardSelect, boardSummarySelect };
-export type { BoardSummary, BoardSectionsTickets }
+type TicketWithParticipants = Prisma.TicketGetPayload<{
+    include: typeof ticketInclude;
+}>;
+
+type BoardWithParticipants = Prisma.BoardGetPayload<{
+    include: typeof boardInclude;
+}>;
+
+type BoardWithSectionsAndTickets = Prisma.BoardGetPayload<{
+    include: typeof boardWithSectionsAndTicketsInclude;
+}>;
+
+export { ticketInclude, sectionInclude, boardInclude, boardWithSectionsAndTicketsInclude };
+export type { TicketWithParticipants, BoardWithParticipants, BoardWithSectionsAndTickets };

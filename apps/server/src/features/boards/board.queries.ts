@@ -1,9 +1,20 @@
 import type { Board, User } from '@prisma/client';
+import type {
+    BoardWithParticipants,
+    BoardWithSectionsAndTickets,
+} from '@/features/boards/select.js';
 import { prisma } from '@/db/prisma.js';
+import {
+    boardInclude,
+    boardWithSectionsAndTicketsInclude,
+} from '@/features/boards/select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
-import { boardSelect, boardSummarySelect } from '@/features/boards/select.js';
 
-const getBoards = async ({ userId }: { userId: User['id'] }) => {
+const getBoards = async ({
+    userId,
+}: {
+    userId: User['id'];
+}): Promise<BoardWithParticipants[]> => {
     try {
         const data = await prisma.board.findMany({
             where: {
@@ -13,7 +24,7 @@ const getBoards = async ({ userId }: { userId: User['id'] }) => {
                 ],
             },
             orderBy: { lastUpdate: 'desc' },
-            select: boardSummarySelect,
+            include: boardInclude,
         });
         return data;
     } catch (error) {
@@ -26,7 +37,10 @@ const createBoard = async ({
     userId,
     name,
     description,
-}: { userId: User['id'] } & Pick<Board, 'name' | 'description'>) => {
+}: { userId: User['id'] } & Pick<
+    Board,
+    'name' | 'description'
+>): Promise<BoardWithParticipants> => {
     try {
         const data = await prisma.board.create({
             data: {
@@ -43,7 +57,7 @@ const createBoard = async ({
                     ],
                 },
             },
-            select: boardSummarySelect,
+            include: boardInclude,
         });
         return data;
     } catch (error) {
@@ -57,7 +71,7 @@ const getBoardById = async ({
 }: {
     userId: User['id'];
     boardId: Board['id'];
-}) => {
+}): Promise<BoardWithSectionsAndTickets | null> => {
     try {
         const data = await prisma.board.findFirst({
             where: {
@@ -67,7 +81,7 @@ const getBoardById = async ({
                     { collaborators: { some: { id: userId } } },
                 ],
             },
-            select: boardSelect,
+            include: boardWithSectionsAndTicketsInclude,
         });
         return data;
     } catch (error) {
