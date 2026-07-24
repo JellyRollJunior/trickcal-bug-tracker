@@ -1,8 +1,9 @@
-import bcrypt from 'bcryptjs';
 import type { Server } from 'node:http';
+import bcrypt from 'bcryptjs';
 import { Server as SocketIoServer } from 'socket.io';
 import { instrument } from '@socket.io/admin-ui'
 import { env } from '@/config/env.js';
+import { attachSocketListeners } from '@/sockets/attachSocketListeners.js';
 
 const configureSocketIo = async (server: Server) => {
     const io = new SocketIoServer(server, {
@@ -16,6 +17,7 @@ const configureSocketIo = async (server: Server) => {
         },
     });
 
+    // Setup admin ui
     instrument(io, {
         auth: {
             type: 'basic',
@@ -24,6 +26,8 @@ const configureSocketIo = async (server: Server) => {
         },
         mode: 'development',
     });
+
+    attachSocketListeners(io);
 };
 
 export { configureSocketIo }
