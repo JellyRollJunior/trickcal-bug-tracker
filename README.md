@@ -43,19 +43,40 @@ root/
         - Create intermediate types w/ Prisma GetPayload
     - Manipulate data, do logic with data, etc.
     - Map BaseWithExtras to dto & send to user - Type name: BaseDto or BaseWithExtrasDto
+- Socket event vs Route
+    - Does this need to happen many times per second/minute during normal use?
+    - Can the UI reasonably proceed optimistically without waiting for confirmation?
 
 ## TODO
 
 - later
     - set token to proper expire time
 
+| Method | URI                                         |
+| ------ | ------------------------------------------- |
+| POST   | /boards/:boardId/sections                   |
+| PATCH  | /section/:sectionId                         |
+| DELETE | /section/:sectionId                         |
+| POST   | /boards/:boardId/sections/:sectionId/ticket |
+| PATCH  | /ticket/:ticketId                           |
+| DELETE | /ticket/:ticketId                           |
+
 ## Process
 
-- socket
-    - setup socket
-    - setup adminui
-    - attach init listeners
+- Create ticket route
+    -
+- socket events
+    - export io
 
+## Planned features
+
+- docker compose setup
+- presence tracking
+- redis cache
+- redis horizontal scaling w/ socket io
+- redis zero downtime updates
+- login attempt rate limit
+- user is editing tracker
 
 ## template
 
