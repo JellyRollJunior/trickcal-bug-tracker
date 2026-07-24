@@ -5,4 +5,9 @@ const postBoardsRequestBodySchema = z.object({
     description: z.string(),
 });
 
-export { postBoardsRequestBodySchema };
+const postSectionsRequestBodySchema = z.object({
+    order: z.string(),
+    name: z.string(),
+})
+
+export { postBoardsRequestBodySchema, postSectionsRequestBodySchema };
