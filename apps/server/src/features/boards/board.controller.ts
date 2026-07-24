@@ -4,11 +4,11 @@ import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
-import * as boardQueries from '@/features/boards/board.queries.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
 } from '@/features/boards/mapper.js';
+import * as boardQueries from '@/features/boards/board.queries.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
     try {

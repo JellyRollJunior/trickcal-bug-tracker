@@ -63,6 +63,7 @@ root/
 
 ## Process
 
+- validate board route inputs
 - Create ticket route
     -
 - socket events
