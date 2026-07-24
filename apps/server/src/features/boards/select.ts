@@ -15,12 +15,18 @@ const boardInclude = Prisma.validator<Prisma.BoardInclude>()({
     collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
 });
 
-const boardWithSectionsAndTicketsInclude = Prisma.validator<Prisma.BoardInclude>()({
+const boardWithSectionsInclude = Prisma.validator<Prisma.BoardInclude>()({
     owner: { select: userSummarySelect },
     collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
-    sections: { include: sectionInclude, orderBy: { order: 'asc' } },
+    sections: { orderBy: { order: 'asc' } },
 });
 
+const boardWithSectionsAndTicketsInclude =
+    Prisma.validator<Prisma.BoardInclude>()({
+        owner: { select: userSummarySelect },
+        collaborators: { select: userSummarySelect, orderBy: { name: 'asc' } },
+        sections: { include: sectionInclude, orderBy: { order: 'asc' } },
+    });
 
 type TicketWithParticipants = Prisma.TicketGetPayload<{
     include: typeof ticketInclude;
@@ -28,15 +34,31 @@ type TicketWithParticipants = Prisma.TicketGetPayload<{
 
 type SectionWithTickets = Prisma.SectionGetPayload<{
     include: typeof sectionInclude;
-}>
+}>;
 
 type BoardWithParticipants = Prisma.BoardGetPayload<{
     include: typeof boardInclude;
+}>;
+
+type BoardWithSections = Prisma.BoardGetPayload<{
+    include: typeof boardWithSectionsAndTicketsInclude;
 }>;
 
 type BoardWithSectionsAndTickets = Prisma.BoardGetPayload<{
     include: typeof boardWithSectionsAndTicketsInclude;
 }>;
 
-export { ticketInclude, sectionInclude, boardInclude, boardWithSectionsAndTicketsInclude };
-export type { TicketWithParticipants, SectionWithTickets, BoardWithParticipants, BoardWithSectionsAndTickets };
+export {
+    ticketInclude,
+    sectionInclude,
+    boardInclude,
+    boardWithSectionsInclude,
+    boardWithSectionsAndTicketsInclude,
+};
+export type {
+    TicketWithParticipants,
+    SectionWithTickets,
+    BoardWithParticipants,
+    BoardWithSections,
+    BoardWithSectionsAndTickets,
+};

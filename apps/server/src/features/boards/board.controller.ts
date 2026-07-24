@@ -49,7 +49,7 @@ const getBoard = async (
         if (!userId) throw new AuthenticationError();
         const boardId = req.params.boardId;
 
-        const data = await boardQueries.getBoardById({ userId, boardId });
+        const data = await boardQueries.getBoardWithSectionsAndTicketsById({ userId, boardId });
         if (!data) throw new NotFoundError('Unable to retrieve board');
 
         res.json(toBoardWithSectionsAndTicketsDto(data));

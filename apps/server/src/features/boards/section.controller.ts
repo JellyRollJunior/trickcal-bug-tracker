@@ -20,7 +20,7 @@ const postSection = async (
         const { order, name } = { ...req.body };
 
         // board permission check
-        const board = await boardQueries.getBoardById({ userId, boardId });
+        const board = await boardQueries.getBoardWithSectionsAndTicketsById({ userId, boardId });
         if (!board) throw new NotFoundError('Unable to create section');
 
         const newSection = await sectionQueries.createSection({

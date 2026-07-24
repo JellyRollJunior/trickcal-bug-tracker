@@ -65,6 +65,13 @@ root/
 
 - validate route paramaters
     - create validateParams
+- Create section route
+    - calculate ordering
+    - ordering lib folder
+    - extract mappers
+    - rename routers
+    - extract selects
+- Extract service logic from controller
 - Create ticket route
 - socket events
     - export io

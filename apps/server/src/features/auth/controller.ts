@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import { toUserDto } from '@/features/users/mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
-import { signToken } from '@/features/auth/passport/signToken.js';
+import { signToken } from '@/lib/auth/signToken.js';
 import * as userQueries from '@/features/users/queries.js';
 
 const postSignup = async (

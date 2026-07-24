@@ -1,11 +1,13 @@
 import type { Board, User } from '@prisma/client';
 import type {
     BoardWithParticipants,
+    BoardWithSections,
     BoardWithSectionsAndTickets,
 } from '@/features/boards/select.js';
 import { prisma } from '@/db/prisma.js';
 import {
     boardInclude,
+    boardWithSectionsInclude,
     boardWithSectionsAndTicketsInclude,
 } from '@/features/boards/select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
@@ -65,7 +67,7 @@ const createBoard = async ({
     }
 };
 
-const getBoardById = async ({
+const getBoardWithSectionsAndTicketsById = async ({
     userId,
     boardId,
 }: {
@@ -89,4 +91,8 @@ const getBoardById = async ({
     }
 };
 
-export { getBoards, createBoard, getBoardById };
+export {
+    getBoards,
+    createBoard,
+    getBoardWithSectionsAndTicketsById,
+};
