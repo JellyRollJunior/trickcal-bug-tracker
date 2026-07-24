@@ -51,6 +51,11 @@ root/
 
 ## Process
 
+- socket
+    - setup socket
+    - setup adminui
+    - attach init listeners
+
 
 ## template
 

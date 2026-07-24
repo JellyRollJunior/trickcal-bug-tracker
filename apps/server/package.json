@@ -35,6 +35,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@socket.io/admin-ui": "^0.5.1",
     "@trickcal-bug-tracker/shared": "workspace:*",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
@@ -47,6 +48,7 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "pg": "^8.22.0",
+    "socket.io": "^4.8.3",
     "zod": "catalog:"
   }
 }

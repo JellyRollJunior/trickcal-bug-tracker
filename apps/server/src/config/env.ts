@@ -4,6 +4,10 @@ if (!process.env['PORT']) throw new Error('PORT is not set');
 if (!process.env['DATABASE_URL']) throw new Error('DATABASE_URL is not set');
 if (!process.env['TOKEN_SECRET']) throw new Error('TOKEN_SECRET is not set');
 
+// Socket
+if (!process.env['SOCKET_ADMIN_USERNAME']) throw new Error('SOCKET_ADMIN_USERNAME is not set')
+if (!process.env['SOCKET_ADMIN_PASSWORD']) throw new Error('SOCKET_ADMIN_PASSWORD is not set')
+
 // Github Oauth
 if (!process.env['GITHUB_CLIENT_ID']) throw new Error('GITHUB_CLIENT_ID is not set');
 if (!process.env['GITHUB_CLIENT_SECRET']) throw new Error('GITHUB_CLIENT_SECRET is not set');
@@ -13,6 +17,10 @@ export const env = {
     port: process.env['PORT'],
     databaseUrl: process.env['DATABASE_URL'],
     tokenSecret: process.env['TOKEN_SECRET'],
+
+    // Socket
+    socketAdminUsername: process.env['SOCKET_ADMIN_USERNAME'],
+    socketAdminPassword: process.env['SOCKET_ADMIN_PASSWORD'],
 
     // GitHub Oauth
     sessionSecret: process.env['SESSION_SECRET'],
