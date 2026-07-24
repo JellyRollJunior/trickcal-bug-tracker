@@ -41,7 +41,7 @@ type BoardWithParticipants = Prisma.BoardGetPayload<{
 }>;
 
 type BoardWithSections = Prisma.BoardGetPayload<{
-    include: typeof boardWithSectionsAndTicketsInclude;
+    include: typeof boardWithSectionsInclude;
 }>;
 
 type BoardWithSectionsAndTickets = Prisma.BoardGetPayload<{

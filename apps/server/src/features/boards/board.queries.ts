@@ -67,6 +67,30 @@ const createBoard = async ({
     }
 };
 
+const getBoardWithSectionsById = async ({
+    userId,
+    boardId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+}): Promise<BoardWithSections | null> => {
+    try {
+        const data = await prisma.board.findFirst({
+            where: {
+                id: boardId,
+                OR: [
+                    { ownerId: userId },
+                    { collaborators: { some: { id: userId } } },
+                ],
+            },
+            include: boardWithSectionsInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch board');
+    }
+};
+
 const getBoardWithSectionsAndTicketsById = async ({
     userId,
     boardId,
@@ -94,5 +118,6 @@ const getBoardWithSectionsAndTicketsById = async ({
 export {
     getBoards,
     createBoard,
+    getBoardWithSectionsById,
     getBoardWithSectionsAndTicketsById,
 };
