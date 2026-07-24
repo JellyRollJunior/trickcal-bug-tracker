@@ -1,6 +1,7 @@
 import type {
     BoardDto,
     BoardWithSectionsAndTicketsDto,
+    SectionDto,
     SectionWithTicketsDto,
     TicketDto,
 } from '@trickcal-bug-tracker/shared';
@@ -10,6 +11,7 @@ import type {
     SectionWithTickets,
     TicketWithParticipants,
 } from '@/features/boards/select.js';
+import { Section } from '@prisma/client';
 
 const toTicketDto = (ticket: TicketWithParticipants): TicketDto => ({
     id: ticket.id,
@@ -28,13 +30,17 @@ const toTicketDto = (ticket: TicketWithParticipants): TicketDto => ({
     assignee: ticket.assignee,
 });
 
-const toSectionDto = (section: SectionWithTickets): SectionWithTicketsDto => ({
+const toSectionDto = (section: Section): SectionDto => ({
     id: section.id,
     boardId: section.boardId,
     order: section.order,
     name: section.name,
     creationDate: section.creationDate.toISOString(),
     lastUpdate: section.lastUpdate.toISOString(),
+});
+
+const toSectionWithTicketsDto = (section: SectionWithTickets): SectionWithTicketsDto => ({
+    ...toSectionDto(section),    
     tickets: section.tickets.map(toTicketDto),
 });
 
@@ -52,7 +58,7 @@ const toBoardWithSectionsAndTicketsDto = (
     board: BoardWithSectionsAndTickets
 ): BoardWithSectionsAndTicketsDto => ({
     ...toBoardDto(board),
-    sections: board.sections.map(toSectionDto),
+    sections: board.sections.map(toSectionWithTicketsDto),
 });
 
 export {

@@ -1,13 +1,16 @@
 import { TicketDto } from './ticket.dto.js';
 
-type SectionWithTicketsDto = {
+type SectionDto = {
     id: string;
     boardId: string;
     order: string;
     creationDate: string;
     lastUpdate: string;
     name: string;
+};
+
+type SectionWithTicketsDto = SectionDto & {
     tickets: TicketDto[];
 };
 
-export { SectionWithTicketsDto };
+export { SectionDto, SectionWithTicketsDto };

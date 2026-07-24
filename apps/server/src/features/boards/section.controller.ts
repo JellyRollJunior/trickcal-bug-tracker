@@ -4,6 +4,7 @@ import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
+import { toSectionDto } from '@/features/boards/mapper.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 import * as sectionQueries from '@/features/boards/section.queries.js';
 
@@ -22,12 +23,12 @@ const postSection = async (
         const board = await boardQueries.getBoardById({ userId, boardId });
         if (!board) throw new NotFoundError('Unable to create section');
 
-        const section = await sectionQueries.createSection({
+        const newSection = await sectionQueries.createSection({
             boardId,
             order,
             name,
         });
-        res.json(section);
+        res.json(toSectionDto(newSection));
     } catch (error) {
         next(error);
     }
