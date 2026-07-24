@@ -7,9 +7,18 @@ import {
 import { toSectionDto } from '@/features/boards/mapper.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 import * as sectionQueries from '@/features/boards/section.queries.js';
+import { computeNewOrder } from './ordering.service.js';
 
 const postSection = async (
-    req: Request<{ boardId: Board['id'] }, {}, Pick<Section, 'order' | 'name'>>,
+    req: Request<
+        { boardId: Board['id'] },
+        {},
+        {
+            previousSectionId: Section['id'] | null;
+            nextSectionId: Section['id'] | null;
+            name: Section['name'];
+        }
+    >,
     res: Response,
     next: NextFunction
 ) => {
@@ -17,12 +26,21 @@ const postSection = async (
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
         const boardId = req.params.boardId;
-        const { order, name } = { ...req.body };
+        const { previousSectionId, nextSectionId, name } = { ...req.body };
 
         // board permission check
-        const board = await boardQueries.getBoardWithSectionsById({ userId, boardId });
+        const board = await boardQueries.getBoardWithSectionsById({
+            userId,
+            boardId,
+        });
         if (!board) throw new NotFoundError('Unable to create section');
 
+        // compute order
+        const order = computeNewOrder(
+            board.sections,
+            previousSectionId,
+            nextSectionId
+        );
         const newSection = await sectionQueries.createSection({
             boardId,
             order,
