@@ -9,7 +9,7 @@ const extractOrder = (
     if (itemId) {
         const previousItem = items.find((items) => items.id === itemId);
         if (!previousItem)
-            throw new NotFoundError('Invalid previous section or ticket id');
+            throw new NotFoundError('Invalid ordering section/ticket id');
         return previousItem.order;
     } else {
         return null;
@@ -21,10 +21,13 @@ const computeNewOrder = (
     previousItemId: Section['id'] | null,
     nextItemId: Section['id'] | null
 ) => {
+    if (items.length > 0 && previousItemId == null && nextItemId == null) {
+        throw new NotFoundError('Invalid ordering section/ticket id');
+    }
     const previousOrder = extractOrder(items, previousItemId);
     const nextOrder = extractOrder(items, nextItemId);
 
     return generateKeyBetween(previousOrder, nextOrder);
 };
 
-export { computeNewOrder }
+export { computeNewOrder };
