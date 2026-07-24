@@ -1,8 +1,14 @@
 import type { Board } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { AuthenticationError, BaseError } from '@trickcal-bug-tracker/shared';
+import {
+    AuthenticationError,
+    NotFoundError,
+} from '@trickcal-bug-tracker/shared';
 import * as boardQueries from '@/features/boards/board.queries.js';
-import { toBoardDto, toBoardWithSectionsAndTicketsDto } from './mapper.js';
+import {
+    toBoardDto,
+    toBoardWithSectionsAndTicketsDto,
+} from '@/features/boards/mapper.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -44,7 +50,7 @@ const getBoard = async (
         const boardId = req.params.boardId;
 
         const data = await boardQueries.getBoardById({ userId, boardId });
-        if (!data) throw new BaseError('404 Not Found', 'Board not found', 404);
+        if (!data) throw new NotFoundError('Unable to retrieve board');
 
         res.json(toBoardWithSectionsAndTicketsDto(data));
     } catch (error) {

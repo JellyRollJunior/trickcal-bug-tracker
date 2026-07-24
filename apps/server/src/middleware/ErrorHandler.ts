@@ -1,14 +1,19 @@
 import type { Errback, NextFunction, Request, Response } from 'express';
 import { z, ZodError } from 'zod';
-import { BaseError } from '@trickcal-bug-tracker/shared';
+import {
+    BaseError,
+    DatabaseError,
+    NotFoundError,
+} from '@trickcal-bug-tracker/shared';
 import { ValidationError } from '@trickcal-bug-tracker/shared';
-import { mapErrorToDto, mapValidationErrorToDto } from '@trickcal-bug-tracker/shared';
+import {
+    mapErrorToDto,
+    mapValidationErrorToDto,
+} from '@trickcal-bug-tracker/shared';
 
 const errorHandler404 = (_req: Request, res: Response, _next: NextFunction) => {
-    const error404 = new BaseError(
-        '404 Not Found',
-        'Invalid route detected. Consult the README for a list of valid routes',
-        404
+    const error404 = new NotFoundError(
+        'Invalid route detected. Consult the README for a list of valid routes'
     );
     const errorDto = mapErrorToDto(error404);
     res.status(errorDto.status).json(errorDto);
@@ -26,7 +31,11 @@ const errorHandler = (
         );
         const validationErrorDto = mapValidationErrorToDto(validationError);
         res.status(validationErrorDto.status).json(validationErrorDto);
-    } else if (err instanceof BaseError) {
+    } else if (
+        err instanceof BaseError ||
+        err instanceof NotFoundError ||
+        err instanceof DatabaseError
+    ) {
         const errorDto = mapErrorToDto(err);
         res.status(errorDto.status).json(errorDto);
     } else {

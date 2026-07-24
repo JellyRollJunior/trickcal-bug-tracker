@@ -1,7 +1,7 @@
 import type { User } from '@prisma/client';
 import type { UserDto } from '@trickcal-bug-tracker/shared';
 
-const mapUserToDto = (user: User): UserDto => {
+const toUserDto = (user: User): UserDto => {
     return {
         id: user.id,
         name: user.name,
@@ -9,4 +9,4 @@ const mapUserToDto = (user: User): UserDto => {
     };
 };
 
-export { mapUserToDto };
+export { toUserDto };

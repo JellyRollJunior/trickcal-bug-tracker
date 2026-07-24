@@ -9,7 +9,7 @@ import type {
     BoardWithSectionsAndTickets,
     SectionWithTickets,
     TicketWithParticipants,
-} from './select.js';
+} from '@/features/boards/select.js';
 
 const toTicketDto = (ticket: TicketWithParticipants): TicketDto => ({
     id: ticket.id,

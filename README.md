@@ -46,16 +46,11 @@ root/
 
 ## TODO
 
-- error handler
-    - database error
-
 - later
     - set token to proper expire time
 
 ## Process
 
-- Errors
-    - create 404 error
 
 ## template
 

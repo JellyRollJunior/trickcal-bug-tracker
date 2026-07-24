@@ -1,7 +1,7 @@
 import type { User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
-import { mapUserToDto } from '@/features/users/mapper.js';
+import { toUserDto } from '@/features/users/mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { signToken } from '@/features/auth/passport/signToken.js';
@@ -21,7 +21,7 @@ const postSignup = async (
             name,
         });
 
-        res.json(mapUserToDto(newUser));
+        res.json(toUserDto(newUser));
     } catch (error) {
         next(error);
     }
