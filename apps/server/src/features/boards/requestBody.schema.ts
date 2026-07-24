@@ -6,8 +6,8 @@ const postBoardsRequestBodySchema = z.object({
 });
 
 const postSectionsRequestBodySchema = z.object({
-    previousSectionId: z.uuid(),
-    nextSectionId: z.uuid(),
+    previousSectionId: z.uuid().nullable(),
+    nextSectionId: z.uuid().nullable(),
     name: z.string(),
 })
 

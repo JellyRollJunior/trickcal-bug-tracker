@@ -51,11 +51,11 @@ const createBoard = async ({
                 description: description,
                 sections: {
                     create: [
-                        { order: '1', name: 'Backlog' },
-                        { order: '2', name: 'In Development' },
-                        { order: '3', name: 'Testing' },
-                        { order: '4', name: 'Blocked' },
-                        { order: '5', name: 'Done' },
+                        { order: 'a0', name: 'Backlog' },
+                        { order: 'a1', name: 'In Development' },
+                        { order: 'a2', name: 'Testing' },
+                        { order: 'a3', name: 'Blocked' },
+                        { order: 'a4', name: 'Done' },
                     ],
                 },
             },

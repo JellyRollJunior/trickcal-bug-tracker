@@ -54,6 +54,9 @@ root/
     - set token to proper expire time
 - test
     - test extract order logic
+- default board
+    - extract default board settings
+    - generate orders from fractional-idexing
 
 | Method | URI                                         |
 | ------ | ------------------------------------------- |
@@ -65,6 +68,8 @@ root/
 
 ## Process
 
+- order computer
+    -   disallow nul nulll if collection is non null
 - validate route paramaters
     - create validateParams
 - Create section route
