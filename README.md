@@ -50,6 +50,14 @@ root/
 - Solidify [router -> controller -> service -> query] architecture
     - If service logic in minimal, just directly call query from controller
         - Don't add extra layers to navigate for no reason
+- One Prisma query does not necessarily equal One SQL query
+    - verify with the following snippet!
+
+```ts
+const prisma = new PrismaClient({
+    log: ["query"],
+});
+```
 
 ## TODO
 
@@ -74,6 +82,8 @@ root/
 - validate route paramaters
     - create validateParams
 - Create ticket route
+    - board service permission check
+    - extract to service layer
 - socket events
     - export io
 

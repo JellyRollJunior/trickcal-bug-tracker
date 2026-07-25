@@ -1,39 +1,18 @@
 import { prisma } from '@/db/prisma.js';
-import { Board, Priority, Section, Severity, Ticket, User } from '@prisma/client';
+import { Priority, Section, Severity, Ticket } from '@prisma/client';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import { ticketInclude } from './ticket.select.js';
 
-/* Checks if user is authorized to retrieve board */
-const getTickets = async ({
-    userId,
-    boardId,
+const getTicketsBySection = async ({
     sectionId,
 }: {
-    userId: User['id'];
-    boardId: Board['id'];
     sectionId: Section['id'];
 }) => {
     try {
-        const data = await prisma.board.findFirst({
-            where: {
-                id: boardId,
-                OR: [
-                    { ownerId: userId },
-                    { collaborators: { some: { id: userId } } },
-                ],
-            },
-            select: {
-                sections: {
-                    where: {
-                        id: sectionId,
-                    },
-                    select: {
-                        tickets: {
-                            include: ticketInclude,
-                        },
-                    },
-                },
-            },
+        const data = await prisma.ticket.findMany({
+            where: { sectionId: sectionId },
+            orderBy: { order: 'asc' },
+            include: ticketInclude,
         });
         return data;
     } catch (error) {
@@ -83,6 +62,7 @@ const createTicket = async ({
                 severity: severity ?? undefined,
                 assignedTo: assigneeId ?? undefined,
             },
+            include: ticketInclude,
         });
         return ticket;
     } catch (error) {
@@ -90,4 +70,4 @@ const createTicket = async ({
     }
 };
 
-export { getTickets, createTicket };
+export { getTicketsBySection, createTicket };
