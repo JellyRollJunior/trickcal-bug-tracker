@@ -1,8 +1,6 @@
 import { Board, Section, User } from '@prisma/client';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import { computeNewOrder } from '@/features/boards/ordering.service.js';
-import { NotFoundError } from '@trickcal-bug-tracker/shared';
-import * as boardQueries from '@/features/boards/board.queries.js';
 import * as sectionQueries from '@/features/boards/section.queries.js';
 
 const createSection = async ({
@@ -19,17 +17,10 @@ const createSection = async ({
     name: Section['name'];
 }) => {
     await assertBoardAccess({ userId, boardId });
-    const board = await boardQueries.getBoardWithSectionsById({
-        boardId,
-    });
-    if (!board) throw new NotFoundError('Unable to create section');
+    const sections = await sectionQueries.getSections({ boardId });
 
     // compute order
-    const order = computeNewOrder(
-        board.sections,
-        previousSectionId,
-        nextSectionId
-    );
+    const order = computeNewOrder(sections, previousSectionId, nextSectionId);
     const newSection = await sectionQueries.createSection({
         boardId,
         order,
