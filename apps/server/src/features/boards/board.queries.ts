@@ -67,22 +67,15 @@ const createBoard = async ({
     }
 };
 
-/* Checks if user is authorized to retrieve board */
 const getBoardById = async ({
-    userId,
     boardId,
 }: {
-    userId: User['id'];
     boardId: Board['id'];
 }): Promise<BoardWithParticipants | null> => {
     try {
         const data = await prisma.board.findFirst({
             where: {
                 id: boardId,
-                OR: [
-                    { ownerId: userId },
-                    { collaborators: { some: { id: userId } } },
-                ],
             },
             include: boardInclude,
         });
@@ -92,22 +85,15 @@ const getBoardById = async ({
     }
 };
 
-/* Checks if user is authorized to retrieve board */
 const getBoardWithSectionsById = async ({
-    userId,
     boardId,
 }: {
-    userId: User['id'];
     boardId: Board['id'];
 }): Promise<BoardWithSections | null> => {
     try {
         const data = await prisma.board.findFirst({
             where: {
                 id: boardId,
-                OR: [
-                    { ownerId: userId },
-                    { collaborators: { some: { id: userId } } },
-                ],
             },
             include: boardWithSectionsInclude,
         });
@@ -117,22 +103,15 @@ const getBoardWithSectionsById = async ({
     }
 };
 
-/* Checks if user is authorized to retrieve board */
 const getBoardWithSectionsAndTicketsById = async ({
-    userId,
     boardId,
 }: {
-    userId: User['id'];
     boardId: Board['id'];
 }): Promise<BoardWithSectionsAndTickets | null> => {
     try {
         const data = await prisma.board.findFirst({
             where: {
                 id: boardId,
-                OR: [
-                    { ownerId: userId },
-                    { collaborators: { some: { id: userId } } },
-                ],
             },
             include: boardWithSectionsAndTicketsInclude,
         });

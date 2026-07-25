@@ -1,9 +1,10 @@
 import type { Board, Section, Ticket } from '@prisma/client';
-import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { Request, Response, NextFunction } from 'express';
+import { generateKeyBetween } from 'fractional-indexing';
+import { assertBoardAccess } from '@/features/boards/board.services.js';
+import { toTicketDto } from '@/features/boards/ticket.mapper.js';
+import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import * as ticketQueries from '@/features/boards/ticket.queries.js';
-import { computeNewOrder } from './ordering.service.js';
-import { toTicketDto } from './ticket.mapper.js';
 
 const postTicket = async (
     req: Request<
@@ -28,17 +29,12 @@ const postTicket = async (
     try {
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        const { sectionId } = { ...req.params };
-
-        // verify permission
+        const { boardId, sectionId } = { ...req.params };
+        await assertBoardAccess({ userId, boardId });
 
         // compute order
         const tickets = await ticketQueries.getTicketsBySection({ sectionId });
-        const order = computeNewOrder(
-            tickets,
-            tickets.at(-1)?.id ?? null,
-            null
-        );
+        const order = generateKeyBetween(tickets.at(-1)?.id ?? null, null);
 
         // create ticket
         const newTicket = await ticketQueries.createTicket({

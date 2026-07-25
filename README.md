@@ -82,8 +82,8 @@ const prisma = new PrismaClient({
 - validate route paramaters
     - create validateParams
 - Create ticket route
-    - board service permission check
     - extract to service layer
+    - validate input
 - socket events
     - export io
 
@@ -96,6 +96,7 @@ const prisma = new PrismaClient({
 - redis zero downtime updates
 - login attempt rate limit
 - user is editing tracker
+- oauth login in popup?
 
 ## template
 

@@ -4,6 +4,7 @@ import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
+import { assertBoardAccess } from '@/features/boards/board.services.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
@@ -48,9 +49,9 @@ const getBoard = async (
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
         const boardId = req.params.boardId;
+        await assertBoardAccess({ userId, boardId });
 
         const data = await boardQueries.getBoardWithSectionsAndTicketsById({
-            userId,
             boardId,
         });
         if (!data) throw new NotFoundError('Unable to retrieve board');
