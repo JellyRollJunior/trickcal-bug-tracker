@@ -7,7 +7,7 @@ import {
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
-} from '@/features/boards/mapper.js';
+} from '@/features/boards/board.mapper.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {

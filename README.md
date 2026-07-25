@@ -47,6 +47,7 @@ root/
 - Socket event vs Route
     - Does this need to happen many times per second/minute during normal use?
     - Can the UI reasonably proceed optimistically without waiting for confirmation?
+- Solidify [router -> controller -> service -> DB] architecture
 
 ## TODO
 
@@ -72,12 +73,8 @@ root/
     -   disallow nul nulll if collection is non null
 - validate route paramaters
     - create validateParams
-- Create section route
-    - calculate ordering
-    - ordering lib folder
-    - extract mappers
-    - rename routers
-    - extract selects
+- rename routers
+- extract selects
 - Extract service logic from controller
 - Create ticket route
 - socket events

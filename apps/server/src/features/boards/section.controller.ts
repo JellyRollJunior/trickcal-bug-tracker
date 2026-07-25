@@ -4,7 +4,7 @@ import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
-import { toSectionDto } from '@/features/boards/mapper.js';
+import { toSectionDto } from '@/features/boards/section.mapper.js';
 import { computeNewOrder } from '@/features/boards/ordering.service.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 import * as sectionQueries from '@/features/boards/section.queries.js';
