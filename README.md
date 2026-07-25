@@ -20,16 +20,16 @@ root/
 
 ## Endpoints
 
-| Method | URI                       | Function                   | Body (inputs)            | Outputs                        | Notes                                                                           |
-| ------ | ------------------------- | -------------------------- | ------------------------ | ------------------------------ | ------------------------------------------------------------------------------- |
-| POST   | /auth/signup              | Signup                     | username, password, name | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
-| POST   | /auth/login               | Login                      | username, password       | { token }                      |                                                                                 |
-| POST   | /auth/github              | GitHub oauth2 login/signup |                          |                                | Login with GitHub oauth. Creates an account if no account exists                |
-| POST   | /auth/github/callback     | GitHub oauth2 callback     |                          | { token }                      | Callback to receive token after successful authorization                        |
-| GET    | /boards                   | get boards                 |                          | boardDto[]                     |                                                                                 |
-| POST   | /boards                   | create boards              | name, description        | boardDto                       |                                                                                 |
-| GET    | /boards/:boardId          | get board by id            |                          | boardWithSectionsAndTicketsDto |                                                                                 |
-| POST   | /boards/:boardId/sections | create section             | name, order              | sectionDto                     |                                                                                 |
+| Method | URI                       | Function                   | Body (inputs)                          | Outputs                        | Notes                                                                           |
+| ------ | ------------------------- | -------------------------- | -------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
+| POST   | /auth/signup              | Signup                     | username, password, name               | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
+| POST   | /auth/login               | Login                      | username, password                     | { token }                      |                                                                                 |
+| POST   | /auth/github              | GitHub oauth2 login/signup |                                        |                                | Login with GitHub oauth. Creates an account if no account exists                |
+| POST   | /auth/github/callback     | GitHub oauth2 callback     |                                        | { token }                      | Callback to receive token after successful authorization                        |
+| GET    | /boards                   | get boards                 |                                        | boardDto[]                     |                                                                                 |
+| POST   | /boards                   | create boards              | name, description                      | boardDto                       |                                                                                 |
+| GET    | /boards/:boardId          | get board by id            |                                        | boardWithSectionsAndTicketsDto |                                                                                 |
+| POST   | /boards/:boardId/sections | create section             | name, previousSectionId, nextSectionId | sectionDto                     |                                                                                 |
 
 ## Learning Outcomes
 
@@ -71,11 +71,8 @@ root/
 
 ## Process
 
-- order computer
-    -   disallow nul nulll if collection is non null
 - validate route paramaters
     - create validateParams
-- Extract service logic from controller
 - Create ticket route
 - socket events
     - export io

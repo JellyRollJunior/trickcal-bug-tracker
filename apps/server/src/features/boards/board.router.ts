@@ -8,6 +8,7 @@ import {
 } from '@/features/boards/requestBody.schema.js';
 import * as boardController from '@/features/boards/board.controller.js';
 import * as sectionController from '@/features/boards/section.controller.js';
+import * as ticketController from '@/features/boards/ticket.controller.js';
 
 const boardRouter: Router = CreateRouter();
 
@@ -26,6 +27,13 @@ boardRouter.post(
     requireAuth,
     validate(postSectionsSchema),
     sectionController.postSection
+);
+
+/* tickets */
+boardRouter.post(
+    '/:boardId/sections/:sectionId/tickets',
+    requireAuth,
+    ticketController.postTicket
 );
 
 export { boardRouter };
