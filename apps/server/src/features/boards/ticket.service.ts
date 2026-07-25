@@ -32,7 +32,7 @@ const createTicket = async ({
 
     // compute order
     const tickets = await ticketQueries.getTicketsBySection({ sectionId });
-    const order = generateKeyBetween(tickets.at(-1)?.id ?? null, null);
+    const order = generateKeyBetween(tickets.at(-1)?.order ?? null, null);
 
     // create ticket
     const newTicket = await ticketQueries.createTicket({
