@@ -3,13 +3,13 @@ import type {
     BoardWithParticipants,
     BoardWithSections,
     BoardWithSectionsAndTickets,
-} from '@/features/boards/select.js';
+} from '@/features/boards/board.select.js';
 import { prisma } from '@/db/prisma.js';
 import {
     boardInclude,
     boardWithSectionsInclude,
     boardWithSectionsAndTicketsInclude,
-} from '@/features/boards/select.js';
+} from '@/features/boards/board.select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 
 const getBoards = async ({

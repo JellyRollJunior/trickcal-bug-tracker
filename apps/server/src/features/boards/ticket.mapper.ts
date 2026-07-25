@@ -1,5 +1,5 @@
 import type { TicketDto } from '@trickcal-bug-tracker/shared';
-import type { TicketWithParticipants } from '@/features/boards/select.js';
+import type { TicketWithParticipants } from '@/features/boards/ticket.select.js';
 
 const toTicketDto = (ticket: TicketWithParticipants): TicketDto => ({
     id: ticket.id,

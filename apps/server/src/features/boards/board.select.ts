@@ -1,14 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { userSummarySelect } from '@/features/users/select.js';
-
-const ticketInclude = Prisma.validator<Prisma.TicketInclude>()({
-    reporter: { select: userSummarySelect },
-    assignee: { select: userSummarySelect },
-});
-
-const sectionInclude = Prisma.validator<Prisma.SectionInclude>()({
-    tickets: { include: ticketInclude, orderBy: { order: 'asc' } },
-});
+import { sectionInclude } from '@/features/boards/section.select.js';
 
 const boardInclude = Prisma.validator<Prisma.BoardInclude>()({
     owner: { select: userSummarySelect },
@@ -28,14 +20,6 @@ const boardWithSectionsAndTicketsInclude =
         sections: { include: sectionInclude, orderBy: { order: 'asc' } },
     });
 
-type TicketWithParticipants = Prisma.TicketGetPayload<{
-    include: typeof ticketInclude;
-}>;
-
-type SectionWithTickets = Prisma.SectionGetPayload<{
-    include: typeof sectionInclude;
-}>;
-
 type BoardWithParticipants = Prisma.BoardGetPayload<{
     include: typeof boardInclude;
 }>;
@@ -49,15 +33,12 @@ type BoardWithSectionsAndTickets = Prisma.BoardGetPayload<{
 }>;
 
 export {
-    ticketInclude,
     sectionInclude,
     boardInclude,
     boardWithSectionsInclude,
     boardWithSectionsAndTicketsInclude,
 };
 export type {
-    TicketWithParticipants,
-    SectionWithTickets,
     BoardWithParticipants,
     BoardWithSections,
     BoardWithSectionsAndTickets,

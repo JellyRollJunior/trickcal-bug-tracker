@@ -73,8 +73,6 @@ root/
     -   disallow nul nulll if collection is non null
 - validate route paramaters
     - create validateParams
-- rename routers
-- extract selects
 - Extract service logic from controller
 - Create ticket route
 - socket events

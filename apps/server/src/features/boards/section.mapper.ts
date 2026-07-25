@@ -2,7 +2,7 @@ import type {
     SectionDto,
     SectionWithTicketsDto,
 } from '@trickcal-bug-tracker/shared';
-import type { SectionWithTickets } from '@/features/boards/select.js';
+import type { SectionWithTickets } from '@/features/boards/section.select.js';
 import { Section } from '@prisma/client';
 import { toTicketDto } from '@/features/boards/ticket.mapper.js';
 
