@@ -15,7 +15,7 @@ const getBoards = async (req: Request, res: Response, next: NextFunction) => {
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
 
-        const data = await boardQueries.getBoards({ userId });
+        const data = await boardQueries.getBoardsByUserId({ userId });
         res.json(data.map(toBoardDto));
     } catch (error) {
         next(error);
@@ -49,7 +49,10 @@ const getBoard = async (
         if (!userId) throw new AuthenticationError();
         const boardId = req.params.boardId;
 
-        const data = await boardQueries.getBoardWithSectionsAndTicketsById({ userId, boardId });
+        const data = await boardQueries.getBoardWithSectionsAndTicketsById({
+            userId,
+            boardId,
+        });
         if (!data) throw new NotFoundError('Unable to retrieve board');
 
         res.json(toBoardWithSectionsAndTicketsDto(data));

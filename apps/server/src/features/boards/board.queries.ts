@@ -12,7 +12,7 @@ import {
 } from '@/features/boards/board.select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 
-const getBoards = async ({
+const getBoardsByUserId = async ({
     userId,
 }: {
     userId: User['id'];
@@ -67,6 +67,7 @@ const createBoard = async ({
     }
 };
 
+/* Checks if user is authorized to retrieve board */
 const getBoardWithSectionsById = async ({
     userId,
     boardId,
@@ -91,6 +92,7 @@ const getBoardWithSectionsById = async ({
     }
 };
 
+/* Checks if user is authorized to retrieve board */
 const getBoardWithSectionsAndTicketsById = async ({
     userId,
     boardId,
@@ -116,7 +118,7 @@ const getBoardWithSectionsAndTicketsById = async ({
 };
 
 export {
-    getBoards,
+    getBoardsByUserId,
     createBoard,
     getBoardWithSectionsById,
     getBoardWithSectionsAndTicketsById,

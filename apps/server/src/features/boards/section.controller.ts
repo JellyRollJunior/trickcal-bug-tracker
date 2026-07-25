@@ -1,13 +1,8 @@
 import type { Board, Section } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import {
-    AuthenticationError,
-    NotFoundError,
-} from '@trickcal-bug-tracker/shared';
+import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { toSectionDto } from '@/features/boards/section.mapper.js';
-import { computeNewOrder } from '@/features/boards/ordering.service.js';
-import * as boardQueries from '@/features/boards/board.queries.js';
-import * as sectionQueries from '@/features/boards/section.queries.js';
+import { createSection } from '@/features/boards/section.service.js';
 
 const postSection = async (
     req: Request<
@@ -28,22 +23,11 @@ const postSection = async (
         const boardId = req.params.boardId;
         const { previousSectionId, nextSectionId, name } = { ...req.body };
 
-        // board permission check
-        const board = await boardQueries.getBoardWithSectionsById({
+        const newSection = await createSection({
             userId,
             boardId,
-        });
-        if (!board) throw new NotFoundError('Unable to create section');
-
-        // compute order
-        const order = computeNewOrder(
-            board.sections,
             previousSectionId,
-            nextSectionId
-        );
-        const newSection = await sectionQueries.createSection({
-            boardId,
-            order,
+            nextSectionId,
             name,
         });
         res.json(toSectionDto(newSection));

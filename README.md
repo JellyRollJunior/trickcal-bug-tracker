@@ -47,7 +47,9 @@ root/
 - Socket event vs Route
     - Does this need to happen many times per second/minute during normal use?
     - Can the UI reasonably proceed optimistically without waiting for confirmation?
-- Solidify [router -> controller -> service -> DB] architecture
+- Solidify [router -> controller -> service -> query] architecture
+    - If service logic in minimal, just directly call query from controller
+        - Don't add extra layers to navigate for no reason
 
 ## TODO
 
