@@ -4,6 +4,7 @@ import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
+import { boardIdParamSchema } from '@/features/boards/requestParams.schema.js';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import {
     toBoardDto,
@@ -48,7 +49,7 @@ const getBoard = async (
     try {
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        const boardId = req.params.boardId;
+        const { boardId } = boardIdParamSchema.parse(req.params);
         await assertBoardAccess({ userId, boardId });
 
         const data = await boardQueries.getBoardWithSectionsAndTicketsById({

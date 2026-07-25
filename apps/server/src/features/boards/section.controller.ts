@@ -1,8 +1,9 @@
 import type { Board, Section } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import { boardIdParamSchema } from '@/features/boards/requestParams.schema.js';
 import { toSectionDto } from '@/features/boards/section.mapper.js';
 import { createSection } from '@/features/boards/section.service.js';
+import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 
 const postSections = async (
     req: Request<
@@ -20,7 +21,7 @@ const postSections = async (
     try {
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        const boardId = req.params.boardId;
+        const { boardId } = boardIdParamSchema.parse(req.params);
         const { previousSectionId, nextSectionId, name } = { ...req.body };
 
         const newSection = await createSection({

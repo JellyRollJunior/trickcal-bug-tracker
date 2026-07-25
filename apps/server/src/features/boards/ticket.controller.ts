@@ -1,5 +1,6 @@
 import type { Board, Section, Ticket } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
+import { boardIdAndSectionIdParamSchema } from '@/features/boards/requestParams.schema.js';
 import { createTicket } from '@/features/boards/ticket.service.js';
 import { toTicketDto } from '@/features/boards/ticket.mapper.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
@@ -27,7 +28,7 @@ const postTickets = async (
     try {
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        const { boardId, sectionId } = { ...req.params };
+        const { boardId, sectionId } = boardIdAndSectionIdParamSchema.parse(req.params);
 
         // create ticket
         const newTicket = await createTicket({
