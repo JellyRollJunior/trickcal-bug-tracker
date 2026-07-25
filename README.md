@@ -81,8 +81,6 @@ const prisma = new PrismaClient({
 
 - validate route paramaters
     - create validateParams
-- Create ticket route
-    - validate input
 - socket events
     - export io
 

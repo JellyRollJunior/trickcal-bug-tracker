@@ -4,7 +4,7 @@ import { createTicket } from '@/features/boards/ticket.service.js';
 import { toTicketDto } from '@/features/boards/ticket.mapper.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 
-const postTicket = async (
+const postTickets = async (
     req: Request<
         { boardId: Board['id']; sectionId: Section['id'] },
         {},
@@ -15,10 +15,10 @@ const postTicket = async (
             | 'reproducibility'
             | 'summary'
             | 'description'
+            | 'priority'
+            | 'severity'
         > & {
-            priority: Ticket['priority'];
-            severity: Ticket['severity'];
-            assigneeId: Ticket['assignedTo'] | null;
+            assigneeId: Ticket['assignedTo'];
         }
     >,
     res: Response,
@@ -42,4 +42,4 @@ const postTicket = async (
     }
 };
 
-export { postTicket };
+export { postTickets };

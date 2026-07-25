@@ -5,6 +5,7 @@ import { validateRequestBody as validate } from '@/middleware/validate.js';
 import {
     postBoardsRequestBodySchema as postBoardsSchema,
     postSectionsRequestBodySchema as postSectionsSchema,
+    postTicketsRequestBodySchema as postTicketsSchema,
 } from '@/features/boards/requestBody.schema.js';
 import * as boardController from '@/features/boards/board.controller.js';
 import * as sectionController from '@/features/boards/section.controller.js';
@@ -26,14 +27,15 @@ boardRouter.post(
     '/:boardId/sections',
     requireAuth,
     validate(postSectionsSchema),
-    sectionController.postSection
+    sectionController.postSections
 );
 
 /* tickets */
 boardRouter.post(
     '/:boardId/sections/:sectionId/tickets',
     requireAuth,
-    ticketController.postTicket
+    validate(postTicketsSchema),
+    ticketController.postTickets
 );
 
 export { boardRouter };

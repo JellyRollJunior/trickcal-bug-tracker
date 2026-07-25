@@ -4,7 +4,7 @@ import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { toSectionDto } from '@/features/boards/section.mapper.js';
 import { createSection } from '@/features/boards/section.service.js';
 
-const postSection = async (
+const postSections = async (
     req: Request<
         { boardId: Board['id'] },
         {},
@@ -36,4 +36,4 @@ const postSection = async (
     }
 };
 
-export { postSection };
+export { postSections };
