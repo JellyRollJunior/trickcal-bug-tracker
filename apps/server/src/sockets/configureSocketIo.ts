@@ -4,6 +4,7 @@ import { Server as SocketIoServer } from 'socket.io';
 import { instrument } from '@socket.io/admin-ui'
 import { env } from '@/config/env.js';
 import { attachSocketListeners } from '@/sockets/attachSocketListeners.js';
+import { setIo } from '@/sockets/ioInstance.js';
 
 const configureSocketIo = async (server: Server) => {
     const io = new SocketIoServer(server, {
@@ -16,7 +17,6 @@ const configureSocketIo = async (server: Server) => {
             credentials: true,
         },
     });
-
     // Setup admin ui
     instrument(io, {
         auth: {
@@ -28,6 +28,7 @@ const configureSocketIo = async (server: Server) => {
     });
 
     attachSocketListeners(io);
+    setIo(io);
 };
 
 export { configureSocketIo }

@@ -80,9 +80,6 @@ const prisma = new PrismaClient({
 
 ## Process
 
-- socket events
-    - export io
-
 ## Planned features
 
 - docker compose setup
