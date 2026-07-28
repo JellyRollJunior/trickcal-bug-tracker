@@ -53,12 +53,13 @@ root/
         - Don't add extra layers to navigate for no reason
 - One Prisma query does not necessarily equal One SQL query
     - verify with the following snippet!
-
-```ts
-const prisma = new PrismaClient({
-    log: ["query"],
-});
-```
+- Docker + Docker compose
+    - Writing dockerfile, docker-compose.yaml, .dockerignore, .env.docker
+    - Containerizing DB & server/shared
+    - Composing DB & server/shared service
+    - Workflow:
+        - Develop on local
+        - Periodically check everything works on container
 
 ## TODO
 
@@ -83,7 +84,6 @@ const prisma = new PrismaClient({
 
 ## Planned features
 
-- docker compose setup
 - presence tracking
 - redis cache
 - redis horizontal scaling w/ socket io
