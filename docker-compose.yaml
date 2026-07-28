@@ -9,6 +9,19 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
   
+  server:
+    build:
+      context: . # set . as root to copy shared files                        
+      dockerfile: apps/server/Dockerfile
+    env_file:
+      - apps/server/.env.docker
+    environment:
+      DATABASE_URL: postgresql://postgres:secret@db:5432/trickal_bug_tracker
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  
 volumes:
   pgdata:
       
