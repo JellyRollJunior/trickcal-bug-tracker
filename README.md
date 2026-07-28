@@ -2,6 +2,12 @@
 
 Typescript React Express monorepo v2
 
+## Features
+
+- PNPM workspaces monorepo using TurboRepo
+- Repo wide build commands for local development with turborepo
+- Docker compose containerized environment for Database & Server
+
 ### Repo structure
 
 ```
@@ -16,6 +22,20 @@ root/
 └── apps/
     ├── server/
     └── client/
+```
+
+## Start Commands
+
+```bash
+# Start container env
+$ docker compose up
+$ docker compose down
+
+# Local build
+$ pnpm install
+$ turbo build
+$ turbo start
+$ turbo dev
 ```
 
 ## Endpoints
@@ -81,6 +101,8 @@ root/
 | DELETE | /ticket/:ticketId                           |
 
 ## Process
+
+- containerize client
 
 ## Planned features
 
