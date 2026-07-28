@@ -1,0 +1,43 @@
+FROM node:24-alpine AS base
+# manages package manager versions (pnpm, yarn) without needing a separate global install
+RUN corepack enable
+WORKDIR /app
+
+# ---- Install stage ----
+FROM base AS deps
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
+COPY apps/server/package.json apps/server/package.json
+COPY packages/shared/package.json packages/shared/package.json
+# --frozen-lockfile: install what's in the lockfile & fail if out of sync with package.json
+RUN pnpm install --frozen-lockfile
+
+# ---- Build stage ----
+FROM base AS build
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/server/node_modules ./apps/server/node_modules
+COPY --from=deps /app/packages/shared/node_modules ./packages/shared/node_modules
+COPY . .
+# --filter=<package>: scope command to run inside package's directory
+RUN pnpm turbo build --filter=@trickcal-bug-tracker/server
+
+# ---- Runtime stage ----
+FROM base AS runner
+ENV NODE_ENV=production
+RUN adduser --disabled-password --gecos "" kommy
+
+COPY --from=build /app/apps/server/dist ./apps/server/dist
+COPY --from=build /app/packages/shared/dist ./packages/shared/dist
+COPY --from=build /app/apps/server/package.json ./apps/server/package.json
+COPY --from=build /app/packages/shared/package.json ./packages/shared/package.json
+COPY --from=build /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
+COPY --from=build /app/apps/server/prisma.config.ts ./apps/server/prisma.config.ts
+COPY --from=build /app/apps/server/prisma/schema.prisma ./apps/server/prisma/schema.prisma
+
+# --prod: only install production dependencies
+RUN pnpm install --prod --frozen-lockfile
+ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
+RUN pnpm --filter @trickcal-bug-tracker/server exec prisma generate
+
+USER kommy
+EXPOSE 3000
+CMD ["node", "apps/server/dist/server.js"]

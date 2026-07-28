@@ -69,6 +69,7 @@ const prisma = new PrismaClient({
 - default board
     - extract default board settings
     - generate orders from fractional-idexing
+- create .env.example
 
 | Method | URI                                         |
 | ------ | ------------------------------------------- |
