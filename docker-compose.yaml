@@ -12,7 +12,7 @@ services:
   server:
     build:
       context: . # set . as root to copy shared files                        
-      dockerfile: apps/server/Dockerfile
+      dockerfile: apps/server/dockerfile
     env_file:
       - apps/server/.env.docker
     environment:
@@ -21,6 +21,17 @@ services:
       - "3000:3000"
     depends_on:
       - db
+
+  client:
+    build:
+      context: .
+      dockerfile: apps/client/dockerfile
+      # args:
+        # VITE_API_URL: http://localhost:3000
+    ports:
+      - "5173:5173"
+    # depends_on:
+      # - server
   
 volumes:
   pgdata:

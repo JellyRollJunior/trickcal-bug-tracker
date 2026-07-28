@@ -6,7 +6,10 @@ Typescript React Express monorepo v2
 
 - PNPM workspaces monorepo using TurboRepo
 - Repo wide build commands for local development with turborepo
-- Docker compose containerized environment for Database & Server
+- Docker compose containerized environment for PostgreSQL Database & Node.JS Server & Vite React Client
+    - server exposed on host localhost:3000
+    - client exposed on host localhost:5173
+    - db exposed on host port 5433
 
 ### Repo structure
 
@@ -73,10 +76,14 @@ $ turbo dev
         - Don't add extra layers to navigate for no reason
 - One Prisma query does not necessarily equal One SQL query
     - verify with the following snippet!
+- Prisma sorting -> PSQL uses local collation -> sorting string keys does not work as expect in JS
+    - solution: manually edit SQL field to sort as expected (see prisma migration files)
 - Docker + Docker compose
     - Writing dockerfile, docker-compose.yaml, .dockerignore, .env.docker
-    - Containerizing DB & server/shared
-    - Composing DB & server/shared service
+    - Containerizing PostgreSQL database, Node.js server, Vite ReactJs client
+    - Composing above 3 ^
+    - Multi stage builds to utilize layer caching
+    - NGINX to serve client static files & use smaller base image
     - Workflow:
         - Develop on local
         - Periodically check everything works on container
@@ -90,19 +97,15 @@ $ turbo dev
 - default board
     - extract default board settings
     - generate orders from fractional-idexing
-- create .env.example
 
 | Method | URI                                         |
 | ------ | ------------------------------------------- |
 | PATCH  | /section/:sectionId                         |
 | DELETE | /section/:sectionId                         |
-| POST   | /boards/:boardId/sections/:sectionId/ticket |
 | PATCH  | /ticket/:ticketId                           |
 | DELETE | /ticket/:ticketId                           |
 
 ## Process
-
-- containerize client
 
 ## Planned features
 
