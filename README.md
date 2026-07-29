@@ -4,12 +4,15 @@ Typescript React Express monorepo v2
 
 ## Features
 
-- PNPM workspaces monorepo using TurboRepo
-- Repo wide build commands for local development with turborepo
-- Docker compose containerized environment for PostgreSQL Database & Node.JS Server & Vite React Client
-    - server exposed on host localhost:3000
-    - client exposed on host localhost:5173
-    - db exposed on host port 5433
+- App
+    - 
+- Repository
+    - PNPM workspaces monorepo using TurboRepo
+    - Repo wide build commands for local development with turborepo
+    - Docker compose containerized environment for PostgreSQL Database & Node.JS Server & Vite React Client
+        - server exposed on host localhost:3000
+        - client exposed on host localhost:5173
+        - db exposed on host port 5433
 
 ### Repo structure
 
@@ -88,6 +91,11 @@ $ turbo dev
         - Develop on local
         - Periodically check everything works on container
 
+## Process
+
+- socket events
+    - join room
+
 ## TODO
 
 - later
@@ -104,8 +112,6 @@ $ turbo dev
 | DELETE | /section/:sectionId                         |
 | PATCH  | /ticket/:ticketId                           |
 | DELETE | /ticket/:ticketId                           |
-
-## Process
 
 ## Planned features
 

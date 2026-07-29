@@ -9,7 +9,7 @@ const requireAuth = (req: Request, res: Response, next: NextFunction) => {
         (error: Error, user: Express.User | null) => {
             // executed after JwtStrategy. Parameters sent through JwtStrategy done callback
             if (error) return next(error);
-            if (!user) return next(new AuthenticationError('Error authenticating token'));
+            if (!user) return next(new AuthenticationError('Unable to authenticate'));
 
             req.user = user;
             next();
