@@ -1,10 +1,5 @@
 import type { Server } from 'node:http';
-import type {
-    ServerToClientEvents,
-    ClientToServerEvents,
-    InterServerEvents,
-    SocketData,
-} from '@trickcal-bug-tracker/shared';
+import type { AppServer } from '@/sockets/types.js';
 import bcrypt from 'bcryptjs';
 import { Server as SocketIoServer } from 'socket.io';
 import { instrument } from '@socket.io/admin-ui';
@@ -14,12 +9,7 @@ import { registerMiddleware } from '@/sockets/registerMiddleware.js';
 import { registerEventHandlers } from '@/sockets/registerEventHandlers.js';
 
 const configureSocketIo = async (server: Server) => {
-    const io = new SocketIoServer<
-        ServerToClientEvents,
-        ClientToServerEvents,
-        InterServerEvents,
-        SocketData
-    >(server, {
+    const io: AppServer = new SocketIoServer(server, {
         cors: {
             origin: [
                 'http://localhost:3000',

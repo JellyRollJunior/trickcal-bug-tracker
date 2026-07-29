@@ -1,22 +1,8 @@
 import type { Board } from '@prisma/client';
-import type {
-    ClientToServerEvents,
-    InterServerEvents,
-    ServerToClientEvents,
-    SocketData,
-} from '@trickcal-bug-tracker/shared';
-import type { Socket } from 'socket.io';
+import type { AppSocket } from '@/sockets/types.js';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 
-const joinRoom = (
-    socket: Socket<
-        ServerToClientEvents,
-        ClientToServerEvents,
-        InterServerEvents,
-        SocketData
-    >,
-    boardId: Board['id']
-) => {
+const joinRoom = (socket: AppSocket, boardId: Board['id']) => {
     try {
         // validate boardId & assert board access
         const userId = socket.data.user.id;
