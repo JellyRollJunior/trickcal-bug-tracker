@@ -97,6 +97,7 @@ $ turbo dev
     - join room
     - move item
     - item moved
+- socket error types
 
 ## TODO
 
