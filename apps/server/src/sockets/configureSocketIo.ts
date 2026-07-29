@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import { Server as SocketIoServer } from 'socket.io';
 import { instrument } from '@socket.io/admin-ui';
 import { env } from '@/config/env.js';
-import { attachSocketListeners } from '@/sockets/attachSocketListeners.js';
 import { setIo } from '@/sockets/ioInstance.js';
 import {
     ServerToClientEvents,
@@ -11,6 +10,7 @@ import {
     InterServerEvents,
     SocketData,
 } from '@trickcal-bug-tracker/shared';
+import { socketRequireAuth as requireAuth } from '@/sockets/socketRequireAuth.js';
 
 const configureSocketIo = async (server: Server) => {
     const io = new SocketIoServer<
@@ -38,7 +38,13 @@ const configureSocketIo = async (server: Server) => {
         mode: 'development',
     });
 
-    attachSocketListeners(io);
+    // require auth for connnection
+    io.use(requireAuth);
+
+    // attach event handlers on connection
+    io.on('connection', (socket) => {
+        console.log(`Connected with socket ID: ${socket.id}`);
+    });
     setIo(io);
 };
 
