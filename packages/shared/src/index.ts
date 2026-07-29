@@ -3,6 +3,9 @@ export * from './boards/board.dto.js';
 export * from './boards/section.dto.js';
 export * from './boards/ticket.dto.js';
 
+// Sockets
+export * from './sockets/events.js';
+
 // Users
 export * from './users/user.dto.js';
 

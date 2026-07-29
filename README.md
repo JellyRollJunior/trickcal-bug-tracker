@@ -93,6 +93,9 @@ $ turbo dev
 
 ## Process
 
+- socket
+    - define sockeetdata
+    - define event interface
 - socket events
     - join room
 
