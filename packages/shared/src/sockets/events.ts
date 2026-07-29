@@ -1,12 +1,12 @@
 import { UserDto } from '../users/user.dto';
 
 type ServerToClientEvents = {
-    'board:itemMoved': () => void;
+    'board:ticketMoved': () => void;
     'board:userJoinedRoom': () => void;
 };
 
 type ClientToServerEvents = {
-    'board:moveItem': () => void;
+    'board:moveTicket': () => void;
     'board:joinRoom': () => void;
 };
 
