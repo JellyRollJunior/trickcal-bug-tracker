@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
-const boardIdSchema = z.uuid();
+const id = z.uuid();
+const name = z.string();
+const description = z.string();
 
-export { boardIdSchema }
+export { id, name, description }

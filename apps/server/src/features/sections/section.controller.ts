@@ -1,6 +1,6 @@
 import type { Board, Section } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { boardIdParamSchema } from '@/features/boards/request-params.schema.js';
+import { boardIdParamSchema } from '@/features/boards/board.request.schema.js';
 import { toSectionDto } from '@/features/sections/section.mapper.js';
 import { createSection } from '@/features/sections/section.service.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';

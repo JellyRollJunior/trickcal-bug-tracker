@@ -99,6 +99,9 @@ $ turbo dev
 - extract 
     - request params
 
+requet-body -> request schem
+create domain schema files to pull from in ^
+
 ## TODO
 
 - sockets

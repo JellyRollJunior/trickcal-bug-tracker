@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { boardIdSchema } from '../boards/board.schema.js';
+import * as boardSchema from '../boards/board.schema.js';
 
 const joinRoomInputSchema = z.object({
-    boardId: boardIdSchema,
+    boardId: boardSchema.id,
 });
 
 type JoinRoomInput = z.infer<typeof joinRoomInputSchema>;
