@@ -5,6 +5,7 @@ export * from './boards/ticket.dto.js';
 
 // Sockets
 export * from './sockets/events.js';
+export * from './sockets/joinRoom.js';
 
 // Users
 export * from './users/user.dto.js';

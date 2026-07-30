@@ -98,6 +98,7 @@ $ turbo dev
     - move item
     - item moved
 - socket error types
+- move input schemas to shared
 
 ## TODO
 
