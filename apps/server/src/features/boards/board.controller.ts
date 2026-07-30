@@ -4,7 +4,7 @@ import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
-import { boardIdParamSchema } from '@/features/boards/requestParams.schema.js';
+import { boardIdParamSchema } from '@/features/boards/request-params.schema.js';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import {
     toBoardDto,

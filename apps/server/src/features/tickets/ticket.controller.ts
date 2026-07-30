@@ -1,8 +1,8 @@
 import type { Board, Section, Ticket } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { boardIdAndSectionIdParamSchema } from '@/features/boards/requestParams.schema.js';
-import { createTicket } from '@/features/boards/ticket.service.js';
-import { toTicketDto } from '@/features/boards/ticket.mapper.js';
+import { boardIdAndSectionIdParamSchema } from '@/features/boards/request-params.schema.js';
+import { createTicket } from '@/features/tickets/ticket.service.js';
+import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 
 const postTickets = async (

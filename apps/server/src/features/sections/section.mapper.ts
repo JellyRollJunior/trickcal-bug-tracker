@@ -2,9 +2,9 @@ import type {
     SectionDto,
     SectionWithTicketsDto,
 } from '@trickcal-bug-tracker/shared';
-import type { SectionWithTickets } from '@/features/boards/section.select.js';
+import type { SectionWithTickets } from '@/features/sections/section.select.js';
 import { Section } from '@prisma/client';
-import { toTicketDto } from '@/features/boards/ticket.mapper.js';
+import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
 
 const toSectionDto = (section: Section): SectionDto => ({
     id: section.id,

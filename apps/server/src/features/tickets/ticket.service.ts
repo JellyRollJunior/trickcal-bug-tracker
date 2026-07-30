@@ -1,7 +1,7 @@
 import type { Board, Ticket, User } from '@prisma/client';
 import { generateKeyBetween } from 'fractional-indexing';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
-import * as ticketQueries from '@/features/boards/ticket.queries.js';
+import * as ticketQueries from '@/features/tickets/ticket.queries.js';
 
 const createTicket = async ({
     userId,

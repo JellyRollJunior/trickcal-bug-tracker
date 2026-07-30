@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { ticketInclude } from '@/features/boards/ticket.select.js';
+import { ticketInclude } from '@/features/tickets/ticket.select.js';
 
 const sectionInclude = Prisma.validator<Prisma.SectionInclude>()({
     tickets: { include: ticketInclude, orderBy: { order: 'asc' } },

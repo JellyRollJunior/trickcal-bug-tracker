@@ -6,10 +6,10 @@ import {
     postBoardsRequestBodySchema as postBoardsSchema,
     postSectionsRequestBodySchema as postSectionsSchema,
     postTicketsRequestBodySchema as postTicketsSchema,
-} from '@/features/boards/requestBody.schema.js';
+} from '@/features/boards/request-body.schema.js';
 import * as boardController from '@/features/boards/board.controller.js';
-import * as sectionController from '@/features/boards/section.controller.js';
-import * as ticketController from '@/features/boards/ticket.controller.js';
+import * as sectionController from '@/features/sections/section.controller.js';
+import * as ticketController from '@/features/tickets/ticket.controller.js';
 
 const boardRouter: Router = CreateRouter();
 

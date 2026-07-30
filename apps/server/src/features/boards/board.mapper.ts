@@ -6,7 +6,7 @@ import type {
     BoardWithParticipants,
     BoardWithSectionsAndTickets,
 } from '@/features/boards/board.select.js';
-import { toSectionWithTicketsDto } from '@/features/boards/section.mapper.js';
+import { toSectionWithTicketsDto } from '@/features/sections/section.mapper.js';
 
 const toBoardDto = (board: BoardWithParticipants): BoardDto => ({
     id: board.id,

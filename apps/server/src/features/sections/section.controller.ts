@@ -1,8 +1,8 @@
 import type { Board, Section } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { boardIdParamSchema } from '@/features/boards/requestParams.schema.js';
-import { toSectionDto } from '@/features/boards/section.mapper.js';
-import { createSection } from '@/features/boards/section.service.js';
+import { boardIdParamSchema } from '@/features/boards/request-params.schema.js';
+import { toSectionDto } from '@/features/sections/section.mapper.js';
+import { createSection } from '@/features/sections/section.service.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 
 const postSections = async (

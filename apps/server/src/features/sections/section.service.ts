@@ -1,7 +1,7 @@
 import { Board, Section, User } from '@prisma/client';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import { computeNewOrder } from '@/features/boards/ordering.service.js';
-import * as sectionQueries from '@/features/boards/section.queries.js';
+import * as sectionQueries from '@/features/sections/section.queries.js';
 
 const createSection = async ({
     userId,
