@@ -1,5 +1,5 @@
 import { UserDto } from '../features/users/user.dto.js';
-import { JoinRoomInput } from './joinRoom.js';
+import { JoinRoomInput } from './socket.request.schema.js';
 import { SocketBaseResponse } from './socket.response.js';
 
 type ServerToClientEvents = {
