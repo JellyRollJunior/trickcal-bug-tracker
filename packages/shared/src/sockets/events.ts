@@ -2,13 +2,13 @@ import { UserDto } from '../users/user.dto';
 import { JoinRoomInput } from './joinRoom';
 
 type ServerToClientEvents = {
-    'board:ticketMoved': () => void;
-    'board:userJoinedRoom': () => void;
+    'board:ticket-moved': () => void;
+    'board:user-joined-room': () => void;
 };
 
 type ClientToServerEvents = {
-    'board:moveTicket': () => void;
-    'board:joinRoom': (input: JoinRoomInput) => void;
+    'board:move-ticket': () => void;
+    'board:join-room': (input: JoinRoomInput) => void;
 };
 
 type InterServerEvents = {};
