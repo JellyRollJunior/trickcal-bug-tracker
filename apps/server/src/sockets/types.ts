@@ -14,8 +14,8 @@ type AppServer = Server<
 >;
 
 type AppSocket = Socket<
-    ServerToClientEvents,
     ClientToServerEvents,
+    ServerToClientEvents,
     InterServerEvents,
     SocketData
 >;

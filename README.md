@@ -95,6 +95,7 @@ $ turbo dev
 
 - socket events
     - join room
+        - handle errors
     - move item
     - item moved
 - socket error types
