@@ -95,11 +95,10 @@ $ turbo dev
 
 - socket events
     - join room
-        - handle errors
-    - move item
-    - item moved
-- socket error types
-- move input schemas to shared
+        - make callbacks work (?)
+        - dont crash on callback not included
+        - send callbacks with postman???
+        - dont leave self room
 
 ## TODO
 
@@ -110,6 +109,7 @@ $ turbo dev
 - default board
     - extract default board settings
     - generate orders from fractional-idexing
+- move input schemas to shared
 
 | Method | URI                                         |
 | ------ | ------------------------------------------- |

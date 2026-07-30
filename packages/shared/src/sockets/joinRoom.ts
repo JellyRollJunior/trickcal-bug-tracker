@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { boardIdSchema } from '../boards/board.schema';
+import { boardIdSchema } from '../boards/board.schema.js';
 
 const joinRoomInputSchema = z.object({
     boardId: boardIdSchema,
