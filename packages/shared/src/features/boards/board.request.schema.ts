@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import * as boardSchema from '@/features/boards/board.schema.js';
-import * as sectionSchema from '@/features/sections/section.schema.js';
+import { boardSchema } from './board.schema.js';
+import { sectionSchema } from '../sections/section.schema.js';
 
 /* Request Body */
 const postBoardsRequestBodySchema = z.object({

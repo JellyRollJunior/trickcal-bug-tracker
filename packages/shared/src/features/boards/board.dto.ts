@@ -1,5 +1,5 @@
 import { UserDto } from '../users/user.dto.js';
-import { SectionWithTicketsDto } from './section.dto.js';
+import { SectionWithTicketsDto } from '../sections/section.dto.js';
 
 type BoardDto = {
     id: string;

@@ -96,11 +96,6 @@ $ turbo dev
 - socket events
     -   move item
 - rework socket infrastructure
-- extract 
-    - request params
-
-requet-body -> request schem
-create domain schema files to pull from in ^
 
 ## TODO
 

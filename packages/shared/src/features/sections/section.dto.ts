@@ -1,4 +1,4 @@
-import { TicketDto } from './ticket.dto.js';
+import { TicketDto } from '../tickets/ticket.dto.js';
 
 type SectionDto = {
     id: string;
