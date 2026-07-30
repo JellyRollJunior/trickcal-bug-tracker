@@ -1,6 +1,6 @@
 import type { AppServer, AppSocket } from "@/sockets/types.js";
 import { JoinRoomInput } from "@trickcal-bug-tracker/shared";
-import { joinRoom } from "@/sockets/roomHandler.js";
+import { joinRoom } from "@/sockets/handlers/room.handler.js";
 
 const registerEventHandlers = (io: AppServer) => {
     io.on('connection', (socket: AppSocket) => {

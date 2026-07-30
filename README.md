@@ -95,7 +95,6 @@ $ turbo dev
 
 - socket events
     -   move item
-- rework socket infrastructure
 
 ## TODO
 
@@ -108,7 +107,6 @@ $ turbo dev
 - default board
     - extract default board settings
     - generate orders from fractional-idexing
-- move input schemas to shared
 
 | Method | URI                                         |
 | ------ | ------------------------------------------- |

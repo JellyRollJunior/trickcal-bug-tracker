@@ -7,7 +7,7 @@ import {
     SocketBaseResponse,
     ValidationError,
 } from '@trickcal-bug-tracker/shared';
-import { assertBoardAccess } from '@/features/boards/board.services.js';
+import { joinBoardRoom } from '@/features/boards/board.socket-service.js';
 
 const joinRoom = async (
     socket: AppSocket,
@@ -25,19 +25,10 @@ const joinRoom = async (
         // validate input
         const parsed = z.parse(joinRoomInputSchema, input);
         const { boardId } = { ...parsed };
-        // assert board access
         const userId = socket.data.user.id;
-        await assertBoardAccess({ userId, boardId });
 
-        // leave all rooms & join room
-        socket.rooms.forEach((room) => {
-            if (room === socket.id) return;
-            socket.leave(room);
-            console.log(`${socket.id} has left room: ${room}`);
-        });
-        socket.join(boardId);
+        await joinBoardRoom({ socket, userId, boardId });
         callback({ success: true });
-        console.log(`${socket.id} joined room ${boardId}`);
     } catch (error) {
         if (error instanceof ZodError) {
             const validationError = new ValidationError(
