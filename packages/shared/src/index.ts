@@ -1,15 +1,15 @@
+// Users
+export * from './features/users/user.dto.js';
+
 // Boards
-export * from './boards/board.dto.js';
-export * from './boards/section.dto.js';
-export * from './boards/ticket.dto.js';
+export * from './features/boards/board.dto.js';
+export * from './features/boards/section.dto.js';
+export * from './features/boards/ticket.dto.js';
 
 // Sockets
 export * from './sockets/socket.events.js';
 export * from './sockets/joinRoom.js';
 export * from './sockets/socket.response.js';
-
-// Users
-export * from './users/user.dto.js';
 
 // Errors
 export * from './errors/AuthenticationError.js';

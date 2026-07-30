@@ -1,4 +1,4 @@
-import { UserDto } from '../users/user.dto.js';
+import { UserDto } from '../features/users/user.dto.js';
 import { JoinRoomInput } from './joinRoom.js';
 import { SocketBaseResponse } from './socket.response.js';
 
