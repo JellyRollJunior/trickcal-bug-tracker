@@ -6,7 +6,7 @@ const registerEventHandlers = (io: AppServer) => {
     io.on('connection', (socket: AppSocket) => {
         console.log(`Connected with socket ID: ${socket.id}`);
 
-        socket.on('board:join-room', (input: JoinRoomInput) => joinRoom(socket, input))
+        socket.on('board:join-room', (input: JoinRoomInput, callback) => joinRoom(socket, input, callback))
     })
 }
 

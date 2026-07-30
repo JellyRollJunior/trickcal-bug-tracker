@@ -1,11 +1,12 @@
+import { BaseError } from "../errors/BaseError";
+
 interface SocketSucessResponse {
     success: true
 }
 
 interface SocketFailureResponse {
     success: false,
-    code: number,
-    message?: string,
+    error: BaseError,
 }
 
 type SocketBaseResponse = SocketSucessResponse | SocketFailureResponse;

@@ -1,5 +1,6 @@
-import { UserDto } from '../users/user.dto';
-import { JoinRoomInput } from './joinRoom';
+import { UserDto } from '../users/user.dto.js';
+import { JoinRoomInput } from './joinRoom.js';
+import { SocketBaseResponse } from './SocketResponse.js';
 
 type ServerToClientEvents = {
     'board:ticket-moved': () => void;
@@ -8,7 +9,10 @@ type ServerToClientEvents = {
 
 type ClientToServerEvents = {
     'board:move-ticket': () => void;
-    'board:join-room': (input: JoinRoomInput) => void;
+    'board:join-room': (
+        input: JoinRoomInput,
+        callback: (response: SocketBaseResponse) => void
+    ) => void;
 };
 
 type InterServerEvents = {};
