@@ -94,14 +94,13 @@ $ turbo dev
 ## Process
 
 - socket events
-    - join room
-        - make callbacks work (?)
-        - dont crash on callback not included
-        - send callbacks with postman???
-        - dont leave self room
+    -   move item
+- rework socket infrastructure
 
 ## TODO
 
+- sockets
+    - extract callback guard
 - later
     - set token to proper expire time
 - test

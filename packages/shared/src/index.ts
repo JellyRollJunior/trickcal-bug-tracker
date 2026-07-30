@@ -4,9 +4,9 @@ export * from './boards/section.dto.js';
 export * from './boards/ticket.dto.js';
 
 // Sockets
-export * from './sockets/events.js';
+export * from './sockets/socket.events.js';
 export * from './sockets/joinRoom.js';
-export * from './sockets/SocketResponse.js';
+export * from './sockets/socket.response.js';
 
 // Users
 export * from './users/user.dto.js';
@@ -17,4 +17,4 @@ export * from './errors/BaseError.js';
 export * from './errors/DatabaseError.js';
 export * from './errors/ValidationError.js';
 export * from './errors/NotFoundError.js';
-export * from './errors/mapper.js';
+export * from './errors/error.mapper.js';

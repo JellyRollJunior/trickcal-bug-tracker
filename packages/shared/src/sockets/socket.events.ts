@@ -1,6 +1,6 @@
 import { UserDto } from '../users/user.dto.js';
 import { JoinRoomInput } from './joinRoom.js';
-import { SocketBaseResponse } from './SocketResponse.js';
+import { SocketBaseResponse } from './socket.response.js';
 
 type ServerToClientEvents = {
     'board:ticket-moved': () => void;

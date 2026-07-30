@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { userSummarySelect } from '@/features/users/select.js';
+import { userSummarySelect } from '@/features/users/user.select.js';
 import { sectionInclude } from '@/features/boards/section.select.js';
 
 const boardInclude = Prisma.validator<Prisma.BoardInclude>()({

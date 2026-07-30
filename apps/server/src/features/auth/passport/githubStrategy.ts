@@ -1,8 +1,8 @@
 import type { VerifyCallback } from 'passport-oauth2';
 import passportGithub from 'passport-github2';
 import { env } from '@/config/env.js';
-import { mapUserToTokenPayload } from '@/features/auth/mapper.js';
-import * as userQueries from '@/features/users/queries.js';
+import { mapUserToTokenPayload } from '@/features/auth/token.mapper.js';
+import * as userQueries from '@/features/users/user.queries.js';
 
 const GithubStrategy = passportGithub.Strategy;
 

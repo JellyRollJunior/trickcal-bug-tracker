@@ -4,7 +4,7 @@ import cors from 'cors';
 import session from 'express-session';
 import { env } from '@/config/env.js';
 import { passport } from '@/features/auth/passport/passport.js'
-import { authRouter } from '@/features/auth/router.js';
+import { authRouter } from '@/features/auth/auth.router.js';
 import { boardRouter } from '@/features/boards/board.router.js';
 import { errorHandler404, errorHandler } from './middleware/ErrorHandler.js';
 

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import * as userSchemas from '@/features/users/schema.js';
+import * as userSchemas from '@/features/users/user.schema.js';
 
 const postSignupRequestBodySchema = z.object({
     username: userSchemas.usernameSchema,

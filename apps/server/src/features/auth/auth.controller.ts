@@ -1,11 +1,11 @@
 import type { User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
-import { toUserDto } from '@/features/users/mapper.js';
+import { toUserDto } from '@/features/users/user.mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { signToken } from '@/lib/auth/signToken.js';
-import * as userQueries from '@/features/users/queries.js';
+import * as userQueries from '@/features/users/user.queries.js';
 
 const postSignup = async (
     req: Request<{}, {}, Pick<User, 'username' | 'password' | 'name'>>,

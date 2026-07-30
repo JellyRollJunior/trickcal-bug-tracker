@@ -6,7 +6,7 @@ import {
     postLoginRequestBodySchema as loginSchema,
 } from '@/features/auth/requestBody.schema.js';
 import { passport } from '@/features/auth/passport/passport.js';
-import * as authController from '@/features/auth/controller.js';
+import * as authController from '@/features/auth/auth.controller.js';
 
 const authRouter: Router = CreateRouter();
 

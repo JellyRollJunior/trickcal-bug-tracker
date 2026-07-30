@@ -1,7 +1,7 @@
 import passportLocal from 'passport-local';
 import bcrypt from 'bcryptjs';
-import { mapUserToTokenPayload } from '@/features/auth/mapper.js';
-import * as userQueries from '@/features/users/queries.js';
+import { mapUserToTokenPayload } from '@/features/auth/token.mapper.js';
+import * as userQueries from '@/features/users/user.queries.js';
 
 const LocalStrategy = passportLocal.Strategy;
 const localStrategy = new LocalStrategy(async (username, password, done) => {

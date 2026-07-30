@@ -14,8 +14,11 @@ const joinRoom = async (
     input: JoinRoomInput,
     callback: (response: SocketBaseResponse) => void
 ) => {
+    // validate callback
     if (typeof callback !== 'function') {
-        console.warn(`Socket ${socket.id} called board:join-room without a callback`);
+        console.warn(
+            `Socket ${socket.id} called board:join-room without a callback`
+        );
         return;
     }
     try {
