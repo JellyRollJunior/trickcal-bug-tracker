@@ -96,6 +96,9 @@ $ turbo dev
 - socket events
     -   move item
 - rework socket infrastructure
+- extract 
+    - request body
+    - request params
 
 ## TODO
 
