@@ -98,7 +98,13 @@ $ turbo dev
     - define shared socket paramters
     - move item handler
     - move item register event handler
-
+    
+    - assert board access
+    - assert ticket in board
+    - assert section in board
+- extract
+    - socket error handler
+    - socket callback validator
 
 ## TODO
 

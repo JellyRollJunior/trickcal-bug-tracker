@@ -71,8 +71,8 @@ const createTicket = async ({
 };
 
 const moveTicket = async ({
-    sectionId,
     ticketId,
+    sectionId,
     order,
 }: {
     ticketId: Ticket['id'];
@@ -89,6 +89,7 @@ const moveTicket = async ({
                 order: order,
             },
         });
+        console.log(data)
         return data;
     } catch (error) {
         throw new DatabaseError('Unable to move ticket');
