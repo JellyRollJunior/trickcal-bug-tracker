@@ -1,6 +1,29 @@
 import type { Section } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
+import { boardInclude } from '@/features/boards/board.select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
+
+const getSectionWithBoard = async ({
+    sectionId,
+}: {
+    sectionId: Section['id'];
+}) => {
+    try {
+        const data = prisma.section.findFirst({
+            where: {
+                id: sectionId,
+            },
+            include: {
+                board: {
+                    include: boardInclude,
+                },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch section');
+    }
+};
 
 const getSections = async ({ boardId }: Pick<Section, 'boardId'>) => {
     try {
@@ -37,4 +60,4 @@ const createSection = async ({
     }
 };
 
-export { getSections, createSection };
+export { getSectionWithBoard, getSections, createSection };

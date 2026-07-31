@@ -8,7 +8,10 @@ const moveTicket = async ({
     previousTicketId,
     nextTicketId,
 }: MoveTicketInput) => {
-    // validate user has permission for board
+    // validate section exists
+    // validate board access
+    // validate ticket in section
+    
     // compute order
     const tickets = await ticketQueries.getTicketsBySection({ sectionId });
     const order = computeNewOrder(tickets, previousTicketId, nextTicketId);
