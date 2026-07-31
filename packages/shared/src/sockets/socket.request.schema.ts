@@ -1,11 +1,18 @@
 import { z } from 'zod';
 import { boardSchema } from '../features/boards/board.schema.js';
+import { ticketSchema } from '../features/tickets/ticket.schema.js';
 
 const joinRoomInputSchema = z.object({
     boardId: boardSchema.id,
 });
-
 type JoinRoomInput = z.infer<typeof joinRoomInputSchema>;
 
-export type { JoinRoomInput };
-export { joinRoomInputSchema };
+const moveTicketInputSchema = z.object({
+    ticketId: ticketSchema.id,
+    sectionId: ticketSchema.sectionId,
+    order: ticketSchema.order,
+});
+type MoveTicketInput = z.infer<typeof moveTicketInputSchema>;
+
+export type { JoinRoomInput, MoveTicketInput };
+export { joinRoomInputSchema, moveTicketInputSchema };

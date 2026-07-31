@@ -75,8 +75,8 @@ const moveTicket = async ({
     ticketId,
     order,
 }: {
-    sectionId: Section['id'];
     ticketId: Ticket['id'];
+    sectionId: Section['id'];
     order: Ticket['order'];
 }) => {
     try {
