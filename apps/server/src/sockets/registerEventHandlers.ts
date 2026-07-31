@@ -9,7 +9,7 @@ const registerEventHandlers = (io: AppServer) => {
 
         socket.on('board:join-room', (input: JoinRoomInput, callback) => joinRoom(socket, input, callback))
 
-        socket.on('ticket:move-ticket', (input: MoveTicketInput, callback) => moveTicket(socket, input, callback))
+        socket.on('ticket:move', (input: MoveTicketInput, callback) => moveTicket(socket, input, callback))
     })
 }
 

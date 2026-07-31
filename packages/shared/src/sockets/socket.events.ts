@@ -3,12 +3,12 @@ import { JoinRoomInput, MoveTicketInput } from './socket.request.schema.js';
 import { SocketBaseResponse } from './socket.response.js';
 
 type ServerToClientEvents = {
-    'ticket:ticket-moved': () => void;
+    'ticket:moved': () => void;
     'board:user-joined-room': () => void;
 };
 
 type ClientToServerEvents = {
-    'ticket:move-ticket': (
+    'ticket:move': (
         input: MoveTicketInput,
         callback: (response: SocketBaseResponse) => void
     ) => void;

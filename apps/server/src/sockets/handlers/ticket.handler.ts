@@ -8,7 +8,7 @@ import {
     SocketBaseResponse,
     ValidationError,
 } from '@trickcal-bug-tracker/shared';
-import * as ticketQueries from '@/features/tickets/ticket.queries.js';
+import * as ticketService from '@/features/tickets/ticket.socket-service.js';
 
 const moveTicket = async (
     socket: AppSocket,
@@ -25,16 +25,17 @@ const moveTicket = async (
     try {
         // validate input
         const parsed = moveTicketInputSchema.parse(input);
-        const { ticketId, sectionId, order } = { ...parsed };
+        const { ticketId, sectionId, previousTicketId, nextTicketId } = {
+            ...parsed,
+        };
 
-        // validate user has permission for board: TODO
-
-        const ticket = await ticketQueries.moveTicket({
+        const movedTicket = await ticketService.moveTicket({
             ticketId,
             sectionId,
-            order,
+            previousTicketId,
+            nextTicketId,
         });
-        if (ticket) {
+        if (movedTicket) {
             callback({ success: true });
         } else {
             callback({

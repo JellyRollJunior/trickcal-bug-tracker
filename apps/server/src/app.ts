@@ -6,7 +6,7 @@ import { env } from '@/config/env.js';
 import { passport } from '@/features/auth/passport/passport.js'
 import { authRouter } from '@/features/auth/auth.router.js';
 import { boardRouter } from '@/features/boards/board.router.js';
-import { errorHandler404, errorHandler } from './middleware/ErrorHandlerz.js';
+import { errorHandler404, errorHandler } from './middleware/errorHandler.js';
 
 const app: Application = express();
 app.use(

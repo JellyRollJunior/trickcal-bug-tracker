@@ -10,7 +10,8 @@ type JoinRoomInput = z.infer<typeof joinRoomInputSchema>;
 const moveTicketInputSchema = z.object({
     ticketId: ticketSchema.id,
     sectionId: ticketSchema.sectionId,
-    order: ticketSchema.order,
+    previousTicketId: ticketSchema.id.nullable(),
+    nextTicketId: ticketSchema.id.nullable(),
 });
 type MoveTicketInput = z.infer<typeof moveTicketInputSchema>;
 
