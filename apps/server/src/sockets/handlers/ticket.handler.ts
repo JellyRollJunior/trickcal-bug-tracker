@@ -24,12 +24,14 @@ const moveTicket = async (
     }
     try {
         // validate input
+        const userId = socket.data.user.id;
         const parsed = moveTicketInputSchema.parse(input);
         const { ticketId, sectionId, previousTicketId, nextTicketId } = {
             ...parsed,
         };
 
         const movedTicket = await ticketService.moveTicket({
+            userId,
             ticketId,
             sectionId,
             previousTicketId,

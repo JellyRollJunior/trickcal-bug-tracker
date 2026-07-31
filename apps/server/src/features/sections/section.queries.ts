@@ -60,4 +60,6 @@ const createSection = async ({
     }
 };
 
+console.log(await getSectionWithBoard({sectionId: '47f03664-444b-43d6-b3e3-d16e4444461f'}))
+
 export { getSectionWithBoard, getSections, createSection };
