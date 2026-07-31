@@ -1,13 +1,11 @@
 import type { AppSocket } from '../types.js';
-import z, { ZodError } from 'zod';
 import {
-    BaseError,
     DatabaseError,
     MoveTicketInput,
     moveTicketInputSchema,
     SocketBaseResponse,
-    ValidationError,
 } from '@trickcal-bug-tracker/shared';
+import { socketErrorHandler } from '@/sockets/handlers/error.handler.js';
 import * as ticketService from '@/features/tickets/ticket.socket-service.js';
 
 const moveTicket = async (
@@ -39,14 +37,7 @@ const moveTicket = async (
             });
         }
     } catch (error) {
-        if (error instanceof ZodError) {
-            const validationError = new ValidationError(
-                z.flattenError(error).fieldErrors
-            );
-            callback({ success: false, error: validationError });
-        } else {
-            callback({ success: false, error: new BaseError() });
-        }
+        socketErrorHandler(error, callback)
     }
 };
 

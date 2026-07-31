@@ -97,11 +97,10 @@ $ turbo dev
 ## Process
 
 - move section guard against prv+next === sectionId
-- extract
-    - socket error handler
 - TEST
     - moveticket
     - callbackguard
+    - error handler
 
 ## TODO
 
