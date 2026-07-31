@@ -93,8 +93,12 @@ $ turbo dev
 
 ## Process
 
-- socket events
-    -   move item
+- socket events: move item
+    - move item query
+    - define shared socket paramters
+    - move item handler
+    - move item register event handler
+
 
 ## TODO
 

@@ -70,4 +70,29 @@ const createTicket = async ({
     }
 };
 
-export { getTicketsBySection, createTicket };
+const moveTicket = async ({
+    sectionId,
+    ticketId,
+    order,
+}: {
+    sectionId: Section['id'];
+    ticketId: Ticket['id'];
+    order: Ticket['order'];
+}) => {
+    try {
+        const data = await prisma.ticket.update({
+            where: {
+                id: ticketId,
+            },
+            data: {
+                sectionId: sectionId,
+                order: order,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to move ticket');
+    }
+};
+
+export { getTicketsBySection, createTicket, moveTicket };
