@@ -15,13 +15,6 @@ const moveTicket = async (
     input: MoveTicketInput,
     callback: (response: SocketBaseResponse) => void
 ) => {
-    // validate callback
-    if (typeof callback !== 'function') {
-        console.warn(
-            `Socket ${socket.id} called board:join-room without a callback`
-        );
-        return;
-    }
     try {
         // validate input
         const userId = socket.data.user.id;

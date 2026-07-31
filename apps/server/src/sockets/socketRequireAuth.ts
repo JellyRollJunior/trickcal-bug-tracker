@@ -8,8 +8,7 @@ const socketRequireAuth = (
     next: (err?: ExtendedError | undefined) => void
 ) => {
     try {
-        // const token = socket.handshake.auth?.token;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3YmU5MzY3LWRiNzctNGRjNy04YTc2LWFhY2ZlOTIyOWUwZiIsIm5hbWUiOiJ1c2FnZXJpbm8iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNzg1NDU3MDEwLCJleHAiOjE3ODgxMzU0MTB9.kBZ3ZcaUg_4tOph0BDV8VpCPkXVIriUKn1Yqt88tlUo'
+        const token = socket.handshake.auth?.token;
         if (!token) throw new Error('Missing token')
         const data = jwt.verify(token, env.tokenSecret);
         socket.data.user = data; // attach user info to socket
