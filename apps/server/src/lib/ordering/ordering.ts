@@ -6,6 +6,18 @@ type Orderable = {
     order: string;
 };
 
+const assertNullOrInList = (
+    itemId: string | null,
+    list: Orderable[],
+    errorMessage?: string
+) => {
+    if (itemId !== null) {
+        if (!list.some((item) => item.id === itemId)) {
+            throw new NotFoundError(errorMessage ?? 'item not in list');
+        }
+    }
+};
+
 const extractOrder = (items: Orderable[], itemId: string | null) => {
     if (itemId) {
         const previousItem = items.find((items) => items.id === itemId);
@@ -30,4 +42,4 @@ const computeNewOrder = (
     return generateKeyBetween(previousOrder, nextOrder);
 };
 
-export { computeNewOrder };
+export { assertNullOrInList, computeNewOrder };

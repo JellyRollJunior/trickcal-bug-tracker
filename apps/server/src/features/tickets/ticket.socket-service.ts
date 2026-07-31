@@ -1,10 +1,14 @@
 import type { User } from '@prisma/client';
-import { MoveTicketInput } from '@trickcal-bug-tracker/shared';
-import { computeNewOrder } from '@/lib/ordering/ordering.js';
+import {
+    MoveTicketInput,
+    NotFoundError,
+    ValidationError,
+} from '@trickcal-bug-tracker/shared';
+import { assertNullOrInList, computeNewOrder } from '@/lib/ordering/ordering.js';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
-import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import * as ticketQueries from '@/features/tickets/ticket.queries.js';
 import * as sectionQueries from '@/features/sections/section.queries.js';
+
 
 const moveTicket = async ({
     userId,
@@ -13,16 +17,20 @@ const moveTicket = async ({
     previousTicketId,
     nextTicketId,
 }: { userId: User['id'] } & MoveTicketInput) => {
+    if (ticketId === previousTicketId || ticketId === nextTicketId) throw new ValidationError({ ticketId: ['ticketId should not match previousTicketId or nextTicketId'] });
     // validate section exists
-    const boardWithSection = await sectionQueries.getSection({
-        sectionId,
-    });
-    // validate board access
-    const boardId = boardWithSection?.boardId;
-    if (!boardId) throw new DatabaseError();
+    const destinationSectionWithTickets = await sectionQueries.getSectionWithTickets({ sectionId });
+    if (!destinationSectionWithTickets) throw new NotFoundError('Section not found');
+    // validate access to board that destination section resides in
+    const boardId = destinationSectionWithTickets.boardId;
     await assertBoardAccess({ userId, boardId });
-    // validate ticket in section
-    
+    // validate ticket in board that destination section resides in
+    const ticketWithOriginSection = await ticketQueries.getTicketWithSection({ ticketId });
+    if (!ticketWithOriginSection) throw new NotFoundError('Ticket not found');
+    if (boardId !== ticketWithOriginSection?.section.boardId) throw new NotFoundError('Ticket and section not in same board');
+    // validate prev/next tickets null or in destination section
+    assertNullOrInList(previousTicketId, destinationSectionWithTickets.tickets, 'Previous ticket not in section');
+    assertNullOrInList(nextTicketId, destinationSectionWithTickets.tickets, 'Next ticket not in section');
 
     // compute order
     const tickets = await ticketQueries.getTicketsBySection({ sectionId });

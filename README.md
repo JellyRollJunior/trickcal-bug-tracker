@@ -102,6 +102,8 @@ $ turbo dev
     - assert board access
     - assert ticket in board
     - assert section in board
+
+- move section guard against prv+next === sectionId
 - extract
     - socket error handler
     - socket callback validator

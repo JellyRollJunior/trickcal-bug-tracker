@@ -1,7 +1,27 @@
 import { prisma } from '@/db/prisma.js';
 import { Priority, Section, Severity, Ticket } from '@prisma/client';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
-import { ticketInclude } from './ticket.select.js';
+import { ticketInclude } from '@/features/tickets/ticket.select.js';
+
+const getTicketWithSection = async ({
+    ticketId,
+}: {
+    ticketId: Ticket['id'];
+}) => {
+    try {
+        const data = await prisma.ticket.findFirst({
+            where: {
+                id: ticketId,
+            },
+            include: {
+                section: true,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch ticket');
+    }
+};
 
 const getTicketsBySection = async ({
     sectionId,
@@ -89,11 +109,11 @@ const moveTicket = async ({
                 order: order,
             },
         });
-        console.log(data)
+        console.log(data);
         return data;
     } catch (error) {
         throw new DatabaseError('Unable to move ticket');
     }
 };
 
-export { getTicketsBySection, createTicket, moveTicket };
+export { getTicketWithSection, getTicketsBySection, createTicket, moveTicket };

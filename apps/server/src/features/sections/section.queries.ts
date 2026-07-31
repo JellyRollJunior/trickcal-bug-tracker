@@ -1,9 +1,9 @@
 import type { Section } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
-import { boardInclude } from '@/features/boards/board.select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
+import { ticketInclude } from '@/features/tickets/ticket.select.js';
 
-const getSectionWithBoard = async ({
+const getSectionWithTickets = async ({
     sectionId,
 }: {
     sectionId: Section['id'];
@@ -14,8 +14,8 @@ const getSectionWithBoard = async ({
                 id: sectionId,
             },
             include: {
-                board: {
-                    include: boardInclude,
+                tickets: {
+                    include: ticketInclude,
                 },
             },
         });
@@ -60,6 +60,4 @@ const createSection = async ({
     }
 };
 
-console.log(await getSectionWithBoard({sectionId: '47f03664-444b-43d6-b3e3-d16e4444461f'}))
-
-export { getSectionWithBoard, getSections, createSection };
+export { getSectionWithTickets, getSections, createSection };
