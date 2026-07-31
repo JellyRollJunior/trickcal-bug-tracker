@@ -71,6 +71,9 @@ $ turbo dev
         - Create intermediate types w/ Prisma GetPayload
     - Manipulate data, do logic with data, etc.
     - Map BaseWithExtras to dto & send to user - Type name: BaseDto or BaseWithExtrasDto
+- Solidify TypeScript shared workflow
+    - define schema, request body, dtos, socket events, errors in shared
+    - import them in client / server
 - Socket event vs Route
     - Does this need to happen many times per second/minute during normal use?
     - Can the UI reasonably proceed optimistically without waiting for confirmation?
@@ -92,16 +95,6 @@ $ turbo dev
         - Periodically check everything works on container
 
 ## Process
-
-- socket events: move item
-    - move item query
-    - define shared socket paramters
-    - move item handler
-    - move item register event handler
-    
-    - assert board access
-    - assert ticket in board
-    - assert section in board
 
 - move section guard against prv+next === sectionId
 - extract
