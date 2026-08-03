@@ -1,14 +1,14 @@
-import { BaseError } from "../errors/BaseError";
+import { BaseError } from '../errors/BaseError';
 
 interface SocketSucessResponse {
-    success: true
+    success: true;
 }
 
 interface SocketFailureResponse {
-    success: false,
-    error: BaseError,
+    success: false;
+    error: BaseError;
 }
 
 type SocketBaseResponse = SocketSucessResponse | SocketFailureResponse;
 
-export { SocketSucessResponse, SocketFailureResponse, SocketBaseResponse }
+export { SocketSucessResponse, SocketFailureResponse, SocketBaseResponse };

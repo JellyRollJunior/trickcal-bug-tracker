@@ -5,7 +5,7 @@ import {
     moveTicketInputSchema,
     SocketBaseResponse,
 } from '@trickcal-bug-tracker/shared';
-import { socketErrorHandler } from '@/sockets/handlers/error.handler.js';
+import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 import * as ticketService from '@/features/tickets/ticket.socket-service.js';
 
 const moveTicket = async (

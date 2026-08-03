@@ -5,7 +5,7 @@ import {
     SocketBaseResponse,
 } from '@trickcal-bug-tracker/shared';
 import { joinBoardRoom } from '@/features/boards/board.socket-service.js';
-import { socketErrorHandler } from '@/sockets/handlers/error.handler.js';
+import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 
 const joinRoom = async (
     socket: AppSocket,
