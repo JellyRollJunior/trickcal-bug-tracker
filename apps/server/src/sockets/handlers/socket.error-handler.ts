@@ -19,6 +19,9 @@ const socketErrorHandler = (
         );
         const errorDto = mapValidationErrorToDto(validationError);
         callback({ success: false, error: errorDto });
+    } else if (error instanceof ValidationError) {
+        const errorDto = mapValidationErrorToDto(error);
+        callback({ success: false, error: errorDto });
     } else if (
         error instanceof BaseError ||
         error instanceof NotFoundError ||

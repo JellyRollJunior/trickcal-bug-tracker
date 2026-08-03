@@ -31,6 +31,9 @@ const errorHandler = (
         );
         const validationErrorDto = mapValidationErrorToDto(validationError);
         res.status(validationErrorDto.status).json(validationErrorDto);
+    } else if (err instanceof ValidationError) {
+        const errorDto = mapValidationErrorToDto(err);
+        res.status(errorDto.status).json(errorDto);
     } else if (
         err instanceof BaseError ||
         err instanceof NotFoundError ||
