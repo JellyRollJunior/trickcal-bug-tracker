@@ -58,11 +58,11 @@ $ turbo dev
 | POST   | /boards/:boardId/sections                    | create section             | name, previousSectionId, nextSectionId                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | issueType, category, reproducibility, summary, description, priority, severity, assigneeId | ticketDto                      |                                                                                 |
 
-| direction        | Socket Event      | Arguments                                           | Use               |
-| ---------------- | ----------------- | --------------------------------------------------- | ----------------- |
-| client to server | 'connection'      | token                                               | socket connection |
-| client to server | 'board:join_room' | boardId                                             | join board room   |
-| client to server | 'ticket:move'     | ticketId, sectionId, previousTicketId, nextTicketId | move ticket       |
+| direction        | Socket Event      | Arguments                                                       | Use               |
+| ---------------- | ----------------- | --------------------------------------------------------------- | ----------------- |
+| client to server | 'connection'      | token                                                           | socket connection |
+| client to server | 'board:join_room' | {boardId}, callback                                             | join board room   |
+| client to server | 'ticket:move'     | {ticketId, sectionId, previousTicketId, nextTicketId}, callback | move ticket       |
 
 ## Learning Outcomes
 
@@ -102,12 +102,11 @@ $ turbo dev
 
 ## Process
 
+- migrate to previousId needed only 
+    - section
+    - ticket
 - ticket:moved
 - move section guard against prv+next === sectionId
-- TEST socket
-    - moveticket
-    - callbackguard
-    - error handler
 
 ## TODO
 

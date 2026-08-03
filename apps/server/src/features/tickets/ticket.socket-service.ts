@@ -33,7 +33,7 @@ const moveTicket = async ({
     assertNullOrInList(nextTicketId, destinationSectionWithTickets.tickets, 'Next ticket not in section');
 
     // compute order
-    const tickets = await ticketQueries.getTicketsBySection({ sectionId });
+    const tickets = destinationSectionWithTickets.tickets;
     const order = computeNewOrder(tickets, previousTicketId, nextTicketId);
 
     const ticket = await ticketQueries.moveTicket({
