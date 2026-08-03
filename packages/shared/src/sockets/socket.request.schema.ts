@@ -11,7 +11,6 @@ const moveTicketInputSchema = z.object({
     ticketId: ticketSchema.id,
     sectionId: ticketSchema.sectionId,
     previousTicketId: ticketSchema.id.nullable(),
-    nextTicketId: ticketSchema.id.nullable(),
 });
 type MoveTicketInput = z.infer<typeof moveTicketInputSchema>;
 
