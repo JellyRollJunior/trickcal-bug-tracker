@@ -5,7 +5,7 @@ Typescript React Express monorepo v2
 ## Features
 
 - App
-    - 
+    -
 - Repository
     - PNPM workspaces monorepo using TurboRepo
     - Repo wide build commands for local development with turborepo
@@ -44,7 +44,7 @@ $ turbo start
 $ turbo dev
 ```
 
-## Endpoints
+## Endpoints & Socket Events
 
 | Method | URI                                          | Function                   | Body (inputs)                                                                              | Outputs                        | Notes                                                                           |
 | ------ | -------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------- |
@@ -57,6 +57,12 @@ $ turbo dev
 | GET    | /boards/:boardId                             | get board by id            |                                                                                            | boardWithSectionsAndTicketsDto |                                                                                 |
 | POST   | /boards/:boardId/sections                    | create section             | name, previousSectionId, nextSectionId                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | issueType, category, reproducibility, summary, description, priority, severity, assigneeId | ticketDto                      |                                                                                 |
+
+| direction        | Socket Event      | Arguments                                           | Use               |
+| ---------------- | ----------------- | --------------------------------------------------- | ----------------- |
+| client to server | 'connection'      | token                                               | socket connection |
+| client to server | 'board:join_room' | boardId                                             | join board room   |
+| client to server | 'ticket:move'     | ticketId, sectionId, previousTicketId, nextTicketId | move ticket       |
 
 ## Learning Outcomes
 
@@ -96,8 +102,9 @@ $ turbo dev
 
 ## Process
 
+- ticket:moved
 - move section guard against prv+next === sectionId
-- TEST
+- TEST socket
     - moveticket
     - callbackguard
     - error handler
@@ -114,12 +121,12 @@ $ turbo dev
     - extract default board settings
     - generate orders from fractional-idexing
 
-| Method | URI                                         |
-| ------ | ------------------------------------------- |
-| PATCH  | /section/:sectionId                         |
-| DELETE | /section/:sectionId                         |
-| PATCH  | /ticket/:ticketId                           |
-| DELETE | /ticket/:ticketId                           |
+| Method | URI                 |
+| ------ | ------------------- |
+| PATCH  | /section/:sectionId |
+| DELETE | /section/:sectionId |
+| PATCH  | /ticket/:ticketId   |
+| DELETE | /ticket/:ticketId   |
 
 ## Planned features
 
