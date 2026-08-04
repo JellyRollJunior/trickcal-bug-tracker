@@ -7,6 +7,7 @@ import {
 } from '@trickcal-bug-tracker/shared';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 import * as ticketService from '@/features/tickets/ticket.socket-service.js';
+import { toUserDto } from '@/features/users/user.mapper.js';
 
 const moveTicket = async (
     socket: AppSocket,
@@ -15,28 +16,19 @@ const moveTicket = async (
 ) => {
     try {
         // validate input
-        const userId = socket.data.user.id
+        const userId = socket.data.user.id;
         const parsed = moveTicketInputSchema.parse(input);
-        const { ticketId, sectionId, previousTicketId } = {
-            ...parsed,
-        };
+        const { ticketId, sectionId, previousTicketId } = parsed;
 
-        const movedTicket = await ticketService.moveTicket({
+        const result = await ticketService.moveTicket({
             userId,
             ticketId,
             sectionId,
             previousTicketId,
         });
-        if (movedTicket) {
-            callback({ success: true });
-        } else {
-            callback({
-                success: false,
-                error: new DatabaseError('Unable to move ticket'),
-            });
-        }
+        callback({ success: true });
     } catch (error) {
-        socketErrorHandler(error, callback)
+        socketErrorHandler(error, callback);
     }
 };
 

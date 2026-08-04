@@ -1,4 +1,4 @@
-import type { User } from '@prisma/client';
+import type { Section, Ticket, User } from '@prisma/client';
 import {
     MoveTicketInput,
     NotFoundError,
@@ -19,7 +19,7 @@ const moveTicket = async ({
     ticketId,
     sectionId,
     previousTicketId,
-}: { userId: User['id'] } & MoveTicketInput) => {
+}: { userId: User['id'] } & MoveTicketInput): Promise<MoveTicketResult> => {
     if (ticketId === previousTicketId) throw new ValidationError({ ticketId: ['ticketId should not match previousTicketId'] });
     
     // validate section exists
@@ -54,7 +54,9 @@ const moveTicket = async ({
         sectionId,
         order,
     });
-    return ticket;
+    return { previousSectionId: ticketWithOriginSection.sectionId, ticket };
 };
+type MoveTicketResult = { previousSectionId: Section['id'], ticket: Ticket}
 
+export type { MoveTicketResult }
 export { moveTicket };
