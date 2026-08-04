@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import {userSchema} from '../users/user.schema.js';
+import {userShape} from '../users/user.schema.js';
 
 const postSignupRequestBodySchema = z.object({
-    username: userSchema.username,
-    password: userSchema.password,
-    name: userSchema.name,
+    username: userShape.username,
+    password: userShape.password,
+    name: userShape.name,
 });
 
 const postLoginRequestBodySchema = z.object({

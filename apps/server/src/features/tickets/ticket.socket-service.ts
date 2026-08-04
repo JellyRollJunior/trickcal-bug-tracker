@@ -1,4 +1,4 @@
-import type { Board, Section, Ticket, User } from '@prisma/client';
+import type { Board, Section, User } from '@prisma/client';
 import {
     MoveTicketInput,
     NotFoundError,

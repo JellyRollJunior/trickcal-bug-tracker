@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { sectionSchema } from '../features/sections';
-import { UserDtoSchema } from '../features/users';
+import { sectionShape } from '../features/sections';
+import { userDtoSchema } from '../features/users';
 import { ticketDtoSchema } from '../features/tickets';
 
 // ticket:moved
 const ticketMovedPayloadSchema = z.object({
-    movedBy: UserDtoSchema,
-    previousSectionId: sectionSchema.id,
+    movedBy: userDtoSchema,
+    previousSectionId: sectionShape.id,
     ticket: ticketDtoSchema,
 });
 type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;

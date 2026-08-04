@@ -1,9 +1,23 @@
 import { z } from 'zod';
+import { userDtoSchema } from '../users';
+import { SectionWithTicketsDto } from '../sections';
 
-const boardSchema = {
+const boardShape = {
     id: z.uuid(),
     name: z.string(),
     description: z.string(),
+    creationDate: z.iso.datetime(),
+    lastUpdate: z.iso.datetime(),
+    owner: userDtoSchema,
+    collaborators: userDtoSchema.array(),
 };
 
-export { boardSchema };
+const boardDtoSchema = z.object(boardShape);
+type BoardDto = z.infer<typeof boardDtoSchema>
+
+type BoardWithSectionsAndTicketsDto = BoardDto & {
+    sections: SectionWithTicketsDto[];
+};
+
+export { BoardDto, BoardWithSectionsAndTicketsDto };
+export { boardShape, boardDtoSchema };

@@ -1,4 +1,4 @@
-import { UserDto } from '../features/users/user.dto.js';
+import { UserDto } from '../features/users';
 import { JoinRoomInput, MoveTicketInput } from './socket.client-to-server.schema.js';
 import { TicketMovedPayload } from './socket.server-client.schema.js';
 import { SocketBaseResponse } from './socket.response.js';

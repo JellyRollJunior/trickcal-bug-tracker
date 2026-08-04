@@ -9,7 +9,7 @@ const SPECIAL_CHARACTER_ERROR_MESSAGE =
     'must contain at least one special character: !@#$%^&*';
 const INVALID_CHARACTER_ERROR_MESSAGE = 'contains invalid characters: <>';
 
-const userSchema = {
+const userShape = {
     id: z.uuid(),
     username: z
         .string()
@@ -47,4 +47,12 @@ const userSchema = {
     role: z.enum(ROLE),
 };
 
-export { userSchema };
+const userDtoSchema = z.object({
+    id: userShape.id,
+    name: userShape.name,
+    role: userShape.role,
+});
+type UserDto = z.infer<typeof userDtoSchema>;
+
+export type { UserDto };
+export { userShape, userDtoSchema };

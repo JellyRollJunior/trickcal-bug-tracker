@@ -103,18 +103,10 @@ $ turbo dev
 
 ## Process
 
-- shared
-    - ticket schema
-    - export schema as z.object or not?
-
 ## TODO
 
-- sockets
-    - extract callback guard
 - later
     - set token to proper expire time
-- test
-    - test extract order logic
 - default board
     - extract default board settings
     - generate orders from fractional-idexing
@@ -126,9 +118,24 @@ $ turbo dev
 | PATCH  | /ticket/:ticketId   |
 | DELETE | /ticket/:ticketId   |
 
+| Socket Event                |
+| --------------------------- |
+| ticket:created              |
+| ticket:edited               |
+| ticket:deleted              |
+| section:created             |
+| section:edited              |
+| section:deleted             |
+| board:added-as-collaborator |
+| board:edited                |
+| board:deleted               |
+
 ## Planned features
 
 - presence tracking
+    - on join room, send users in room
+    - room joined, update user list
+    - room left, update user list
 - redis cache
 - redis horizontal scaling w/ socket io
 - redis zero downtime updates

@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { boardSchema } from '../features/boards/board.schema.js';
+import { boardShape } from '../features/boards/board.schema.js';
 import { ticketShape } from '../features/tickets/ticket.schema.js';
 
 // board:join-room
 const joinRoomInputSchema = z.object({
-    boardId: boardSchema.id,
+    boardId: boardShape.id,
 });
 type JoinRoomInput = z.infer<typeof joinRoomInputSchema>;
 

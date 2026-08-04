@@ -7,6 +7,7 @@ import {
 import { toUserDto } from '@/features/users/user.mapper.js';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 import * as ticketService from '@/features/tickets/ticket.socket-service.js';
+import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
 
 const moveTicket = async (
     socket: AppSocket,
@@ -29,7 +30,7 @@ const moveTicket = async (
         socket.to(result.boardId).emit('ticket:moved', {
             movedBy: toUserDto(socket.data.user),
             previousSectionId: result.previousSectionId,
-            ticket: result.ticket,
+            ticket: toTicketDto(result.ticket),
         });
     } catch (error) {
         socketErrorHandler(error, callback);
