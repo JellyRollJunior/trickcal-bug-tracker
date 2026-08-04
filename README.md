@@ -103,8 +103,9 @@ $ turbo dev
 
 ## Process
 
-- shared ticket schema
-    - user userDto for reporter + assignee
+- shared
+    - ticket schema
+    - export schema as z.object or not?
 
 ## TODO
 

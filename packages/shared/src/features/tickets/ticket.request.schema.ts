@@ -1,15 +1,15 @@
 import { z } from 'zod';
-import { ticketSchema } from './ticket.schema.js';
+import { ticketShape } from './ticket.schema.js';
 
 const postTicketsRequestBodySchema = z.object({
-    issueType: ticketSchema.issueType,
-    category: ticketSchema.category,
-    reproducibility: ticketSchema.reproducibility,
-    summary: ticketSchema.summary,
-    description: ticketSchema.description,
-    priority: ticketSchema.priority,
-    severity: ticketSchema.severity,
-    assigneeId: ticketSchema.assigneeId,
+    issueType: ticketShape.issueType,
+    category: ticketShape.category,
+    reproducibility: ticketShape.reproducibility,
+    summary: ticketShape.summary,
+    description: ticketShape.description,
+    priority: ticketShape.priority,
+    severity: ticketShape.severity,
+    assigneeId: ticketShape.assigneeId,
 });
 
 export { postTicketsRequestBodySchema };
