@@ -1,7 +1,7 @@
 import { prisma } from '@/db/prisma.js';
 import { Priority, Section, Severity, Ticket } from '@prisma/client';
+import { ticketInclude, TicketWithParticipants } from '@/features/tickets/ticket.select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
-import { ticketInclude } from '@/features/tickets/ticket.select.js';
 
 const getTicketWithSection = async ({
     ticketId,
@@ -98,7 +98,7 @@ const moveTicket = async ({
     ticketId: Ticket['id'];
     sectionId: Section['id'];
     order: Ticket['order'];
-}) => {
+}): Promise<TicketWithParticipants> => {
     try {
         const data = await prisma.ticket.update({
             where: {
@@ -108,8 +108,8 @@ const moveTicket = async ({
                 sectionId: sectionId,
                 order: order,
             },
+            include: ticketInclude,
         });
-        console.log(data);
         return data;
     } catch (error) {
         throw new DatabaseError('Unable to move ticket');

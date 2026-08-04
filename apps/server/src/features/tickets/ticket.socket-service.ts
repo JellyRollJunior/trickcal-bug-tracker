@@ -1,4 +1,4 @@
-import type { Section, Ticket, User } from '@prisma/client';
+import type { Board, Section, Ticket, User } from '@prisma/client';
 import {
     MoveTicketInput,
     NotFoundError,
@@ -11,6 +11,7 @@ import {
 } from '@/lib/ordering/ordering.js';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import { generateKeyBetween } from 'fractional-indexing';
+import { TicketWithParticipants } from '@/features/tickets/ticket.select.js';
 import * as ticketQueries from '@/features/tickets/ticket.queries.js';
 import * as sectionQueries from '@/features/sections/section.queries.js';
 
@@ -54,9 +55,13 @@ const moveTicket = async ({
         sectionId,
         order,
     });
-    return { previousSectionId: ticketWithOriginSection.sectionId, ticket };
+    return { boardId, previousSectionId: ticketWithOriginSection.sectionId, ticket };
 };
-type MoveTicketResult = { previousSectionId: Section['id'], ticket: Ticket}
+type MoveTicketResult = {
+    boardId: Board['id'];
+    previousSectionId: Section['id'];
+    ticket: TicketWithParticipants;
+};
 
 export type { MoveTicketResult }
 export { moveTicket };

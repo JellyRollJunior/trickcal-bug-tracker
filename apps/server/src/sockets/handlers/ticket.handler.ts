@@ -1,13 +1,12 @@
 import type { AppSocket } from '@/sockets/types.js';
 import {
-    DatabaseError,
     MoveTicketInput,
     moveTicketInputSchema,
     SocketBaseResponse,
 } from '@trickcal-bug-tracker/shared';
+import { toUserDto } from '@/features/users/user.mapper.js';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 import * as ticketService from '@/features/tickets/ticket.socket-service.js';
-import { toUserDto } from '@/features/users/user.mapper.js';
 
 const moveTicket = async (
     socket: AppSocket,
@@ -27,6 +26,11 @@ const moveTicket = async (
             previousTicketId,
         });
         callback({ success: true });
+        socket.to(result.boardId).emit('ticket:moved', {
+            movedBy: toUserDto(socket.data.user),
+            previousSectionId: result.previousSectionId,
+            ticket: result.ticket,
+        });
     } catch (error) {
         socketErrorHandler(error, callback);
     }

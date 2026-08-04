@@ -46,23 +46,24 @@ $ turbo dev
 
 ## Endpoints & Socket Events
 
-| Method | URI                                          | Function                   | Body (inputs)                                                                              | Outputs                        | Notes                                                                           |
-| ------ | -------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------- |
-| POST   | /auth/signup                                 | Signup                     | username, password, name                                                                   | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
-| POST   | /auth/login                                  | Login                      | username, password                                                                         | { token }                      |                                                                                 |
-| POST   | /auth/github                                 | GitHub oauth2 login/signup |                                                                                            |                                | Login with GitHub oauth. Creates an account if no account exists                |
-| POST   | /auth/github/callback                        | GitHub oauth2 callback     |                                                                                            | { token }                      | Callback to receive token after successful authorization                        |
-| GET    | /boards                                      | get boards                 |                                                                                            | boardDto[]                     |                                                                                 |
-| POST   | /boards                                      | create boards              | name, description                                                                          | boardDto                       |                                                                                 |
-| GET    | /boards/:boardId                             | get board by id            |                                                                                            | boardWithSectionsAndTicketsDto |                                                                                 |
-| POST   | /boards/:boardId/sections                    | create section             | name, previousSectionId                                                                    | sectionDto                     |                                                                                 |
-| POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | issueType, category, reproducibility, summary, description, priority, severity, assigneeId | ticketDto                      |                                                                                 |
+| Method | URI                                          | Function                   | Body (inputs)                                                                                  | Outputs                        | Notes                                                                           |
+| ------ | -------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
+| POST   | /auth/signup                                 | Signup                     | { username, password, name }                                                                   | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
+| POST   | /auth/login                                  | Login                      | { username, password }                                                                         | { token }                      |                                                                                 |
+| POST   | /auth/github                                 | GitHub oauth2 login/signup |                                                                                                |                                | Login with GitHub oauth. Creates an account if no account exists                |
+| POST   | /auth/github/callback                        | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
+| GET    | /boards                                      | get boards                 |                                                                                                | boardDto[]                     |                                                                                 |
+| POST   | /boards                                      | create boards              | { name, description }                                                                          | boardDto                       |                                                                                 |
+| GET    | /boards/:boardId                             | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
+| POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
+| POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 
-| direction        | Socket Event      | Arguments                                          | Use               |
-| ---------------- | ----------------- | -------------------------------------------------- | ----------------- |
-| client to server | 'connection'      | token                                              | socket connection |
-| client to server | 'board:join_room' | {boardId}, callback                                | join board room   |
-| client to server | 'ticket:move'     | {ticketId, sectionId, previousTicketId }, callback | move ticket       |
+| direction        | Socket Event      | Arguments                                           | Use                 |
+| ---------------- | ----------------- | --------------------------------------------------- | ------------------- |
+| client to server | 'connection'      | token                                               | socket connection   |
+| client to server | 'board:join_room' | { boardId }, callback                               | join board room     |
+| client to server | 'ticket:move'     | { ticketId, sectionId, previousTicketId }, callback | move ticket         |
+| server to client | 'ticket:movd'     |                                                     | notify ticket moved |
 
 ## Learning Outcomes
 
@@ -102,9 +103,6 @@ $ turbo dev
 
 ## Process
 
-- ticket:moved
-    - define params + response shape
-    - execute 
 - shared ticket schema
     - user userDto for reporter + assignee
 
