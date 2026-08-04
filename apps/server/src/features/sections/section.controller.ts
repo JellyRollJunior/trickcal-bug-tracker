@@ -11,7 +11,6 @@ const postSections = async (
         {},
         {
             previousSectionId: Section['id'] | null;
-            nextSectionId: Section['id'] | null;
             name: Section['name'];
         }
     >,
@@ -22,13 +21,12 @@ const postSections = async (
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
         const { boardId } = boardIdParamSchema.parse(req.params);
-        const { previousSectionId, nextSectionId, name } = { ...req.body };
+        const { previousSectionId, name } = { ...req.body };
 
         const newSection = await createSection({
             userId,
             boardId,
             previousSectionId,
-            nextSectionId,
             name,
         });
         res.json(toSectionDto(newSection));

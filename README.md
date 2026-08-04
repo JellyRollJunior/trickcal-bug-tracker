@@ -55,7 +55,7 @@ $ turbo dev
 | GET    | /boards                                      | get boards                 |                                                                                            | boardDto[]                     |                                                                                 |
 | POST   | /boards                                      | create boards              | name, description                                                                          | boardDto                       |                                                                                 |
 | GET    | /boards/:boardId                             | get board by id            |                                                                                            | boardWithSectionsAndTicketsDto |                                                                                 |
-| POST   | /boards/:boardId/sections                    | create section             | name, previousSectionId, nextSectionId                                                     | sectionDto                     |                                                                                 |
+| POST   | /boards/:boardId/sections                    | create section             | name, previousSectionId                                                                    | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | issueType, category, reproducibility, summary, description, priority, severity, assigneeId | ticketDto                      |                                                                                 |
 
 | direction        | Socket Event      | Arguments                                          | Use               |
@@ -102,8 +102,6 @@ $ turbo dev
 
 ## Process
 
-- migrate to previousId needed only
-    - section
 - ticket:moved
 - move section guard against prv+next === sectionId
 
