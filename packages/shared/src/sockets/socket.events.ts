@@ -1,9 +1,10 @@
 import { UserDto } from '../features/users/user.dto.js';
-import { JoinRoomInput, MoveTicketInput } from './socket.request.schema.js';
+import { JoinRoomInput, MoveTicketInput } from './socket.client-to-server.schema.js';
+import { TicketMovedPayload } from './socket.server-client.schema.js';
 import { SocketBaseResponse } from './socket.response.js';
 
 type ServerToClientEvents = {
-    'ticket:moved': () => void;
+    'ticket:moved': (input : TicketMovedPayload) => void;
     'board:user-joined-room': () => void;
 };
 

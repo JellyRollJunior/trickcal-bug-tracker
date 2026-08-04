@@ -1,4 +1,4 @@
-import type { AppSocket } from '../types.js';
+import type { AppSocket } from '@/sockets/types.js';
 import {
     DatabaseError,
     MoveTicketInput,
@@ -15,9 +15,9 @@ const moveTicket = async (
 ) => {
     try {
         // validate input
-        const userId = socket.data.user.id;
+        const userId = socket.data.user.id
         const parsed = moveTicketInputSchema.parse(input);
-        const { ticketId, sectionId, previousTicketId, nextTicketId } = {
+        const { ticketId, sectionId, previousTicketId } = {
             ...parsed,
         };
 
@@ -26,7 +26,6 @@ const moveTicket = async (
             ticketId,
             sectionId,
             previousTicketId,
-            nextTicketId,
         });
         if (movedTicket) {
             callback({ success: true });

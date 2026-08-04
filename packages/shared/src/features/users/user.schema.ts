@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ROLE } from './user.enums.js';
 
 // error messages
 const LOWERCASE_ERROR_MESSAGE = 'must contain at least one lowercase letter';
@@ -9,6 +10,7 @@ const SPECIAL_CHARACTER_ERROR_MESSAGE =
 const INVALID_CHARACTER_ERROR_MESSAGE = 'contains invalid characters: <>';
 
 const userSchema = {
+    id: z.uuid(),
     username: z
         .string()
         .min(8)
@@ -16,7 +18,6 @@ const userSchema = {
         .regex(/^[^<>]*$/, {
             message: `username ${INVALID_CHARACTER_ERROR_MESSAGE}`,
         }),
-
     password: z
         .string()
         .min(8)
@@ -43,6 +44,7 @@ const userSchema = {
         .regex(/^[^<>]*$/, {
             message: `name ${INVALID_CHARACTER_ERROR_MESSAGE}`,
         }),
+    role: z.enum(ROLE),
 };
 
 export { userSchema };

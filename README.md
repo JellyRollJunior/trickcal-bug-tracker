@@ -103,7 +103,10 @@ $ turbo dev
 ## Process
 
 - ticket:moved
-- move section guard against prv+next === sectionId
+    - define params + response shape
+    - execute 
+- shared ticket schema
+    - user userDto for reporter + assignee
 
 ## TODO
 
