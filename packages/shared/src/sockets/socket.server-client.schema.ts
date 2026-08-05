@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { sectionShape } from '../features/sections';
 import { userDtoSchema, userShape } from '../features/users';
 import { ticketDtoSchema } from '../features/tickets';
+import { boardShape } from '../features/boards';
 
 // board:user-joined-room
 const userJoinedRoomPayloadSchema = z.object({
@@ -16,6 +17,7 @@ type UserLeftPayload = z.infer<typeof userLeftRoomPayloadSchema>;
 
 // ticket:created
 const ticketCreatedPayloadSchema = z.object({
+    boardId: boardShape.id,
     ticket: ticketDtoSchema,
 });
 type TicketCreatedPayload = z.infer<typeof ticketCreatedPayloadSchema>;

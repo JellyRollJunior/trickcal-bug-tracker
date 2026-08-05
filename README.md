@@ -69,6 +69,7 @@ $ turbo dev
 | ----------------------------- | -------------------------------------- | ----------------------- |
 | 'board:user-joined-room'      | { user }                               | notify user joined room |
 | 'board:user-left-room'        | { userId }                             | notify user left room   |
+| 'ticket:created'              | { boardId, ticket }                    | notify ticket created   |
 | 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved     |
 
 ## Learning Outcomes
@@ -126,7 +127,6 @@ $ turbo dev
 
 | Socket Event                |
 | --------------------------- |
-| ticket:created              |
 | ticket:edited               |
 | ticket:deleted              |
 | section:created             |

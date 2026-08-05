@@ -4,6 +4,7 @@ import { boardIdAndSectionIdParamSchema } from '@trickcal-bug-tracker/shared';
 import { createTicket } from '@/features/tickets/ticket.service.js';
 import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import { getIo } from '@/sockets/ioInstance.js';
 
 const postTickets = async (
     req: Request<
@@ -37,7 +38,13 @@ const postTickets = async (
             sectionId,
             ...req.body,
         });
-        res.json(toTicketDto(newTicket));
+        
+        // emit ticket creation 
+        const ticketDto = toTicketDto(newTicket)
+        const io = getIo();
+        io.sockets.to(boardId).emit('ticket:created', { boardId, ticket: ticketDto });
+        
+        res.json(ticketDto);
     } catch (error) {
         next(error);
     }
