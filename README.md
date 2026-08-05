@@ -104,7 +104,6 @@ $ turbo dev
 ## Process
 
 - presence tracking
-    - on join -> retrieve users in room
     - on join -> notify everyone in room of new user joined
     - on disconnect -> notify user disconnect (check for duplicate tabs)
 

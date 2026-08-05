@@ -23,6 +23,9 @@ const joinRoom = async (
         const currentViewers = await joinBoardRoom({ io, socket, userId, boardId });
         const mappedViewers = currentViewers.map(toUserDto)
         callback({ success: true, viewers: mappedViewers });
+
+        // emit user joined room
+        socket.to(boardId).emit('board:user-joined-room', { user: toUserDto(socket.data.user) })
     } catch (error) {
         socketErrorHandler(error, callback);
     }
