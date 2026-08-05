@@ -6,6 +6,7 @@ import {
 } from '@trickcal-bug-tracker/shared';
 import { joinBoardRoom } from '@/features/boards/board.socket-service.js';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
+import { toUserDto } from '@/features/users/user.mapper.js';
 
 const joinRoom = async (
     io: AppServer,
@@ -20,7 +21,8 @@ const joinRoom = async (
         const userId = socket.data.user.id;
 
         const currentViewers = await joinBoardRoom({ io, socket, userId, boardId });
-        callback({ success: true, viewers: currentViewers });
+        const mappedViewers = currentViewers.map(toUserDto)
+        callback({ success: true, viewers: mappedViewers });
     } catch (error) {
         socketErrorHandler(error, callback);
     }
