@@ -109,9 +109,6 @@ $ turbo dev
 
 ## Process
 
-- presence tracking
-    - on disconnect -> notify user disconnect (check for duplicate tabs)
-
 ## TODO
 
 - later
@@ -141,10 +138,6 @@ $ turbo dev
 
 ## Planned features
 
-- presence tracking
-    - on join room, send users in room
-    - room joined, update user list
-    - room left, update user list
 - redis cache
 - redis horizontal scaling w/ socket io
 - redis zero downtime updates

@@ -14,6 +14,12 @@ const userLeftRoomPayloadSchema = z.object({
 });
 type UserLeftPayload = z.infer<typeof userLeftRoomPayloadSchema>;
 
+// ticket:created
+const ticketCreatedPayloadSchema = z.object({
+    ticket: ticketDtoSchema,
+});
+type TicketCreatedPayload = z.infer<typeof ticketCreatedPayloadSchema>;
+
 // ticket:moved
 const ticketMovedPayloadSchema = z.object({
     movedBy: userDtoSchema,
@@ -22,9 +28,10 @@ const ticketMovedPayloadSchema = z.object({
 });
 type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
-export type { UserJoinedPayload, UserLeftPayload, TicketMovedPayload };
+export type { UserJoinedPayload, UserLeftPayload, TicketCreatedPayload, TicketMovedPayload };
 export {
     userJoinedRoomPayloadSchema,
     userLeftRoomPayloadSchema,
+    ticketCreatedPayloadSchema,
     ticketMovedPayloadSchema,
 };
