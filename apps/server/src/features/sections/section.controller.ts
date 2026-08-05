@@ -4,6 +4,7 @@ import { boardIdParamSchema } from '@trickcal-bug-tracker/shared';
 import { toSectionDto } from '@/features/sections/section.mapper.js';
 import { createSection } from '@/features/sections/section.service.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import { getIo } from '@/sockets/ioInstance.js';
 
 const postSections = async (
     req: Request<
@@ -29,6 +30,12 @@ const postSections = async (
             previousSectionId,
             name,
         });
+
+        // emit section creation
+        const sectionDto = toSectionDto(newSection);
+        const io = getIo();
+        io.sockets.to(boardId).emit('section:created', { boardId, section: sectionDto });
+        
         res.json(toSectionDto(newSection));
     } catch (error) {
         next(error);

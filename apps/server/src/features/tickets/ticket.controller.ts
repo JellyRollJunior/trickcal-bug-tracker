@@ -31,7 +31,6 @@ const postTickets = async (
         if (!userId) throw new AuthenticationError();
         const { boardId, sectionId } = boardIdAndSectionIdParamSchema.parse(req.params);
 
-        // create ticket
         const newTicket = await createTicket({
             userId,
             boardId,

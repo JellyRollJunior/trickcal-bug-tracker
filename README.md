@@ -69,6 +69,7 @@ $ turbo dev
 | ----------------------------- | -------------------------------------- | ----------------------- |
 | 'board:user-joined-room'      | { user }                               | notify user joined room |
 | 'board:user-left-room'        | { userId }                             | notify user left room   |
+| 'section:created'             | { boardId, section }                   | notify section created  |
 | 'ticket:created'              | { boardId, ticket }                    | notify ticket created   |
 | 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved     |
 
