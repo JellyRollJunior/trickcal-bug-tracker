@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { sectionShape } from '../features/sections';
+import { sectionDtoSchema, sectionShape } from '../features/sections';
 import { userDtoSchema, userShape } from '../features/users';
 import { ticketDtoSchema } from '../features/tickets';
 import { boardShape } from '../features/boards';
@@ -10,10 +10,18 @@ const userJoinedRoomPayloadSchema = z.object({
 });
 type UserJoinedPayload = z.infer<typeof userJoinedRoomPayloadSchema>;
 
+// board:user-left-room
 const userLeftRoomPayloadSchema = z.object({
     userId: userShape.id,
 });
 type UserLeftPayload = z.infer<typeof userLeftRoomPayloadSchema>;
+
+// section:created
+const sectionCreatedPayloadSchema = z.object({
+    boardId: boardShape.id,
+    section: sectionDtoSchema,
+});
+type SectionCreatedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
 
 // ticket:created
 const ticketCreatedPayloadSchema = z.object({
@@ -30,10 +38,17 @@ const ticketMovedPayloadSchema = z.object({
 });
 type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
-export type { UserJoinedPayload, UserLeftPayload, TicketCreatedPayload, TicketMovedPayload };
+export type {
+    UserJoinedPayload,
+    UserLeftPayload,
+    SectionCreatedPayload,
+    TicketCreatedPayload,
+    TicketMovedPayload,
+};
 export {
     userJoinedRoomPayloadSchema,
     userLeftRoomPayloadSchema,
+    sectionCreatedPayloadSchema,
     ticketCreatedPayloadSchema,
     ticketMovedPayloadSchema,
 };
