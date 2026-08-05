@@ -117,20 +117,22 @@ $ turbo dev
     - set token to proper expire time
 - default board
     - extract default board settings
-    - generate orders from fractional-idexing
+    - generate orders from fractional-indexing
 
-| Method | URI                 |
-| ------ | ------------------- |
-| PATCH  | /section/:sectionId |
-| DELETE | /section/:sectionId |
-| PATCH  | /ticket/:ticketId   |
-| DELETE | /ticket/:ticketId   |
+| Method | URI                          |
+| ------ | ---------------------------- |
+| POST   | /board/:boardId/collaborator |
+| PATCH  | /board/:boardId              |
+| DELETE | /board/:boardId              |
+| PATCH  | /section/:sectionId          |
+| DELETE | /section/:sectionId          |
+| PATCH  | /ticket/:ticketId            |
+| DELETE | /ticket/:ticketId            |
 
 | Socket Event                |
 | --------------------------- |
 | ticket:edited               |
 | ticket:deleted              |
-| section:created             |
 | section:edited              |
 | section:deleted             |
 | board:added-as-collaborator |

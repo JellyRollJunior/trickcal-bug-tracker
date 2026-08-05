@@ -63,4 +63,17 @@ const getBoard = async (
     }
 };
 
+const patchBoard =  async (
+    req: Request<{ boardId: Board['id'] }, {}, {}>,
+    res: Response,
+    next: NextFunction
+) => {
+    // validate body in middleware
+    // validate params
+    // assert access
+    // edit board
+    // return board
+    // emit board edited
+}
+
 export { getBoards, postBoards, getBoard };

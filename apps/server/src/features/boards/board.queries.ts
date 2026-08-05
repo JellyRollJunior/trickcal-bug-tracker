@@ -121,10 +121,36 @@ const getBoardWithSectionsAndTicketsById = async ({
     }
 };
 
+const editBoard = async ({
+    boardId,
+    name,
+    description,
+}: { boardId: Board['id'] } & Pick<
+    Board,
+    'name' | 'description'
+>): Promise<BoardWithParticipants> => {
+    try {
+        const data = await prisma.board.update({
+            where: {
+                id: boardId,
+            },
+            data: {
+                name,
+                description,
+            },
+            include: boardInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to edit board');
+    }
+};
+
 export {
     getBoardsByUserId,
     createBoard,
     getBoardById,
     getBoardWithSectionsById,
     getBoardWithSectionsAndTicketsById,
+    editBoard,
 };
