@@ -2,6 +2,7 @@ import type { AppServer, AppSocket } from '@/sockets/types.js';
 import { JoinRoomInput, MoveTicketInput } from '@trickcal-bug-tracker/shared';
 import { joinRoom } from '@/sockets/handlers/room.handler.js';
 import { moveTicket } from '@/sockets/handlers/ticket.handler.js';
+import { disconnectSocket } from '@/sockets/handlers/disconnect.handler.js';
 import { withCallbackGuard } from '@/lib/sockets/callbackGuard.js';
 
 const registerEventHandlers = (io: AppServer) => {
@@ -21,6 +22,8 @@ const registerEventHandlers = (io: AppServer) => {
                 moveTicket(socket, input, callback)
             )
         );
+
+        socket.on('disconnect', () => disconnectSocket(socket))
     });
 };
 

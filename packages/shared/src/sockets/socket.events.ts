@@ -11,21 +11,23 @@ import {
     SocketBaseResponse,
     SocketJoinRoomResponse,
 } from './socket.response.js';
+import { BoardDto } from '../features/boards';
 
 type ServerToClientEvents = {
-    'ticket:moved': (payload: TicketMovedPayload) => void;
     'board:user-joined-room': (payload: UserJoinedPayload) => void;
+    'ticket:moved': (payload: TicketMovedPayload) => void;
 };
 
 type ClientToServerEvents = {
-    'ticket:move': (
-        input: MoveTicketInput,
-        callback: (response: SocketBaseResponse) => void
-    ) => void;
     'board:join-room': (
         input: JoinRoomInput,
         callback: (response: SocketJoinRoomResponse) => void
     ) => void;
+    'ticket:move': (
+        input: MoveTicketInput,
+        callback: (response: SocketBaseResponse) => void
+    ) => void;
+    'disconnect': () => void;
 };
 
 type InterServerEvents = {};

@@ -58,12 +58,16 @@ $ turbo dev
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 
-| direction        | Socket Event      | Arguments                                           | Use                 |
-| ---------------- | ----------------- | --------------------------------------------------- | ------------------- |
-| client to server | 'connection'      | token                                               | socket connection   |
-| client to server | 'board:join_room' | { boardId }, callback                               | join board room     |
-| client to server | 'ticket:move'     | { ticketId, sectionId, previousTicketId }, callback | move ticket         |
-| server to client | 'ticket:moved'     |                                                     | notify ticket moved |
+| Client to server socket event | Arguments                                           | Use               |
+| ----------------------------- | --------------------------------------------------- | ----------------- |
+| 'connection'                  | token                                               | socket connection |
+| 'board:join_room'             | { boardId }, callback                               | join board room   |
+| 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |
+
+| Server to client socket event | Payload                                | Use                     |
+| ----------------------------- | -------------------------------------- | ----------------------- |
+| 'board:user-joined-room'      | { user }                               | notify user joined room |
+| 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved     |
 
 ## Learning Outcomes
 
@@ -104,7 +108,6 @@ $ turbo dev
 ## Process
 
 - presence tracking
-    - on join -> notify everyone in room of new user joined
     - on disconnect -> notify user disconnect (check for duplicate tabs)
 
 ## TODO
