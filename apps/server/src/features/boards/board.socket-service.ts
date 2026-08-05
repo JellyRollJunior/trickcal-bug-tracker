@@ -15,7 +15,10 @@ const joinBoardRoom = async ({
     userId: User['id'];
 } & JoinRoomInput): Promise<UserDto[]> => {
     await assertBoardAccess({ userId, boardId });
+    
     switchToRoom(socket, boardId);
+    socket.data.currentBoardId = boardId;
+    
     const currentViewers = await getRoomPresence(io, boardId);
     return currentViewers;
 };

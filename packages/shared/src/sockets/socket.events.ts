@@ -33,6 +33,7 @@ type ClientToServerEvents = {
 type InterServerEvents = {};
 
 type SocketData = {
+    currentBoardId: BoardDto['id'] | null;
     user: UserDto;
 };
 
