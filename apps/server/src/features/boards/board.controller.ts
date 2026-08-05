@@ -63,17 +63,37 @@ const getBoard = async (
     }
 };
 
-const patchBoard =  async (
-    req: Request<{ boardId: Board['id'] }, {}, {}>,
+const patchBoard = async (
+    req: Request<
+        { boardId: Board['id'] },
+        {},
+        Pick<Board, 'name' | 'description'>
+    >,
     res: Response,
     next: NextFunction
 ) => {
-    // validate body in middleware
-    // validate params
-    // assert access
-    // edit board
-    // return board
-    // emit board edited
-}
+    try {
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
+        // validate body in middleware
+        // validate params
+        const { boardId } = req.params;
+        const { name, description } = req.body;
+        // assert access
+        await assertBoardAccess({ userId, boardId });
 
-export { getBoards, postBoards, getBoard };
+        const board = await boardQueries.editBoard({
+            boardId,
+            name,
+            description,
+        });
+
+        // emit board edited
+        const boardDto = toBoardDto(board);
+        res.json(boardDto);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { getBoards, postBoards, getBoard, patchBoard };

@@ -21,6 +21,7 @@ boardRouter.post(
     boardController.postBoards
 );
 boardRouter.get('/:boardId', requireAuth, boardController.getBoard);
+boardRouter.patch('/:boardId', requireAuth, boardController.patchBoard);
 
 /* sections */
 boardRouter.post(
