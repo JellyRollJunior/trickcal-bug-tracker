@@ -23,7 +23,7 @@ const registerEventHandlers = (io: AppServer) => {
             )
         );
 
-        socket.on('disconnect', () => disconnectSocket(socket))
+        socket.on('disconnect', () => disconnectSocket(io, socket));
     });
 };
 

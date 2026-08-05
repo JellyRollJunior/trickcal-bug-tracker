@@ -60,13 +60,15 @@ $ turbo dev
 
 | Client to server socket event | Arguments                                           | Use               |
 | ----------------------------- | --------------------------------------------------- | ----------------- |
-| 'connection'                  | token                                               | socket connection |
+| 'connection'                  | token                                               | connect socket    |
+| 'disconnect'                  |                                                     | disconnect socket |
 | 'board:join_room'             | { boardId }, callback                               | join board room   |
 | 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |
 
 | Server to client socket event | Payload                                | Use                     |
 | ----------------------------- | -------------------------------------- | ----------------------- |
 | 'board:user-joined-room'      | { user }                               | notify user joined room |
+| 'board:user-left-room'        | { userId }                             | notify user left room   |
 | 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved     |
 
 ## Learning Outcomes
