@@ -6,6 +6,7 @@ import {
 import {
     TicketMovedPayload,
     UserJoinedPayload,
+    UserLeftPayload,
 } from './socket.server-client.schema.js';
 import {
     SocketBaseResponse,
@@ -15,6 +16,7 @@ import { BoardDto } from '../features/boards';
 
 type ServerToClientEvents = {
     'board:user-joined-room': (payload: UserJoinedPayload) => void;
+    'board:user-left-room': (payload: UserLeftPayload) => void;
     'ticket:moved': (payload: TicketMovedPayload) => void;
 };
 
