@@ -11,7 +11,7 @@ const registerEventHandlers = (io: AppServer) => {
         socket.on(
             'board:join-room',
             withCallbackGuard((input: JoinRoomInput, callback) =>
-                joinRoom(socket, input, callback)
+                joinRoom(io, socket, input, callback)
             )
         );
 

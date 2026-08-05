@@ -1,19 +1,23 @@
 import type { User } from '@prisma/client';
-import type { AppSocket } from '@/sockets/types.js';
-import { JoinRoomInput } from '@trickcal-bug-tracker/shared';
+import type { AppServer, AppSocket } from '@/sockets/types.js';
+import { JoinRoomInput, UserDto } from '@trickcal-bug-tracker/shared';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
-import { switchToRoom } from '@/lib/sockets/roomUtils.js';
+import { getRoomPresence, switchToRoom } from '@/lib/sockets/roomUtils.js';
 
 const joinBoardRoom = async ({
+    io,
     socket,
     userId,
     boardId,
 }: {
+    io: AppServer;
     socket: AppSocket;
     userId: User['id'];
-} & JoinRoomInput) => {
+} & JoinRoomInput): Promise<UserDto[]> => {
     await assertBoardAccess({ userId, boardId });
     switchToRoom(socket, boardId);
+    const currentViewers = await getRoomPresence(io, boardId);
+    return currentViewers;
 };
 
 export { joinBoardRoom };

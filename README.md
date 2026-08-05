@@ -63,7 +63,7 @@ $ turbo dev
 | client to server | 'connection'      | token                                               | socket connection   |
 | client to server | 'board:join_room' | { boardId }, callback                               | join board room     |
 | client to server | 'ticket:move'     | { ticketId, sectionId, previousTicketId }, callback | move ticket         |
-| server to client | 'ticket:movd'     |                                                     | notify ticket moved |
+| server to client | 'ticket:moved'     |                                                     | notify ticket moved |
 
 ## Learning Outcomes
 
@@ -102,6 +102,11 @@ $ turbo dev
         - Periodically check everything works on container
 
 ## Process
+
+- presence tracking
+    - on join -> retrieve users in room
+    - on join -> notify everyone in room of new user joined
+    - on disconnect -> notify user disconnect (check for duplicate tabs)
 
 ## TODO
 

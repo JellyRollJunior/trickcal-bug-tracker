@@ -1,16 +1,17 @@
-import type { AppSocket } from '@/sockets/types.js';
+import type { AppServer, AppSocket } from '@/sockets/types.js';
 import {
     JoinRoomInput,
     joinRoomInputSchema,
-    SocketBaseResponse,
+    SocketJoinRoomResponse,
 } from '@trickcal-bug-tracker/shared';
 import { joinBoardRoom } from '@/features/boards/board.socket-service.js';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 
 const joinRoom = async (
+    io: AppServer,
     socket: AppSocket,
     input: JoinRoomInput,
-    callback: (response: SocketBaseResponse) => void
+    callback: (response: SocketJoinRoomResponse) => void
 ) => {
     try {
         // validate input
@@ -18,8 +19,8 @@ const joinRoom = async (
         const { boardId } = { ...parsed };
         const userId = socket.data.user.id;
 
-        await joinBoardRoom({ socket, userId, boardId });
-        callback({ success: true });
+        const currentViewers = await joinBoardRoom({ io, socket, userId, boardId });
+        callback({ success: true, viewers: currentViewers });
     } catch (error) {
         socketErrorHandler(error, callback);
     }

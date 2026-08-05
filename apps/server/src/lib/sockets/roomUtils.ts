@@ -1,4 +1,4 @@
-import { AppSocket } from '@/sockets/types.js';
+import { AppServer, AppSocket } from '@/sockets/types.js';
 
 const switchToRoom = (socket: AppSocket, roomId: string) => {
     socket.rooms.forEach((room) => {
@@ -10,4 +10,10 @@ const switchToRoom = (socket: AppSocket, roomId: string) => {
     console.log(`${socket.id} joined room ${roomId}`);
 };
 
-export { switchToRoom };
+const getRoomPresence = async (io: AppServer, roomId: string) => {
+    const sockets = await io.in(roomId).fetchSockets();
+    const usersInRoomById = new Map(sockets.map((socket) => [socket.data.user.id, socket.data.user]))
+    return Array.from(usersInRoomById.values())
+}
+
+export { switchToRoom, getRoomPresence };
