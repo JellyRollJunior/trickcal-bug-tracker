@@ -1,9 +1,13 @@
 import { Board, Section, User } from '@prisma/client';
 import { generateKeyBetween } from 'fractional-indexing';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
-import { assertNullOrInList, assertValidOrdering, getNextIndexInList } from '@/lib/ordering/ordering.js';
+import {
+    assertNullOrInList,
+    assertValidOrdering,
+    getNextIndexInList,
+} from '@/lib/ordering/ordering.js';
+import { NotFoundError, ValidationError } from '@trickcal-bug-tracker/shared';
 import * as sectionQueries from '@/features/sections/section.queries.js';
-import { NotFoundError } from '@trickcal-bug-tracker/shared';
 
 const createSection = async ({
     userId,
@@ -20,14 +24,20 @@ const createSection = async ({
 
     // assert previous section null or exists and in board
     const sections = await sectionQueries.getSections({ boardId });
-    assertNullOrInList(previousSectionId, sections, 'Invalid previous section id')
+    assertNullOrInList(
+        previousSectionId,
+        sections,
+        'Invalid previous section id'
+    );
 
     // assert valid ordering
-    const prevSection = sections.find((section) => section.id === previousSectionId) ?? null;
+    const prevSection =
+        sections.find((section) => section.id === previousSectionId) ?? null;
     const nextSectionIndex = getNextIndexInList(previousSectionId, sections);
-    const nextSection = nextSectionIndex !== null ? sections[nextSectionIndex] : null;
+    const nextSection =
+        nextSectionIndex !== null ? sections[nextSectionIndex] : null;
     assertValidOrdering(sections, prevSection, nextSection);
-    
+
     const order = generateKeyBetween(prevSection?.order, nextSection?.order);
     const newSection = await sectionQueries.createSection({
         boardId,
@@ -46,12 +56,18 @@ const editSection = async ({
     sectionId: Section['id'];
     name: Section['name'];
 }) => {
+    if (name === undefined) {
+        throw new ValidationError({ payload: ['No edits provided'] });
+    }
     // assert sectionId exists & assert board access
     const section = await sectionQueries.getSectionById({ sectionId });
-    if (!section) throw new NotFoundError('Invalid sectionId')
+    if (!section) throw new NotFoundError('Invalid sectionId');
     await assertBoardAccess({ userId, boardId: section.boardId });
 
-    const editedSection = await sectionQueries.editSection({ sectionId, edits: { name } });
+    const editedSection = await sectionQueries.editSection({
+        sectionId,
+        edits: { name },
+    });
     return editedSection;
 };
 
