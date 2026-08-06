@@ -4,8 +4,8 @@ import { SectionWithTicketsDto } from '../sections';
 
 const boardShape = {
     id: z.uuid(),
-    name: z.string(),
-    description: z.string(),
+    name: z.string().min(1).max(100).optional(),
+    description: z.string().max(2000).optional(),
     creationDate: z.iso.datetime(),
     lastUpdate: z.iso.datetime(),
     owner: userDtoSchema,
@@ -13,7 +13,7 @@ const boardShape = {
 };
 
 const boardDtoSchema = z.object(boardShape);
-type BoardDto = z.infer<typeof boardDtoSchema>
+type BoardDto = z.infer<typeof boardDtoSchema>;
 
 type BoardWithSectionsAndTicketsDto = BoardDto & {
     sections: SectionWithTicketsDto[];

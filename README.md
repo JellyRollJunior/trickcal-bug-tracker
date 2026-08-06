@@ -53,8 +53,9 @@ $ turbo dev
 | POST   | /auth/github                                 | GitHub oauth2 login/signup |                                                                                                |                                | Login with GitHub oauth. Creates an account if no account exists                |
 | POST   | /auth/github/callback                        | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
 | GET    | /boards                                      | get boards                 |                                                                                                | boardDto[]                     |                                                                                 |
-| POST   | /boards                                      | create boards              | { name, description }                                                                          | boardDto                       |                                                                                 |
+| POST   | /boards                                      | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
 | GET    | /boards/:boardId                             | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
+| PATCH  | /boards/:boardId                             | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 
@@ -78,7 +79,7 @@ $ turbo dev
 - Prisma indexing
     - foreign keys not indexed by default
     - indexing based on actual query patterns, not defensively on every column
-- Prisma nested creates
+- Prisma nested create
 - Solidify TypeScript data return workflow
     - DB object in Prisma Schema - Type name: Base
     - Query object with extras - Type name: BaseWithExtras
