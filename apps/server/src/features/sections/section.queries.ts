@@ -3,6 +3,22 @@ import { prisma } from '@/db/prisma.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import { ticketInclude } from '@/features/tickets/ticket.select.js';
 
+const getSections = async ({ boardId }: Pick<Section, 'boardId'>) => {
+    try {
+        const data = await prisma.section.findMany({
+            where: {
+                boardId: boardId,
+            },
+            orderBy: {
+                order: 'asc',
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch sections');
+    }
+};
+
 const getSectionById = async ({ sectionId }: { sectionId: Section['id'] }) => {
     try {
         const data = await prisma.section.findUnique({
@@ -35,22 +51,6 @@ const getSectionWithTickets = async ({
         return data;
     } catch (error) {
         throw new DatabaseError('Unable to fetch section');
-    }
-};
-
-const getSections = async ({ boardId }: Pick<Section, 'boardId'>) => {
-    try {
-        const data = await prisma.section.findMany({
-            where: {
-                boardId: boardId,
-            },
-            orderBy: {
-                order: 'asc',
-            },
-        });
-        return data;
-    } catch (error) {
-        throw new DatabaseError('Unable to fetch sections');
     }
 };
 
@@ -93,10 +93,24 @@ const editSection = async ({
     }
 };
 
+const deleteSection = async ({ sectionId }: { sectionId: Section['id'] }) => {
+    try {
+        const data = await prisma.section.delete({
+            where: {
+                id: sectionId,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to delete sections');
+    }
+};
+
 export {
+    getSections,
     getSectionById,
     getSectionWithTickets,
-    getSections,
     createSection,
     editSection,
+    deleteSection
 };

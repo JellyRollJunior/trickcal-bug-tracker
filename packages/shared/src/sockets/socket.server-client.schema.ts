@@ -33,6 +33,8 @@ type SectionCreatedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
 
 // section:edited
 type SectionEditedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
+// section:deleted
+type SectionDeletedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
 
 /* ---------- Tickets ---------- */
 // ticket:created
@@ -53,6 +55,7 @@ type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 export type {
     BoardEditedPayload,
     SectionCreatedPayload,
+    SectionDeletedPayload,
     SectionEditedPayload,
     TicketCreatedPayload,
     TicketMovedPayload,

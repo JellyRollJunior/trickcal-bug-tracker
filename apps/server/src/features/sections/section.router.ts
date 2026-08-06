@@ -13,5 +13,10 @@ sectionRouter.patch(
     validate(patchSectionsRequestBodySchema),
     sectionController.patchSection
 );
+sectionRouter.delete(
+    '/:sectionId',
+    requireAuth,
+    sectionController.deleteSection
+);
 
 export { sectionRouter };

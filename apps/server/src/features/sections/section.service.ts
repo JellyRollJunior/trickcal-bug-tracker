@@ -71,4 +71,20 @@ const editSection = async ({
     return editedSection;
 };
 
-export { createSection, editSection };
+const deleteSection = async ({
+    userId,
+    sectionId,
+}: {
+    userId: User['id'];
+    sectionId: Section['id'];
+}) => {
+    // assert sectionId exists & assert board access
+    const section = await sectionQueries.getSectionById({ sectionId });
+    if (!section) throw new NotFoundError('Invalid sectionId');
+    await assertBoardAccess({ userId, boardId: section.boardId });
+
+    const deletedSection = await sectionQueries.deleteSection({ sectionId });
+    return deletedSection;
+};
+
+export { createSection, editSection, deleteSection };

@@ -59,6 +59,7 @@ $ turbo dev
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                          | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
+| DELETE | sections/:sectionId                          | delete section             |                                                                                                | sectionDto                     |                                                                                 |
 
 | Client to server socket event | Arguments                                           | Use               |
 | ----------------------------- | --------------------------------------------------- | ----------------- |
@@ -74,6 +75,7 @@ $ turbo dev
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
 | 'section:created'             | { boardId, section }                   | notify section created              |
 | 'section:edited'              | { boardId, section }                   | notify section edited               |
+| 'section:deleted'             | { boardId, section }                   | notify section deleted              |
 | 'ticket:created'              | { boardId, ticket }                    | notify ticket created               |
 | 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved                 |
 
@@ -125,12 +127,12 @@ $ turbo dev
 - default board
     - extract default board settings
     - generate orders from fractional-indexing
+- empty payload 500 error expected?
 
 | Method | URI                          |
 | ------ | ---------------------------- |
 | POST   | /board/:boardId/collaborator |
 | DELETE | /board/:boardId              |
-| DELETE | /section/:sectionId          |
 | PATCH  | /ticket/:ticketId            |
 | DELETE | /ticket/:ticketId            |
 
