@@ -1,17 +1,21 @@
 import type { Board } from '@prisma/client';
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import {
     AuthenticationError,
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
 import { boardIdParamSchema } from '@trickcal-bug-tracker/shared';
-import { assertBoardAccess, editBoard } from '@/features/boards/board.services.js';
+import {
+    assertBoardAccess,
+    editBoard,
+} from '@/features/boards/board.services.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
 } from '@/features/boards/board.mapper.js';
-import * as boardQueries from '@/features/boards/board.queries.js';
 import { getIo } from '@/sockets/ioInstance.js';
+import * as boardQueries from '@/features/boards/board.queries.js';
+import * as boardService from '@/features/boards/board.services.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -79,13 +83,35 @@ const patchBoard = async (
         if (!userId) throw new AuthenticationError();
         const { boardId } = boardIdParamSchema.parse(req.params);
         const { name, description } = req.body;
-        
-        const board = await editBoard({ userId, boardId, name, description })
-        
+
+        const board = await boardService.editBoard({ userId, boardId, name, description });
+
         // emit board edited
         const boardDto = toBoardDto(board);
         const io = getIo();
         io.sockets.to(boardId).emit('board:edited', { board: boardDto });
+
+        res.json(boardDto);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteBoard = async (
+    req: Request<{ boardId: Board['id'] }, {}, {}>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        // validate variables
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
+        const { boardId } = boardIdParamSchema.parse(req.params);
+
+        const deletedBoard = await boardService.deleteBoard({ userId, boardId });
+        
+        // emit
+        const boardDto = toBoardDto(deletedBoard);
         
         res.json(boardDto);
     } catch (error) {
@@ -93,4 +119,4 @@ const patchBoard = async (
     }
 };
 
-export { getBoards, postBoards, getBoard, patchBoard };
+export { getBoards, postBoards, getBoard, patchBoard, deleteBoard };

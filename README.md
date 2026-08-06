@@ -123,6 +123,8 @@ $ turbo dev
 - refactor payload + request schemas
 - create ticket
     - verify section id valid
+- ticket
+    - extract to service layer
 - later
     - set token to proper expire time
 - default board
