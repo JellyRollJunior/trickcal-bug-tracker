@@ -66,13 +66,14 @@ $ turbo dev
 | 'board:join_room'             | { boardId }, callback                               | join board room   |
 | 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |
 
-| Server to client socket event | Payload                                | Use                     |
-| ----------------------------- | -------------------------------------- | ----------------------- |
-| 'board:user-joined-room'      | { user }                               | notify user joined room |
-| 'board:user-left-room'        | { userId }                             | notify user left room   |
-| 'section:created'             | { boardId, section }                   | notify section created  |
-| 'ticket:created'              | { boardId, ticket }                    | notify ticket created   |
-| 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved     |
+| Server to client socket event | Payload                                | Use                                 |
+| ----------------------------- | -------------------------------------- | ----------------------------------- |
+| 'board:user-joined-room'      | { user }                               | notify user joined room             |
+| 'board:user-left-room'        | { userId }                             | notify user left room               |
+| 'board:edited'                | { board }                              | notify board name/desciption edited |
+| 'section:created'             | { boardId, section }                   | notify section created              |
+| 'ticket:created'              | { boardId, ticket }                    | notify ticket created               |
+| 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved                 |
 
 ## Learning Outcomes
 
@@ -136,7 +137,6 @@ $ turbo dev
 | section:edited              |
 | section:deleted             |
 | board:added-as-collaborator |
-| board:edited                |
 | board:deleted               |
 
 ## Planned features
