@@ -3,6 +3,7 @@ import { generateKeyBetween } from 'fractional-indexing';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import { assertNullOrInList, assertValidOrdering, getNextIndexInList } from '@/lib/ordering/ordering.js';
 import * as sectionQueries from '@/features/sections/section.queries.js';
+import { NotFoundError } from '@trickcal-bug-tracker/shared';
 
 const createSection = async ({
     userId,
@@ -38,19 +39,20 @@ const createSection = async ({
 
 const editSection = async ({
     userId,
-    boardId,
     sectionId,
     name,
 }: {
     userId: User['id'];
-    boardId: Board['id'];
     sectionId: Section['id'];
     name: Section['name'];
 }) => {
-    await assertBoardAccess({ userId, boardId });
+    // assert sectionId exists & assert board access
+    const section = await sectionQueries.getSectionById({ sectionId });
+    if (!section) throw new NotFoundError('Invalid sectionId')
+    await assertBoardAccess({ userId, boardId: section.boardId });
 
-    const section = await sectionQueries.editSection({ sectionId, edits: { name } });
-    return section;
+    const editedSection = await sectionQueries.editSection({ sectionId, edits: { name } });
+    return editedSection;
 };
 
 export { createSection, editSection };

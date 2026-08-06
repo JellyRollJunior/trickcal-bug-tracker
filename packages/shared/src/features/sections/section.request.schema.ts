@@ -1,8 +1,16 @@
 import { z } from 'zod';
+import { sectionShape } from './section.schema';
 
+/* Request Body */
 const postSectionsRequestBodySchema = z.object({
-    previousSectionId: z.uuid().nullable(),
-    name: z.string(),
+    previousSectionId: sectionShape.id.nullable(),
+    name: sectionShape.name,
 });
 
-export { postSectionsRequestBodySchema }
+/* Request Paramters */
+const sectionIdParamSchema = z.object({
+    sectionId: sectionShape.id,
+});
+
+export { postSectionsRequestBodySchema };
+export { sectionIdParamSchema };

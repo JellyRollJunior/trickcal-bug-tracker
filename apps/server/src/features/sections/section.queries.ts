@@ -3,13 +3,26 @@ import { prisma } from '@/db/prisma.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import { ticketInclude } from '@/features/tickets/ticket.select.js';
 
+const getSectionById = async ({ sectionId }: { sectionId: Section['id'] }) => {
+    try {
+        const data = await prisma.section.findUnique({
+            where: {
+                id: sectionId,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch section');
+    }
+};
+
 const getSectionWithTickets = async ({
     sectionId,
 }: {
     sectionId: Section['id'];
 }) => {
     try {
-        const data = prisma.section.findFirst({
+        const data = await prisma.section.findFirst({
             where: {
                 id: sectionId,
             },
@@ -80,4 +93,10 @@ const editSection = async ({
     }
 };
 
-export { getSectionWithTickets, getSections, createSection, editSection };
+export {
+    getSectionById,
+    getSectionWithTickets,
+    getSections,
+    createSection,
+    editSection,
+};

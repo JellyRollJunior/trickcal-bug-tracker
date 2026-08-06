@@ -6,7 +6,8 @@ import { env } from '@/config/env.js';
 import { passport } from '@/features/auth/passport/passport.js'
 import { authRouter } from '@/features/auth/auth.router.js';
 import { boardRouter } from '@/features/boards/board.router.js';
-import { errorHandler404, errorHandler } from './middleware/errorHandler.js';
+import { sectionRouter } from '@/features/sections/section.router.js';
+import { errorHandler404, errorHandler } from '@/middleware/errorHandler.js';
 
 const app: Application = express();
 app.use(
@@ -29,6 +30,7 @@ app.use(passport.session());
 // routes
 app.use('/auth', authRouter);
 app.use('/boards', boardRouter);
+app.use('/sections', sectionRouter);
 
 // error handlers
 app.use(/(.*)/, errorHandler404);

@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import {
     boardIdAndSectionIdParamSchema,
     boardIdParamSchema,
+    sectionIdParamSchema,
 } from '@trickcal-bug-tracker/shared';
 import { toSectionDto } from '@/features/sections/section.mapper.js';
 import { createSection, editSection } from '@/features/sections/section.service.js';
@@ -47,7 +48,7 @@ const postSections = async (
 
 const patchSection = async (
     req: Request<
-        { boardId: Board['id']; sectionId: Section['id'] },
+        { sectionId: Section['id'] },
         {},
         Pick<Section, 'name'>
     >,
@@ -58,10 +59,10 @@ const patchSection = async (
         // validate body
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        const { boardId, sectionId } = boardIdAndSectionIdParamSchema.parse(req.params);
+        const { sectionId } = sectionIdParamSchema.parse(req.params);
         const { name } = req.body;
 
-        const section = await editSection({ userId, boardId, sectionId, name });
+        const section = await editSection({ userId, sectionId, name });
         
         // emit
         const sectionDto = toSectionDto(section);
