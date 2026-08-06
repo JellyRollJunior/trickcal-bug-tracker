@@ -1,5 +1,6 @@
 import type { Board, User } from '@prisma/client';
-import { NotFoundError } from '@trickcal-bug-tracker/shared';
+import { NotFoundError, ValidationError } from '@trickcal-bug-tracker/shared';
+import { BoardWithParticipants } from '@/features/boards/board.select.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 
 const assertBoardAccess = async ({
@@ -11,7 +12,7 @@ const assertBoardAccess = async ({
 }) => {
     const board = await boardQueries.getBoardById({ boardId });
 
-    // asset board exists && user is owner or collaborator
+    // assert board exists && user is owner or collaborator
     if (
         !board ||
         (board.ownerId !== userId &&
@@ -23,4 +24,27 @@ const assertBoardAccess = async ({
     }
 };
 
-export { assertBoardAccess }
+const editBoard = async ({
+    userId,
+    boardId,
+    name,
+    description,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+    name?: Board['name'];
+    description?: Board['description'];
+}): Promise<BoardWithParticipants> => {
+    await assertBoardAccess({ userId, boardId });
+    if (name === undefined && description === undefined) {
+        throw new ValidationError({ payload: ['No edits provided'] });
+    }
+
+    const board = await boardQueries.editBoard({
+        boardId,
+        edits: { name, description },
+    });
+    return board;
+};
+
+export { assertBoardAccess, editBoard };

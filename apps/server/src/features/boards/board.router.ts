@@ -3,6 +3,7 @@ import { Router as CreateRouter } from 'express';
 import { requireAuth } from '@/middleware/requireAuth.js';
 import { validateRequestBody as validate } from '@/middleware/validate.js';
 import {
+    patchboardsRequestBodySchema,
     postBoardsRequestBodySchema as postBoardsSchema,
     postSectionsRequestBodySchema as postSectionsSchema,
     postTicketsRequestBodySchema as postTicketsSchema,
@@ -21,7 +22,7 @@ boardRouter.post(
     boardController.postBoards
 );
 boardRouter.get('/:boardId', requireAuth, boardController.getBoard);
-boardRouter.patch('/:boardId', requireAuth, boardController.patchBoard);
+boardRouter.patch('/:boardId', requireAuth, validate(patchboardsRequestBodySchema), boardController.patchBoard);
 
 /* sections */
 boardRouter.post(

@@ -5,7 +5,7 @@ import {
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
 import { boardIdParamSchema } from '@trickcal-bug-tracker/shared';
-import { assertBoardAccess } from '@/features/boards/board.services.js';
+import { assertBoardAccess, editBoard } from '@/features/boards/board.services.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
@@ -67,27 +67,20 @@ const patchBoard = async (
     req: Request<
         { boardId: Board['id'] },
         {},
-        Pick<Board, 'name' | 'description'>
+        { name?: Board['name']; description?: Board['description'] }
     >,
     res: Response,
     next: NextFunction
 ) => {
     try {
+        // validate variables
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        // validate body in middleware
-        // validate params
-        const { boardId } = req.params;
+        const { boardId } = boardIdParamSchema.parse(req.params);
         const { name, description } = req.body;
-        // assert access
-        await assertBoardAccess({ userId, boardId });
-
-        const board = await boardQueries.editBoard({
-            boardId,
-            name,
-            description,
-        });
-
+        
+        const board = await editBoard({ userId, boardId, name, description })
+        
         // emit board edited
         const boardDto = toBoardDto(board);
         res.json(boardDto);

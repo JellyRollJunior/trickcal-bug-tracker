@@ -123,21 +123,17 @@ const getBoardWithSectionsAndTicketsById = async ({
 
 const editBoard = async ({
     boardId,
-    name,
-    description,
-}: { boardId: Board['id'] } & Pick<
-    Board,
-    'name' | 'description'
->): Promise<BoardWithParticipants> => {
+    edits,
+}: {
+    boardId: Board['id'];
+    edits: { name?: Board['name']; description?: Board['description'] };
+}): Promise<BoardWithParticipants> => {
     try {
         const data = await prisma.board.update({
             where: {
                 id: boardId,
             },
-            data: {
-                name,
-                description,
-            },
+            data: edits,
             include: boardInclude,
         });
         return data;

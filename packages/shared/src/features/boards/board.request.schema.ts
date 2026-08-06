@@ -7,6 +7,10 @@ const postBoardsRequestBodySchema = z.object({
     name: boardShape.name,
     description: boardShape.description,
 });
+const patchboardsRequestBodySchema = z.object({
+    name: boardShape.name.optional(),
+    description: boardShape.description.optional(),
+});
 
 /* Request Parameters */
 const boardIdParamSchema = z.object({ boardId: boardShape.id });
@@ -15,5 +19,5 @@ const boardIdAndSectionIdParamSchema = z.object({
     sectionId: sectionShape.id,
 });
 
-export { postBoardsRequestBodySchema };
+export { postBoardsRequestBodySchema, patchboardsRequestBodySchema };
 export { boardIdParamSchema, boardIdAndSectionIdParamSchema };
