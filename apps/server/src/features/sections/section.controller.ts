@@ -5,7 +5,7 @@ import {
     boardIdParamSchema,
 } from '@trickcal-bug-tracker/shared';
 import { toSectionDto } from '@/features/sections/section.mapper.js';
-import { createSection } from '@/features/sections/section.service.js';
+import { createSection, editSection } from '@/features/sections/section.service.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { getIo } from '@/sockets/ioInstance.js';
 
@@ -55,8 +55,17 @@ const patchSection = async (
     next: NextFunction
 ) => {
     try {
+        // validate body
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
         const { boardId, sectionId } = boardIdAndSectionIdParamSchema.parse(req.params);
         const { name } = req.body;
+
+        const section = await editSection({ userId, boardId, sectionId, name });
+        
+        // emit
+        const sectionDto = toSectionDto(section);
+        res.json(sectionDto)
     } catch (error) {
         next(error);
     }

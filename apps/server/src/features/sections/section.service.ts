@@ -36,4 +36,21 @@ const createSection = async ({
     return newSection;
 };
 
-export { createSection };
+const editSection = async ({
+    userId,
+    boardId,
+    sectionId,
+    name,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+    sectionId: Section['id'];
+    name: Section['name'];
+}) => {
+    await assertBoardAccess({ userId, boardId });
+
+    const section = await sectionQueries.editSection({ sectionId, edits: { name } });
+    return section;
+};
+
+export { createSection, editSection };
