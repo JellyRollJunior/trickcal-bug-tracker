@@ -31,6 +31,9 @@ const sectionCreatedPayloadSchema = z.object({
 });
 type SectionCreatedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
 
+// section:edited
+type SectionEditedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
+
 /* ---------- Tickets ---------- */
 // ticket:created
 const ticketCreatedPayloadSchema = z.object({
@@ -50,6 +53,7 @@ type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 export type {
     BoardEditedPayload,
     SectionCreatedPayload,
+    SectionEditedPayload,
     TicketCreatedPayload,
     TicketMovedPayload,
     UserJoinedPayload,

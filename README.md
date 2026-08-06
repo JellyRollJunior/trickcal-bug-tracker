@@ -58,6 +58,7 @@ $ turbo dev
 | PATCH  | /boards/:boardId                             | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
+| PATCH  | sections/:sectionId                          | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
 
 | Client to server socket event | Arguments                                           | Use               |
 | ----------------------------- | --------------------------------------------------- | ----------------- |
@@ -72,6 +73,7 @@ $ turbo dev
 | 'board:user-left-room'        | { userId }                             | notify user left room               |
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
 | 'section:created'             | { boardId, section }                   | notify section created              |
+| 'section:edited'              | { boardId, section }                   | notify section edited               |
 | 'ticket:created'              | { boardId, ticket }                    | notify ticket created               |
 | 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved                 |
 
@@ -115,6 +117,9 @@ $ turbo dev
 
 ## TODO
 
+- define schema limits on board, section, tickets
+- create ticket
+    - verify section id valid
 - later
     - set token to proper expire time
 - default board
@@ -125,7 +130,6 @@ $ turbo dev
 | ------ | ---------------------------- |
 | POST   | /board/:boardId/collaborator |
 | DELETE | /board/:boardId              |
-| PATCH  | /section/:sectionId          |
 | DELETE | /section/:sectionId          |
 | PATCH  | /ticket/:ticketId            |
 | DELETE | /ticket/:ticketId            |
@@ -134,7 +138,6 @@ $ turbo dev
 | --------------------------- |
 | ticket:edited               |
 | ticket:deleted              |
-| section:edited              |
 | section:deleted             |
 | board:added-as-collaborator |
 | board:deleted               |

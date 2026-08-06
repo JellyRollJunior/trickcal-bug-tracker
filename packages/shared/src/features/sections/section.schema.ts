@@ -8,7 +8,7 @@ const sectionShape = {
     order: z.string(),
     creationDate: z.iso.datetime(),
     lastUpdate: z.iso.datetime(),
-    name: z.string(),
+    name: z.string().min(1).max(26),
 };
 
 const sectionDtoSchema = z.object(sectionShape);

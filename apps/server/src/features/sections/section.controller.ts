@@ -1,12 +1,14 @@
 import type { Board, Section } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 import {
-    boardIdAndSectionIdParamSchema,
     boardIdParamSchema,
     sectionIdParamSchema,
 } from '@trickcal-bug-tracker/shared';
 import { toSectionDto } from '@/features/sections/section.mapper.js';
-import { createSection, editSection } from '@/features/sections/section.service.js';
+import {
+    createSection,
+    editSection,
+} from '@/features/sections/section.service.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { getIo } from '@/sockets/ioInstance.js';
 
@@ -38,7 +40,9 @@ const postSections = async (
         // emit section creation
         const sectionDto = toSectionDto(newSection);
         const io = getIo();
-        io.sockets.to(boardId).emit('section:created', { boardId, section: sectionDto });
+        io.sockets
+            .to(boardId)
+            .emit('section:created', { boardId, section: sectionDto });
 
         res.json(toSectionDto(newSection));
     } catch (error) {
@@ -47,11 +51,7 @@ const postSections = async (
 };
 
 const patchSection = async (
-    req: Request<
-        { sectionId: Section['id'] },
-        {},
-        Pick<Section, 'name'>
-    >,
+    req: Request<{ sectionId: Section['id'] }, {}, Pick<Section, 'name'>>,
     res: Response,
     next: NextFunction
 ) => {
@@ -63,10 +63,16 @@ const patchSection = async (
         const { name } = req.body;
 
         const section = await editSection({ userId, sectionId, name });
-        
+
         // emit
         const sectionDto = toSectionDto(section);
-        res.json(sectionDto)
+        const io = getIo();
+        io.sockets.to(section.boardId).emit('section:edited', {
+            boardId: section.boardId,
+            section: sectionDto,
+        });
+
+        res.json(sectionDto);
     } catch (error) {
         next(error);
     }
