@@ -60,4 +60,24 @@ const createSection = async ({
     }
 };
 
-export { getSectionWithTickets, getSections, createSection };
+const editSection = async ({
+    sectionId,
+    edits,
+}: {
+    sectionId: Section['id'];
+    edits: { name?: Section['name'] };
+}) => {
+    try {
+        const data = await prisma.section.update({
+            where: {
+                id: sectionId,
+            },
+            data: edits,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to edit section');
+    }
+};
+
+export { getSectionWithTickets, getSections, createSection, editSection };
