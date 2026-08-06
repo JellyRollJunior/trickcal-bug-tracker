@@ -123,7 +123,6 @@ $ turbo dev
 | Method | URI                          |
 | ------ | ---------------------------- |
 | POST   | /board/:boardId/collaborator |
-| PATCH  | /board/:boardId              |
 | DELETE | /board/:boardId              |
 | PATCH  | /section/:sectionId          |
 | DELETE | /section/:sectionId          |

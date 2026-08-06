@@ -2,8 +2,9 @@ import { z } from 'zod';
 import { sectionDtoSchema, sectionShape } from '../features/sections';
 import { userDtoSchema, userShape } from '../features/users';
 import { ticketDtoSchema } from '../features/tickets';
-import { boardShape } from '../features/boards';
+import { boardDtoSchema, boardShape } from '../features/boards';
 
+/* ---------- BOARDS ---------- */
 // board:user-joined-room
 const userJoinedRoomPayloadSchema = z.object({
     user: userDtoSchema,
@@ -16,6 +17,13 @@ const userLeftRoomPayloadSchema = z.object({
 });
 type UserLeftPayload = z.infer<typeof userLeftRoomPayloadSchema>;
 
+// board:edited
+const boardEditedPayloadSchema = z.object({
+    board: boardDtoSchema,
+});
+type BoardEditedPayload = z.infer<typeof boardEditedPayloadSchema>;
+
+/* ---------- Sections ---------- */
 // section:created
 const sectionCreatedPayloadSchema = z.object({
     boardId: boardShape.id,
@@ -23,6 +31,7 @@ const sectionCreatedPayloadSchema = z.object({
 });
 type SectionCreatedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
 
+/* ---------- Tickets ---------- */
 // ticket:created
 const ticketCreatedPayloadSchema = z.object({
     boardId: boardShape.id,
@@ -39,16 +48,18 @@ const ticketMovedPayloadSchema = z.object({
 type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
 export type {
-    UserJoinedPayload,
-    UserLeftPayload,
+    BoardEditedPayload,
     SectionCreatedPayload,
     TicketCreatedPayload,
     TicketMovedPayload,
+    UserJoinedPayload,
+    UserLeftPayload,
 };
 export {
-    userJoinedRoomPayloadSchema,
-    userLeftRoomPayloadSchema,
+    boardEditedPayloadSchema,
     sectionCreatedPayloadSchema,
     ticketCreatedPayloadSchema,
     ticketMovedPayloadSchema,
+    userJoinedRoomPayloadSchema,
+    userLeftRoomPayloadSchema,
 };

@@ -11,6 +11,7 @@ import {
     toBoardWithSectionsAndTicketsDto,
 } from '@/features/boards/board.mapper.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
+import { getIo } from '@/sockets/ioInstance.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -83,6 +84,9 @@ const patchBoard = async (
         
         // emit board edited
         const boardDto = toBoardDto(board);
+        const io = getIo();
+        io.sockets.to(boardId).emit('board:edited', { board: boardDto });
+        
         res.json(boardDto);
     } catch (error) {
         next(error);
