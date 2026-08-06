@@ -120,6 +120,7 @@ $ turbo dev
 ## TODO
 
 - define schema limits on board, section, tickets
+- refactor payload + request schemas
 - create ticket
     - verify section id valid
 - later

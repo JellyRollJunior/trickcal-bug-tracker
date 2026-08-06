@@ -142,11 +142,30 @@ const editBoard = async ({
     }
 };
 
+const deleteBoard = async ({
+    boardId,
+}: {
+    boardId: Board['id'];
+}): Promise<BoardWithParticipants> => {
+    try {
+        const data = await prisma.board.delete({
+            where: {
+                id: boardId,
+            },
+            include: boardInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to delete board');
+    }
+};
+
 export {
     getBoardsByUserId,
-    createBoard,
-    getBoardById,
     getBoardWithSectionsById,
     getBoardWithSectionsAndTicketsById,
+    getBoardById,
+    createBoard,
     editBoard,
+    deleteBoard,
 };

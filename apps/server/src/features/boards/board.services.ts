@@ -1,5 +1,9 @@
 import type { Board, User } from '@prisma/client';
-import { NotFoundError, ValidationError } from '@trickcal-bug-tracker/shared';
+import {
+    AuthorizationError,
+    NotFoundError,
+    ValidationError,
+} from '@trickcal-bug-tracker/shared';
 import { BoardWithParticipants } from '@/features/boards/board.select.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 
@@ -47,4 +51,22 @@ const editBoard = async ({
     return board;
 };
 
-export { assertBoardAccess, editBoard };
+const deleteBoard = async ({
+    userId,
+    boardId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+}): Promise<BoardWithParticipants> => {
+    // verify userId owners board
+    const board = await boardQueries.getBoardById({ boardId });
+    if (!board) throw new NotFoundError('Unable to retrieve board');
+    if (board.ownerId !== userId) {
+        throw new AuthorizationError('Unable to authorize board');
+    }
+
+    const deletedBoard = await boardQueries.deleteBoard({ boardId });
+    return deletedBoard;
+};
+
+export { assertBoardAccess, editBoard, deleteBoard };

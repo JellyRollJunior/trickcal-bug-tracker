@@ -1,4 +1,5 @@
 export * from './AuthenticationError.js';
+export * from './AuthorizationError.js';
 export * from './BaseError.js';
 export * from './DatabaseError.js';
 export * from './NotFoundError.js';
