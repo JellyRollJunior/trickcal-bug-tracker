@@ -23,6 +23,12 @@ const boardEditedPayloadSchema = z.object({
 });
 type BoardEditedPayload = z.infer<typeof boardEditedPayloadSchema>;
 
+// board:deleted
+const boardDeletedPayloadSchema = z.object({
+    board: boardDtoSchema,
+});
+type BoardDeletedPayload = z.infer<typeof boardDeletedPayloadSchema>;
+
 /* ---------- Sections ---------- */
 // section:created
 const sectionCreatedPayloadSchema = z.object({
@@ -53,6 +59,7 @@ const ticketMovedPayloadSchema = z.object({
 type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
 export type {
+    BoardDeletedPayload,
     BoardEditedPayload,
     SectionCreatedPayload,
     SectionDeletedPayload,
@@ -63,6 +70,7 @@ export type {
     UserLeftPayload,
 };
 export {
+    boardDeletedPayloadSchema,
     boardEditedPayloadSchema,
     sectionCreatedPayloadSchema,
     ticketCreatedPayloadSchema,

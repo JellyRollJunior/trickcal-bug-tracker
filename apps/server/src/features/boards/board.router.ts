@@ -14,30 +14,17 @@ import * as ticketController from '@/features/tickets/ticket.controller.js';
 
 const boardRouter: Router = CreateRouter();
 
+/* boards */
 boardRouter.get('/', requireAuth, boardController.getBoards);
-boardRouter.post(
-    '/',
-    requireAuth,
-    validate(postBoardsSchema),
-    boardController.postBoards
-);
+boardRouter.post('/', requireAuth, validate(postBoardsSchema), boardController.postBoards);
 boardRouter.get('/:boardId', requireAuth, boardController.getBoard);
 boardRouter.patch('/:boardId', requireAuth, validate(patchboardsRequestBodySchema), boardController.patchBoard);
+boardRouter.delete('/:boardId', requireAuth, boardController.deleteBoard);
 
 /* sections */
-boardRouter.post(
-    '/:boardId/sections',
-    requireAuth,
-    validate(postSectionsSchema),
-    sectionController.postSections
-);
+boardRouter.post('/:boardId/sections', requireAuth, validate(postSectionsSchema), sectionController.postSections);
 
 /* tickets */
-boardRouter.post(
-    '/:boardId/sections/:sectionId/tickets',
-    requireAuth,
-    validate(postTicketsSchema),
-    ticketController.postTickets
-);
+boardRouter.post('/:boardId/sections/:sectionId/tickets', requireAuth, validate(postTicketsSchema), ticketController.postTickets);
 
 export { boardRouter };

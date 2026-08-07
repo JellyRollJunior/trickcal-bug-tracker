@@ -5,10 +5,7 @@ import {
     NotFoundError,
 } from '@trickcal-bug-tracker/shared';
 import { boardIdParamSchema } from '@trickcal-bug-tracker/shared';
-import {
-    assertBoardAccess,
-    editBoard,
-} from '@/features/boards/board.services.js';
+import { assertBoardAccess } from '@/features/boards/board.services.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
@@ -110,7 +107,6 @@ const deleteBoard = async (
 
         const deletedBoard = await boardService.deleteBoard({ userId, boardId });
         
-        // emit
         const boardDto = toBoardDto(deletedBoard);
         
         res.json(boardDto);
