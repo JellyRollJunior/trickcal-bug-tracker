@@ -107,10 +107,10 @@ const deleteBoard = async (
 
         const deletedBoard = await boardService.deleteBoard({ userId, boardId });
         
-        // emit to all collaborators
+        // emit to all collaborators & owner
         const boardDto = toBoardDto(deletedBoard);
         const io = getIo();
-        const rooms = boardDto.collaborators.map((user) => `user:${user.id}`)
+        const rooms = boardDto.collaborators.map((user) => `user:${user.id}`).concat(`user:${userId}`);
         io.sockets.to(rooms).emit('board:deleted', { board: boardDto });
         
         res.json(boardDto);

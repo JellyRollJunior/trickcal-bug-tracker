@@ -56,6 +56,7 @@ $ turbo dev
 | POST   | /boards                                      | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
 | GET    | /boards/:boardId                             | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
 | PATCH  | /boards/:boardId                             | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
+| DELETE | /boards/:boardId                             | delete board               |                                                                                                | boardDto                       |                                                                                 |
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                          | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
@@ -73,6 +74,7 @@ $ turbo dev
 | 'board:user-joined-room'      | { user }                               | notify user joined room             |
 | 'board:user-left-room'        | { userId }                             | notify user left room               |
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
+| 'board:deleted'               | { board }                              | notify board deletion               |
 | 'section:created'             | { boardId, section }                   | notify section created              |
 | 'section:edited'              | { boardId, section }                   | notify section edited               |
 | 'section:deleted'             | { boardId, section }                   | notify section deleted              |
@@ -135,7 +137,6 @@ $ turbo dev
 | Method | URI                          |
 | ------ | ---------------------------- |
 | POST   | /board/:boardId/collaborator |
-| DELETE | /board/:boardId              |
 | PATCH  | /ticket/:ticketId            |
 | DELETE | /ticket/:ticketId            |
 
@@ -145,7 +146,6 @@ $ turbo dev
 | ticket:deleted              |
 | section:deleted             |
 | board:added-as-collaborator |
-| board:deleted               |
 
 ## Planned features
 
