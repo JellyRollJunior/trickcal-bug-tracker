@@ -1,6 +1,7 @@
 import type { Board, User } from '@prisma/client';
 import {
     AuthorizationError,
+    BaseError,
     NotFoundError,
     ValidationError,
 } from '@trickcal-bug-tracker/shared';
@@ -26,6 +27,22 @@ const assertBoardAccess = async ({
     ) {
         throw new NotFoundError('Unable to fetch board');
     }
+};
+
+const assertBoardOwner = async ({
+    userId,
+    boardId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+}): Promise<BoardWithParticipants> => {
+    const board = await boardQueries.getBoardById({ boardId });
+
+    if (!board) throw new NotFoundError('Unable to retrieve board');
+    if (board.ownerId !== userId) {
+        throw new AuthorizationError('Unable to authorize board');
+    }
+    return board;
 };
 
 const editBoard = async ({
@@ -58,15 +75,28 @@ const deleteBoard = async ({
     userId: User['id'];
     boardId: Board['id'];
 }): Promise<BoardWithParticipants> => {
-    // verify userId owners board
-    const board = await boardQueries.getBoardById({ boardId });
-    if (!board) throw new NotFoundError('Unable to retrieve board');
-    if (board.ownerId !== userId) {
-        throw new AuthorizationError('Unable to authorize board');
-    }
+    await assertBoardOwner({ userId, boardId });
 
     const deletedBoard = await boardQueries.deleteBoard({ boardId });
     return deletedBoard;
 };
 
-export { assertBoardAccess, editBoard, deleteBoard };
+const addBoardCollaborator = async ({
+    userId,
+    boardId,
+    newCollaboratorId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+    newCollaboratorId: User['id'];
+}) => {
+    const board = await assertBoardOwner({ userId, boardId });
+    if (board.collaborators.some((user) => user.id === newCollaboratorId)) {
+        throw new BaseError('Conflict error', 'User already a collaborator', 409);
+    }
+
+    const boardWithNewCollaborator = await boardQueries.addBoardCollaborator({ boardId, newCollaboratorId });
+    return boardWithNewCollaborator;
+};
+
+export { assertBoardAccess, editBoard, deleteBoard, addBoardCollaborator };
