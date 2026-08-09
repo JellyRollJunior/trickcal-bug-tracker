@@ -160,6 +160,33 @@ const deleteBoard = async ({
     }
 };
 
+const addBoardCollaborator = async ({
+    boardId,
+    userId,
+}: {
+    boardId: Board['id'];
+    userId: User['id'];
+}): Promise<BoardWithParticipants> => {
+    try {
+        const data = await prisma.board.update({
+            where: {
+                id: boardId,
+            },
+            data: {
+                collaborators: {
+                    connect: {
+                        id: userId,
+                    },
+                },
+            },
+            include: boardInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to add collaborator');
+    }
+};
+
 export {
     getBoardsByUserId,
     getBoardWithSectionsById,
@@ -168,4 +195,5 @@ export {
     createBoard,
     editBoard,
     deleteBoard,
+    addBoardCollaborator
 };

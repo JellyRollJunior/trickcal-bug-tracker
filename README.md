@@ -56,7 +56,7 @@ $ turbo dev
 | POST   | /boards                                      | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
 | GET    | /boards/:boardId                             | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
 | PATCH  | /boards/:boardId                             | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
-| DELETE | /boards/:boardId                             | delete board               |                                                                                                | boardDto                       |                                                                                 |
+| DELETE | /boards/:boardId                             | delete board               |                                                                                                | boardDto                       | must be owner to delete board                                                   |
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                          | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
@@ -137,6 +137,7 @@ $ turbo dev
 | Method | URI                          |
 | ------ | ---------------------------- |
 | POST   | /board/:boardId/collaborator |
+| DELETE | /board/:boardId/collaborator |
 | PATCH  | /ticket/:ticketId            |
 | DELETE | /ticket/:ticketId            |
 
