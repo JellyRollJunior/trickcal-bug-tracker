@@ -1,4 +1,4 @@
-import type { Board } from '@prisma/client';
+import type { Board, User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
 import {
     AuthenticationError,
@@ -119,4 +119,26 @@ const deleteBoard = async (
     }
 };
 
-export { getBoards, postBoards, getBoard, patchBoard, deleteBoard };
+const postBoardCollaborator = async (
+    req: Request<{ boardId: Board['id'] }, {}, { collaboratorId: User['id']}>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        // validate variables
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
+        const { boardId } = boardIdParamSchema.parse(req.params);
+        const { collaboratorId } = req.body
+
+        const board = await boardService.addBoardCollaborator({ userId, boardId, collaboratorId })
+
+        // emit to all collaborators & owner
+        const boardDto = toBoardDto(board);
+        res.json(boardDto);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { getBoards, postBoards, getBoard, patchBoard, deleteBoard, postBoardCollaborator };

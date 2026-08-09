@@ -20,6 +20,7 @@ boardRouter.post('/', requireAuth, validate(postBoardsSchema), boardController.p
 boardRouter.get('/:boardId', requireAuth, boardController.getBoard);
 boardRouter.patch('/:boardId', requireAuth, validate(patchboardsRequestBodySchema), boardController.patchBoard);
 boardRouter.delete('/:boardId', requireAuth, boardController.deleteBoard);
+boardRouter.post('/:boardId/collaborators', requireAuth, boardController.postBoardCollaborator);
 
 /* sections */
 boardRouter.post('/:boardId/sections', requireAuth, validate(postSectionsSchema), sectionController.postSections);

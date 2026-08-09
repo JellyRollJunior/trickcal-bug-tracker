@@ -84,18 +84,18 @@ const deleteBoard = async ({
 const addBoardCollaborator = async ({
     userId,
     boardId,
-    newCollaboratorId,
+    collaboratorId,
 }: {
     userId: User['id'];
     boardId: Board['id'];
-    newCollaboratorId: User['id'];
+    collaboratorId: User['id'];
 }) => {
     const board = await assertBoardOwner({ userId, boardId });
-    if (board.collaborators.some((user) => user.id === newCollaboratorId)) {
+    if (board.collaborators.some((user) => user.id === collaboratorId)) {
         throw new BaseError('Conflict error', 'User already a collaborator', 409);
     }
 
-    const boardWithNewCollaborator = await boardQueries.addBoardCollaborator({ boardId, newCollaboratorId });
+    const boardWithNewCollaborator = await boardQueries.addBoardCollaborator({ boardId, collaboratorId });
     return boardWithNewCollaborator;
 };
 

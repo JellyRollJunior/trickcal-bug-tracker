@@ -162,10 +162,10 @@ const deleteBoard = async ({
 
 const addBoardCollaborator = async ({
     boardId,
-    newCollaboratorId,
+    collaboratorId,
 }: {
     boardId: Board['id'];
-    newCollaboratorId: User['id'];
+    collaboratorId: User['id'];
 }): Promise<BoardWithParticipants> => {
     try {
         const data = await prisma.board.update({
@@ -175,7 +175,7 @@ const addBoardCollaborator = async ({
             data: {
                 collaborators: {
                     connect: {
-                        id: newCollaboratorId,
+                        id: collaboratorId,
                     },
                 },
             },
