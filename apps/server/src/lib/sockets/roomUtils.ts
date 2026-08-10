@@ -2,7 +2,7 @@ import { AppServer, AppSocket } from '@/sockets/types.js';
 
 const switchToRoom = (socket: AppSocket, roomId: string) => {
     socket.rooms.forEach((room) => {
-        if (room === socket.id) return;
+        if (room === socket.id || room.includes('user:')) return;
         socket.leave(room);
         console.log(`${socket.id} has left room: ${room}`);
     });

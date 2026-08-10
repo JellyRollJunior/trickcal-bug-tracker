@@ -7,6 +7,7 @@ import {
 } from '@trickcal-bug-tracker/shared';
 import { BoardWithParticipants } from '@/features/boards/board.select.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
+import * as userQueries from '@/features/users/user.queries.js';
 
 const assertBoardAccess = async ({
     userId,
@@ -89,14 +90,17 @@ const addBoardCollaborator = async ({
     userId: User['id'];
     boardId: Board['id'];
     collaboratorId: User['id'];
-}) => {
+}): Promise<{ collaborator: User, board: BoardWithParticipants }> => {
+    // assert userId is owner, collaboratorId is not already collaborator, collaboratorId is real user 
     const board = await assertBoardOwner({ userId, boardId });
     if (board.collaborators.some((user) => user.id === collaboratorId)) {
         throw new BaseError('Conflict error', 'User already a collaborator', 409);
     }
+    const collaborator = await userQueries.getUserById({ id: collaboratorId });
+    if (!collaborator) throw new NotFoundError('Unable to retrieve user using collaboratorId');
 
     const boardWithNewCollaborator = await boardQueries.addBoardCollaborator({ boardId, collaboratorId });
-    return boardWithNewCollaborator;
+    return { collaborator, board: boardWithNewCollaborator};
 };
 
 export { assertBoardAccess, editBoard, deleteBoard, addBoardCollaborator };

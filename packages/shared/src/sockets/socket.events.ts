@@ -4,6 +4,7 @@ import {
     MoveTicketInput,
 } from './socket.client-to-server.schema.js';
 import {
+    BoardAddedCollaborator,
     BoardDeletedPayload,
     BoardEditedPayload,
     SectionCreatedPayload,
@@ -25,6 +26,7 @@ type ServerToClientEvents = {
     'board:user-left-room': (payload: UserLeftPayload) => void;
     'board:edited': (payload: BoardEditedPayload) => void;
     'board:deleted': (payload: BoardDeletedPayload) => void;
+    'board:added-collaborator': (payload: BoardAddedCollaborator) => void;
     'section:created': (payload: SectionCreatedPayload) => void;
     'section:edited': (payload: SectionEditedPayload) => void;
     'section:deleted': (payload: SectionDeletedPayload) => void;

@@ -13,6 +13,7 @@ import {
 import { getIo } from '@/sockets/ioInstance.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 import * as boardService from '@/features/boards/board.services.js';
+import { toUserDto } from '../users/user.mapper.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -131,10 +132,15 @@ const postBoardCollaborator = async (
         const { boardId } = boardIdParamSchema.parse(req.params);
         const { collaboratorId } = req.body
 
-        const board = await boardService.addBoardCollaborator({ userId, boardId, collaboratorId })
+        const { collaborator, board } = await boardService.addBoardCollaborator({ userId, boardId, collaboratorId })
 
-        // emit to all collaborators & owner
+        // emit to all collaborators & owner & new collaborator
         const boardDto = toBoardDto(board);
+        const collaboratorDto = toUserDto(collaborator);
+        const io = getIo();
+        const rooms = board.collaborators.map((user) => `user:${user.id}`).concat(`user:${boardDto.owner.id}`).concat(`user:${collaboratorDto.id}`)
+        io.to(rooms).emit('board:added-collaborator', { user: collaboratorDto, board: boardDto });
+        
         res.json(boardDto);
     } catch (error) {
         next(error);

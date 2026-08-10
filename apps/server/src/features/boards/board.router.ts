@@ -7,6 +7,7 @@ import {
     postBoardsRequestBodySchema as postBoardsSchema,
     postSectionsRequestBodySchema as postSectionsSchema,
     postTicketsRequestBodySchema as postTicketsSchema,
+    postBoardCollaboratorRequestBodySchema as postBoardCollaboratorSchema,
 } from '@trickcal-bug-tracker/shared';
 import * as boardController from '@/features/boards/board.controller.js';
 import * as sectionController from '@/features/sections/section.controller.js';
@@ -20,7 +21,7 @@ boardRouter.post('/', requireAuth, validate(postBoardsSchema), boardController.p
 boardRouter.get('/:boardId', requireAuth, boardController.getBoard);
 boardRouter.patch('/:boardId', requireAuth, validate(patchboardsRequestBodySchema), boardController.patchBoard);
 boardRouter.delete('/:boardId', requireAuth, boardController.deleteBoard);
-boardRouter.post('/:boardId/collaborators', requireAuth, boardController.postBoardCollaborator);
+boardRouter.post('/:boardId/collaborators', requireAuth, validate(postBoardCollaboratorSchema), boardController.postBoardCollaborator);
 
 /* sections */
 boardRouter.post('/:boardId/sections', requireAuth, validate(postSectionsSchema), sectionController.postSections);
