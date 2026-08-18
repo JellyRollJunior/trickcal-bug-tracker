@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from 'express';
 import {
     AuthenticationError,
     NotFoundError,
+    boardIdAndCollaboratorIdParamSchema,
     boardIdParamSchema,
 } from '@trickcal-bug-tracker/shared';
 import { getIo } from '@/sockets/ioInstance.js';
@@ -152,17 +153,21 @@ const deleteBoardCollaborator = async (
     res: Response,
     next: NextFunction
 ) => {
-    // validatre variables
-    const userId = req.user?.id;
-    if (!userId) throw new AuthenticationError();
-    const { boardId } = boardIdParamSchema.parse(req.params);
-    const { collaboratorId } = req.body
+    try {
+        // validatre variables
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
+        const { boardId, collaboratorId } = boardIdAndCollaboratorIdParamSchema.parse(req.params);
 
-    const { collaborator, board } = await boardServices.deleteBoardCollaborator({ userId, boardId, collaboratorId });
+        const { collaborator, board } = await boardServices.deleteBoardCollaborator({ userId, boardId, collaboratorId });
 
-    // todo: emit
-    const boardDto = toBoardDto(board);
-    res.json(boardDto)
+        // todo: emit
+        const boardDto = toBoardDto(board);
+
+        res.json(boardDto)
+    } catch (error) {
+        next(error)
+    }
 }
 
 export {

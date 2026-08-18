@@ -122,6 +122,9 @@ $ turbo dev
 
 ## Process
 
+- refacot shared param + request schemas + socket schemas.
+    -   lots of overlap 
+
 ## TODO
 
 - define schema limits on board, section, tickets
