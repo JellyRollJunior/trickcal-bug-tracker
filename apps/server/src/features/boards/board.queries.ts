@@ -187,6 +187,31 @@ const addBoardCollaborator = async ({
     }
 };
 
+const deleteBoardCollaborator = async ({
+    boardId,
+    collaboratorId,
+}: {
+    boardId: Board['id'];
+    collaboratorId: User['id'];
+}) => {
+    try {
+        const data = await prisma.board.update({
+            where: {
+                id: boardId,
+            },
+            data: {
+                collaborators: {
+                    disconnect: {
+                        id: collaboratorId,
+                    },
+                },
+            },
+        });
+    } catch (error) {
+        throw new DatabaseError('Unable to remove collaborator');
+    }
+};
+
 export {
     getBoardsByUserId,
     getBoardWithSectionsById,
@@ -195,5 +220,6 @@ export {
     createBoard,
     editBoard,
     deleteBoard,
-    addBoardCollaborator
+    addBoardCollaborator,
+    deleteBoardCollaborator,
 };

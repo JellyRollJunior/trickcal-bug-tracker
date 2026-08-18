@@ -73,7 +73,7 @@ $ turbo dev
 | Server to client socket event | Payload                                | Use                                 |
 | ----------------------------- | -------------------------------------- | ----------------------------------- |
 | 'board:user-joined-room'      | { user }                               | notify user joined room             |
-| 'board:user-left-room'        | { userId }                             | notify user left room               |
+| 'board:user-left-room'        | { userId }                             | notify user left room               | 
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
 | 'board:deleted'               | { board }                              | notify board deletion               |
 | 'board:added-collaborator'    | { user, board }                        | notify board collaborator added     |
