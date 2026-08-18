@@ -14,7 +14,10 @@ const patchboardsRequestBodySchema = z.object({
 });
 const postBoardCollaboratorRequestBodySchema = z.object({
     collaboratorId: userShape.id,
-})
+});
+const deleteBoardCollaboratorRequestBodySchema = z.object({
+    collaboratorId: userShape.id,
+});
 
 /* Request Parameters */
 const boardIdParamSchema = z.object({ boardId: boardShape.id });
@@ -23,5 +26,10 @@ const boardIdAndSectionIdParamSchema = z.object({
     sectionId: sectionShape.id,
 });
 
-export { postBoardsRequestBodySchema, patchboardsRequestBodySchema, postBoardCollaboratorRequestBodySchema };
+export {
+    postBoardsRequestBodySchema,
+    patchboardsRequestBodySchema,
+    postBoardCollaboratorRequestBodySchema,
+    deleteBoardCollaboratorRequestBodySchema,
+};
 export { boardIdParamSchema, boardIdAndSectionIdParamSchema };

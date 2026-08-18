@@ -58,6 +58,7 @@ $ turbo dev
 | PATCH  | /boards/:boardId                             | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
 | DELETE | /boards/:boardId                             | delete board               |                                                                                                | boardDto                       | must be owner to delete board                                                   |
 | POST   | /boards/:boardId/collaborators               | add collaborator           | { collaboratorId }                                                                             | boardDto                       | must be owner to add collaborator                                               |
+| DELETE | /boards/:boardId/collaborators               | delete collaborator        | { collaboratorId }                                                                             | boardDto                       | must be owner to delete collaborator                                            |
 | POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                          | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
@@ -73,7 +74,7 @@ $ turbo dev
 | Server to client socket event | Payload                                | Use                                 |
 | ----------------------------- | -------------------------------------- | ----------------------------------- |
 | 'board:user-joined-room'      | { user }                               | notify user joined room             |
-| 'board:user-left-room'        | { userId }                             | notify user left room               | 
+| 'board:user-left-room'        | { userId }                             | notify user left room               |
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
 | 'board:deleted'               | { board }                              | notify board deletion               |
 | 'board:added-collaborator'    | { user, board }                        | notify board collaborator added     |
@@ -136,17 +137,16 @@ $ turbo dev
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
 
-| Method | URI                          |
-| ------ | ---------------------------- |
-| DELETE | /board/:boardId/collaborator |
-| PATCH  | /ticket/:ticketId            |
-| DELETE | /ticket/:ticketId            |
+| Method | URI               |
+| ------ | ----------------- |
+| PATCH  | /ticket/:ticketId |
+| DELETE | /ticket/:ticketId |
 
-| Socket Event                |
-| --------------------------- |
-| ticket:edited               |
-| ticket:deleted              |
-| section:deleted             |
+| Socket Event    |
+| --------------- |
+| ticket:edited   |
+| ticket:deleted  |
+| section:deleted |
 
 ## Planned features
 
