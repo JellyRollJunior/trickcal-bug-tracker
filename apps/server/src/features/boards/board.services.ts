@@ -103,4 +103,31 @@ const addBoardCollaborator = async ({
     return { collaborator, board: boardWithNewCollaborator};
 };
 
-export { assertBoardAccess, editBoard, deleteBoard, addBoardCollaborator };
+const deleteBoardCollaborator = async ({
+    userId,
+    boardId,
+    collaboratorId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+    collaboratorId: User['id'];
+}) => {
+    // assert userId is owner, collaboratorId is a collaborator, collaboratorId is real user 
+    const board = await assertBoardOwner({ userId, boardId });
+    if (!board.collaborators.some((user) => user.id === collaboratorId)) {
+        throw new BaseError('Conflict error', 'User corresponding to collaboratorId is not a collaborator', 409);
+    }
+    const collaborator = await userQueries.getUserById({ id: collaboratorId });
+    if (!collaborator) throw new NotFoundError('Unable to retrieve user using collaboratorId');
+
+    const boardWithoutCollaborator = await boardQueries.deleteBoardCollaborator({ boardId, collaboratorId });
+    return { collaborator, board: boardWithoutCollaborator };
+};
+
+export {
+    assertBoardAccess,
+    editBoard,
+    deleteBoard,
+    addBoardCollaborator,
+    deleteBoardCollaborator,
+};
