@@ -36,6 +36,9 @@ const boardAddedCollaboratorPayloadSchema = z.object({
 });
 type BoardAddedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
 
+// board:deleted-collaborator
+type BoardDeletedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
+
 
 /* ---------- Sections ---------- */
 // section:created
@@ -70,6 +73,7 @@ type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
 export type {
     BoardAddedCollaborator,
+    BoardDeletedCollaborator,
     BoardDeletedPayload,
     BoardEditedPayload,
     SectionCreatedPayload,

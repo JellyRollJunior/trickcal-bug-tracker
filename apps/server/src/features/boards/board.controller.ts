@@ -135,11 +135,11 @@ const postBoardCollaborator = async (
 
         const { collaborator, board } = await boardServices.addBoardCollaborator({ userId, boardId, collaboratorId })
 
-        // emit to all collaborators & owner & new collaborator
+        // emit to board & new collaborator
         const boardDto = toBoardDto(board);
         const collaboratorDto = toUserDto(collaborator);
         const io = getIo();
-        const rooms = board.collaborators.map((user) => `user:${user.id}`).concat(`user:${boardDto.owner.id}`).concat(`user:${collaboratorDto.id}`)
+        const rooms = [`${boardDto.id}`].concat(`user:${collaboratorDto.id}`)
         io.to(rooms).emit('board:added-collaborator', { user: collaboratorDto, board: boardDto });
         
         res.json(boardDto);
@@ -161,8 +161,12 @@ const deleteBoardCollaborator = async (
 
         const { collaborator, board } = await boardServices.deleteBoardCollaborator({ userId, boardId, collaboratorId });
 
-        // todo: emit
+        // emit to board & deleted collaborator
         const boardDto = toBoardDto(board);
+        const collaboratorDto = toUserDto(collaborator)
+        const io = getIo();
+        const rooms = [`${boardDto.id}`].concat(`user:${collaboratorDto.id}`);
+        io.to(rooms).emit('board:deleted-collaborator', { user: collaboratorDto, board: boardDto });
 
         res.json(boardDto)
     } catch (error) {

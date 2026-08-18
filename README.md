@@ -46,23 +46,23 @@ $ turbo dev
 
 ## Endpoints & Socket Events
 
-| Method | URI                                          | Function                   | Body (inputs)                                                                                  | Outputs                        | Notes                                                                           |
-| ------ | -------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
-| POST   | /auth/signup                                 | Signup                     | { username, password, name }                                                                   | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
-| POST   | /auth/login                                  | Login                      | { username, password }                                                                         | { token }                      |                                                                                 |
-| POST   | /auth/github                                 | GitHub oauth2 login/signup |                                                                                                |                                | Login with GitHub oauth. Creates an account if no account exists                |
-| POST   | /auth/github/callback                        | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
-| GET    | /boards                                      | get boards                 |                                                                                                | boardDto[]                     |                                                                                 |
-| POST   | /boards                                      | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
-| GET    | /boards/:boardId                             | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
-| PATCH  | /boards/:boardId                             | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
-| DELETE | /boards/:boardId                             | delete board               |                                                                                                | boardDto                       | must be owner to delete board                                                   |
-| POST   | /boards/:boardId/collaborators               | add collaborator           | { collaboratorId }                                                                             | boardDto                       | must be owner to add collaborator                                               |
-| DELETE | /boards/:boardId/collaborators               | delete collaborator        | { collaboratorId }                                                                             | boardDto                       | must be owner to delete collaborator                                            |
-| POST   | /boards/:boardId/sections                    | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
-| POST   | /boards/:boardId/sections/:sectionId/tickets | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
-| PATCH  | sections/:sectionId                          | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
-| DELETE | sections/:sectionId                          | delete section             |                                                                                                | sectionDto                     |                                                                                 |
+| Method | URI                                            | Function                   | Body (inputs)                                                                                  | Outputs                        | Notes                                                                           |
+| ------ | ---------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
+| POST   | /auth/signup                                   | Signup                     | { username, password, name }                                                                   | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
+| POST   | /auth/login                                    | Login                      | { username, password }                                                                         | { token }                      |                                                                                 |
+| POST   | /auth/github                                   | GitHub oauth2 login/signup |                                                                                                |                                | Login with GitHub oauth. Creates an account if no account exists                |
+| POST   | /auth/github/callback                          | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
+| GET    | /boards                                        | get boards                 |                                                                                                | boardDto[]                     |                                                                                 |
+| POST   | /boards                                        | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
+| GET    | /boards/:boardId                               | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
+| PATCH  | /boards/:boardId                               | patch board                | { name?, description? }                                                                        | boardDto                       | see POST /boards                                                                |
+| DELETE | /boards/:boardId                               | delete board               |                                                                                                | boardDto                       | must be owner to delete board                                                   |
+| POST   | /boards/:boardId/collaborators                 | add collaborator           | { collaboratorId }                                                                             | boardDto                       | must be owner to add collaborator                                               |
+| DELETE | /boards/:boardId/collaborators/:collaboratorId | delete collaborator        |                                                                                                | boardDto                       | must be owner to delete collaborator                                            |
+| POST   | /boards/:boardId/sections                      | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
+| POST   | /boards/:boardId/sections/:sectionId/tickets   | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
+| PATCH  | sections/:sectionId                            | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
+| DELETE | sections/:sectionId                            | delete section             |                                                                                                | sectionDto                     |                                                                                 |
 
 | Client to server socket event | Arguments                                           | Use               |
 | ----------------------------- | --------------------------------------------------- | ----------------- |
@@ -78,6 +78,7 @@ $ turbo dev
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
 | 'board:deleted'               | { board }                              | notify board deletion               |
 | 'board:added-collaborator'    | { user, board }                        | notify board collaborator added     |
+| 'board:deleted-collaborator'  | { user, board }                        | notify board collaborator deleted   |
 | 'section:created'             | { boardId, section }                   | notify section created              |
 | 'section:edited'              | { boardId, section }                   | notify section edited               |
 | 'section:deleted'             | { boardId, section }                   | notify section deleted              |
@@ -123,7 +124,7 @@ $ turbo dev
 ## Process
 
 - refacot shared param + request schemas + socket schemas.
-    -   lots of overlap 
+    - lots of overlap
 
 ## TODO
 
