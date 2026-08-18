@@ -100,7 +100,7 @@ const addBoardCollaborator = async ({
     if (!collaborator) throw new NotFoundError('Unable to retrieve user using collaboratorId');
 
     const boardWithNewCollaborator = await boardQueries.addBoardCollaborator({ boardId, collaboratorId });
-    return { collaborator, board: boardWithNewCollaborator};
+    return { collaborator, board: boardWithNewCollaborator };
 };
 
 const deleteBoardCollaborator = async ({
@@ -111,7 +111,7 @@ const deleteBoardCollaborator = async ({
     userId: User['id'];
     boardId: Board['id'];
     collaboratorId: User['id'];
-}) => {
+}): Promise<{ collaborator: User, board: BoardWithParticipants }> => {
     // assert userId is owner, collaboratorId is a collaborator, collaboratorId is real user 
     const board = await assertBoardOwner({ userId, boardId });
     if (!board.collaborators.some((user) => user.id === collaboratorId)) {

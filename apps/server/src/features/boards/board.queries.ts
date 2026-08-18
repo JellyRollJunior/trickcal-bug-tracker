@@ -206,7 +206,9 @@ const deleteBoardCollaborator = async ({
                     },
                 },
             },
+            include: boardInclude,
         });
+        return data;
     } catch (error) {
         throw new DatabaseError('Unable to remove collaborator');
     }

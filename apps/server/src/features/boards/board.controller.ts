@@ -3,17 +3,17 @@ import type { Request, Response, NextFunction } from 'express';
 import {
     AuthenticationError,
     NotFoundError,
+    boardIdParamSchema,
 } from '@trickcal-bug-tracker/shared';
-import { boardIdParamSchema } from '@trickcal-bug-tracker/shared';
+import { getIo } from '@/sockets/ioInstance.js';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
 } from '@/features/boards/board.mapper.js';
-import { getIo } from '@/sockets/ioInstance.js';
+import { toUserDto } from '@/features/users/user.mapper.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
-import * as boardService from '@/features/boards/board.services.js';
-import { toUserDto } from '../users/user.mapper.js';
+import * as boardServices from '@/features/boards/board.services.js';
 
 const getBoards = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -82,7 +82,7 @@ const patchBoard = async (
         const { boardId } = boardIdParamSchema.parse(req.params);
         const { name, description } = req.body;
 
-        const board = await boardService.editBoard({ userId, boardId, name, description });
+        const board = await boardServices.editBoard({ userId, boardId, name, description });
 
         // emit board edited
         const boardDto = toBoardDto(board);
@@ -106,7 +106,7 @@ const deleteBoard = async (
         if (!userId) throw new AuthenticationError();
         const { boardId } = boardIdParamSchema.parse(req.params);
 
-        const deletedBoard = await boardService.deleteBoard({ userId, boardId });
+        const deletedBoard = await boardServices.deleteBoard({ userId, boardId });
         
         // emit to all collaborators & owner
         const boardDto = toBoardDto(deletedBoard);
@@ -132,7 +132,7 @@ const postBoardCollaborator = async (
         const { boardId } = boardIdParamSchema.parse(req.params);
         const { collaboratorId } = req.body
 
-        const { collaborator, board } = await boardService.addBoardCollaborator({ userId, boardId, collaboratorId })
+        const { collaborator, board } = await boardServices.addBoardCollaborator({ userId, boardId, collaboratorId })
 
         // emit to all collaborators & owner & new collaborator
         const boardDto = toBoardDto(board);
@@ -147,4 +147,31 @@ const postBoardCollaborator = async (
     }
 }
 
-export { getBoards, postBoards, getBoard, patchBoard, deleteBoard, postBoardCollaborator };
+const deleteBoardCollaborator = async (
+    req: Request<{ boardId: Board['id'] }, {}, { collaboratorId: User['id']}>,
+    res: Response,
+    next: NextFunction
+) => {
+    // validatre variables
+    const userId = req.user?.id;
+    if (!userId) throw new AuthenticationError();
+    const { boardId } = boardIdParamSchema.parse(req.params);
+    const { collaboratorId } = req.body
+
+    const { collaborator, board } = await boardServices.deleteBoardCollaborator({ userId, boardId, collaboratorId });
+
+    // todo: emit
+    const boardDto = toBoardDto(board);
+    res.json(boardDto)
+}
+
+export {
+    getBoards,
+    postBoards,
+    getBoard,
+    patchBoard,
+    deleteBoard,
+    postBoardCollaborator,
+    deleteBoardCollaborator,
+};
+
