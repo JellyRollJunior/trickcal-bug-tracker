@@ -78,7 +78,7 @@ $ turbo dev
 | 'board:edited'                | { board }                              | notify board name/desciption edited |
 | 'board:deleted'               | { board }                              | notify board deletion               |
 | 'board:added-collaborator'    | { user, board }                        | notify board collaborator added     |
-| 'board:deleted-collaborator'  | { user, board }                        | notify board collaborator deleted   |
+| 'board:removed-collaborator'  | { user, board }                        | notify board collaborator deleted   |
 | 'section:created'             | { boardId, section }                   | notify section created              |
 | 'section:edited'              | { boardId, section }                   | notify section edited               |
 | 'section:deleted'             | { boardId, section }                   | notify section deleted              |
@@ -108,7 +108,6 @@ $ turbo dev
     - If service logic in minimal, just directly call query from controller
         - Don't add extra layers to navigate for no reason
 - One Prisma query does not necessarily equal One SQL query
-    - verify with the following snippet!
 - Prisma sorting -> PSQL uses local collation -> sorting string keys does not work as expect in JS
     - solution: manually edit SQL field to sort as expected (see prisma migration files)
 - Docker + Docker compose
@@ -123,6 +122,7 @@ $ turbo dev
 
 ## Process
 
+- path aliasing for shared... shit is ugly
 - refacot shared param + request schemas + socket schemas.
     - lots of overlap
 

@@ -1,13 +1,13 @@
-import { UserDto } from '../features/users';
+import { UserDto } from '../features/users/index.js';
 import {
     JoinRoomInput,
     MoveTicketInput,
 } from './socket.client-to-server.schema.js';
 import {
     BoardAddedCollaborator,
-    BoardDeletedCollaborator,
     BoardDeletedPayload,
     BoardEditedPayload,
+    BoardRemovedCollaborator,
     SectionCreatedPayload,
     SectionDeletedPayload,
     SectionEditedPayload,
@@ -20,7 +20,7 @@ import {
     SocketBaseResponse,
     SocketJoinRoomResponse,
 } from './socket.response.js';
-import { BoardDto } from '../features/boards';
+import { BoardDto } from '../features/boards/index.js';
 
 type ServerToClientEvents = {
     'board:user-joined-room': (payload: UserJoinedPayload) => void;
@@ -28,7 +28,7 @@ type ServerToClientEvents = {
     'board:edited': (payload: BoardEditedPayload) => void;
     'board:deleted': (payload: BoardDeletedPayload) => void;
     'board:added-collaborator': (payload: BoardAddedCollaborator) => void;
-    'board:deleted-collaborator': (payload: BoardDeletedCollaborator) => void;
+    'board:removed-collaborator': (payload: BoardRemovedCollaborator) => void;
     'section:created': (payload: SectionCreatedPayload) => void;
     'section:edited': (payload: SectionEditedPayload) => void;
     'section:deleted': (payload: SectionDeletedPayload) => void;

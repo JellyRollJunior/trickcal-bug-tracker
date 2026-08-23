@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { boardShape } from '../boards';
-import { ticketDtoSchema } from '../tickets';
+import { boardShape } from '../boards/index.js';
+import { ticketDtoSchema } from '../tickets/index.js';
 
 const sectionShape = {
     id: z.uuid(),

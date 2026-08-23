@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { sectionDtoSchema, sectionShape } from '../features/sections';
-import { userDtoSchema, userShape } from '../features/users';
-import { ticketDtoSchema } from '../features/tickets';
-import { boardDtoSchema, boardShape } from '../features/boards';
+import { sectionDtoSchema, sectionShape } from '../features/sections/index.js';
+import { userDtoSchema, userShape } from '../features/users/index.js';
+import { ticketDtoSchema } from '../features/tickets/index.js';
+import { boardDtoSchema, boardShape } from '../features/boards/index.js';
 
 /* ---------- BOARDS ---------- */
 // board:user-joined-room
@@ -36,8 +36,8 @@ const boardAddedCollaboratorPayloadSchema = z.object({
 });
 type BoardAddedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
 
-// board:deleted-collaborator
-type BoardDeletedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
+// board:removed-collaborator
+type BoardRemovedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
 
 
 /* ---------- Sections ---------- */
@@ -73,7 +73,7 @@ type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
 export type {
     BoardAddedCollaborator,
-    BoardDeletedCollaborator,
+    BoardRemovedCollaborator,
     BoardDeletedPayload,
     BoardEditedPayload,
     SectionCreatedPayload,

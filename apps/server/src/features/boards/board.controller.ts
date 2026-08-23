@@ -166,7 +166,7 @@ const deleteBoardCollaborator = async (
         const collaboratorDto = toUserDto(collaborator)
         const io = getIo();
         const rooms = [`${boardDto.id}`].concat(`user:${collaboratorDto.id}`);
-        io.to(rooms).emit('board:deleted-collaborator', { user: collaboratorDto, board: boardDto });
+        io.to(rooms).emit('board:removed-collaborator', { user: collaboratorDto, board: boardDto });
 
         res.json(boardDto)
     } catch (error) {

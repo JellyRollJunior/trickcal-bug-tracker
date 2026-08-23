@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { sectionShape } from './section.schema';
+import { sectionShape } from './section.schema.js';
 
 /* Request Body */
 const postSectionsRequestBodySchema = z.object({
