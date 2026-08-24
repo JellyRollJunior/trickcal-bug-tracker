@@ -7,6 +7,7 @@ import { passport } from '@/features/auth/passport/passport.js'
 import { authRouter } from '@/features/auth/auth.router.js';
 import { boardRouter } from '@/features/boards/board.router.js';
 import { sectionRouter } from '@/features/sections/section.router.js';
+import { ticketRouter } from '@/features/tickets/ticket.router.js';
 import { errorHandler404, errorHandler } from '@/middleware/errorHandler.js';
 
 const app: Application = express();
@@ -31,6 +32,7 @@ app.use(passport.session());
 app.use('/auth', authRouter);
 app.use('/boards', boardRouter);
 app.use('/sections', sectionRouter);
+app.use('/tickets', ticketRouter);
 
 // error handlers
 app.use(/(.*)/, errorHandler404);

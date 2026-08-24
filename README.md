@@ -63,6 +63,7 @@ $ turbo dev
 | POST   | /boards/:boardId/sections/:sectionId/tickets   | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                            | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
 | DELETE | sections/:sectionId                            | delete section             |                                                                                                | sectionDto                     |                                                                                 |
+| DELETE | tickets/:ticketId                              | delete ticket              |                                                                                                | ticketDto                      |                                                                                 |
 
 | Client to server socket event | Arguments                                           | Use               |
 | ----------------------------- | --------------------------------------------------- | ----------------- |
@@ -122,6 +123,8 @@ $ turbo dev
 
 ## Process
 
+- | DELETE | /ticket/:ticketId |
+
 - path aliasing for shared... shit is ugly
 - refacot shared param + request schemas + socket schemas.
     - lots of overlap
@@ -144,7 +147,6 @@ $ turbo dev
 | Method | URI               |
 | ------ | ----------------- |
 | PATCH  | /ticket/:ticketId |
-| DELETE | /ticket/:ticketId |
 
 | Socket Event    |
 | --------------- |
