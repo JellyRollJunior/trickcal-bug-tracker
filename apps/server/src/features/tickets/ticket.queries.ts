@@ -1,7 +1,10 @@
 import { prisma } from '@/db/prisma.js';
 import { Priority, Section, Severity, Ticket } from '@prisma/client';
-import { ticketInclude, TicketWithParticipants } from '@/features/tickets/ticket.select.js';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
+import {
+    ticketInclude,
+    TicketWithParticipants,
+} from '@/features/tickets/ticket.select.js';
 
 const getTicketWithSection = async ({
     ticketId,
@@ -116,4 +119,24 @@ const moveTicket = async ({
     }
 };
 
-export { getTicketWithSection, getTicketsBySection, createTicket, moveTicket };
+const deleteTicket = async ({ ticketId }: { ticketId: Ticket['id'] }) => {
+    try {
+        const data = await prisma.ticket.delete({
+            where: {
+                id: ticketId,
+            },
+            include: ticketInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to delete ticket');
+    }
+};
+
+export {
+    getTicketWithSection,
+    getTicketsBySection,
+    createTicket,
+    moveTicket,
+    deleteTicket,
+};
