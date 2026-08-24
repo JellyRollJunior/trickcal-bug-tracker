@@ -12,6 +12,7 @@ import {
     SectionDeletedPayload,
     SectionEditedPayload,
     TicketCreatedPayload,
+    TicketDeletedPayload,
     TicketMovedPayload,
     UserJoinedPayload,
     UserLeftPayload,
@@ -34,6 +35,7 @@ type ServerToClientEvents = {
     'section:deleted': (payload: SectionDeletedPayload) => void;
     'ticket:created': (payload: TicketCreatedPayload) => void;
     'ticket:moved': (payload: TicketMovedPayload) => void;
+    'ticket:deleted': (payload: TicketDeletedPayload) => void;
 };
 
 type ClientToServerEvents = {
