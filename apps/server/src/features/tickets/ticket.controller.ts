@@ -54,7 +54,7 @@ const postTickets = async (
 };
 
 const deleteTickets = async (
-    req: Request<{ ticketId: Ticket['id'] }, {}, { boardId: Board['id']; }>,
+    req: Request<{ ticketId: Ticket['id'] }, {}, {}>,
     res: Response,
     next: NextFunction
 ) => {
@@ -62,9 +62,8 @@ const deleteTickets = async (
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
         const { ticketId } = ticketIdParamSchema.parse(req.params);
-        const { boardId } = req.body;
 
-        const deletedTicket = await ticketServices.deleteTicket({ userId, boardId, ticketId });
+        const deletedTicket = await ticketServices.deleteTicket({ userId, ticketId });
 
         // emit event
         const ticketDto = toTicketDto(deletedTicket);
