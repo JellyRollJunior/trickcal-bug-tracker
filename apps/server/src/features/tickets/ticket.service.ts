@@ -1,6 +1,7 @@
 import type { Board, Ticket, User } from '@prisma/client';
 import { generateKeyBetween } from 'fractional-indexing';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
+import { NotFoundError } from '@trickcal-bug-tracker/shared';
 import * as ticketQueries from '@/features/tickets/ticket.queries.js';
 
 const createTicket = async ({
@@ -59,6 +60,7 @@ const deleteTicket = async ({
     ticketId: Ticket['id'];
 }) => {
     const ticket = await ticketQueries.getTicketWithSection({ ticketId: ticketId });
+    if (!ticket) throw new NotFoundError('Ticket not found');
     await assertBoardAccess({ userId, boardId: ticket?.section.boardId ?? '' });
 
     const deletedTicket = await ticketQueries.deleteTicket({ ticketId });
