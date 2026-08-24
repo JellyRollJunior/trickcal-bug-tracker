@@ -51,4 +51,19 @@ const createTicket = async ({
     return newTicket;
 };
 
-export { createTicket };
+const deleteTicket = async ({
+    userId,
+    boardId,
+    ticketId,
+}: {
+    userId: User['id'];
+    boardId: Board['id'];
+    ticketId: Ticket['id'];
+}) => {
+    await assertBoardAccess({ userId, boardId });
+
+    const deletedTicket = await ticketQueries.deleteTicket({ ticketId });
+    return deletedTicket;
+};
+
+export { createTicket, deleteTicket };
