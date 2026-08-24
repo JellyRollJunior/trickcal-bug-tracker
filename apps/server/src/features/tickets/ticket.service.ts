@@ -59,12 +59,14 @@ const deleteTicket = async ({
     userId: User['id'];
     ticketId: Ticket['id'];
 }) => {
-    const ticket = await ticketQueries.getTicketWithSection({ ticketId: ticketId });
+    const ticket = await ticketQueries.getTicketWithSection({
+        ticketId: ticketId,
+    });
     if (!ticket) throw new NotFoundError('Ticket not found');
     await assertBoardAccess({ userId, boardId: ticket?.section.boardId ?? '' });
 
     const deletedTicket = await ticketQueries.deleteTicket({ ticketId });
-    return deletedTicket;
+    return { boardId: ticket.section.boardId, ticket: deletedTicket };
 };
 
 export { createTicket, deleteTicket };

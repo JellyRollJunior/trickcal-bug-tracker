@@ -1,9 +1,13 @@
 import type { Board, Section, Ticket } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { boardIdAndSectionIdParamSchema, ticketIdParamSchema } from '@trickcal-bug-tracker/shared';
-import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
-import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import {
+    boardIdAndSectionIdParamSchema,
+    ticketIdParamSchema,
+    AuthenticationError,
+} from '@trickcal-bug-tracker/shared';
 import { getIo } from '@/sockets/ioInstance.js';
+import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
+import { toUserDto } from '@/features/users/user.mapper.js';
 import * as ticketServices from '@/features/tickets/ticket.service.js';
 
 const postTickets = async (
@@ -59,16 +63,24 @@ const deleteTickets = async (
     next: NextFunction
 ) => {
     try {
-        const userId = req.user?.id;
-        if (!userId) throw new AuthenticationError();
+        if (!req.user) throw new AuthenticationError();
+        const userId = req.user.id;
         const { ticketId } = ticketIdParamSchema.parse(req.params);
 
-        const deletedTicket = await ticketServices.deleteTicket({ userId, ticketId });
+        const { boardId, ticket } = await ticketServices.deleteTicket({
+            userId,
+            ticketId,
+        });
 
         // emit event
-        const ticketDto = toTicketDto(deletedTicket);
+        const ticketDto = toTicketDto(ticket);
+        const io = getIo();
+        io.to(boardId).emit('ticket:deleted', {
+            deletedby: toUserDto(req.user),
+            ticket: ticketDto,
+        });
 
-        res.json(ticketDto)
+        res.json(ticketDto);
     } catch (error) {
         next(error);
     }

@@ -6,8 +6,8 @@ import {
 } from '@trickcal-bug-tracker/shared';
 import { toUserDto } from '@/features/users/user.mapper.js';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
-import * as ticketService from '@/features/tickets/ticket.socket-service.js';
 import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
+import * as ticketService from '@/features/tickets/ticket.socket-service.js';
 
 const moveTicket = async (
     socket: AppSocket,
