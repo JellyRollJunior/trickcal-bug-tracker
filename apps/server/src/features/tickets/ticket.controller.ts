@@ -1,6 +1,6 @@
 import type { Board, Section, Ticket } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
-import { boardIdAndSectionIdParamSchema, boardIdAndTicketIdParamSchema } from '@trickcal-bug-tracker/shared';
+import { boardIdAndSectionIdParamSchema, ticketIdParamSchema } from '@trickcal-bug-tracker/shared';
 import { toTicketDto } from '@/features/tickets/ticket.mapper.js';
 import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { getIo } from '@/sockets/ioInstance.js';
@@ -54,14 +54,15 @@ const postTickets = async (
 };
 
 const deleteTickets = async (
-    req: Request<{ boardId: Board['id']; ticketId: Ticket['id'] }, {}, {}>,
+    req: Request<{ ticketId: Ticket['id'] }, {}, { boardId: Board['id']; }>,
     res: Response,
     next: NextFunction
 ) => {
     try {
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
-        const { boardId, ticketId } = boardIdAndTicketIdParamSchema.parse(req.params);
+        const { ticketId } = ticketIdParamSchema.parse(req.params);
+        const { boardId } = req.body;
 
         const deletedTicket = await ticketServices.deleteTicket({ userId, boardId, ticketId });
 

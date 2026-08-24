@@ -12,4 +12,8 @@ const postTicketsRequestBodySchema = z.object({
     assigneeId: ticketShape.assigneeId,
 });
 
+/* Request Parameters */
+const ticketIdParamSchema = z.object({ ticketId: ticketShape.id });
+
 export { postTicketsRequestBodySchema };
+export { ticketIdParamSchema };

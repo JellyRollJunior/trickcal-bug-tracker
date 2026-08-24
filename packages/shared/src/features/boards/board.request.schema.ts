@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { boardShape } from './board.schema.js';
 import { sectionShape } from '../sections/section.schema.js';
 import { userShape } from '../users/user.schema.js';
-import { ticketShape } from '../tickets/ticket.schema.js';
 
 /* Request Body */
 const postBoardsRequestBodySchema = z.object({
@@ -27,10 +26,6 @@ const boardIdAndSectionIdParamSchema = z.object({
     boardId: boardShape.id,
     sectionId: sectionShape.id,
 });
-const boardIdAndTicketIdParamSchema = z.object({
-    boardId: boardShape.id,
-    ticketId: ticketShape.id,
-})
 
 export {
     postBoardsRequestBodySchema,
@@ -41,5 +36,4 @@ export {
     boardIdParamSchema,
     boardIdAndCollaboratorIdParamSchema,
     boardIdAndSectionIdParamSchema,
-    boardIdAndTicketIdParamSchema,
 };
