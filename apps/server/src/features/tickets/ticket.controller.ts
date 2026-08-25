@@ -1,4 +1,4 @@
-import type { Board, Section, Ticket } from '@prisma/client';
+import type { Board, Prisma, Section, Ticket } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 import {
     boardIdAndSectionIdParamSchema,
@@ -57,6 +57,44 @@ const postTickets = async (
     }
 };
 
+const patchTickets = async (
+    req: Request<
+        { ticketId: Ticket['id'] },
+        {},
+        Pick<
+            Prisma.TicketUpdateInput,
+            | 'issueType'
+            | 'category'
+            | 'priority'
+            | 'severity'
+            | 'reproducibility'
+            | 'summary'
+            | 'description'
+        >
+    >,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        if (!req.user) throw new AuthenticationError();
+        const userId = req.user.id;
+        const { ticketId } = ticketIdParamSchema.parse(req.params);
+        const updates = req.body;
+
+        const { boardId, ticket } = await ticketServices.updateTicket({
+            userId,
+            ticketId,
+            updates,
+        });
+
+        const ticketDto = toTicketDto(ticket);
+
+        res.json(ticketDto);
+    } catch (error) {
+        next(error);
+    }
+};
+
 const deleteTickets = async (
     req: Request<{ ticketId: Ticket['id'] }, {}, {}>,
     res: Response,
@@ -86,4 +124,4 @@ const deleteTickets = async (
     }
 };
 
-export { postTickets, deleteTickets };
+export { postTickets, patchTickets, deleteTickets };
