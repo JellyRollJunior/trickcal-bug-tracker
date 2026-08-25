@@ -62,9 +62,9 @@ const editBoard = async ({
         throw new ValidationError({ payload: ['No edits provided'] });
     }
 
-    const board = await boardQueries.editBoard({
+    const board = await boardQueries.updateBoard({
         boardId,
-        edits: { name, description },
+        updates: { name, description },
     });
     return board;
 };

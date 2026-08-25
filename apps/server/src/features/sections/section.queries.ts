@@ -73,19 +73,19 @@ const createSection = async ({
     }
 };
 
-const editSection = async ({
+const updateSection = async ({
     sectionId,
-    edits,
+    updates,
 }: {
     sectionId: Section['id'];
-    edits: { name?: Section['name'] };
+    updates: { name?: Section['name'] };
 }) => {
     try {
         const data = await prisma.section.update({
             where: {
                 id: sectionId,
             },
-            data: edits,
+            data: updates,
         });
         return data;
     } catch (error) {
@@ -111,6 +111,6 @@ export {
     getSectionById,
     getSectionWithTickets,
     createSection,
-    editSection,
+    updateSection,
     deleteSection
 };

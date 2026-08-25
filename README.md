@@ -59,7 +59,7 @@ $ turbo dev
 | DELETE | /boards/:boardId                               | delete board               |                                                                                                | boardDto                       | must be owner to delete board                                                   |
 | POST   | /boards/:boardId/collaborators                 | add collaborator           | { collaboratorId }                                                                             | boardDto                       | must be owner to add collaborator                                               |
 | DELETE | /boards/:boardId/collaborators/:collaboratorId | delete collaborator        |                                                                                                | boardDto                       | must be owner to delete collaborator                                            |
-| POST   | /boards/:boardId/sections                      | create section             | { name, previousSectionId}                                                                     | sectionDto                     |                                                                                 |
+| POST   | /boards/:boardId/sections                      | create section             | { name, previousSectionId }                                                                     | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets   | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                            | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
 | DELETE | sections/:sectionId                            | delete section             |                                                                                                | sectionDto                     |                                                                                 |
@@ -121,9 +121,13 @@ $ turbo dev
     - Workflow:
         - Develop on local
         - Periodically check everything works on container
+- Prisma update input
+    - Prisma generates a fully-optional "update input" type for every model
+    - Simplifies typing the edit object 
 
 ## Process
 
+- add assignee
 - path aliasing for shared... shit is ugly
 - refacot shared param + request schemas + socket schemas.
     - lots of overlap
@@ -142,6 +146,7 @@ $ turbo dev
     - extract default board settings
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
+
 
 
 | Socket Event    |

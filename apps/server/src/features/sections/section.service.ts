@@ -64,11 +64,11 @@ const editSection = async ({
     if (!section) throw new NotFoundError('Invalid sectionId');
     await assertBoardAccess({ userId, boardId: section.boardId });
 
-    const editedSection = await sectionQueries.editSection({
+    const updatedSection = await sectionQueries.updateSection({
         sectionId,
-        edits: { name },
+        updates: { name },
     });
-    return editedSection;
+    return updatedSection;
 };
 
 const deleteSection = async ({

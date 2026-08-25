@@ -93,12 +93,12 @@ const createTicket = async ({
     }
 };
 
-const editTicket = async ({
+const updateTicket = async ({
     ticketId,
-    edits,
+    updates,
 }: {
     ticketId: Ticket['id'];
-    edits: Pick<
+    updates: Pick<
         Prisma.TicketUpdateInput,
         | 'issueType'
         | 'category'
@@ -114,7 +114,7 @@ const editTicket = async ({
             where: {
                 id: ticketId,
             },
-            data: edits,
+            data: updates,
             include: ticketInclude,
         });
         return data;
@@ -167,7 +167,7 @@ export {
     getTicketWithSection,
     getTicketsBySection,
     createTicket,
-    editTicket,
+    updateTicket,
     deleteTicket,
     moveTicket,
 };

@@ -1,4 +1,4 @@
-import type { Board, User } from '@prisma/client';
+import type { Board, Prisma, User } from '@prisma/client';
 import type {
     BoardWithParticipants,
     BoardWithSections,
@@ -121,19 +121,19 @@ const getBoardWithSectionsAndTicketsById = async ({
     }
 };
 
-const editBoard = async ({
+const updateBoard = async ({
     boardId,
-    edits,
+    updates,
 }: {
     boardId: Board['id'];
-    edits: { name?: Board['name']; description?: Board['description'] };
+    updates: Pick<Prisma.BoardUpdateInput, 'name' | 'description'>;
 }): Promise<BoardWithParticipants> => {
     try {
         const data = await prisma.board.update({
             where: {
                 id: boardId,
             },
-            data: edits,
+            data: updates,
             include: boardInclude,
         });
         return data;
@@ -220,7 +220,7 @@ export {
     getBoardWithSectionsAndTicketsById,
     getBoardById,
     createBoard,
-    editBoard,
+    updateBoard,
     deleteBoard,
     addBoardCollaborator,
     deleteBoardCollaborator,
