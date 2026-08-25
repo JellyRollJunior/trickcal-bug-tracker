@@ -59,10 +59,11 @@ $ turbo dev
 | DELETE | /boards/:boardId                               | delete board               |                                                                                                | boardDto                       | must be owner to delete board                                                   |
 | POST   | /boards/:boardId/collaborators                 | add collaborator           | { collaboratorId }                                                                             | boardDto                       | must be owner to add collaborator                                               |
 | DELETE | /boards/:boardId/collaborators/:collaboratorId | delete collaborator        |                                                                                                | boardDto                       | must be owner to delete collaborator                                            |
-| POST   | /boards/:boardId/sections                      | create section             | { name, previousSectionId }                                                                     | sectionDto                     |                                                                                 |
+| POST   | /boards/:boardId/sections                      | create section             | { name, previousSectionId }                                                                    | sectionDto                     |                                                                                 |
 | POST   | /boards/:boardId/sections/:sectionId/tickets   | create ticket              | { issueType, category, reproducibility, summary, description, priority, severity, assigneeId } | ticketDto                      |                                                                                 |
 | PATCH  | sections/:sectionId                            | edit section               | { name }                                                                                       | sectionDto                     | name: { min: 1, max: 26 }                                                       |
 | DELETE | sections/:sectionId                            | delete section             |                                                                                                | sectionDto                     |                                                                                 |
+| PATCH  | tickets/:ticketId                              | update ticket              | { issueType, category, priority, severity, reproducibility, summary, description}              | ticketDto                      |                                                                                 |
 | DELETE | tickets/:ticketId                              | delete ticket              |                                                                                                | ticketDto                      |                                                                                 |
 
 | Client to server socket event | Arguments                                           | Use               |
@@ -150,11 +151,9 @@ $ turbo dev
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
 
-
-
-| Socket Event    |
-| --------------- |
-| ticket:edited   |
+| Socket Event  |
+| ------------- |
+| ticket:edited |
 
 ## Planned features
 

@@ -71,6 +71,13 @@ const ticketMovedPayloadSchema = z.object({
 });
 type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 
+// ticket:updated
+const ticketUpdatedPayloadSchema = z.object({
+    updatedBy: userDtoSchema,
+    ticket: ticketDtoSchema,
+})
+type TicketUpdatedPayload = z.infer<typeof ticketUpdatedPayloadSchema>;
+
 // ticket:deleted
 const ticketDeletedPayloadSchema = z.object({
     deletedby: userDtoSchema,
@@ -83,12 +90,16 @@ export type {
     BoardRemovedCollaborator,
     BoardDeletedPayload,
     BoardEditedPayload,
+    
     SectionCreatedPayload,
     SectionDeletedPayload,
     SectionEditedPayload,
+    
     TicketCreatedPayload,
+    TicketUpdatedPayload,
     TicketMovedPayload,
     TicketDeletedPayload,
+    
     UserJoinedPayload,
     UserLeftPayload,
 };
@@ -96,10 +107,14 @@ export {
     boardAddedCollaboratorPayloadSchema,
     boardDeletedPayloadSchema,
     boardEditedPayloadSchema,
+    
     sectionCreatedPayloadSchema,
+    
     ticketCreatedPayloadSchema,
     ticketMovedPayloadSchema,
+    ticketUpdatedPayloadSchema,
     ticketDeletedPayloadSchema,
+    
     userJoinedRoomPayloadSchema,
     userLeftRoomPayloadSchema,
 };

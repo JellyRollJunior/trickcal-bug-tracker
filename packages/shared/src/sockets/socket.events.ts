@@ -14,6 +14,7 @@ import {
     TicketCreatedPayload,
     TicketDeletedPayload,
     TicketMovedPayload,
+    TicketUpdatedPayload,
     UserJoinedPayload,
     UserLeftPayload,
 } from './socket.server-client.schema.js';
@@ -34,6 +35,7 @@ type ServerToClientEvents = {
     'section:edited': (payload: SectionEditedPayload) => void;
     'section:deleted': (payload: SectionDeletedPayload) => void;
     'ticket:created': (payload: TicketCreatedPayload) => void;
+    'ticket:updated': (payload: TicketUpdatedPayload) => void;
     'ticket:moved': (payload: TicketMovedPayload) => void;
     'ticket:deleted': (payload: TicketDeletedPayload) => void;
 };
