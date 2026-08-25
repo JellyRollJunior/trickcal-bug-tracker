@@ -1,8 +1,23 @@
-import type { Board, Ticket, User } from '@prisma/client';
+import type { Board, Prisma, Ticket, User } from '@prisma/client';
 import { generateKeyBetween } from 'fractional-indexing';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import { NotFoundError } from '@trickcal-bug-tracker/shared';
 import * as ticketQueries from '@/features/tickets/ticket.queries.js';
+
+const assertBoardAccessWithTicketId = async ({
+    userId,
+    ticketId,
+}: {
+    userId: User['id'];
+    ticketId: Ticket['id'];
+}) => {
+    const ticket = await ticketQueries.getTicketWithSection({
+        ticketId: ticketId,
+    });
+    if (!ticket) throw new NotFoundError('Ticket not found');
+    await assertBoardAccess({ userId, boardId: ticket?.section.boardId ?? '' });
+    return ticket;
+};
 
 const createTicket = async ({
     userId,
@@ -52,6 +67,31 @@ const createTicket = async ({
     return newTicket;
 };
 
+const updateTicket = async ({
+    userId,
+    ticketId,
+    updates,
+}: {
+    userId: User['id'];
+    ticketId: Ticket['id'];
+    updates: Pick<
+        Prisma.TicketUpdateInput,
+        | 'issueType'
+        | 'category'
+        | 'priority'
+        | 'severity'
+        | 'reproducibility'
+        | 'summary'
+        | 'description'
+    >;
+}) => {
+    const ticketWithSection = await assertBoardAccessWithTicketId({ userId, ticketId });
+
+    const updatedTicket = await ticketQueries.updateTicket({ ticketId, updates });
+
+    return { boardId: ticketWithSection.section.boardId, ticket: updatedTicket };
+};
+
 const deleteTicket = async ({
     userId,
     ticketId,
@@ -59,14 +99,10 @@ const deleteTicket = async ({
     userId: User['id'];
     ticketId: Ticket['id'];
 }) => {
-    const ticket = await ticketQueries.getTicketWithSection({
-        ticketId: ticketId,
-    });
-    if (!ticket) throw new NotFoundError('Ticket not found');
-    await assertBoardAccess({ userId, boardId: ticket?.section.boardId ?? '' });
+    const ticketWithSection = await assertBoardAccessWithTicketId({ userId, ticketId });
 
     const deletedTicket = await ticketQueries.deleteTicket({ ticketId });
-    return { boardId: ticket.section.boardId, ticket: deletedTicket };
+    return { boardId: ticketWithSection.section.boardId, ticket: deletedTicket };
 };
 
-export { createTicket, deleteTicket };
+export { createTicket, updateTicket, deleteTicket };
