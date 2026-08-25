@@ -124,8 +124,6 @@ $ turbo dev
 
 ## Process
 
-- | DELETE | /ticket/:ticketId |
-
 - path aliasing for shared... shit is ugly
 - refacot shared param + request schemas + socket schemas.
     - lots of overlap
@@ -145,15 +143,10 @@ $ turbo dev
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
 
-| Method | URI               |
-| ------ | ----------------- |
-| PATCH  | /ticket/:ticketId |
 
 | Socket Event    |
 | --------------- |
 | ticket:edited   |
-| ticket:deleted  |
-| section:deleted |
 
 ## Planned features
 

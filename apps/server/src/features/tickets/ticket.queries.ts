@@ -1,5 +1,5 @@
 import { prisma } from '@/db/prisma.js';
-import { Priority, Section, Severity, Ticket } from '@prisma/client';
+import { Priority, Prisma, Section, Severity, Ticket } from '@prisma/client';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import {
     ticketInclude,
@@ -93,6 +93,50 @@ const createTicket = async ({
     }
 };
 
+const editTicket = async ({
+    ticketId,
+    edits,
+}: {
+    ticketId: Ticket['id'];
+    edits: Pick<
+        Prisma.TicketUpdateInput,
+        | 'issueType'
+        | 'category'
+        | 'priority'
+        | 'severity'
+        | 'reproducibility'
+        | 'summary'
+        | 'description'
+    >;
+}): Promise<TicketWithParticipants> => {
+    try {
+        const data = await prisma.ticket.update({
+            where: {
+                id: ticketId,
+            },
+            data: edits,
+            include: ticketInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to edit ticket');
+    }
+};
+
+const deleteTicket = async ({ ticketId }: { ticketId: Ticket['id'] }) => {
+    try {
+        const data = await prisma.ticket.delete({
+            where: {
+                id: ticketId,
+            },
+            include: ticketInclude,
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to delete ticket');
+    }
+};
+
 const moveTicket = async ({
     ticketId,
     sectionId,
@@ -119,24 +163,11 @@ const moveTicket = async ({
     }
 };
 
-const deleteTicket = async ({ ticketId }: { ticketId: Ticket['id'] }) => {
-    try {
-        const data = await prisma.ticket.delete({
-            where: {
-                id: ticketId,
-            },
-            include: ticketInclude,
-        });
-        return data;
-    } catch (error) {
-        throw new DatabaseError('Unable to delete ticket');
-    }
-};
-
 export {
     getTicketWithSection,
     getTicketsBySection,
     createTicket,
-    moveTicket,
+    editTicket,
     deleteTicket,
+    moveTicket,
 };
