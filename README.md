@@ -141,8 +141,6 @@ $ turbo dev
 
 - define schema limits on board, section, tickets
 - refactor payload + request schemas
-- create ticket
-    - verify section id valid
 - ticket
     - extract to service layer
 - later
@@ -151,10 +149,6 @@ $ turbo dev
     - extract default board settings
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
-
-| Socket Event  |
-| ------------- |
-| ticket:edited |
 
 ## Planned features
 

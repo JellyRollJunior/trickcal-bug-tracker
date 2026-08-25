@@ -3,6 +3,7 @@ import { generateKeyBetween } from 'fractional-indexing';
 import { assertBoardAccess } from '@/features/boards/board.services.js';
 import { NotFoundError } from '@trickcal-bug-tracker/shared';
 import * as ticketQueries from '@/features/tickets/ticket.queries.js';
+import * as boardQueries from '@/features/boards/board.queries.js';
 
 const assertBoardAccessWithTicketId = async ({
     userId,
@@ -45,6 +46,10 @@ const createTicket = async ({
         assigneeId: Ticket['assignedTo'] | null;
     }) => {
     await assertBoardAccess({ userId, boardId });
+    const boardWithSection = await boardQueries.getBoardWithSectionsById({ boardId });
+    if (!boardWithSection?.sections.some((section) => section.id === sectionId)) {
+        throw new NotFoundError('Section corresponding sectionId not found');
+    }
 
     // compute order
     const tickets = await ticketQueries.getTicketsBySection({ sectionId });
