@@ -1,19 +1,29 @@
 import { z } from 'zod';
 import { ticketShape } from './ticket.schema.js';
 
+/* Request body */
 const postTicketsRequestBodySchema = z.object({
     issueType: ticketShape.issueType,
     category: ticketShape.category,
+    priority: ticketShape.priority,
+    severity: ticketShape.severity,
     reproducibility: ticketShape.reproducibility,
     summary: ticketShape.summary,
     description: ticketShape.description,
-    priority: ticketShape.priority,
-    severity: ticketShape.severity,
     assigneeId: ticketShape.assigneeId,
+});
+const patchTicketsRequestBodySchema = z.object({
+    issueType: ticketShape.issueType.optional(),
+    category: ticketShape.category.optional(),
+    priority: ticketShape.priority.optional(),
+    severity: ticketShape.severity.optional(),
+    reproducibility: ticketShape.reproducibility.optional(),
+    summary: ticketShape.summary.optional(),
+    description: ticketShape.description.optional(),
 });
 
 /* Request Parameters */
 const ticketIdParamSchema = z.object({ ticketId: ticketShape.id });
 
-export { postTicketsRequestBodySchema };
+export { postTicketsRequestBodySchema, patchTicketsRequestBodySchema };
 export { ticketIdParamSchema };

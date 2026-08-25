@@ -123,7 +123,10 @@ $ turbo dev
         - Periodically check everything works on container
 - Prisma update input
     - Prisma generates a fully-optional "update input" type for every model
-    - Simplifies typing the edit object 
+    - Simplifies typing the edit object
+- Shared workflow
+    - Shared imports from server
+    - Setup server as source of truth tbh
 
 ## Process
 
