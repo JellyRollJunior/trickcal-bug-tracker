@@ -85,6 +85,7 @@ $ turbo dev
 | 'section:edited'              | { boardId, section }                   | notify section edited               |
 | 'section:deleted'             | { boardId, section }                   | notify section deleted              |
 | 'ticket:created'              | { boardId, ticket }                    | notify ticket created               |
+| 'ticket:updated'              | { updatedBy, ticket }                  | notify ticket updated               |
 | 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved                 |
 | 'ticket:deleted'              | { deletedBy, ticket }                  | notify ticket deleted               |
 

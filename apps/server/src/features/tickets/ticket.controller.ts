@@ -88,6 +88,11 @@ const patchTickets = async (
         });
 
         const ticketDto = toTicketDto(ticket);
+        const io = getIo();
+        io.to(boardId).emit('ticket:updated', {
+            updatedBy: toUserDto(req.user),
+            ticket: ticketDto,
+        });
 
         res.json(ticketDto);
     } catch (error) {
