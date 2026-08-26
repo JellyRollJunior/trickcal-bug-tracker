@@ -5,20 +5,13 @@ import { NotFoundError } from '@trickcal-bug-tracker/shared';
 import * as ticketQueries from '@/features/tickets/ticket.queries.js';
 import * as boardQueries from '@/features/boards/board.queries.js';
 
-const assertBoardAccessWithTicketId = async ({
-    userId,
-    ticketId,
-}: {
-    userId: User['id'];
-    ticketId: Ticket['id'];
-}) => {
+const assertTicket = async ({ ticketId }: { ticketId: Ticket['id']}) => {
     const ticket = await ticketQueries.getTicketWithSection({
         ticketId: ticketId,
     });
     if (!ticket) throw new NotFoundError('Ticket not found');
-    await assertBoardAccess({ userId, boardId: ticket?.section.boardId ?? '' });
     return ticket;
-};
+}
 
 const createTicket = async ({
     userId,
@@ -90,12 +83,32 @@ const updateTicket = async ({
         | 'description'
     >;
 }) => {
-    const ticketWithSection = await assertBoardAccessWithTicketId({ userId, ticketId });
+    const ticketWithSection = await assertTicket({ ticketId });
+    await assertBoardAccess({ userId, boardId: ticketWithSection.section.boardId });
 
     const updatedTicket = await ticketQueries.updateTicket({ ticketId, updates });
 
     return { boardId: ticketWithSection.section.boardId, ticket: updatedTicket };
 };
+
+const updateAssignee = async ({
+    userId,
+    ticketId,
+    assigneeId,
+}: {
+    userId: User['id'];
+    ticketId: Ticket['id'];
+    assigneeId: User['id'];
+}) => {
+    // assert ticket exists, userId board access, assigneeId board access
+    const ticketWithSection = await assertTicket({ ticketId });
+    await assertBoardAccess({ userId, boardId: ticketWithSection.section.boardId });
+    await assertBoardAccess({ userId: assigneeId, boardId: ticketWithSection.section.boardId });
+
+    const updatedTicket = await ticketQueries.updateAssignee({ ticketId, assigneeId });
+
+    return { boardId: ticketWithSection.section.boardId, updatedTicket };
+}
 
 const deleteTicket = async ({
     userId,
@@ -104,10 +117,11 @@ const deleteTicket = async ({
     userId: User['id'];
     ticketId: Ticket['id'];
 }) => {
-    const ticketWithSection = await assertBoardAccessWithTicketId({ userId, ticketId });
+    const ticketWithSection = await assertTicket({ ticketId });
+    await assertBoardAccess({ userId, boardId: ticketWithSection.section.boardId });
 
     const deletedTicket = await ticketQueries.deleteTicket({ ticketId });
     return { boardId: ticketWithSection.section.boardId, ticket: deletedTicket };
 };
 
-export { createTicket, updateTicket, deleteTicket };
+export { createTicket, updateTicket, updateAssignee, deleteTicket };
