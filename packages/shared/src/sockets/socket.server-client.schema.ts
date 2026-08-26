@@ -81,6 +81,7 @@ type TicketUpdatedPayload = z.infer<typeof ticketUpdatedPayloadSchema>;
 // ticket:updated-assignee
 const ticketAssigneeUpdatedPayloadSchema = z.object({
     updatedBy: userDtoSchema,
+    previousAssignee: userDtoSchema.nullable(),
     ticket: ticketDtoSchema,
 })
 type TicketAssigneeUpdatedPayload = z.infer<typeof ticketAssigneeUpdatedPayloadSchema>;

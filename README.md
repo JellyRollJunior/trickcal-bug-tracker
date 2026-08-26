@@ -74,21 +74,22 @@ $ turbo dev
 | 'board:join_room'             | { boardId }, callback                               | join board room   |
 | 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |
 
-| Server to client socket event | Payload                                | Use                                 |
-| ----------------------------- | -------------------------------------- | ----------------------------------- |
-| 'board:user-joined-room'      | { user }                               | notify user joined room             |
-| 'board:user-left-room'        | { userId }                             | notify user left room               |
-| 'board:edited'                | { board }                              | notify board name/desciption edited |
-| 'board:deleted'               | { board }                              | notify board deletion               |
-| 'board:added-collaborator'    | { user, board }                        | notify board collaborator added     |
-| 'board:removed-collaborator'  | { user, board }                        | notify board collaborator deleted   |
-| 'section:created'             | { boardId, section }                   | notify section created              |
-| 'section:edited'              | { boardId, section }                   | notify section edited               |
-| 'section:deleted'             | { boardId, section }                   | notify section deleted              |
-| 'ticket:created'              | { boardId, ticket }                    | notify ticket created               |
-| 'ticket:updated'              | { updatedBy, ticket }                  | notify ticket updated               |
-| 'ticket:moved'                | { movedBy, previousSectionId, ticket } | notify ticket moved                 |
-| 'ticket:deleted'              | { deletedBy, ticket }                  | notify ticket deleted               |
+| Server to client socket event | Payload                                 | Use                                 |
+| ----------------------------- | --------------------------------------- | ----------------------------------- |
+| 'board:user-joined-room'      | { user }                                | notify user joined room             |
+| 'board:user-left-room'        | { userId }                              | notify user left room               |
+| 'board:edited'                | { board }                               | notify board name/desciption edited |
+| 'board:deleted'               | { board }                               | notify board deletion               |
+| 'board:added-collaborator'    | { user, board }                         | notify board collaborator added     |
+| 'board:removed-collaborator'  | { user, board }                         | notify board collaborator deleted   |
+| 'section:created'             | { boardId, section }                    | notify section created              |
+| 'section:edited'              | { boardId, section }                    | notify section edited               |
+| 'section:deleted'             | { boardId, section }                    | notify section deleted              |
+| 'ticket:created'              | { boardId, ticket }                     | notify ticket created               |
+| 'ticket:updated'              | { updatedBy, ticket }                   | notify ticket updated               |
+| 'ticket:updated-assignee'     | { updatedBy, previousAssignee, ticket } | notify ticket assignee updated      |
+| 'ticket:moved'                | { movedBy, previousSectionId, ticket }  | notify ticket moved                 |
+| 'ticket:deleted'              | { deletedBy, ticket }                   | notify ticket deleted               |
 
 ## Learning Outcomes
 
@@ -133,7 +134,6 @@ $ turbo dev
 
 ## Process
 
-- add assignee
 - path aliasing for shared... shit is ugly
 - refacot shared param + request schemas + socket schemas.
     - lots of overlap

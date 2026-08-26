@@ -12,8 +12,6 @@ import {
     ticketInclude,
     TicketWithParticipants,
 } from '@/features/tickets/ticket.select.js';
-import { disconnect } from 'process';
-import { connect } from 'http2';
 
 const getTicketWithSection = async ({
     ticketId,
@@ -26,6 +24,7 @@ const getTicketWithSection = async ({
                 id: ticketId,
             },
             include: {
+                ...ticketInclude,
                 section: true,
             },
         });

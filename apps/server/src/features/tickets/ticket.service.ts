@@ -98,16 +98,22 @@ const updateAssignee = async ({
 }: {
     userId: User['id'];
     ticketId: Ticket['id'];
-    assigneeId: User['id'];
+    assigneeId: User['id'] | null;
 }) => {
     // assert ticket exists, userId board access, assigneeId board access
     const ticketWithSection = await assertTicket({ ticketId });
     await assertBoardAccess({ userId, boardId: ticketWithSection.section.boardId });
-    await assertBoardAccess({ userId: assigneeId, boardId: ticketWithSection.section.boardId });
+    if (assigneeId !== null) { 
+        await assertBoardAccess({ userId: assigneeId, boardId: ticketWithSection.section.boardId });
+    }
 
     const updatedTicket = await ticketQueries.updateAssignee({ ticketId, assigneeId });
 
-    return { boardId: ticketWithSection.section.boardId, updatedTicket };
+    return { 
+        boardId: ticketWithSection.section.boardId, 
+        previousAssignee: ticketWithSection.assignee, 
+        updatedTicket 
+    };
 }
 
 const deleteTicket = async ({

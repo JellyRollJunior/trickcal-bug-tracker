@@ -111,11 +111,17 @@ const putTicketAssignee = async (
         const { ticketId } = ticketIdParamSchema.parse(req.params);
         const { assigneeId } = req.body;
 
-        const { boardId, updatedTicket } = await ticketServices.updateAssignee({ userId, ticketId, assigneeId });
+        const { boardId, previousAssignee, updatedTicket } = await ticketServices.updateAssignee({ userId, ticketId, assigneeId });
 
         const ticketDto = toTicketDto(updatedTicket);
         const io = getIo();
-        io.to(boardId).emit('ticket:updated-assignee', { updatedBy: toUserDto(req.user), ticket: ticketDto });
+        io.to(boardId).emit('ticket:updated-assignee', {
+            updatedBy: toUserDto(req.user),
+            previousAssignee: previousAssignee
+                ? toUserDto(previousAssignee)
+                : null,
+            ticket: ticketDto,
+        });
         
         res.json(ticketDto)
     } catch (error) {
