@@ -21,9 +21,12 @@ const patchTicketsRequestBodySchema = z.object({
     summary: ticketShape.summary.optional(),
     description: ticketShape.description.optional(),
 });
+const putAssigneeRequestBodySchema = z.object({
+    assigneeId: ticketShape.assigneeId.nullable(),
+})
 
 /* Request Parameters */
 const ticketIdParamSchema = z.object({ ticketId: ticketShape.id });
 
-export { postTicketsRequestBodySchema, patchTicketsRequestBodySchema };
+export { postTicketsRequestBodySchema, patchTicketsRequestBodySchema, putAssigneeRequestBodySchema };
 export { ticketIdParamSchema };
