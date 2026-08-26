@@ -1,10 +1,19 @@
 import { prisma } from '@/db/prisma.js';
-import { Priority, Prisma, Section, Severity, Ticket } from '@prisma/client';
+import {
+    Priority,
+    Prisma,
+    Section,
+    Severity,
+    Ticket,
+    User,
+} from '@prisma/client';
 import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import {
     ticketInclude,
     TicketWithParticipants,
 } from '@/features/tickets/ticket.select.js';
+import { disconnect } from 'process';
+import { connect } from 'http2';
 
 const getTicketWithSection = async ({
     ticketId,
@@ -123,6 +132,30 @@ const updateTicket = async ({
     }
 };
 
+const updateAssignee = async ({
+    ticketId,
+    assigneeId,
+}: {
+    ticketId: Ticket['id'];
+    assigneeId: User['id'] | null;
+}) => {
+    try {
+        const data = await prisma.ticket.update({
+            where: {
+                id: ticketId,
+            },
+            data: {
+                assignee: assigneeId
+                    ? { connect: { id: assigneeId } }
+                    : { disconnect: {} },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to update assignee');
+    }
+};
+
 const deleteTicket = async ({ ticketId }: { ticketId: Ticket['id'] }) => {
     try {
         const data = await prisma.ticket.delete({
@@ -168,6 +201,7 @@ export {
     getTicketsBySection,
     createTicket,
     updateTicket,
+    updateAssignee,
     deleteTicket,
     moveTicket,
 };

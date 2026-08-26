@@ -139,12 +139,10 @@ $ turbo dev
 
 ## TODO
 
+- assignedTo -> assigneeId
 - define schema limits on board, section, tickets
 - refactor payload + request schemas
-- ticket
-    - extract to service layer
-- later
-    - set token to proper expire time
+- set token to proper expire time
 - default board
     - extract default board settings
     - generate orders from fractional-indexing
@@ -153,10 +151,7 @@ $ turbo dev
 ## Planned features
 
 - redis cache
-- redis horizontal scaling w/ socket io
-- redis zero downtime updates
 - login attempt rate limit
-- user is editing tracker
 - oauth login in popup?
 
 ## template
