@@ -114,6 +114,8 @@ const putTicketAssignee = async (
         const { boardId, updatedTicket } = await ticketServices.updateAssignee({ userId, ticketId, assigneeId });
 
         const ticketDto = toTicketDto(updatedTicket);
+        const io = getIo();
+        io.to(boardId).emit('ticket:updated-assignee', { updatedBy: toUserDto(req.user), ticket: ticketDto });
         
         res.json(ticketDto)
     } catch (error) {
