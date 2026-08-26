@@ -149,6 +149,7 @@ const updateAssignee = async ({
                     ? { connect: { id: assigneeId } }
                     : { disconnect: {} },
             },
+            include: ticketInclude,
         });
         return data;
     } catch (error) {

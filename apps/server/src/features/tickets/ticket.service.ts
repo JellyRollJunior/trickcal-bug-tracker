@@ -121,7 +121,7 @@ const deleteTicket = async ({
     await assertBoardAccess({ userId, boardId: ticketWithSection.section.boardId });
 
     const deletedTicket = await ticketQueries.deleteTicket({ ticketId });
-    return { boardId: ticketWithSection.section.boardId, ticket: deletedTicket };
+    return { boardId: ticketWithSection.section.boardId, deletedTicket: deletedTicket };
 };
 
 export { createTicket, updateTicket, updateAssignee, deleteTicket };

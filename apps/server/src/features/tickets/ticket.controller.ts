@@ -1,4 +1,4 @@
-import type { Board, Prisma, Section, Ticket } from '@prisma/client';
+import type { Board, Prisma, Section, Ticket, User } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 import {
     boardIdAndSectionIdParamSchema,
@@ -100,6 +100,27 @@ const patchTickets = async (
     }
 };
 
+const putTicketAssignee = async (
+    req: Request<{ ticketId: Ticket['id'] }, {}, { assigneeId: User['id'] }>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        if (!req.user) throw new AuthenticationError();
+        const userId = req.user.id;
+        const { ticketId } = ticketIdParamSchema.parse(req.params);
+        const { assigneeId } = req.body;
+
+        const { boardId, updatedTicket } = await ticketServices.updateAssignee({ userId, ticketId, assigneeId });
+
+        const ticketDto = toTicketDto(updatedTicket);
+        
+        res.json(ticketDto)
+    } catch (error) {
+        next(error);
+    }
+};
+
 const deleteTickets = async (
     req: Request<{ ticketId: Ticket['id'] }, {}, {}>,
     res: Response,
@@ -110,13 +131,13 @@ const deleteTickets = async (
         const userId = req.user.id;
         const { ticketId } = ticketIdParamSchema.parse(req.params);
 
-        const { boardId, ticket } = await ticketServices.deleteTicket({
+        const { boardId, deletedTicket } = await ticketServices.deleteTicket({
             userId,
             ticketId,
         });
 
         // emit event
-        const ticketDto = toTicketDto(ticket);
+        const ticketDto = toTicketDto(deletedTicket);
         const io = getIo();
         io.to(boardId).emit('ticket:deleted', {
             deletedby: toUserDto(req.user),
@@ -129,4 +150,4 @@ const deleteTickets = async (
     }
 };
 
-export { postTickets, patchTickets, deleteTickets };
+export { postTickets, patchTickets, putTicketAssignee, deleteTickets };
