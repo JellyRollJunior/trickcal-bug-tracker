@@ -4,8 +4,23 @@ Typescript React Express monorepo v2
 
 ## Features
 
-- App
-    -
+- Backend
+    - Auth
+        - Github OAuth login, Username/Password login
+        - JsonWebToken auth state
+    - Boards
+        - CRUD operations
+        - Add & Delete board collaborators
+    - Sections
+        - CRUD operations
+    - Tickets
+        - CRUD operations
+        - Add & Delete ticket assignee
+    - Socket Events
+        - Notification of all board/section/ticket operations by server to client socket event
+        - Presnsce tracking (who is currently viewing board)
+        - Move ticket between sections by socket event
+
 - Repository
     - PNPM workspaces monorepo using TurboRepo
     - Repo wide build commands for local development with turborepo
@@ -134,26 +149,18 @@ $ turbo dev
 
 ## Process
 
+- login attempt rate limit
+
 - path aliasing for shared... shit is ugly
-- refacot shared param + request schemas + socket schemas.
-    - lots of overlap
 
 ## TODO
 
 - assignedTo -> assigneeId
-- define schema limits on board, section, tickets
-- refactor payload + request schemas
 - set token to proper expire time
 - default board
     - extract default board settings
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
-
-## Planned features
-
-- redis cache
-- login attempt rate limit
-- oauth login in popup?
 
 ## template
 

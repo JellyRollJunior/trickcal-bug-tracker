@@ -1,5 +1,5 @@
+import type { User } from '@prisma/client';
 import { prisma } from '@/db/prisma.js';
-import { User } from '@prisma/client';
 
 const getUserById = async ({ id }: Pick<User, 'id'>) => {
     try {

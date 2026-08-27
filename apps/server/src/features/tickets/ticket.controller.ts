@@ -148,7 +148,7 @@ const deleteTickets = async (
         const ticketDto = toTicketDto(deletedTicket);
         const io = getIo();
         io.to(boardId).emit('ticket:deleted', {
-            deletedby: toUserDto(req.user),
+            deletedBy: toUserDto(req.user),
             ticket: ticketDto,
         });
 
