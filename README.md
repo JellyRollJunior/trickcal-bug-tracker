@@ -150,7 +150,7 @@ $ turbo dev
 ## Process
 
 - login attempt rate limit
-
+- google oauth login
 - path aliasing for shared... shit is ugly
 
 ## TODO

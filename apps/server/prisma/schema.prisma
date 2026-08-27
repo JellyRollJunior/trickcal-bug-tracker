@@ -12,6 +12,7 @@ model User {
   password String?
   name     String
   githubId String? @unique
+  googleId String? @unique
   role     Role    @default(MEMBER)
 
   boards             Board[]  @relation(name: "owner")

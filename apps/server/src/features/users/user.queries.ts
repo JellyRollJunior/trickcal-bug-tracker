@@ -41,6 +41,20 @@ const getUserByGithubId = async ({ githubId }: Pick<User, 'githubId'>) => {
     }
 };
 
+const getUserByGoogleId = async ({ googleId }: Pick<User, 'googleId'>) => {
+    try {
+        if (!googleId) return null;
+        const data = await prisma.user.findUnique({
+            where: {
+                googleId: googleId,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to fetch user');
+    }
+};
+
 const createUser = async ({
     username,
     password,
@@ -77,10 +91,29 @@ const createGithubUser = async ({
     }
 };
 
+const createGoogleUser = async ({
+    googleId,
+    name,
+}: Pick<User, 'googleId' | 'name'>) => {
+    try {
+        const data = await prisma.user.create({
+            data: {
+                googleId: googleId,
+                name: name,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error('Unable to create user');
+    }
+};
+
 export {
     getUserById,
     getUserByUsername,
     getUserByGithubId,
+    getUserByGoogleId,
     createUser,
     createGithubUser,
+    createGoogleUser,
 };
