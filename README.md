@@ -146,11 +146,18 @@ $ turbo dev
 - Shared workflow
     - Shared imports from server
     - Setup server as source of truth tbh
+- Rate limiting w/ rate-limiter-flexible & redis
 
 ## Process
 
-- login attempt rate limit
-- google oauth login
+- setup redis
+
+- redis login attempt rate limit
+- redis socketIO horizontal scaling (?)
+- redis express session horizontal scaling (for oauth logins)
+
+- google oauth login (TEST IT)
+
 - path aliasing for shared... shit is ugly
 
 ## TODO
@@ -161,6 +168,11 @@ $ turbo dev
     - extract default board settings
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
+
+- compose with redis
+- compose with google env vars & redis vars
+- update env examples
+
 
 ## template
 

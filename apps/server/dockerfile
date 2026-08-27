@@ -35,6 +35,7 @@ COPY --from=build /app/apps/server/prisma/schema.prisma ./apps/server/prisma/sch
 
 # --prod: only install production dependencies
 RUN pnpm install --prod --frozen-lockfile
+# -- crashes with a DATABASE_URL environment variable so set a placeholder one before compose injects it
 ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
 RUN pnpm --filter @trickcal-bug-tracker/server exec prisma generate
 
