@@ -147,6 +147,7 @@ $ turbo dev
     - Shared imports from server
     - Setup server as source of truth tbh
 - Rate limiting w/ rate-limiter-flexible & redis
+    - our setup: only consume points on auth failure
 
 ## Process
 
@@ -172,6 +173,8 @@ $ turbo dev
 - compose with redis
 - compose with google env vars & redis vars
 - update env examples
+
+- document rate limiter redis
 
 
 ## template

@@ -3,9 +3,11 @@ import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { toUserDto } from '@/features/users/user.mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
-import { AuthenticationError } from '@trickcal-bug-tracker/shared';
+import { AuthenticationError, RateLimitError } from '@trickcal-bug-tracker/shared';
 import { signToken } from '@/lib/auth/signToken.js';
 import * as userQueries from '@/features/users/user.queries.js';
+import { loginLimiterByEmail, loginLimiterByIp } from '@/lib/rate-limiting/login.limiter.js';
+import { RateLimiterRes } from 'rate-limiter-flexible';
 
 const postSignup = async (
     req: Request<{}, {}, Pick<User, 'username' | 'password' | 'name'>>,
@@ -29,6 +31,20 @@ const postSignup = async (
 
 /* Authenticate credentials & issue jwt on successful authentication */
 const postLogin = async (req: Request, res: Response, next: NextFunction) => {
+    // Check limiters before auth -> reject if already blocked
+    const { email } = req.body;
+    const ip = req.ip;
+    try {
+        await Promise.all([
+            ip ? loginLimiterByIp.consume(ip, 0) : null,
+            loginLimiterByEmail.consume(email, 0)
+        ]);
+    } catch (rateLimiterRes) {
+        const secs = Math.round((rateLimiterRes as RateLimiterRes).msBeforeNext / 1000) || 1; // NaN on unexpected error (no crash)
+        res.set('Retry-After', String(secs));
+        next(new RateLimitError());
+    }
+
     const authMiddleware = passport.authenticate(
         'local',
         { session: false },
