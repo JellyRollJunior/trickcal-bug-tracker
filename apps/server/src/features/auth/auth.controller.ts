@@ -56,7 +56,6 @@ const getGithubCallback = (
 ) => {
     const authMiddleware = passport.authenticate(
         'github',
-        { failureRedirect: '/' },
         (error: Error, user: Express.User, info: { message?: string }) => {
             // Executed after GithubStrategy
             if (error) return next(error);
@@ -69,4 +68,23 @@ const getGithubCallback = (
     authMiddleware(req, res, next);
 };
 
-export { postSignup, postLogin, getGithubCallback };
+const getGoogleCallback = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const authMiddleware = passport.authenticate(
+        'google',
+        (error: Error, user: Express.User, info: { message?: string }) => {
+            // Executed after GoogleStrategy
+            if (error) return next(error);
+            if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with Google'));
+            
+            const token = signToken(user);
+            res.json({ message: 'Google authentication success', token })
+        }
+    );
+    authMiddleware(req, res, next);
+};
+
+export { postSignup, postLogin, getGithubCallback, getGoogleCallback };

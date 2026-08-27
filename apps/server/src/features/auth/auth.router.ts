@@ -14,5 +14,7 @@ authRouter.post('/signup', validate(signupSchema), authController.postSignup);
 authRouter.post('/login', validate(loginSchema), authController.postLogin);
 authRouter.get('/github', passport.authenticate('github'));
 authRouter.get('/github/callback', authController.getGithubCallback);
+authRouter.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+authRouter.get('/google/callback', authController.getGoogleCallback);
 
 export { authRouter };
