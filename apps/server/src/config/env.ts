@@ -1,8 +1,14 @@
 import 'dotenv/config';
 
 if (!process.env['PORT']) throw new Error('PORT is not set');
-if (!process.env['DATABASE_URL']) throw new Error('DATABASE_URL is not set');
 if (!process.env['TOKEN_SECRET']) throw new Error('TOKEN_SECRET is not set');
+
+// origins
+if (!process.env['SERVER_URI']) throw new Error('SERVER_URI is not set');
+if (!process.env['CLIENT_URI']) throw new Error('CLIENT_URI is not set');
+
+// Postgres
+if (!process.env['DATABASE_URL']) throw new Error('DATABASE_URL is not set');
 
 // Redis
 if (!process.env['REDIS_URL']) throw new Error('REDIS_URL is not set');
@@ -23,9 +29,15 @@ if (!process.env['GOOGLE_CALLBACK_URL']) throw new Error('GOOGLE_CALLBACK_URL is
 
 export const env = {
     port: process.env['PORT'],
-    databaseUrl: process.env['DATABASE_URL'],
     tokenSecret: process.env['TOKEN_SECRET'],
 
+    // origins
+    server_uri: process.env['SERVER_URI'],
+    client_uri: process.env['CLIENT_URI'],
+    
+    // Postgres
+    databaseUrl: process.env['DATABASE_URL'],
+    
     // Redis
     redisUrl: process.env['REDIS_URL'],
 

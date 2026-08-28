@@ -163,6 +163,7 @@ $ turbo dev
 
 - compose with redis
 - .env origin list
+    - .env.docker
 
 ## TODO
 

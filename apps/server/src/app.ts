@@ -3,8 +3,9 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import { env } from '@/config/env.js';
+import { origins } from '@/config/origins.js';
 import { sessionStore } from '@/lib/redis/sessionStore.js';
-import { passport } from '@/features/auth/passport/passport.js'
+import { passport } from '@/features/auth/passport/passport.js';
 import { authRouter } from '@/features/auth/auth.router.js';
 import { boardRouter } from '@/features/boards/board.router.js';
 import { sectionRouter } from '@/features/sections/section.router.js';
@@ -14,19 +15,21 @@ import { errorHandler404, errorHandler } from '@/middleware/errorHandler.js';
 const app: Application = express();
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: origins,
     })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // configure sessions for oauth
-app.use(session({
-    store: sessionStore,
-    secret: env.sessionSecret ?? '',
-    resave: false,
-    saveUninitialized: false
-}));
+app.use(
+    session({
+        store: sessionStore,
+        secret: env.sessionSecret ?? '',
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 

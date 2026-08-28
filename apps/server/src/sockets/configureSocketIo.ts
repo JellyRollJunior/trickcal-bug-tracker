@@ -3,6 +3,7 @@ import type { AppServer } from '@/sockets/types.js';
 import bcrypt from 'bcryptjs';
 import { Server as SocketIoServer } from 'socket.io';
 import { instrument } from '@socket.io/admin-ui';
+import { origins } from '@/config/origins.js';
 import { env } from '@/config/env.js';
 import { setIo } from '@/sockets/ioInstance.js';
 import { createSocketIoRedisAdapter } from '@/lib/redis/socketAdapter.js';
@@ -13,8 +14,7 @@ const configureSocketIo = async (server: Server) => {
     const io: AppServer = new SocketIoServer(server, {
         cors: {
             origin: [
-                'http://localhost:3000',
-                'http://localhost:5173',
+                ...origins,
                 'https://admin.socket.io',
             ],
             credentials: true,
