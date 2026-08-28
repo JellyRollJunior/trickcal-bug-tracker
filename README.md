@@ -146,8 +146,11 @@ $ turbo dev
 - Shared workflow
     - Shared imports from server
     - Setup server as source of truth tbh
-- Rate limiting w/ rate-limiter-flexible & redis
-    - our setup: only consume points on auth failure
+- Setup Redis server w/ docker
+- Rate limiting 
+    - Setup: rate-limiter-flexible & Redis
+    - Only consume points on auth failure
+    - Reset points on auth success
 
 ## Process
 

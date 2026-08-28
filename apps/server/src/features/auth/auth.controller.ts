@@ -6,7 +6,7 @@ import { passport } from '@/features/auth/passport/passport.js';
 import { AuthenticationError, RateLimitError } from '@trickcal-bug-tracker/shared';
 import { signToken } from '@/lib/auth/signToken.js';
 import * as userQueries from '@/features/users/user.queries.js';
-import { loginLimiterByEmail, loginLimiterByIp } from '@/lib/rate-limiting/login.limiter.js';
+import { loginLimiterByUsername, loginLimiterByIp, IP_FALLBACK_KEY } from '@/lib/rate-limiting/login.limiter.js';
 import { RateLimiterRes } from 'rate-limiter-flexible';
 
 const postSignup = async (
@@ -32,17 +32,17 @@ const postSignup = async (
 /* Authenticate credentials & issue jwt on successful authentication */
 const postLogin = async (req: Request, res: Response, next: NextFunction) => {
     // Check limiters before auth -> reject if already blocked
-    const { email } = req.body;
+    const { username } = req.body;
     const ip = req.ip;
     try {
         await Promise.all([
-            ip ? loginLimiterByIp.consume(ip, 0) : null,
-            loginLimiterByEmail.consume(email, 0)
+            loginLimiterByIp.consume(ip ?? IP_FALLBACK_KEY, 0),
+            loginLimiterByUsername.consume(username, 0),
         ]);
     } catch (rateLimiterRes) {
         const secs = Math.round((rateLimiterRes as RateLimiterRes).msBeforeNext / 1000) || 1; // NaN on unexpected error (no crash)
         res.set('Retry-After', String(secs));
-        next(new RateLimitError());
+        return next(new RateLimitError());
     }
 
     const authMiddleware = passport.authenticate(
