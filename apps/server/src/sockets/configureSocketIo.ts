@@ -5,6 +5,7 @@ import { Server as SocketIoServer } from 'socket.io';
 import { instrument } from '@socket.io/admin-ui';
 import { env } from '@/config/env.js';
 import { setIo } from '@/sockets/ioInstance.js';
+import { createSocketIoRedisAdapter } from '@/lib/redis/socketAdapter.js';
 import { registerMiddleware } from '@/sockets/registerMiddleware.js';
 import { registerEventHandlers } from '@/sockets/registerEventHandlers.js';
 
@@ -19,6 +20,11 @@ const configureSocketIo = async (server: Server) => {
             credentials: true,
         },
     });
+
+    // Setup redis adapter
+    const socketIoRedisAdapter = await createSocketIoRedisAdapter();
+    io.adapter(socketIoRedisAdapter);
+
     // Setup admin ui
     instrument(io, {
         auth: {

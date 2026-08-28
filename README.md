@@ -8,7 +8,7 @@ Typescript React Express monorepo v2
     - Auth
         - Github OAuth login, Username/Password login
         - JsonWebToken user state
-        - Rate limiting on IP & username using Redis & rate-limiter-flexible
+        - Rate limiting on IP & username
     - Boards
         - CRUD operations
         - Add & Delete board collaborators
@@ -21,6 +21,7 @@ Typescript React Express monorepo v2
         - Notification of all board/section/ticket operations by server to client socket event
         - Presnsce tracking (who is currently viewing board)
         - Move ticket between sections by socket event
+    - Horizontal Scaling On Sessions & SocketIO
 
 - Repository
     - PNPM workspaces monorepo using TurboRepo
@@ -155,12 +156,13 @@ $ turbo dev
     - Only consume points on auth failure
     - Reset points on auth success
 - Horizontal Scaling
-    - Sessions: redis + connect-redis + express-session
+    - Sessions: redis + [connect-redis](https://github.com/tj/connect-redis) + express-session
+    - SocketIO: redis + [@socketio/redis-adapter](https://socket.io/docs/v4/redis-adapter/)
 
 ## Process
 
-- redis socketIO horizontal scaling (?)
 - compose with redis
+- .env origin list
 
 ## TODO
 
