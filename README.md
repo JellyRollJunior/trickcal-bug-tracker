@@ -132,7 +132,7 @@ $ turbo dev
 - One Prisma query does not necessarily equal One SQL query
 - Prisma sorting -> PSQL uses local collation -> sorting string keys does not work as expect in JS
     - solution: manually edit SQL field to sort as expected (see prisma migration files)
-- Docker + Docker compose
+- Docker & Docker compose
     - Writing dockerfile, docker-compose.yaml, .dockerignore, .env.docker
     - Containerizing PostgreSQL database, Node.js server, Vite ReactJs client
     - Composing above 3 ^
@@ -147,10 +147,11 @@ $ turbo dev
 - Shared workflow
     - Shared imports from server
     - Setup server as source of truth tbh
-- Setup Redis server w/ docker image
+- Setup local Redis instance
     - SSH into redis cli to view keys and values
+    - Tested local installation & redis docker image
 - Rate limiting 
-    - Setup: rate-limiter-flexible & Redis
+    - Using [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) & Redis
     - Only consume points on auth failure
     - Reset points on auth success
 
@@ -158,6 +159,7 @@ $ turbo dev
 
 - redis socketIO horizontal scaling (?)
 - redis express session horizontal scaling (for oauth logins)
+- compose with redis
 
 ## TODO
 
@@ -167,23 +169,3 @@ $ turbo dev
     - extract default board settings
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
-
-- compose with redis
-
-- document rate limiter redis
-
-
-## template
-
-const getBoard = async (
-req: Request<{}, {}, {}>,
-res: Response,
-next: NextFunction
-) => {
-try {
-
-    } catch (error) {
-        next(error)
-    }
-
-};
