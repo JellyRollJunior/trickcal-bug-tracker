@@ -162,8 +162,6 @@ $ turbo dev
 ## Process
 
 - compose with redis
-- .env origin list
-    - .env.docker
 
 ## TODO
 
