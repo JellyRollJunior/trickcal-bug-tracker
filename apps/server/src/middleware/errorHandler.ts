@@ -1,21 +1,22 @@
 import type { Errback, NextFunction, Request, Response } from 'express';
 import { z, ZodError } from 'zod';
 import {
+    AuthenticationError,
+    AuthorizationError,
     BaseError,
     DatabaseError,
     NotFoundError,
+    RateLimitError,
+    toRateLimitErrorDto,
 } from '@trickcal-bug-tracker/shared';
 import { ValidationError } from '@trickcal-bug-tracker/shared';
-import {
-    mapErrorToDto,
-    mapValidationErrorToDto,
-} from '@trickcal-bug-tracker/shared';
+import { toErrorDto, toValidationErrorDto } from '@trickcal-bug-tracker/shared';
 
 const errorHandler404 = (_req: Request, res: Response, _next: NextFunction) => {
     const error404 = new NotFoundError(
         'Invalid route detected. Consult the README for a list of valid routes'
     );
-    const errorDto = mapErrorToDto(error404);
+    const errorDto = toErrorDto(error404);
     res.status(errorDto.status).json(errorDto);
 };
 
@@ -29,20 +30,25 @@ const errorHandler = (
         const validationError = new ValidationError(
             z.flattenError(err).fieldErrors
         );
-        const validationErrorDto = mapValidationErrorToDto(validationError);
+        const validationErrorDto = toValidationErrorDto(validationError);
         res.status(validationErrorDto.status).json(validationErrorDto);
     } else if (err instanceof ValidationError) {
-        const errorDto = mapValidationErrorToDto(err);
+        const errorDto = toValidationErrorDto(err);
+        res.status(errorDto.status).json(errorDto);
+    } else if (err instanceof RateLimitError) {
+        const errorDto = toRateLimitErrorDto(err);
         res.status(errorDto.status).json(errorDto);
     } else if (
         err instanceof BaseError ||
         err instanceof NotFoundError ||
-        err instanceof DatabaseError
+        err instanceof DatabaseError ||
+        err instanceof AuthenticationError ||
+        err instanceof AuthorizationError
     ) {
-        const errorDto = mapErrorToDto(err);
+        const errorDto = toErrorDto(err);
         res.status(errorDto.status).json(errorDto);
     } else {
-        const errorDto = mapErrorToDto(new BaseError());
+        const errorDto = toErrorDto(new BaseError());
         res.status(errorDto.status).json(errorDto);
     }
 };

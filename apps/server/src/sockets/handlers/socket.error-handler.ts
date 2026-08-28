@@ -2,8 +2,8 @@ import z, { ZodError } from 'zod';
 import {
     BaseError,
     DatabaseError,
-    mapErrorToDto,
-    mapValidationErrorToDto,
+    toErrorDto,
+    toValidationErrorDto,
     NotFoundError,
     SocketBaseResponse,
     ValidationError,
@@ -17,17 +17,17 @@ const socketErrorHandler = (
         const validationError = new ValidationError(
             z.flattenError(error).fieldErrors
         );
-        const errorDto = mapValidationErrorToDto(validationError);
+        const errorDto = toValidationErrorDto(validationError);
         callback({ success: false, error: errorDto });
     } else if (error instanceof ValidationError) {
-        const errorDto = mapValidationErrorToDto(error);
+        const errorDto = toValidationErrorDto(error);
         callback({ success: false, error: errorDto });
     } else if (
         error instanceof BaseError ||
         error instanceof NotFoundError ||
         error instanceof DatabaseError
     ) {
-        const errorDto = mapErrorToDto(error);
+        const errorDto = toErrorDto(error);
         callback({ success: false, error: errorDto });
     } else {
         callback({ success: false, error: new BaseError() });

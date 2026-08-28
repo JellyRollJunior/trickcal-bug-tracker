@@ -1,7 +1,8 @@
 import type { BaseError } from './BaseError.js';
+import type { RateLimitError } from './RateLimitError.js';
 import type { ValidationError } from './ValidationError.js';
 
-const mapErrorToDto = (error: BaseError) => {
+const toErrorDto = (error: BaseError) => {
     return {
         status: error.status,
         name: error.name,
@@ -9,13 +10,18 @@ const mapErrorToDto = (error: BaseError) => {
     };
 };
 
-const mapAuthenticationErrorToDto = mapErrorToDto;
-
-const mapValidationErrorToDto = (error: ValidationError) => {
+const toValidationErrorDto = (error: ValidationError) => {
     return {
-        ...mapErrorToDto(error),
+        ...toErrorDto(error),
         validationErrors: error.validationErrors,
     };
 };
 
-export { mapErrorToDto, mapAuthenticationErrorToDto, mapValidationErrorToDto };
+const toRateLimitErrorDto = (error: RateLimitError) => {
+    return {
+        ...toErrorDto(error),
+        timeoutInSeconds: error.timeoutInSeconds,
+    };
+};
+
+export { toErrorDto, toValidationErrorDto, toRateLimitErrorDto };

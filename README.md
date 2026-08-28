@@ -7,7 +7,8 @@ Typescript React Express monorepo v2
 - Backend
     - Auth
         - Github OAuth login, Username/Password login
-        - JsonWebToken auth state
+        - JsonWebToken user state
+        - Rate limiting on IP & username using Redis & rate-limiter-flexible
     - Boards
         - CRUD operations
         - Add & Delete board collaborators
@@ -146,7 +147,8 @@ $ turbo dev
 - Shared workflow
     - Shared imports from server
     - Setup server as source of truth tbh
-- Setup Redis server w/ docker
+- Setup Redis server w/ docker image
+    - SSH into redis cli to view keys and values
 - Rate limiting 
     - Setup: rate-limiter-flexible & Redis
     - Only consume points on auth failure
@@ -154,15 +156,8 @@ $ turbo dev
 
 ## Process
 
-- setup redis
-
-- redis login attempt rate limit
 - redis socketIO horizontal scaling (?)
 - redis express session horizontal scaling (for oauth logins)
-
-- google oauth login (TEST IT)
-
-- path aliasing for shared... shit is ugly
 
 ## TODO
 

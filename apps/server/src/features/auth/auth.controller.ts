@@ -41,8 +41,7 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
         ]);
     } catch (rateLimiterRes) {
         const secs = Math.round((rateLimiterRes as RateLimiterRes).msBeforeNext / 1000) || 1; // NaN on unexpected error (no crash)
-        res.set('Retry-After', String(secs));
-        return next(new RateLimitError());
+        return next(new RateLimitError(secs));
     }
 
     const authMiddleware = passport.authenticate(
