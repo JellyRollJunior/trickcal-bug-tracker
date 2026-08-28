@@ -169,8 +169,6 @@ $ turbo dev
 - empty payload 500 error expected?
 
 - compose with redis
-- compose with google env vars & redis vars
-- update env examples
 
 - document rate limiter redis
 
