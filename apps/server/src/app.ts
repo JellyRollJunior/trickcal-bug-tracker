@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import { env } from '@/config/env.js';
+import { sessionStore } from '@/lib/redis/sessionStore.js';
 import { passport } from '@/features/auth/passport/passport.js'
 import { authRouter } from '@/features/auth/auth.router.js';
 import { boardRouter } from '@/features/boards/board.router.js';
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // configure sessions for oauth
 app.use(session({
+    store: sessionStore,
     secret: env.sessionSecret ?? '',
     resave: false,
     saveUninitialized: false

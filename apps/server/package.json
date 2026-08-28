@@ -38,6 +38,7 @@
     "@socket.io/admin-ui": "^0.5.1",
     "@trickcal-bug-tracker/shared": "workspace:*",
     "bcryptjs": "^3.0.3",
+    "connect-redis": "^10.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

@@ -154,11 +154,12 @@ $ turbo dev
     - Using [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) & Redis
     - Only consume points on auth failure
     - Reset points on auth success
+- Horizontal Scaling
+    - Sessions: redis + connect-redis + express-session
 
 ## Process
 
 - redis socketIO horizontal scaling (?)
-- redis express session horizontal scaling (for oauth logins)
 - compose with redis
 
 ## TODO
