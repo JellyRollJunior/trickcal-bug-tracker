@@ -32,6 +32,9 @@ COPY --from=build /app/packages/shared/package.json ./packages/shared/package.js
 COPY --from=build /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
 COPY --from=build /app/apps/server/prisma.config.ts ./apps/server/prisma.config.ts
 COPY --from=build /app/apps/server/prisma/schema.prisma ./apps/server/prisma/schema.prisma
+COPY --from=build /app/apps/server/prisma/migrations ./apps/server/prisma/migrations
+COPY apps/server/entrypoint.sh ./apps/server/entrypoint.sh
+RUN chmod +x ./apps/server/entrypoint.sh
 
 # --prod: only install production dependencies
 RUN pnpm install --prod --frozen-lockfile

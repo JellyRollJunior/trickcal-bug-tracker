@@ -4,6 +4,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
+    "db:deploy": "prisma migrate deploy",
     "dev": "tsx watch src/server.ts",
     "build": "prisma generate && tsc --build && tsc-alias",
     "test": "vitest --typecheck",
