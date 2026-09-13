@@ -166,8 +166,6 @@ $ turbo dev
 
 ## Process
 
-- compose with redis
-
 ## TODO
 
 - assignedTo -> assigneeId
