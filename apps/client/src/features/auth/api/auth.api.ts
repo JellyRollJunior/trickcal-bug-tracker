@@ -12,11 +12,7 @@ const postLogin = async ({ username, password }: PostLoginParams) => {
     const payload = { username, password };
     const parsedPayload = postLoginRequestBodySchema.parse(payload);
     const response = await makeRequest(path, {
-        mode: 'cors',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        method: 'POST',        
         body: JSON.stringify(parsedPayload),
     });
     const parsedResponse = postLoginResponseSchema.parse(response);
