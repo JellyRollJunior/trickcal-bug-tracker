@@ -159,6 +159,8 @@ $ turbo dev
     - Sessions: redis + [connect-redis](https://github.com/tj/connect-redis) + express-session
     - SocketIO: redis + [@socketio/redis-adapter](https://socket.io/docs/v4/redis-adapter/)
 
+- Background image component w/ fixed positioning
+
 ## Neat Bugs
 - Database Prisma migration desync
     - Developing on local DB and testing on docker container DB instance causes migration drift

@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Footer } from '@/layout/Footer.tsx';
+import { Background } from '@/common/components/Background.tsx';
 
 const AuthLayout = () => {
   return (
@@ -8,6 +9,7 @@ const AuthLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <Background />
     </div>
   );
 };

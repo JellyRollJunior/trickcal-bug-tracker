@@ -1,1 +1,25 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  /* Colors */
+  --color-cheek-blush: #fdd8d7;
+  --color-butter-clothes-yellow: #fee3b1;
+  --color-butter-clothes-yellow-dark: #ffd68b;
+  --color-butter-hair-brown: #e5c0a8;
+  --color-butter-hair-brown-dark: #c9a093;
+  --color-butter-stocking-slate: #9f7e7c;
+  --color-butter-cheek-pink: #fca9a7;
+  --color-butter-skin-white: #fdf0eb;
+
+  --color-kommy-hair-white-dark: #eedbdf;
+  --color-kommy-hair-pink-light: #fdd8d7;
+  --color-kommy-pants-pink-dark: #ffbcbe;
+}
+
+@utility site-bg {
+  background-image: url('../assets/images/background.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: difference;
+}
