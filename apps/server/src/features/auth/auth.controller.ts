@@ -58,7 +58,7 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
             
             // auth successful - sign token
             const token = signToken(userTokenPayload);
-            res.json({ message: 'Authentication success', token });
+            res.json({ token });
         }
     );
     authMiddleware(req, res, next);
