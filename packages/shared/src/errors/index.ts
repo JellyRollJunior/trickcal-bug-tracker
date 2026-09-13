@@ -6,3 +6,4 @@ export * from './NotFoundError.js';
 export * from './ValidationError.js';
 export * from './RateLimitError.js';
 export * from './error.mapper.js';
+export * from './error.schema.js';
