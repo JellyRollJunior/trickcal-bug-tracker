@@ -2,6 +2,7 @@ import type { RouteObject } from 'react-router-dom';
 import { App } from '@/App.tsx';
 import { MainLayout } from '@/layout/MainLayout.tsx';
 import { AuthLayout } from '@/layout/AuthLayout.tsx';
+import { Login } from '@/features/auth/components/Login.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -22,6 +23,7 @@ const routes: RouteObject[] = [
         children: [
           {
             path: 'login',
+            element: <Login />
           },
         ],
       },
