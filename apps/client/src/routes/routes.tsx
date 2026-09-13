@@ -22,7 +22,6 @@ const routes: RouteObject[] = [
         children: [
           {
             path: 'login',
-            element: <h1>This is the login page!</h1>,
           },
         ],
       },
