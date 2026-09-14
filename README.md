@@ -160,6 +160,11 @@ $ turbo dev
     - SocketIO: redis + [@socketio/redis-adapter](https://socket.io/docs/v4/redis-adapter/)
 
 - Background image component w/ fixed positioning
+- React Query (TanStack Query)
+    - Query client setup + defaults, useQuery, useMutation, query/cache invalidation
+- Solidify request pipeline
+    - Hook uses TanStack useQuery to make request using our resource retrieval function -> resource retrieval function calls base api request function
+    - On error, API request function uses resolveError to throw error returned by server -> resolved error is caught by useQuery so we can narrow the error using instanceof & handle
 
 ## Neat Bugs
 
