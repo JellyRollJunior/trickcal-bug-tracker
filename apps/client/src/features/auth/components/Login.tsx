@@ -1,8 +1,10 @@
 import type { SubmitEvent } from 'react';
-import { useLogin } from '@/features/auth/hooks/useLogin.tsx';
 import { useState } from 'react';
+import { useAuth } from '@/context/auth/useAuth.ts';
+import { useLogin } from '@/features/auth/hooks/useLogin.tsx';
 
 const Login = () => {
+  const authContext = useAuth();
   const { mutate: login, isPending } = useLogin();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,9 +15,7 @@ const Login = () => {
       { username, password },
       {
         onSuccess: (data) => {
-          // validate data
-          // get token
-          console.log(data?.token);
+          authContext.setToken(data.token);
         },
         onError: (error) => {
           console.log(error);
