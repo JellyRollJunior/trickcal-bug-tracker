@@ -1,5 +1,6 @@
-import { QueryClient } from '@tanstack/react-query';
-import { AuthenticationError, ValidationError } from '@trickcal-bug-tracker/shared';
+import { QueryClient, QueryCache } from '@tanstack/react-query';
+import { AuthenticationError, BaseError } from '@trickcal-bug-tracker/shared';
+import { router } from '@/routes/router.tsx';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -7,8 +8,8 @@ const queryClient = new QueryClient({
             staleTime: 1000 * 60 * 10, // 10 minutes
             refetchOnWindowFocus: true,
             retry: (failureCount, error) => {
-                if (error instanceof AuthenticationError) return false; // don't retry on 401
-                if (error instanceof ValidationError) return false; // don't retry on 400
+                if (error instanceof BaseError && error.status < 500)
+                    return false; // on known error, don't retry
                 return failureCount < 2; // else, retry once
             },
         },
@@ -16,6 +17,17 @@ const queryClient = new QueryClient({
             retry: 0,
         },
     },
+    queryCache: new QueryCache({
+        onError: (error) => {
+            if (error instanceof AuthenticationError) {
+                // notify user of authentication error
+                const currentPath = router.state.location.pathname;
+                if (currentPath !== '/auth/login') {
+                    router.navigate('/auth/login', { replace: true });
+                }
+            }
+        },
+    }),
 });
 
 export { queryClient };
