@@ -176,9 +176,29 @@ $ turbo dev
     - Instanceof works by checking of our objects prototype is the same instance as the constructors
         - Object.getPrototypeOf(obj) === Constructor.prototype
 
-## Process
+## Current
 
-## TODO
+## Todo list
+
+- auth
+    - login w/ github
+    - login w/ google
+    - signup
+- UI
+    - display boards
+    - display board
+    - select board
+- boards
+    - get boards
+    - get board
+- section
+    - edit section
+- tickets
+    - edit ticket
+    - move ticket
+    - create ticket
+
+## Improvements
 
 - assignedTo -> assigneeId
 - set token to proper expire time

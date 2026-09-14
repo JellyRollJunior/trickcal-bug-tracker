@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { createContext, useState } from 'react';
-
-const TOKEN_KEY = 'token';
+import { clearToken, getToken, setToken as setTokenStorage } from '@/lib/TokenStorage.ts';
 
 type AuthContextValue = {
   token: string | null;
@@ -12,14 +11,14 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setTokenState] = useState<string | null>(() => {
-    return localStorage.getItem(TOKEN_KEY);
+    return getToken();
   });
 
   const setToken = (newToken: string | null) => {
     if (newToken) {
-      localStorage.setItem(TOKEN_KEY, newToken);
+      setTokenStorage(newToken);
     } else {
-      localStorage.removeItem(TOKEN_KEY);
+      clearToken();
     }
     setTokenState(newToken);
   };

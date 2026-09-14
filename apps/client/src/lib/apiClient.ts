@@ -1,15 +1,22 @@
 import { resolveError } from '@/lib/resolveError.ts';
+import { getToken } from '@/lib/TokenStorage.ts';
 
 const BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
+
+const getAuthHeader = (): HeadersInit => {
+    const token = getToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 const makeRequest = async (path: string, options: RequestInit = {}) => {
     const response = await fetch(`${BASE_URL}${path}`, {
         mode: 'cors',
+        ...options,
         headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeader(),
             ...options.headers,
         },
-        ...options,
     });
 
     // validate content type
