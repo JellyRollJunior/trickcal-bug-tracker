@@ -3,12 +3,12 @@ import {
     postLoginRequestBodySchema,
     postLoginResponseSchema,
 } from '@trickcal-bug-tracker/shared';
-import { makeRequest } from '@/lib/apiClient.tsx';
+import { makeRequest } from '@/lib/apiClient.ts';
 
 type PostLoginParams = z.infer<typeof postLoginRequestBodySchema>;
 
 const postLogin = async ({ username, password }: PostLoginParams) => {
-    const path = '/login';
+    const path = '/auth/login';
     const payload = { username, password };
     const parsedPayload = postLoginRequestBodySchema.parse(payload);
     const response = await makeRequest(path, {

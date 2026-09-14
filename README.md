@@ -151,7 +151,7 @@ $ turbo dev
 - Setup local Redis instance
     - SSH into redis cli to view keys and values
     - Tested local installation & redis docker image
-- Rate limiting 
+- Rate limiting
     - Using [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) & Redis
     - Only consume points on auth failure
     - Reset points on auth success
@@ -162,9 +162,14 @@ $ turbo dev
 - Background image component w/ fixed positioning
 
 ## Neat Bugs
+
 - Database Prisma migration desync
     - Developing on local DB and testing on docker container DB instance causes migration drift
     - On docker compose server startup, execute prisma migration deploy to ensure DB sync
+- Instanceof does not work on data received server!
+    - Network serialization (JSON) strips prototype chains
+    - Instanceof works by checking of our objects prototype is the same instance as the constructors
+        - Object.getPrototypeOf(obj) === Constructor.prototype
 
 ## Process
 
