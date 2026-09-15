@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
 import { MainLayout } from '@/layout/MainLayout.tsx';
 import { AuthLayout } from '@/layout/AuthLayout.tsx';
-import { Login } from '@/features/auth/components/Login.tsx';
+import { LoginForm } from '@/features/auth/components/Login/LoginForm.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -24,7 +24,7 @@ const routes: RouteObject[] = [
         children: [
           {
             path: 'login',
-            element: <Login />,
+            element: <LoginForm />,
           },
         ],
       },

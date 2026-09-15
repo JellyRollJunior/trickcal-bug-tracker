@@ -1,33 +1,18 @@
-import type { SubmitEvent } from 'react';
-import { useState } from 'react';
-import { useAuth } from '@/context/auth/useAuth.ts';
-import { useLogin } from '@/features/auth/hooks/useLogin.tsx';
+import { useLoginForm } from '@/features/auth/components/Login/useLoginForm.tsx';
 
-const Login = () => {
-  const authContext = useAuth();
-  const { mutate: login, isPending } = useLogin();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = (event: SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    login(
-      { username, password },
-      {
-        onSuccess: (data) => {
-          authContext.setToken(data.token);
-        },
-        onError: (error) => {
-          console.log(error);
-          // set error
-        },
-      }
-    );
-  };
+const LoginForm = () => {
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    handleSubmit,
+    isPending,
+  } = useLoginForm();
 
   return (
     <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light mt-5 rounded-sm border-2 px-5">
-      <form className="flex flex-col" onSubmit={handleLogin}>
+      <form className="flex flex-col" onSubmit={handleSubmit}>
         <label className="mt-3" htmlFor="username">
           Username
         </label>
@@ -73,4 +58,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export { LoginForm };
