@@ -1,12 +1,13 @@
+import { boardDtoSchema } from '@trickcal-bug-tracker/shared';
 import { makeRequest } from '@/lib/apiClient.ts';
 
-const getBoards = async (token: string) => {
+const getBoards = async () => {
     const path = '/boards';
-    const data = await makeRequest(path, {
+    const response = await makeRequest(path, {
         method: 'GET',
-        headers: { Authorization: `bearer ${token}` },
     });
-    return data;
+    const parsedResponse = boardDtoSchema.array().parse(response);
+    return parsedResponse;
 };
 
 export { getBoards };

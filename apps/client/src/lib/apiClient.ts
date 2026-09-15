@@ -9,14 +9,15 @@ const getAuthHeader = (): HeadersInit => {
 };
 
 const makeRequest = async (path: string, options: RequestInit = {}) => {
+    const { headers, ...optionsWithoutHeaders } = options;
     const response = await fetch(`${BASE_URL}${path}`, {
         mode: 'cors',
-        ...options,
         headers: {
             'Content-Type': 'application/json',
             ...getAuthHeader(),
-            ...options.headers,
+            ...headers,
         },
+        ...optionsWithoutHeaders,
     });
 
     // validate content type
