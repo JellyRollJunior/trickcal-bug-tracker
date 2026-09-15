@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBoards } from '@/features/boards/hooks/useBoards.tsx';
 
@@ -8,8 +9,6 @@ const BoardsDropdown = () => {
 
   return (
     <>
-      <h1 className="text-xl font-bold text-white">hi guys</h1>
-
       <div className="relative">
         <button
           className="border-sand-beige mt-1 rounded-md border-2 bg-white px-3 py-2"
@@ -18,9 +17,7 @@ const BoardsDropdown = () => {
           Select board
         </button>
 
-        <div
-          className={`overflow-hidden transition-all duration-200 ease-out ${isOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}
-        >
+        <div>
           <AnimatePresence>
             {isOpen && isSuccess && (
               <motion.ul
@@ -32,7 +29,12 @@ const BoardsDropdown = () => {
               >
                 {data.map((board) => (
                   <li key={board.id} className="px-3 py-2 hover:bg-gray-100">
-                    {board.name}
+                    <Link
+                      to={`/boards/${board.id}`}
+                      className="block px-3 py-2"
+                    >
+                      {board.name}
+                    </Link>
                   </li>
                 ))}
               </motion.ul>
