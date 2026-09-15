@@ -17,6 +17,9 @@ const routes: RouteObject[] = [
             index: true,
             element: <h1 className="text-3xl">Supiki deruji bazeyo!</h1>,
           },
+          {
+            path: '/boards/:boardId',
+          },
         ],
       },
       {

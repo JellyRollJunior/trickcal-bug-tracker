@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 const BoardsDropdown = () => {
   const { data, isSuccess } = useBoards();
   const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => setIsOpen((prev) => !prev);
 
   return (
     <>
       <div className="w-md">
         <button
-          className="border-sand-beige mt-1 rounded-md w-full border-2 bg-white px-3 py-2"
-          onClick={() => setIsOpen((prev) => !prev)}
+          className="border-sand-beige mt-1 w-full rounded-md border-2 bg-white px-3 py-2"
+          onClick={toggleDropdown}
         >
           Select board
         </button>
@@ -27,7 +28,11 @@ const BoardsDropdown = () => {
               className="border-sand-beige overflow-hidden rounded-b-md border-2 border-t-0 bg-white"
             >
               {data.map((board) => (
-                <li key={board.id} className="px-3 py-2 hover:bg-gray-100">
+                <li
+                  key={board.id}
+                  className="px-3 py-2 hover:bg-gray-100"
+                  onClick={toggleDropdown}
+                >
                   <Link to={`/boards/${board.id}`} className="block px-3 py-2">
                     {board.name}
                   </Link>
