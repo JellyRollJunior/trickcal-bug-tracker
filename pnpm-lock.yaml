@@ -1,97 +1,3 @@
----
-lockfileVersion: '9.0'
-
-importers:
-
-  .:
-    configDependencies: {}
-    packageManagerDependencies:
-      '@pnpm/exe':
-        specifier: 10.30.2
-        version: 10.30.2
-      pnpm:
-        specifier: 10.30.2
-        version: 10.30.2
-
-packages:
-
-  '@pnpm/exe@10.30.2':
-    resolution: {integrity: sha512-frpfh4MVJ2n1UUWSoadSwp27JU4r1LkeNb5FFAxCywUlDVzymExKA1/EKFgRFmZsJn3uHKIeLZrFp+Hb6jMH0A==}
-    hasBin: true
-
-  '@pnpm/linux-arm64@10.30.2':
-    resolution: {integrity: sha512-oDXTsc5jxU7+OXw/T9citTHt1yJj8xf8J0fLy5M3xpwIjOBQsJRrBGCU0cAmPMm+KZ9PQi032cvGX3+KAD5COQ==}
-    cpu: [arm64]
-    os: [linux]
-    hasBin: true
-
-  '@pnpm/linux-x64@10.30.2':
-    resolution: {integrity: sha512-gfq1yQHcgu/p2C1ciRwMW3rzx0FJq5+o6iFDPe8CyfEwA4EOu+QMHYEXmtUHn3kH8wtdsqi/gGnkfZ5pfselCg==}
-    cpu: [x64]
-    os: [linux]
-    hasBin: true
-
-  '@pnpm/macos-arm64@10.30.2':
-    resolution: {integrity: sha512-c7j2rDpe2g4cYQynx02eQUV0Alix3iDj+RUivEzMjthK58aZyNNQyq6jHdhEFqa6RvCizED8hMwJHPfFqBOtkg==}
-    cpu: [arm64]
-    os: [darwin]
-    hasBin: true
-
-  '@pnpm/macos-x64@10.30.2':
-    resolution: {integrity: sha512-htrIYiQx86HFhqfJqcp/EnKG5iCutwW5FXawuIp0PChMGrR6ymzrQPJnBzD6TT1cLG6egU9VMpG2RtnMnjlfpA==}
-    cpu: [x64]
-    os: [darwin]
-    hasBin: true
-
-  '@pnpm/win-arm64@10.30.2':
-    resolution: {integrity: sha512-RcGWeWiXULVxwUrHeaHl/fdPUMv1yc5QgwWkuBpJpmiTyG6QEFKowl4vtwU8Rbk537Ruo1k8e3n1r+GXs+zcbA==}
-    cpu: [arm64]
-    os: [win32]
-    hasBin: true
-
-  '@pnpm/win-x64@10.30.2':
-    resolution: {integrity: sha512-7WOtqO12ka91ijgL3taStU/3O6EEIDid6RuBCg+hsBTiwSUbH6awT6fLjhWCnoNQJUMvnUaegeWEVfOBVNWLQg==}
-    cpu: [x64]
-    os: [win32]
-    hasBin: true
-
-  pnpm@10.30.2:
-    resolution: {integrity: sha512-Ns3HB+e3lAqYjJwez4jQhPhRS1w/CF9TouJEwpIdOyVFvCDdTr4fwkX+7EY7spiuzqemPtH3aAuHfcY3nY0MtA==}
-    engines: {node: '>=18.12'}
-    hasBin: true
-
-snapshots:
-
-  '@pnpm/exe@10.30.2':
-    optionalDependencies:
-      '@pnpm/linux-arm64': 10.30.2
-      '@pnpm/linux-x64': 10.30.2
-      '@pnpm/macos-arm64': 10.30.2
-      '@pnpm/macos-x64': 10.30.2
-      '@pnpm/win-arm64': 10.30.2
-      '@pnpm/win-x64': 10.30.2
-
-  '@pnpm/linux-arm64@10.30.2':
-    optional: true
-
-  '@pnpm/linux-x64@10.30.2':
-    optional: true
-
-  '@pnpm/macos-arm64@10.30.2':
-    optional: true
-
-  '@pnpm/macos-x64@10.30.2':
-    optional: true
-
-  '@pnpm/win-arm64@10.30.2':
-    optional: true
-
-  '@pnpm/win-x64@10.30.2':
-    optional: true
-
-  pnpm@10.30.2: {}
-
----
 lockfileVersion: '9.0'
 
 settings:
@@ -132,6 +38,9 @@ importers:
       '@trickcal-bug-tracker/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      motion:
+        specifier: ^13.3.0
+        version: 13.3.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -2123,6 +2032,17 @@ packages:
     resolution: {integrity: sha512-Nr2P1Yyaj2sy1Qdt/wI3GcByxrUdbSKg5+cGvw8f18hT2SkQt6V72iOjBpk7IO3UkzBsdlGRs2a4z6dLrJprgw==}
     engines: {node: ^14.13.1 || >=16.0.0}
 
+  framer-motion@13.3.0:
+    resolution: {integrity: sha512-nry9figMPgd/7tTy9zzGRsD+kJ9tjZ74sKJ3jFBa7j6DTBIM04T6eBgneFLXCB0151wychIxsiojPlcG4JxeoA==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@2.0.0:
     resolution: {integrity: sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==}
     engines: {node: '>= 0.8'}
@@ -2515,6 +2435,23 @@ packages:
   minimatch@10.2.5:
     resolution: {integrity: sha512-MULkVLfKGYDFYejP07QOurDLLQpcjk7Fw+7jXS2R2czRQzR56yHRveU5NDJEOviH+hETZKSkIk5c+T23GjFUMg==}
     engines: {node: 18 || 20 || >=22}
+
+  motion-dom@13.3.0:
+    resolution: {integrity: sha512-AmAnB6pHdZ1vHGzWzuzteG6Q3j1lHKeX/lbST6jGlgm0cjvLUgaCk1xhOuPMOy5SgovN6wnnUdwFrkcsus7Ftg==}
+
+  motion-utils@13.3.0:
+    resolution: {integrity: sha512-sgSschQp7EseHInIlR7hBbMuvet3RA0bs28KPZAXJcGKGdxHGvh1ogpYDilY3bOMtl73EqPNmp75sAKHYPU5sg==}
+
+  motion@13.3.0:
+    resolution: {integrity: sha512-WHLzq1EQCoJO9S+HSDl9WlJYUpCsSAGYPoI0R4qO9ZScx7uLhpYzpoF8iobYvG248idzkl35pAShfWftEUjsdQ==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
@@ -5080,6 +5017,15 @@ snapshots:
 
   fractional-indexing@4.0.0: {}
 
+  framer-motion@13.3.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+    dependencies:
+      motion-dom: 13.3.0
+      motion-utils: 13.3.0
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+
   fresh@2.0.0: {}
 
   fsevents@2.3.3:
@@ -5429,6 +5375,20 @@ snapshots:
   minimatch@10.2.5:
     dependencies:
       brace-expansion: 5.0.7
+
+  motion-dom@13.3.0:
+    dependencies:
+      motion-utils: 13.3.0
+
+  motion-utils@13.3.0: {}
+
+  motion@13.3.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+    dependencies:
+      framer-motion: 13.3.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
 
   ms@2.0.0: {}
 
@@ -6011,8 +5971,7 @@ snapshots:
     optionalDependencies:
       typescript: 7.0.2
 
-  tslib@2.8.1:
-    optional: true
+  tslib@2.8.1: {}
 
   tsx@4.23.1:
     dependencies:
