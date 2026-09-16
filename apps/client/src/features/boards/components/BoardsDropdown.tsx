@@ -10,7 +10,7 @@ const BoardsDropdown = () => {
 
   return (
     <>
-      <div className="w-md">
+      <div className="w-md self-center">
         <button
           className="border-sand-beige mt-1 w-full rounded-md border-2 bg-white px-3 py-2"
           onClick={toggleDropdown}

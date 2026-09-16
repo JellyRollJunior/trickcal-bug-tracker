@@ -4,8 +4,8 @@ import { BoardsDropdown } from '@/features/boards/components/BoardsDropdown.tsx'
 
 const MainLayout = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center">
-      <header className="w-full pt-4 pb-3 bg-kommy-hair-white-dark/80">
+    <div className="flex min-h-screen w-full flex-col">
+      <header className="bg-kommy-hair-white-dark/80 w-full pt-4 pb-3">
         <h1 className="text-center">Trickcal Bug Tracker</h1>
       </header>
       <BoardsDropdown />
