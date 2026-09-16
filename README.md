@@ -110,6 +110,19 @@ $ turbo dev
 
 ## Learning Outcomes
 
+- Solidify TypeScript Prisma Zod shared workflow
+    - Shared defines: 
+        - Socket events
+        - DTO schema shape
+        - Request body schema for each route
+        - Response schema for each route
+        - Errors
+    - Server: 
+        - Define data shape in prisma schema
+        - Imports DTO, Request, Response schemas to serve data
+    - Client:
+        - Imports Request, Response schemas to validate data & request bodies
+
 - Prisma indexing
     - foreign keys not indexed by default
     - indexing based on actual query patterns, not defensively on every column
@@ -121,9 +134,6 @@ $ turbo dev
         - Create intermediate types w/ Prisma GetPayload
     - Manipulate data, do logic with data, etc.
     - Map BaseWithExtras to dto & send to user - Type name: BaseDto or BaseWithExtrasDto
-- Solidify TypeScript shared workflow
-    - define schema, request body, dtos, socket events, errors in shared
-    - import them in client / server
 - Socket event vs Route
     - Does this need to happen many times per second/minute during normal use?
     - Can the UI reasonably proceed optimistically without waiting for confirmation?
@@ -145,9 +155,6 @@ $ turbo dev
 - Prisma update input
     - Prisma generates a fully-optional "update input" type for every model
     - Simplifies typing the edit object
-- Shared workflow
-    - Shared imports from server
-    - Setup server as source of truth tbh
 - Setup local Redis instance
     - SSH into redis cli to view keys and values
     - Tested local installation & redis docker image
