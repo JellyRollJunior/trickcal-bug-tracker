@@ -1,10 +1,9 @@
 import type {
   BoardDto,
-  SectionWithTicketsDto,
-  TicketDto,
 } from '@trickcal-bug-tracker/shared';
 import { useParams } from 'react-router-dom';
 import { useBoard } from '@/features/boards/hooks/useBoard.tsx';
+import { Section } from '@/features/sections/components/Section.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -24,7 +23,9 @@ const Board = ({ boardId }: BoardProps) => {
       {board && isSuccess && !isPending && (
         <>
           <h2 className="block-primary w-fit px-3 py-2">{board.name}</h2>
-          <h3 className="block-primary w-fit px-3 py-2">{board.description}</h3>
+          <div className="block-primary w-fit px-3 py-2">
+            {board.description}
+          </div>
           <ol className="flex gap-3 overflow-x-auto pb-5">
             {board.sections.map((section) => (
               <Section key={section.id} section={section} />
@@ -33,30 +34,6 @@ const Board = ({ boardId }: BoardProps) => {
         </>
       )}
     </div>
-  );
-};
-
-type SectionProps = { section: SectionWithTicketsDto };
-const Section = ({ section }: SectionProps) => {
-  return (
-    <div className="min-w-40 max-w-80 flex-1">
-      <h3 className="block-primary px-3 py-2">{section.name}</h3>
-      <ol className="mt-1 flex flex-col gap-1">
-        {section.tickets.map((ticket) => (
-          <Ticket key={ticket.id} ticket={ticket} />
-        ))}
-      </ol>
-    </div>
-  );
-};
-
-type TicketProps = { ticket: TicketDto };
-const Ticket = ({ ticket }: TicketProps) => {
-  return (
-    <li className="block-primary px-3 py-2">
-      {ticket.summary}
-      <br />
-    </li>
   );
 };
 
