@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { boardShape } from '../boards/index.js';
 import { ticketDtoSchema } from '../tickets/index.js';
 
 const sectionShape = {
     id: z.uuid(),
-    boardId: boardShape.id,
+    boardId: z.uuid(),
     order: z.string(),
     creationDate: z.iso.datetime(),
     lastUpdate: z.iso.datetime(),

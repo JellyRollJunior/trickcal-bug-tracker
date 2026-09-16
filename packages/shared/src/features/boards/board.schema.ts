@@ -1,11 +1,13 @@
 import { z } from 'zod';
 import { userDtoSchema } from '../users/index.js';
-import { SectionWithTicketsDto } from '../sections/index.js';
+import {
+    sectionWithTicketsDtoSchema,
+} from '../sections/index.js';
 
 const boardShape = {
     id: z.uuid(),
-    name: z.string().min(1).max(100).optional(),
-    description: z.string().max(2000).optional(),
+    name: z.string().min(1).max(100),
+    description: z.string().max(2000),
     creationDate: z.iso.datetime(),
     lastUpdate: z.iso.datetime(),
     owner: userDtoSchema,
@@ -15,9 +17,12 @@ const boardShape = {
 const boardDtoSchema = z.object(boardShape);
 type BoardDto = z.infer<typeof boardDtoSchema>;
 
-type BoardWithSectionsAndTicketsDto = BoardDto & {
-    sections: SectionWithTicketsDto[];
-};
+const boardWithSectionsAndTicketsDtoSchema = boardDtoSchema.extend({
+    sections: sectionWithTicketsDtoSchema.array(),
+});
+type BoardWithSectionsAndTicketsDto = z.infer<
+    typeof boardWithSectionsAndTicketsDtoSchema
+>;
 
 export { BoardDto, BoardWithSectionsAndTicketsDto };
-export { boardShape, boardDtoSchema };
+export { boardShape, boardDtoSchema, boardWithSectionsAndTicketsDtoSchema };
