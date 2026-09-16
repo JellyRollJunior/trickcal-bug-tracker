@@ -20,12 +20,12 @@ const Board = ({ boardId }: BoardProps) => {
   const { data: board, isSuccess, isPending } = useBoard(boardId);
 
   return (
-    <div className='flex flex-col gap-2 mt-3'>
+    <div className="mx-2 mt-3 mb-3 flex flex-col gap-2">
       {board && isSuccess && !isPending && (
         <>
-          <h2 className='block-primary px-3 py-2 w-fit'>{board.name}</h2>
-          <h3 className='block-primary px-3 py-2 w-fit '>{board.description}</h3>
-          <ol className="flex max-w-screen gap-3 pb-5 overflow-x-scroll">
+          <h2 className="block-primary w-fit px-3 py-2">{board.name}</h2>
+          <h3 className="block-primary w-fit px-3 py-2">{board.description}</h3>
+          <ol className="flex max-w-screen gap-3 overflow-x-scroll pb-5">
             {board.sections.map((section) => (
               <Section key={section.id} section={section} />
             ))}
@@ -39,11 +39,9 @@ const Board = ({ boardId }: BoardProps) => {
 type SectionProps = { section: SectionWithTicketsDto };
 const Section = ({ section }: SectionProps) => {
   return (
-    <div className="w-40 shrink-0 ">
-      <h3 className="block-primary py-2 px-3">
-        {section.name}
-      </h3>
-      <ol className="flex flex-col gap-2">
+    <div className="w-40 shrink-0">
+      <h3 className="block-primary px-3 py-2">{section.name}</h3>
+      <ol className="mt-1 flex flex-col gap-1">
         {section.tickets.map((ticket) => (
           <Ticket key={ticket.id} ticket={ticket} />
         ))}
@@ -57,7 +55,7 @@ const Ticket = ({ ticket }: TicketProps) => {
   return (
     <li className="block-primary px-3 py-2">
       {ticket.summary}
-      {ticket.description}
+      <br />
     </li>
   );
 };
