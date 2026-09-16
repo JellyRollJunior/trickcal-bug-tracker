@@ -25,7 +25,7 @@ const Board = ({ boardId }: BoardProps) => {
         <>
           <h2 className="block-primary w-fit px-3 py-2">{board.name}</h2>
           <h3 className="block-primary w-fit px-3 py-2">{board.description}</h3>
-          <ol className="flex max-w-screen gap-3 overflow-x-scroll pb-5">
+          <ol className="flex gap-3 overflow-x-auto pb-5">
             {board.sections.map((section) => (
               <Section key={section.id} section={section} />
             ))}
@@ -39,7 +39,7 @@ const Board = ({ boardId }: BoardProps) => {
 type SectionProps = { section: SectionWithTicketsDto };
 const Section = ({ section }: SectionProps) => {
   return (
-    <div className="w-40 shrink-0">
+    <div className="min-w-40 max-w-80 flex-1">
       <h3 className="block-primary px-3 py-2">{section.name}</h3>
       <ol className="mt-1 flex flex-col gap-1">
         {section.tickets.map((ticket) => (
