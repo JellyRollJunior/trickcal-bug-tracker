@@ -10,7 +10,7 @@ const BoardsDropdown = () => {
 
   return (
     <>
-      <div className="w-md self-center">
+      <div className="relative w-md">
         <button
           className="border-sand-beige mt-1 w-full rounded-md border-2 bg-white px-3 py-2"
           onClick={toggleDropdown}
@@ -25,7 +25,7 @@ const BoardsDropdown = () => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="border-sand-beige overflow-hidden rounded-b-md border-2 border-t-0 bg-white"
+              className="border-sand-beige absolute w-full overflow-hidden rounded-b-md border-2 border-t-0 bg-white"
             >
               {data.map((board) => (
                 <li
