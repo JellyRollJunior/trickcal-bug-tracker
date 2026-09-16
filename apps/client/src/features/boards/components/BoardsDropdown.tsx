@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBoards } from '@/features/boards/hooks/useBoards.tsx';
-import { Link } from 'react-router-dom';
 
 const BoardsDropdown = () => {
-  const { data, isSuccess } = useBoards();
+  const { data, isSuccess, isPending } = useBoards();
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
@@ -19,7 +19,7 @@ const BoardsDropdown = () => {
         </button>
 
         <AnimatePresence>
-          {isOpen && isSuccess && (
+          {isOpen && isSuccess && !isPending && (
             <motion.ul
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
