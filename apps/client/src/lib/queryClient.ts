@@ -8,8 +8,9 @@ const queryClient = new QueryClient({
             staleTime: 1000 * 60 * 10, // 10 minutes
             refetchOnWindowFocus: true,
             retry: (failureCount, error) => {
-                if (error instanceof BaseError && error.status < 500)
+                if (error instanceof BaseError && error.status < 500) {
                     return false; // on known error, don't retry
+                }
                 return failureCount < 2; // else, retry once
             },
         },

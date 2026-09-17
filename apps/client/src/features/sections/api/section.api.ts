@@ -4,7 +4,7 @@ import {
     type BoardDto,
     type SectionDto,
 } from '@trickcal-bug-tracker/shared';
-import { makeRequest } from '@/lib/apiClient.ts';
+import { makeRequest, safeParse } from '@/lib/apiClient.ts';
 
 const postSections = async ({
     boardId,
@@ -16,13 +16,13 @@ const postSections = async ({
     previousSectionId: SectionDto['id'];
 }) => {
     const path = `/boards/${boardId}/sections`;
-    const body = { name, previousSectionId };
-    const parsedBody = postSectionsRequestBodySchema.parse(body);
+    const payload = { name, previousSectionId };
+    const parsedBody = safeParse(postSectionsRequestBodySchema, payload);
     const response = await makeRequest(path, {
         method: 'POST',
         body: JSON.stringify(parsedBody),
     });
-    const parsedResponse = postSectionsResponseSchema.parse(response);
+    const parsedResponse = safeParse(postSectionsResponseSchema, response);
     return parsedResponse;
 };
 

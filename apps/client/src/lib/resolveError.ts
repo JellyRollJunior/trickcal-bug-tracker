@@ -1,8 +1,6 @@
 import {
     knownErrorSchema,
     baseErrorSchema,
-} from '@trickcal-bug-tracker/shared';
-import {
     BaseError,
     AuthenticationError,
     AuthorizationError,

@@ -25,7 +25,6 @@ const useBoardPage = (boardId: BoardDto['id']) => {
       {
         onError: (error) => {
           console.log(error);
-          // toast error
         },
       }
     );
