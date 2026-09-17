@@ -4,7 +4,7 @@ import { App } from '@/App.tsx';
 import { MainLayout } from '@/layout/MainLayout.tsx';
 import { AuthLayout } from '@/layout/AuthLayout.tsx';
 import { LoginForm } from '@/features/auth/components/Login/LoginForm.tsx';
-import { Board } from '@/features/boards/components/Board.tsx';
+import { Board } from '@/features/boards/components/Board/Board.tsx';
 
 const routes: RouteObject[] = [
   {
