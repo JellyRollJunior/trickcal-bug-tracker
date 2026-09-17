@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Section } from '@/features/sections/components/Section.tsx';
 import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.tsx';
+import { Modal } from '@/common/components/Modal.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -44,6 +45,10 @@ const Board = ({ boardId }: BoardProps) => {
     }
   }, [isCreateSectionOpen]);
 
+  const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
+  const openCreateTicket = () => setIsCreateTicketOpen(true);
+  const closeCreateTicket = () => setIsCreateTicketOpen(false);
+
   return (
     <div className="mx-2 mt-3 mb-3 flex flex-col gap-2">
       {board && isSuccessGetBoard && !isPendingGetBoard && (
@@ -56,7 +61,11 @@ const Board = ({ boardId }: BoardProps) => {
           {/* Section List */}
           <ol className="flex gap-3 overflow-x-auto pb-5">
             {board.sections.map((section) => (
-              <Section key={section.id} section={section} />
+              <Section
+                openCreateTicketModal={openCreateTicket}
+                key={section.id}
+                section={section}
+              />
             ))}
 
             {/* Create Section */}
@@ -109,6 +118,15 @@ const Board = ({ boardId }: BoardProps) => {
           </ol>
         </>
       )}
+
+      {/* Create Ticket */}
+      <Modal
+        open={isCreateTicketOpen}
+        closeModal={closeCreateTicket}
+        title="test"
+      >
+        <div>hi guys</div>
+      </Modal>
     </div>
   );
 };
