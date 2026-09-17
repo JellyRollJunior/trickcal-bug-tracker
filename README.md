@@ -191,6 +191,7 @@ board
 
 ## Todo list
 
+- optimistic updates with tanstack for ticket move
 backend
 - get /users 
 

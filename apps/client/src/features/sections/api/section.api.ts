@@ -1,5 +1,10 @@
-import { makeRequest } from '@/lib/apiClient';
-import { postSectionsRequestBodySchema, type BoardDto, type SectionDto } from '@trickcal-bug-tracker/shared';
+import {
+    postSectionsRequestBodySchema,
+    postSectionsResponseSchema,
+    type BoardDto,
+    type SectionDto,
+} from '@trickcal-bug-tracker/shared';
+import { makeRequest } from '@/lib/apiClient.ts';
 
 const postSections = async ({
     boardId,
@@ -17,7 +22,8 @@ const postSections = async ({
         method: 'POST',
         body: JSON.stringify(parsedBody),
     });
-    return response;
+    const parsedResponse = postSectionsResponseSchema.parse(response);
+    return parsedResponse;
 };
 
-export { postSections }
+export { postSections };
