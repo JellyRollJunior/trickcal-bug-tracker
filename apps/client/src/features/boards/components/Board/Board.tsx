@@ -62,7 +62,7 @@ const Board = ({ boardId }: BoardProps) => {
             {/* Create Section */}
             {!isCreateSectionOpen && (
               <button
-                className="block-primary flex h-fit min-w-40 flex-1 justify-between px-3 py-2 disabled:bg-gray-300"
+                className="block-primary flex h-fit flex-1 justify-between px-3 py-2 text-nowrap disabled:bg-gray-300"
                 disabled={isPendingCreateSection}
                 onClick={openCreateSection}
               >
@@ -72,7 +72,7 @@ const Board = ({ boardId }: BoardProps) => {
             {isCreateSectionOpen && (
               <form
                 ref={createSectionRef}
-                className="block-primary h-fit w-fit min-w-50 px-3 py-2"
+                className="block-primary h-fit w-fit px-3 py-2"
                 onSubmit={(event) => {
                   handleCreateSection(event);
                   closeCreateSection();
@@ -82,10 +82,11 @@ const Board = ({ boardId }: BoardProps) => {
                   className="block-primary w-full py-1 pr-1 pl-2"
                   type="text"
                   placeholder="Section name"
-                  min={1}
-                  max={26}
+                  minLength={1}
+                  maxLength={26}
                   value={sectionName}
                   onChange={(event) => setSectionName(event?.target.value)}
+                  required
                 />
                 <div className="mt-2 flex justify-start gap-1">
                   <button
