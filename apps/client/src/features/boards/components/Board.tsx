@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useBoard } from '@/features/boards/hooks/useBoard.tsx';
 import { useCreateSection } from '@/features/sections/hooks/useCreateSection.tsx';
 import { Section } from '@/features/sections/components/Section.tsx';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -26,6 +26,18 @@ const Board = ({ boardId }: BoardProps) => {
   const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
   const openCreateSection = () => setIsCreateSectionOpen(true);
   const closeCreateSection = () => setIsCreateSectionOpen(false);
+
+  const createSectionRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (isCreateSectionOpen) {
+      createSectionRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'end',
+        block: 'nearest',
+      });
+    }
+  }, [isCreateSectionOpen]);
 
   return (
     <div className="mx-2 mt-3 mb-3 flex flex-col gap-2">
@@ -53,7 +65,7 @@ const Board = ({ boardId }: BoardProps) => {
               </button>
             )}
             {isCreateSectionOpen && (
-              <form className="block-primary h-fit w-fit min-w-50 px-3 py-2">
+              <form ref={createSectionRef} className="block-primary h-fit w-fit min-w-50 px-3 py-2">
                 <input
                   className="block-primary w-full py-1 pr-1 pl-2"
                   type="text"
