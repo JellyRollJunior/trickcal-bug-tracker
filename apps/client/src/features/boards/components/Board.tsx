@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useBoard } from '@/features/boards/hooks/useBoard.tsx';
 import { useCreateSection } from '@/features/sections/hooks/useCreateSection.tsx';
 import { Section } from '@/features/sections/components/Section.tsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -21,11 +21,34 @@ const Board = ({ boardId }: BoardProps) => {
     isSuccess: isSuccessGetBoard,
     isPending: isPendingGetBoard,
   } = useBoard(boardId);
-  const { isPending: isPendingCreateSection } = useCreateSection(boardId);
+  const { mutate: createSection, isPending: isPendingCreateSection } =
+    useCreateSection(boardId);
+  const [sectionName, setSectionName] = useState('');
+
+  const handleCreateSection = (event: SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const lastSectionOrderId = board?.sections.at(-1)?.id;
+    createSection(
+      {
+        boardId,
+        name: sectionName,
+        previousSectionId: lastSectionOrderId ?? '',
+      },
+      {
+        onError: (error) => {
+          console.log(error);
+          // toast error
+        },
+      }
+    );
+  };
 
   const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
   const openCreateSection = () => setIsCreateSectionOpen(true);
-  const closeCreateSection = () => setIsCreateSectionOpen(false);
+  const closeCreateSection = () => {
+    setIsCreateSectionOpen(false);
+    setSectionName('');
+  };
 
   const createSectionRef = useRef<HTMLFormElement>(null);
 
@@ -65,11 +88,22 @@ const Board = ({ boardId }: BoardProps) => {
               </button>
             )}
             {isCreateSectionOpen && (
-              <form ref={createSectionRef} className="block-primary h-fit w-fit min-w-50 px-3 py-2">
+              <form
+                ref={createSectionRef}
+                className="block-primary h-fit w-fit min-w-50 px-3 py-2"
+                onSubmit={(event) => {
+                  handleCreateSection(event);
+                  closeCreateSection();
+                }}
+              >
                 <input
                   className="block-primary w-full py-1 pr-1 pl-2"
                   type="text"
                   placeholder="Section name"
+                  min={1}
+                  max={26}
+                  value={sectionName}
+                  onChange={(event) => setSectionName(event?.target.value)}
                 />
                 <div className="mt-2 flex justify-start gap-1">
                   <button

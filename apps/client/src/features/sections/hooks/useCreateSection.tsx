@@ -1,12 +1,16 @@
 import type { BoardDto } from '@trickcal-bug-tracker/shared';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postSections } from '@/features/sections/api/section.api.ts';
 
 const useCreateSection = (boardId: BoardDto['id']) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['boards', boardId],
     mutationFn: postSections,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
+    },
   });
 };
 
-export { useCreateSection }
+export { useCreateSection };
