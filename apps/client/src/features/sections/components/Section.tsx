@@ -1,7 +1,5 @@
-import type {
-  SectionWithTicketsDto,
-  TicketDto,
-} from '@trickcal-bug-tracker/shared';
+import type { SectionWithTicketsDto } from '@trickcal-bug-tracker/shared';
+import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 
 type SectionProps = { section: SectionWithTicketsDto };
 const Section = ({ section }: SectionProps) => {
@@ -17,16 +15,6 @@ const Section = ({ section }: SectionProps) => {
         ))}
       </ol>
     </div>
-  );
-};
-
-type TicketProps = { ticket: TicketDto };
-const Ticket = ({ ticket }: TicketProps) => {
-  return (
-    <li className="block-primary px-3 py-2" draggable>
-      {ticket.summary}
-      <br />
-    </li>
   );
 };
 
