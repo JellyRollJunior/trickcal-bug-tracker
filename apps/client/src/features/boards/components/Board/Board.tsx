@@ -49,6 +49,8 @@ const Board = ({ boardId }: BoardProps) => {
   const openCreateTicket = () => setIsCreateTicketOpen(true);
   const closeCreateTicket = () => setIsCreateTicketOpen(false);
 
+  const allCollaborators = board ? [board.owner, ...board.collaborators] : [];
+
   return (
     <div className="mx-2 mt-3 mb-3 flex flex-col gap-2">
       {board && isSuccessGetBoard && !isPendingGetBoard && (
@@ -71,7 +73,7 @@ const Board = ({ boardId }: BoardProps) => {
             {/* Create Section */}
             {!isCreateSectionOpen && (
               <button
-                className="block-primary flex h-fit flex-1 justify-between px-3 py-2 text-nowrap disabled:bg-gray-300"
+                className="block-primary flex h-fit flex-1 justify-between py-2 pr-4 pl-3 text-nowrap disabled:bg-gray-300"
                 disabled={isPendingCreateSection}
                 onClick={openCreateSection}
               >
@@ -123,6 +125,7 @@ const Board = ({ boardId }: BoardProps) => {
       <CreateTicketModal
         open={isCreateTicketOpen}
         closeModal={closeCreateTicket}
+        collaborators={allCollaborators}
       />
     </div>
   );
