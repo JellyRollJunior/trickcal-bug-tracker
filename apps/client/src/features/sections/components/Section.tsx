@@ -7,8 +7,8 @@ type SectionProps = {
 };
 const Section = ({ section, openCreateTicketModal }: SectionProps) => {
   return (
-    <div className="max-w-80 min-w-40 flex-1">
-      <div className="block-primary flex justify-between px-3 py-2">
+    <div className="max-w-80 min-w-45 flex-1">
+      <div className="block-primary flex justify-between gap-1 px-3 py-2">
         <h3>{section.name}</h3>
         <button
           className="rounded-full px-1 hover:bg-gray-200"

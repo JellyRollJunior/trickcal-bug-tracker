@@ -190,7 +190,9 @@ $ turbo dev
 
 ## Current
 
-board
+- extract section create
+- extract ticket create modal
+
 
 ## Todo list
 

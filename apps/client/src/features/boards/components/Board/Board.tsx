@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Section } from '@/features/sections/components/Section.tsx';
 import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.tsx';
-import { Modal } from '@/common/components/Modal.tsx';
+import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -120,13 +120,10 @@ const Board = ({ boardId }: BoardProps) => {
       )}
 
       {/* Create Ticket */}
-      <Modal
+      <CreateTicketModal
         open={isCreateTicketOpen}
         closeModal={closeCreateTicket}
-        title="test"
-      >
-        <div>hi guys</div>
-      </Modal>
+      />
     </div>
   );
 };
