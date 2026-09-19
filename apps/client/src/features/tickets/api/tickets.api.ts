@@ -1,5 +1,6 @@
 import {
     postTicketsRequestBodySchema,
+    postTicketsResponseSchema,
     type BoardDto,
     type SectionDto,
 } from '@trickcal-bug-tracker/shared';
@@ -23,7 +24,8 @@ const postTicket = async ({
         method: 'POST',
         body: JSON.stringify(parsedPayload),
     });
-    return response;
+    const parsedResponse = safeParse(postTicketsResponseSchema, response);
+    return parsedResponse;
 };
 
 export { postTicket };
