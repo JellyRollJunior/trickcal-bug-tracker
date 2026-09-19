@@ -19,8 +19,10 @@ const useBoardPage = (boardId: BoardDto['id']) => {
     createSection(
       {
         boardId,
-        name: sectionName,
-        previousSectionId: lastSectionOrderId ?? '',
+        data: {
+          name: sectionName,
+          previousSectionId: lastSectionOrderId ?? '',
+        },
       },
       {
         onError: (error) => {

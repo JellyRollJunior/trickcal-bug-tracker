@@ -19,10 +19,10 @@ const postTicket = async ({
     data: PostTicketRequestBody;
 }) => {
     const path = `/boards/${boardId}/sections/${sectionId}/tickets`;
-    const parsedPayload = safeParse(postTicketsRequestBodySchema, data);
+    const parsedBody = safeParse(postTicketsRequestBodySchema, data);
     const response = await makeRequest(path, {
         method: 'POST',
-        body: JSON.stringify(parsedPayload),
+        body: JSON.stringify(parsedBody),
     });
     const parsedResponse = safeParse(postTicketsResponseSchema, response);
     return parsedResponse;

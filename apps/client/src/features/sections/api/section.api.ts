@@ -2,22 +2,21 @@ import {
     postSectionsRequestBodySchema,
     postSectionsResponseSchema,
     type BoardDto,
-    type SectionDto,
 } from '@trickcal-bug-tracker/shared';
+import z from 'zod';
 import { makeRequest, safeParse } from '@/lib/apiClient.ts';
+
+type PostSectionRequestBody = z.infer<typeof postSectionsRequestBodySchema>;
 
 const postSections = async ({
     boardId,
-    name,
-    previousSectionId,
+    data,
 }: {
     boardId: BoardDto['id'];
-    name: SectionDto['name'];
-    previousSectionId: SectionDto['id'];
+    data: PostSectionRequestBody;
 }) => {
     const path = `/boards/${boardId}/sections`;
-    const payload = { name, previousSectionId };
-    const parsedBody = safeParse(postSectionsRequestBodySchema, payload);
+    const parsedBody = safeParse(postSectionsRequestBodySchema, data);
     const response = await makeRequest(path, {
         method: 'POST',
         body: JSON.stringify(parsedBody),
