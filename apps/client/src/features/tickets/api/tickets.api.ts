@@ -9,7 +9,7 @@ import { makeRequest, safeParse } from '@/lib/apiClient.ts';
 
 type PostTicketRequestBody = z.infer<typeof postTicketsRequestBodySchema>;
 
-const postTicket = async ({
+const postTickets = async ({
     boardId,
     sectionId,
     data,
@@ -28,4 +28,4 @@ const postTicket = async ({
     return parsedResponse;
 };
 
-export { postTicket };
+export { postTickets };
