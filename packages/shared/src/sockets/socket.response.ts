@@ -11,7 +11,7 @@ interface SocketFailureResponse {
 }
 
 type SocketBaseResponse = SocketSucessResponse | SocketFailureResponse;
-type SocketJoinRoomResponse = { success: true, viewers: UserDto[] } | SocketBaseResponse
+type SocketJoinRoomResponse = { success: true, viewers: UserDto[] } | SocketBaseResponse;
 
 export { SocketSucessResponse, SocketFailureResponse };
 export { SocketBaseResponse, SocketJoinRoomResponse}

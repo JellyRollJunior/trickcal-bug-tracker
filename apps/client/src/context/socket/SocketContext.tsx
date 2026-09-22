@@ -31,6 +31,7 @@ const SocketProvider = ({ children }: { children: ReactNode }) => {
 
     newSocket.on('connect', () => setIsConnected(true));
     newSocket.on('disconnect', () => setIsConnected(false));
+    newSocket.on('connect_error', (err) => console.error('Socket connect error:', err.message));
 
     setSocket(newSocket);
 

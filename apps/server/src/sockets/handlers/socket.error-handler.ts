@@ -1,10 +1,8 @@
 import z, { ZodError } from 'zod';
 import {
     BaseError,
-    DatabaseError,
     toErrorDto,
     toValidationErrorDto,
-    NotFoundError,
     SocketBaseResponse,
     ValidationError,
 } from '@trickcal-bug-tracker/shared';
@@ -23,9 +21,7 @@ const socketErrorHandler = (
         const errorDto = toValidationErrorDto(error);
         callback({ success: false, error: errorDto });
     } else if (
-        error instanceof BaseError ||
-        error instanceof NotFoundError ||
-        error instanceof DatabaseError
+        error instanceof BaseError 
     ) {
         const errorDto = toErrorDto(error);
         callback({ success: false, error: errorDto });

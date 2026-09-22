@@ -86,12 +86,12 @@ $ turbo dev
 | PUT    | tickets/:ticketId/assignee                     | update ticket assignee     | { assigneeId }                                                                                 | ticketDto                      | assignee must have board access                                                 |
 | DELETE | tickets/:ticketId                              | delete ticket              |                                                                                                | ticketDto                      |                                                                                 |
 
-| Client to server socket event | Arguments                                           | Use               |
-| ----------------------------- | --------------------------------------------------- | ----------------- |
-| 'connection'                  | token                                               | connect socket    |
-| 'disconnect'                  |                                                     | disconnect socket |
-| 'board:join_room'             | { boardId }, callback                               | join board room   |
-| 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |
+| Client to server socket event | Arguments                                           | Use               | Callback args                            |
+| ----------------------------- | --------------------------------------------------- | ----------------- | ---------------------------------------- |
+| 'connection'                  | token                                               | connect socket    |                                          |
+| 'disconnect'                  |                                                     | disconnect socket |                                          |
+| 'board:join_room'             | { boardId }, callback                               | join board room   | { success: boolean, viewers: userDto[] } |
+| 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |                                          |
 
 | Server to client socket event | Payload                                 | Use                                 |
 | ----------------------------- | --------------------------------------- | ----------------------------------- |
@@ -198,6 +198,7 @@ $ turbo dev
   backend
 
 - get /users
+- get /current
 - dont crash on unable to fetch users
 
 - auth
@@ -220,12 +221,10 @@ $ turbo dev
 - socket
     - move ticket
     - presence tracking
-    
     - board edited
     - board deleted
     - collab added
     - collab deleted
-    
     - section edited
     - section deleted
     - section created
@@ -235,8 +234,6 @@ $ turbo dev
     - ticket deleted
     - ticket moved
     - ticket assignee changed
-
-
 
 ## Improvements
 
@@ -249,3 +246,6 @@ $ turbo dev
 
 - UI
     - dont let modal handle title -> delegate to children
+- Socket Response Type is incorrect
+    - should be SocketErrorResponse | SocketSuccessResponse & { data }
+    - I wrote SocketErrorResponse | SocketSuccessResponse | SocketSuccessResponse & { data }
