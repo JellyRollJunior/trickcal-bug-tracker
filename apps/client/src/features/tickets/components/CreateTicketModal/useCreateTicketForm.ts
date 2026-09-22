@@ -12,6 +12,7 @@ type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 const useCreateTicketForm = (
     boardId: BoardDto['id'],
     sectionId: SectionDto['id'],
+    closeModal: () => void,
 ) => {
     const [summary, setSummary] = useState<TicketPayload['summary']>('');
     const [description, setDescription] = useState<TicketPayload['description']>('');
@@ -51,11 +52,19 @@ const useCreateTicketForm = (
 
     const handleCreateTicket = async (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        createTicket({
-            boardId,
-            sectionId,
-            data: toPayload(),
-        });
+         createTicket(
+            {
+                boardId,
+                sectionId,
+                data: toPayload(),
+            },
+            {
+                onSuccess: () => {
+                    reset();
+                    closeModal();
+                },
+            }
+        );
     };
 
     return {

@@ -1,8 +1,8 @@
-import type { BoardDto } from '@trickcal-bug-tracker/shared';
+import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Section } from '@/features/sections/components/Section.tsx';
-import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.tsx';
+import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.ts';
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
@@ -10,7 +10,7 @@ type BoardProps = { boardId: BoardDto['id'] };
 const BoardContainer = () => {
   const { boardId } = useParams();
 
-  if (!boardId) return <h3> swag </h3>;
+  if (!boardId) return <h3> Loading... </h3>;
 
   return <Board boardId={boardId} />;
 };
@@ -26,15 +26,14 @@ const Board = ({ boardId }: BoardProps) => {
     setSectionName,
   } = useBoardPage(boardId);
 
+  // Create Section Form
   const [isCreateSectionOpen, setIsCreateSectionOpen] = useState(false);
   const openCreateSection = () => setIsCreateSectionOpen(true);
   const closeCreateSection = () => {
     setIsCreateSectionOpen(false);
     setSectionName('');
   };
-
   const createSectionRef = useRef<HTMLFormElement>(null);
-
   useEffect(() => {
     if (isCreateSectionOpen) {
       createSectionRef.current?.scrollIntoView({
@@ -45,10 +44,17 @@ const Board = ({ boardId }: BoardProps) => {
     }
   }, [isCreateSectionOpen]);
 
+  // Create Ticket Modal
   const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
-  const openCreateTicket = () => setIsCreateTicketOpen(true);
-  const closeCreateTicket = () => setIsCreateTicketOpen(false);
-
+  const [sectionId, setSectionId] = useState<SectionDto['id'] | null>(null);
+  const openCreateTicket = (sectionId: SectionDto['id']) => {
+    setSectionId(sectionId);
+    setIsCreateTicketOpen(true);
+  };
+  const closeCreateTicket = () => {
+    setIsCreateTicketOpen(false);
+    setSectionId(null);
+  };  
   const allCollaborators = board ? [board.owner, ...board.collaborators] : [];
 
   return (
@@ -64,7 +70,7 @@ const Board = ({ boardId }: BoardProps) => {
           <ol className="flex gap-3 overflow-x-auto pb-5">
             {board.sections.map((section) => (
               <Section
-                openCreateTicketModal={openCreateTicket}
+                openCreateTicketModal={() => openCreateTicket(section.id)}
                 key={section.id}
                 section={section}
               />
@@ -119,12 +125,15 @@ const Board = ({ boardId }: BoardProps) => {
             )}
           </ol>
           {/* Create Ticket */}
-          <CreateTicketModal
-            open={isCreateTicketOpen}
-            closeModal={closeCreateTicket}
-            boardId={board.id}
-            collaborators={allCollaborators}
-          />
+          {isCreateTicketOpen && sectionId && (
+            <CreateTicketModal
+              open={isCreateTicketOpen}
+              closeModal={closeCreateTicket}
+              boardId={board.id}
+              sectionId={sectionId}
+              collaborators={allCollaborators}
+            />
+          )}
         </>
       )}
     </div>

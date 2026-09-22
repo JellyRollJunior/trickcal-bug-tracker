@@ -1,4 +1,8 @@
-import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
+import type {
+  BoardDto,
+  SectionDto,
+  UserDto,
+} from '@trickcal-bug-tracker/shared';
 import {
   useCreateTicketForm,
   type TicketPayload,
@@ -9,12 +13,14 @@ type CreateTicketModalProps = {
   open: boolean;
   closeModal: () => void;
   boardId: BoardDto['id'];
+  sectionId: SectionDto['id'];
   collaborators: UserDto[];
 };
 const CreateTicketModal = ({
   open,
   closeModal,
   boardId,
+  sectionId,
   collaborators,
 }: CreateTicketModalProps) => {
   const {
@@ -35,11 +41,16 @@ const CreateTicketModal = ({
     assigneeId,
     setAssigneeId,
     reset,
-  } = useCreateTicketForm(boardId, '');
+    handleCreateTicket,
+    isPendingCreateTicket,
+  } = useCreateTicketForm(boardId, sectionId, closeModal);
 
   return (
     <Modal open={open} closeModal={closeModal} title="Create Ticket">
-      <form className="mt-2 h-fit w-fit px-3 py-2">
+      <form
+        className="mt-2 h-fit w-fit px-3 py-2"
+        onSubmit={handleCreateTicket}
+      >
         <textarea
           className="block-primary mt-2 w-full py-1 pr-1 pl-2"
           placeholder="Summary"
@@ -162,7 +173,7 @@ const CreateTicketModal = ({
         <div className="mt-2 flex justify-start gap-1">
           <button
             className="button-primary px-3 py-1 disabled:bg-gray-300"
-            //   disabled={isPendingCreateTicket}
+            disabled={isPendingCreateTicket}
           >
             Create
           </button>
@@ -173,7 +184,7 @@ const CreateTicketModal = ({
               closeModal();
               reset();
             }}
-            //   disabled={isPendingCreateTicket}
+            disabled={isPendingCreateTicket}
           >
             Cancel
           </button>
