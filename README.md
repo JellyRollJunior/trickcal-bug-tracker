@@ -192,7 +192,6 @@ $ turbo dev
 
 - extract section create
     - extract create section hook
-- extract ticket create modal
 
 ## Todo list
 
