@@ -3,14 +3,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postSections } from '@/features/sections/api/section.api.ts';
 
 const useCreateSection = (boardId: BoardDto['id']) => {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: postSections,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
-    },
-  });
+    return useMutation({
+        mutationFn: postSections,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
+        },
+    });
 };
 
 export { useCreateSection };

@@ -1,6 +1,6 @@
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState, type SubmitEvent } from 'react';
-import { useCreateSection } from '@/features/sections/hooks/useCreateSection.tsx';
+import { useCreateSection } from '@/features/sections/hooks/useCreateSection.ts';
 
 const useCreateSectionListItem = (
     boardId: BoardDto['id'],
