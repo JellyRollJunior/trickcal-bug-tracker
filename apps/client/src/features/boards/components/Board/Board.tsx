@@ -74,7 +74,13 @@ const Board = ({ boardId }: BoardProps) => {
           {/* Section Settings drawer */}
           <AnimatePresence>
             {isSectionSettingsOpen && (
-              <motion.aside className="absolute top-0 right-0 h-screen min-w-1/3 border-1 border-black bg-white">
+              <motion.aside
+                initial={{ translateX: '100%', opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                exit={{ translateX: '100%', opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="absolute top-0 right-0 h-screen min-w-1/3 border border-black bg-white"
+              >
                 <button
                   className="absolute -top-1.5 right-1.5 h-fit text-2xl"
                   onClick={closeSectionSettings}
