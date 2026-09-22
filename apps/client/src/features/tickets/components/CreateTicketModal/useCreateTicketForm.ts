@@ -1,10 +1,18 @@
 import type { z } from 'zod';
-import type { postTicketsRequestBodySchema } from '@trickcal-bug-tracker/shared';
-import { useState } from 'react';
+import type {
+    BoardDto,
+    postTicketsRequestBodySchema,
+    SectionDto,
+} from '@trickcal-bug-tracker/shared';
+import { useState, type SubmitEvent } from 'react';
+import { useCreateTicket } from '@/features/tickets/hooks/useCreateTicket.ts';
 
 type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 
-const useCreateTicketForm = () => {
+const useCreateTicketForm = (
+    boardId: BoardDto['id'],
+    sectionId: SectionDto['id'],
+) => {
     const [summary, setSummary] = useState<TicketPayload['summary']>('');
     const [description, setDescription] = useState<TicketPayload['description']>('');
     const [issueType, setIssueType] = useState<TicketPayload['issueType'] | ''>('');
@@ -13,6 +21,11 @@ const useCreateTicketForm = () => {
     const [severity, setSeverity] = useState<TicketPayload['severity'] | ''>('');
     const [reproducibility, setReproducibility] = useState<TicketPayload['reproducibility']>(false);
     const [assigneeId, setAssigneeId] = useState<TicketPayload['assigneeId']>(null);
+    const { 
+        mutate: createTicket, 
+        isPending: isPendingCreateTicket,
+        isSuccess: isSuccessCreateTicket, 
+    } = useCreateTicket(boardId);
         
     const reset = () => {
         setSummary('');
@@ -36,6 +49,15 @@ const useCreateTicketForm = () => {
         assigneeId,
     });
 
+    const handleCreateTicket = async (event: SubmitEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        createTicket({
+            boardId,
+            sectionId,
+            data: toPayload(),
+        });
+    };
+
     return {
         summary,
         setSummary,
@@ -54,8 +76,11 @@ const useCreateTicketForm = () => {
         assigneeId,
         setAssigneeId,
         reset,
+        handleCreateTicket,
+        isPendingCreateTicket,
+        isSuccessCreateTicket,
     };
 };
 
-export { useCreateTicketForm };
 export type { TicketPayload };
+export { useCreateTicketForm };

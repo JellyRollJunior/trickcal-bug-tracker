@@ -1,4 +1,4 @@
-import type { UserDto } from '@trickcal-bug-tracker/shared';
+import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
 import {
   useCreateTicketForm,
   type TicketPayload,
@@ -8,11 +8,13 @@ import { Modal } from '@/common/components/Modal.tsx';
 type CreateTicketModalProps = {
   open: boolean;
   closeModal: () => void;
+  boardId: BoardDto['id'];
   collaborators: UserDto[];
 };
 const CreateTicketModal = ({
   open,
   closeModal,
+  boardId,
   collaborators,
 }: CreateTicketModalProps) => {
   const {
@@ -33,7 +35,7 @@ const CreateTicketModal = ({
     assigneeId,
     setAssigneeId,
     reset,
-  } = useCreateTicketForm();
+  } = useCreateTicketForm(boardId, '');
 
   return (
     <Modal open={open} closeModal={closeModal} title="Create Ticket">

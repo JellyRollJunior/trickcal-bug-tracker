@@ -5,9 +5,8 @@ import { postTickets } from '@/features/tickets/api/tickets.api.ts';
 const useCreateTicket = (boardId: BoardDto['id']) => {
   const queryClient = useQueryClient();
 
-  useMutation({
+  return useMutation({
     mutationFn: postTickets,
-
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
     },

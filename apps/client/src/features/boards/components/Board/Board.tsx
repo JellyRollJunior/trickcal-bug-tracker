@@ -118,15 +118,15 @@ const Board = ({ boardId }: BoardProps) => {
               </form>
             )}
           </ol>
+          {/* Create Ticket */}
+          <CreateTicketModal
+            open={isCreateTicketOpen}
+            closeModal={closeCreateTicket}
+            boardId={board.id}
+            collaborators={allCollaborators}
+          />
         </>
       )}
-
-      {/* Create Ticket */}
-      <CreateTicketModal
-        open={isCreateTicketOpen}
-        closeModal={closeCreateTicket}
-        collaborators={allCollaborators}
-      />
     </div>
   );
 };
