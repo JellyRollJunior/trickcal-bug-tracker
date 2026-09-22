@@ -23,6 +23,9 @@ Typescript React Express monorepo v2
         - Move ticket between sections by socket event
     - Horizontal Scaling On Sessions & SocketIO
 
+- Frontend
+    - Presence tracking
+
 - Repository
     - PNPM workspaces monorepo using TurboRepo
     - Repo wide build commands for local development with turborepo
@@ -124,6 +127,7 @@ $ turbo dev
         - Imports DTO, Request, Response schemas to serve data
     - Client:
         - Imports Request, Response schemas to validate data & request bodies
+    - Think about what data is needed to make client side calculations easier & server side calcualtions easier
 
 - Prisma indexing
     - foreign keys not indexed by default
@@ -179,6 +183,7 @@ $ turbo dev
     - On error, API request function uses resolveError to throw error returned by server -> resolved error is caught by useQuery so we can narrow the error using instanceof & handle
 - Extracting component logic into hook to separate logic and UI
 - Sonner toast library
+- Typing socket.io-client
 
 ## Neat Bugs
 
@@ -189,12 +194,16 @@ $ turbo dev
     - Network serialization (JSON) strips prototype chains
     - Instanceof works by checking of our objects prototype is the same instance as the constructors
         - Object.getPrototypeOf(obj) === Constructor.prototype
+- Infinitely joining room
+    - Root cause: Forgot to use useCallback on joinRoom function
+    - everytime a state updates, joinRoom is recreated
+    - joinRoom is called again each time it is recreated
 
 ## Current
 
 - parse response
     - user-left-room
-    - user-join-room
+    - user-joined-room
 
 - usePresenceTracking
     - race condition?

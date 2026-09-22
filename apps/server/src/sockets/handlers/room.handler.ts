@@ -25,16 +25,18 @@ const joinRoom = async (
         await assertBoardAccess({ userId, boardId });
 
         // switch to room
-        const currentBoardId = socket.data.currentBoardId;
-        if (currentBoardId && currentBoardId !== boardId) {
-            await socket.leave(currentBoardId);
+        socket.rooms.forEach(async (room) => {
+            if (room === socket.id || room.includes('user:')) return;
+            await socket.leave(room);
+            console.log(`${socket.id} has left room: ${room}`);
 
-            const remainingViewers = await getRoomPresence(io, currentBoardId);
-            socket.to(currentBoardId).emit('board:user-left-room', {
-                userId,
+            // emit board:user-left-room
+            const remainingViewers = await getRoomPresence(io, room);
+            socket.to(room).emit('board:user-left-room', {
+                userId: socket.data.user.id,
                 viewers: remainingViewers,
             });
-        }
+        });
         await socket.join(boardId);
         console.log(`${socket.id} joined room ${boardId}`);
 

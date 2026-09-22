@@ -61,7 +61,7 @@ const Board = ({ boardId }: BoardProps) => {
           <ul className="block-primary flex flex-col gap-1 px-3 py-2">
             <li>Viewers</li>
             {viewerList.map((viewer) => (
-              <li>
+              <li key={viewer.id}>
                 {viewer.name} - {viewer.id}
               </li>
             ))}
