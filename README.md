@@ -246,3 +246,6 @@ $ turbo dev
     - extract default board settings
     - generate orders from fractional-indexing
 - empty payload 500 error expected?
+
+- UI
+    - dont let modal handle title -> delegate to children
