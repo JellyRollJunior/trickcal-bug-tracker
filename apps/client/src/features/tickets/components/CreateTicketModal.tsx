@@ -20,10 +20,10 @@ const CreateTicketModal = ({
 }: CreateTicketModalProps) => {
   const [summary, setSummary] = useState<TicketPayload['summary']>('');
   const [description, setDescription] = useState<TicketPayload['description']>('');
-  const [issueType, setIssueType] = useState<TicketPayload['issueType']>();
-  const [category, setCategory] = useState<TicketPayload['category']>();
-  const [priority, setPriority] = useState<TicketPayload['priority']>();
-  const [severity, setSeverity] = useState<TicketPayload['severity']>();
+  const [issueType, setIssueType] = useState<TicketPayload['issueType'] | ''>('');
+  const [category, setCategory] = useState<TicketPayload['category'] | ''>('');
+  const [priority, setPriority] = useState<TicketPayload['priority'] | ''>('');
+  const [severity, setSeverity] = useState<TicketPayload['severity'] | ''>('');
   const [reproducibility, setReproducibility] = useState<TicketPayload['reproducibility']>(false);
   const [assigneeId, setAssigneeId] = useState<TicketPayload['assigneeId']>(null);
 
@@ -61,7 +61,7 @@ const CreateTicketModal = ({
             }
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Issue Type
             </option>
             <option value="BUG">Bug</option>
@@ -78,7 +78,7 @@ const CreateTicketModal = ({
             }
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Category
             </option>
             <option value="SERVER">Server</option>
@@ -98,7 +98,7 @@ const CreateTicketModal = ({
             }
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Priority
             </option>
             <option value="LOWEST">Lowest</option>
@@ -116,7 +116,7 @@ const CreateTicketModal = ({
             }
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Severity
             </option>
             <option value="TRIVIAL">Trivial</option>
@@ -141,7 +141,7 @@ const CreateTicketModal = ({
           value={assigneeId ?? ''}
           onChange={(event) => setAssigneeId(event.target.value || null)}
         >
-          <option value="" selected>Unassigned</option>
+          <option value="">Unassigned</option>
           {collaborators.map((collaborator) => (
             <option key={collaborator.id} value={collaborator.id}>
               {collaborator.name}

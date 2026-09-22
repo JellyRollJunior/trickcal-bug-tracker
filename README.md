@@ -193,12 +193,13 @@ $ turbo dev
 - extract section create
 - extract ticket create modal
 
-
 ## Todo list
 
 - optimistic updates with tanstack for ticket move
 backend
+
 - get /users 
+- dont crash on unable to fetch users
 
 - auth
     - login w/ github
