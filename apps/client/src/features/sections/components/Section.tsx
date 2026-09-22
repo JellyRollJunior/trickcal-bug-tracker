@@ -17,16 +17,16 @@ const Section = ({
   return (
     <div className="max-w-80 min-w-45 flex-1">
       <div className="block-primary flex justify-between gap-1 p-2">
-        <h3>{section.name}</h3>
+        <h3 className='self-center'>{section.name}</h3>
         <div className="grid h-fit grid-cols-2 gap-1">
           <button
-            className="rounded-full hover:bg-gray-200"
+            className="rounded-full button-primary"
             onClick={openCreateTicketModal}
           >
             <img src={add} />
           </button>
           <button
-            className="rounded-full hover:bg-gray-200"
+            className="rounded-full button-primary p-0.5"
             onClick={openSectionSettings}
           >
             <img src={settings} />

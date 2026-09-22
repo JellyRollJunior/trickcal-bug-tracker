@@ -1,6 +1,6 @@
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { AnimatePresence, motion } from 'motion/react';
-import { useSectionSettingsDrawer } from './useSectionSettingsDrawer';
+import { useSectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/useSectionSettingsDrawer.ts';
 
 type SectionSettingsDrawerProps = {
   open: boolean;
@@ -36,7 +36,7 @@ const SectionSettingsDrawer = ({
           <h3 className="font-semibold">Section settings</h3>
           <form onSubmit={handleDeleteSection}>
             <button
-              className="block-primary px-3 py-1"
+              className="button-caution px-3 py-1"
               disabled={isPendingDeleteSection}
             >
               Remove section
