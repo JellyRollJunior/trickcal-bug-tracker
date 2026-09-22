@@ -18,7 +18,7 @@ const BoardContainer = () => {
 };
 
 const Board = ({ boardId }: BoardProps) => {
-  const { board } = useBoardPage(boardId);
+  const { board, viewerList } = useBoardPage(boardId);
 
   // Create Ticket Modal
   const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
@@ -56,6 +56,16 @@ const Board = ({ boardId }: BoardProps) => {
           <div className="block-primary w-fit px-3 py-2">
             {board.description}
           </div>
+
+          {/* Presence Tracking */}
+          <ul className="block-primary flex flex-col gap-1 px-3 py-2">
+            <li>Viewers</li>
+            {viewerList.map((viewer) => (
+              <li>
+                {viewer.name} - {viewer.id}
+              </li>
+            ))}
+          </ul>
 
           {/* Section List */}
           <ol className="flex flex-1 gap-3 overflow-x-auto">

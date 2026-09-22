@@ -6,7 +6,7 @@ import {
 import { toast } from 'sonner';
 import { router } from '@/routes/router.tsx';
 
-const toastError = (error: unknown) => {
+const handleError = (error: unknown) => {
     if (error instanceof AuthenticationError) {
         // notify user of authentication error
         const currentPath = router.state.location.pathname;
@@ -29,4 +29,4 @@ const toastError = (error: unknown) => {
     }
 };
 
-export { toastError };
+export { handleError };

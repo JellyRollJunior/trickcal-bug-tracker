@@ -28,7 +28,7 @@ const routes: RouteObject[] = [
         element: <AuthLayout />,
         children: [
           {
-            path: 'login',
+            path: '/auth/login',
             element: <LoginForm />,
           },
         ],

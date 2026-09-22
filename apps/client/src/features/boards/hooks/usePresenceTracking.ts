@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
 import { resolveError } from '@/lib/resolveError.ts';
-import { toastError } from '@/lib/toastError.ts';
+import { handleError } from '@/lib/errorHandler.ts';
 
 const usePresenceTracking = () => {
     const { socket, isConnected } = useSocket();
@@ -31,7 +31,7 @@ const usePresenceTracking = () => {
                         resolveError(response.error);
                     }
                 } catch (error) {
-                    toastError(error);
+                    handleError(error);
                 }
             }
         );

@@ -1,6 +1,6 @@
 import { QueryClient, QueryCache, MutationCache } from '@tanstack/react-query';
 import { BaseError } from '@trickcal-bug-tracker/shared';
-import { toastError } from '@/lib/toastError.ts';
+import { handleError } from '@/lib/errorHandler.ts';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -18,8 +18,8 @@ const queryClient = new QueryClient({
             retry: 0,
         },
     },
-    queryCache: new QueryCache({ onError: toastError }),
-    mutationCache: new MutationCache({ onError: toastError }),
+    queryCache: new QueryCache({ onError: handleError }),
+    mutationCache: new MutationCache({ onError: handleError }),
 });
 
 export { queryClient };

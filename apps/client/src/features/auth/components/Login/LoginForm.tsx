@@ -24,6 +24,7 @@ const LoginForm = () => {
           min={1}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
+          required
         />
 
         <label className="mt-3" htmlFor="password">
@@ -37,6 +38,7 @@ const LoginForm = () => {
           min={1}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          required
         />
 
         <div className="my-3 flex gap-3">
