@@ -1,19 +1,23 @@
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { AnimatePresence, motion } from 'motion/react';
+import { useSectionSettingsDrawer } from './useSectionSettingsDrawer';
 
 type SectionSettingsDrawerProps = {
   open: boolean;
-  closeModal: () => void;
+  closeDrawer: () => void;
   boardId: BoardDto['id'];
   sectionId: SectionDto['id'];
 };
 const SectionSettingsDrawer = ({
   open,
-  closeModal,
+  closeDrawer,
   boardId,
   sectionId,
 }: SectionSettingsDrawerProps) => {
-  return (
+  const { handleDeleteSection, isPendingDeleteSection } =
+    useSectionSettingsDrawer(boardId, sectionId, closeDrawer);
+  
+    return (
     <AnimatePresence>
       {open && (
         <motion.aside
@@ -25,11 +29,19 @@ const SectionSettingsDrawer = ({
         >
           <button
             className="absolute -top-1.5 right-1.5 h-fit text-2xl"
-            onClick={closeModal}
+            onClick={closeDrawer}
           >
             ×
           </button>
           <h3 className="font-semibold">Section settings</h3>
+          <form onSubmit={handleDeleteSection}>
+            <button
+              className="block-primary px-3 py-1"
+              disabled={isPendingDeleteSection}
+            >
+              Remove section
+            </button>
+          </form>
         </motion.aside>
       )}
     </AnimatePresence>

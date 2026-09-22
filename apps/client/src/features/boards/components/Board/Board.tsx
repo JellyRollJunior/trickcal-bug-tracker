@@ -79,7 +79,7 @@ const Board = ({ boardId }: BoardProps) => {
           {isSectionSettingsOpen && settingsSectionId && (
             <SectionSettingsDrawer
               open={isSectionSettingsOpen}
-              closeModal={closeSectionSettings}
+              closeDrawer={closeSectionSettings}
               boardId={board.id}
               sectionId={settingsSectionId}
             />
