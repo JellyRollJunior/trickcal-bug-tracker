@@ -192,6 +192,11 @@ $ turbo dev
 
 ## Current
 
+- emit left room on switch boards
+- return presence list on 
+    - user-left-room
+    - user-joined-room
+
 ## Todo list
 
 - optimistic updates with tanstack for ticket move

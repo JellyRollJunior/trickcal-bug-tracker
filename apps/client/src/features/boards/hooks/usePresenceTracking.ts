@@ -4,7 +4,7 @@ import {
     type UserDto,
 } from '@trickcal-bug-tracker/shared';
 import type { SocketJoinRoomResponse } from '@trickcal-bug-tracker/shared';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
 import { resolveError } from '@/lib/resolveError.ts';
@@ -37,7 +37,14 @@ const usePresenceTracking = () => {
         );
     };
 
+    useEffect(() => {
+
+    }, [])
+
     // board:user-joined-room
+    if (isConnected && socket) {
+
+    }
 
     // board:user-left-room
 

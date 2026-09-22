@@ -4,6 +4,7 @@ const switchToRoom = (socket: AppSocket, roomId: string) => {
     socket.rooms.forEach((room) => {
         if (room === socket.id || room.includes('user:')) return;
         socket.leave(room);
+        socket.to(room).emit('board:user-left-room', { userId: socket.data.user.id })
         console.log(`${socket.id} has left room: ${room}`);
     });
     socket.join(roomId);

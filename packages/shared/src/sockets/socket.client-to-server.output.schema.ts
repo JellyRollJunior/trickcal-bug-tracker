@@ -19,7 +19,7 @@ const joinRoomOutputSchema = z.object({
 });
 type JoinRoomOutputSchema = z.infer<typeof joinRoomOutputSchema>;
 type SocketJoinRoomResponse =
-    (SocketSucessResponse & JoinRoomOutputSchema) | SocketFailureResponse;
+    (SocketSucessResponse & JoinRoomOutputSchema) | SocketBaseResponse;
 
 export type { SocketSucessResponse, SocketFailureResponse };
 export type { SocketBaseResponse, SocketJoinRoomResponse };
