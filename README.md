@@ -192,14 +192,12 @@ $ turbo dev
 
 ## Current
 
-- emit left room on switch boards
-- return presence list on
-    - user-left-room
-    - user-joined-room
-- join socket service to socket handler
 - parse response
     - user-left-room
     - user-join-room
+
+- usePresenceTracking
+    - race condition?
 
 ## Todo list
 
