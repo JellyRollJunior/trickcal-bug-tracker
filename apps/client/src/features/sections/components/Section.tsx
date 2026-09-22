@@ -7,8 +7,13 @@ import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 type SectionProps = {
   section: SectionWithTicketsDto;
   openCreateTicketModal: () => void;
+  openSectionSettings: () => void;
 };
-const Section = ({ section, openCreateTicketModal }: SectionProps) => {
+const Section = ({
+  section,
+  openCreateTicketModal,
+  openSectionSettings,
+}: SectionProps) => {
   return (
     <div className="max-w-80 min-w-45 flex-1">
       <div className="block-primary flex justify-between gap-1 p-2">
@@ -20,7 +25,10 @@ const Section = ({ section, openCreateTicketModal }: SectionProps) => {
           >
             <img src={add} />
           </button>
-          <button className="rounded-full hover:bg-gray-200">
+          <button
+            className="rounded-full hover:bg-gray-200"
+            onClick={openSectionSettings}
+          >
             <img src={settings} />
           </button>
         </div>
