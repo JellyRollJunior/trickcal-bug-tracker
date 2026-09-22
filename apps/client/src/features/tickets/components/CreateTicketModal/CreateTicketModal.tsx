@@ -1,12 +1,9 @@
-import z from 'zod';
-import { useState } from 'react';
+import type { UserDto } from '@trickcal-bug-tracker/shared';
 import {
-  postTicketsRequestBodySchema,
-  type UserDto,
-} from '@trickcal-bug-tracker/shared';
+  useCreateTicketForm,
+  type TicketPayload,
+} from '@/features/tickets/components/CreateTicketModal/useCreateTicketForm.ts';
 import { Modal } from '@/common/components/Modal.tsx';
-
-type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 
 type CreateTicketModalProps = {
   open: boolean;
@@ -18,14 +15,25 @@ const CreateTicketModal = ({
   closeModal,
   collaborators,
 }: CreateTicketModalProps) => {
-  const [summary, setSummary] = useState<TicketPayload['summary']>('');
-  const [description, setDescription] = useState<TicketPayload['description']>('');
-  const [issueType, setIssueType] = useState<TicketPayload['issueType'] | ''>('');
-  const [category, setCategory] = useState<TicketPayload['category'] | ''>('');
-  const [priority, setPriority] = useState<TicketPayload['priority'] | ''>('');
-  const [severity, setSeverity] = useState<TicketPayload['severity'] | ''>('');
-  const [reproducibility, setReproducibility] = useState<TicketPayload['reproducibility']>(false);
-  const [assigneeId, setAssigneeId] = useState<TicketPayload['assigneeId']>(null);
+  const {
+    summary,
+    setSummary,
+    description,
+    setDescription,
+    issueType,
+    setIssueType,
+    category,
+    setCategory,
+    priority,
+    setPriority,
+    severity,
+    setSeverity,
+    reproducibility,
+    setReproducibility,
+    assigneeId,
+    setAssigneeId,
+    reset,
+  } = useCreateTicketForm();
 
   return (
     <Modal open={open} closeModal={closeModal} title="Create Ticket">
@@ -159,7 +167,10 @@ const CreateTicketModal = ({
           <button
             className="button-primary px-3 py-1 disabled:bg-gray-300"
             type="button"
-            onClick={closeModal}
+            onClick={() => {
+              closeModal();
+              reset();
+            }}
             //   disabled={isPendingCreateTicket}
           >
             Cancel

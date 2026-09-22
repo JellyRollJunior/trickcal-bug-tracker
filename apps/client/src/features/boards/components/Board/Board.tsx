@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Section } from '@/features/sections/components/Section.tsx';
 import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.tsx';
-import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal.tsx';
+import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
