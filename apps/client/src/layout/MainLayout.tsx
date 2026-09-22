@@ -8,7 +8,7 @@ const MainLayout = () => {
       <header className="bg-kommy-hair-white-dark/80 flex w-full justify-center pt-4 pb-3">
         <BoardsDropdown />
       </header>
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col">
         <Outlet />
       </div>
       <Background />

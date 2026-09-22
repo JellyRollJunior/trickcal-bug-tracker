@@ -41,7 +41,7 @@ const Board = ({ boardId }: BoardProps) => {
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   return (
-    <div className="mx-2 mt-3 mb-3 flex flex-col gap-2">
+    <div className="mx-2 mt-3 mb-3 flex flex-col gap-2 flex-1">
       {board && isSuccessGetBoard && !isPendingGetBoard && (
         <>
           <h2 className="block-primary w-fit px-3 py-2">{board.name}</h2>
@@ -50,7 +50,7 @@ const Board = ({ boardId }: BoardProps) => {
           </div>
 
           {/* Section List */}
-          <ol className="flex gap-3 overflow-x-auto pb-5">
+          <ol className="flex gap-3 overflow-x-auto flex-1">
             {board.sections.map((section) => (
               <Section
                 openCreateTicketModal={() => openCreateTicket(section.id)}
