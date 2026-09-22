@@ -69,6 +69,8 @@ $ turbo dev
 | POST   | /auth/login                                    | Login                      | { username, password }                                                                         | { token }                      |                                                                                 |
 | POST   | /auth/github                                   | GitHub oauth2 login/signup |                                                                                                |                                | Login with GitHub oauth. Creates an account if no account exists                |
 | POST   | /auth/github/callback                          | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
+| POST   | /auth/google                                   | Google oauth2 callback     |                                                                                                |                                | Login with Google oauth. Creates an account if no account exists                |
+| POST   | /auth/google/callback                          | Google oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
 | GET    | /boards                                        | get boards                 |                                                                                                | boardDto[]                     |                                                                                 |
 | POST   | /boards                                        | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
 | GET    | /boards/:boardId                               | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
@@ -111,13 +113,13 @@ $ turbo dev
 ## Learning Outcomes
 
 - Solidify TypeScript Prisma Zod shared workflow
-    - Shared defines: 
+    - Shared defines:
         - Socket events
         - DTO schema shape
         - Request body schema for each route
         - Response schema for each route
         - Errors
-    - Server: 
+    - Server:
         - Define data shape in prisma schema
         - Imports DTO, Request, Response schemas to serve data
     - Client:
@@ -190,34 +192,51 @@ $ turbo dev
 
 ## Current
 
-- extract section create
-    - extract create section hook
-
 ## Todo list
 
 - optimistic updates with tanstack for ticket move
-backend
+  backend
 
-- get /users 
+- get /users
 - dont crash on unable to fetch users
 
 - auth
     - login w/ github
     - login w/ google
     - signup
-- UI
-    - display boards
-    - display board
-    - select board
-- boards
-    - get boards
-    - get board
+- board
+    - delete board
+    - patch board
+    - add collaborator
+    - delete colalborator
 - section
     - edit section
+    - delete seciton
 - tickets
     - edit ticket
+    - edit ticket assignee
+    - delete ticket
+
+- socket
     - move ticket
-    - create ticket
+    - presence tracking
+    
+    - board edited
+    - board deleted
+    - collab added
+    - collab deleted
+    
+    - section edited
+    - section deleted
+    - section created
+
+    - ticket created
+    - ticket updated
+    - ticket deleted
+    - ticket moved
+    - ticket assignee changed
+
+
 
 ## Improvements
 
