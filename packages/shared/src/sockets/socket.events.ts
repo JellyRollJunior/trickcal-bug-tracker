@@ -2,7 +2,7 @@ import { UserDto } from '../features/users/index.js';
 import {
     JoinRoomInput,
     MoveTicketInput,
-} from './socket.client-to-server.schema.js';
+} from './socket.client-to-server.input.schema.js';
 import {
     BoardAddedCollaborator,
     BoardDeletedPayload,
@@ -22,7 +22,7 @@ import {
 import {
     SocketBaseResponse,
     SocketJoinRoomResponse,
-} from './socket.response.js';
+} from './socket.client-to-server.output.schema.js';
 import { BoardDto } from '../features/boards/index.js';
 
 type ServerToClientEvents = {
