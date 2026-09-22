@@ -38,15 +38,18 @@ const usePresenceTracking = () => {
     };
 
     useEffect(() => {
+        if (!isConnected || !socket) return;
 
-    }, [])
+        // board:user-joined-room
+        socket.on('board:user-joined-room', (payload) => {
+            setViewerList(payload.viewers);
+        });
 
-    // board:user-joined-room
-    if (isConnected && socket) {
-
-    }
-
-    // board:user-left-room
+        // board:user-left-room
+        socket.on('board:user-left-room', (payload) => {
+            setViewerList(payload.viewers);
+        });
+    }, [socket, isConnected]);
 
     return { viewerList, joinRoom };
 };

@@ -1,20 +1,8 @@
-import { AppServer, AppSocket } from '@/sockets/types.js';
-
-const switchToRoom = (socket: AppSocket, roomId: string) => {
-    socket.rooms.forEach((room) => {
-        if (room === socket.id || room.includes('user:')) return;
-        socket.leave(room);
-        socket.to(room).emit('board:user-left-room', { userId: socket.data.user.id })
-        console.log(`${socket.id} has left room: ${room}`);
-    });
-    socket.join(roomId);
-    console.log(`${socket.id} joined room ${roomId}`);
-};
+import { AppServer } from '@/sockets/types.js';
 
 const getRoomPresence = async (io: AppServer, roomId: string) => {
     const sockets = await io.in(roomId).fetchSockets();
-    const usersInRoomById = new Map(sockets.map((socket) => [socket.data.user.id, socket.data.user]))
-    return Array.from(usersInRoomById.values())
+    return sockets.map((socket) => socket.data.user);
 }
 
-export { switchToRoom, getRoomPresence };
+export { getRoomPresence };

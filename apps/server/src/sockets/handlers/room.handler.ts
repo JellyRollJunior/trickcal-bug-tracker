@@ -7,6 +7,7 @@ import {
 import { joinBoardRoom } from '@/features/boards/board.socket-service.js';
 import { socketErrorHandler } from '@/sockets/handlers/socket.error-handler.js';
 import { toUserDto } from '@/features/users/user.mapper.js';
+import { getRoomPresence } from '@/lib/sockets/roomUtils.js';
 
 const joinRoom = async (
     io: AppServer,
@@ -25,7 +26,8 @@ const joinRoom = async (
         callback({ success: true, viewers: mappedViewers });
 
         // emit user joined room
-        socket.to(boardId).emit('board:user-joined-room', { user: toUserDto(socket.data.user) })
+        const viewers = await getRoomPresence(io, boardId);
+        socket.to(boardId).emit('board:user-joined-room', { userId: socket.data.user.id, viewers })
     } catch (error) {
         socketErrorHandler(error, callback);
     }

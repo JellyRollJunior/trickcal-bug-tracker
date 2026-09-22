@@ -7,13 +7,15 @@ import { boardDtoSchema, boardShape } from '../features/boards/index.js';
 /* ---------- BOARDS ---------- */
 // board:user-joined-room
 const userJoinedRoomPayloadSchema = z.object({
-    user: userDtoSchema,
+    userId: userShape.id,
+    viewers: userDtoSchema.array(),
 });
 type UserJoinedPayload = z.infer<typeof userJoinedRoomPayloadSchema>;
 
 // board:user-left-room
 const userLeftRoomPayloadSchema = z.object({
     userId: userShape.id,
+    viewers: userDtoSchema.array(),
 });
 type UserLeftPayload = z.infer<typeof userLeftRoomPayloadSchema>;
 
