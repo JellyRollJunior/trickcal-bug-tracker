@@ -17,11 +17,16 @@ const BoardContainer = () => {
 };
 
 const Board = ({ boardId }: BoardProps) => {
-  const { board, isSuccessGetBoard, isPendingGetBoard } = useBoardPage(boardId);
+  const {
+    board,
+    isSuccessGetBoard,
+    isPendingGetBoard,
+    sectionId,
+    setSectionId,
+  } = useBoardPage(boardId);
 
   // Create Ticket Modal
   const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
-  const [sectionId, setSectionId] = useState<SectionDto['id'] | null>(null);
   const openCreateTicket = (sectionId: SectionDto['id']) => {
     setSectionId(sectionId);
     setIsCreateTicketOpen(true);
@@ -31,7 +36,7 @@ const Board = ({ boardId }: BoardProps) => {
     setSectionId(null);
   };
   const allCollaborators = board ? [board.owner, ...board.collaborators] : [];
-  
+
   // Create Section List Item
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
