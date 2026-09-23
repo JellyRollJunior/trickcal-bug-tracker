@@ -6,6 +6,7 @@ import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.ts
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
 import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer';
+import { AnimatePresence } from 'motion/react';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -93,15 +94,16 @@ const Board = ({ boardId }: BoardProps) => {
           </ol>
 
           {/* Section Settings drawer */}
-          {settingsDrawerData && (
-            <SectionSettingsDrawer
-              open={settingsDrawerData !== null}
-              closeDrawer={closeSectionSettings}
-              boardId={board.id}
-              sectionId={settingsDrawerData.id}
-              sectionName={settingsDrawerData.name}
-            />
-          )}
+          <AnimatePresence>
+            {settingsDrawerData && (
+              <SectionSettingsDrawer
+                closeDrawer={closeSectionSettings}
+                boardId={board.id}
+                sectionId={settingsDrawerData.id}
+                sectionName={settingsDrawerData.name}
+              />
+            )}
+          </AnimatePresence>
 
           {/* Create Ticket */}
           {isCreateTicketOpen && createTicketSectionId && (

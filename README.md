@@ -25,6 +25,8 @@ Typescript React Express monorepo v2
 
 - Frontend
     - Presence tracking
+    - CRUD Sections
+    
 
 - Repository
     - PNPM workspaces monorepo using TurboRepo
