@@ -126,6 +126,7 @@ const deleteBoardCollaborator = async ({
 
 export {
     assertBoardAccess,
+    assertBoardOwner,
     editBoard,
     deleteBoard,
     addBoardCollaborator,

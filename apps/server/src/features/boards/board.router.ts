@@ -23,6 +23,7 @@ boardRouter.patch('/:boardId', requireAuth, validate(patchboardsRequestBodySchem
 boardRouter.delete('/:boardId', requireAuth, boardController.deleteBoard);
 boardRouter.post('/:boardId/collaborators', requireAuth, validate(postBoardCollaboratorSchema), boardController.postBoardCollaborator);
 boardRouter.delete('/:boardId/collaborators/:collaboratorId', requireAuth, boardController.deleteBoardCollaborator);
+boardRouter.get('/:boardId/collaborators/available', requireAuth, boardController.getAvailableNewCollaborators);
 
 /* sections */
 boardRouter.post('/:boardId/sections', requireAuth, validate(postSectionsSchema), sectionController.postSections);

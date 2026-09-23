@@ -214,7 +214,7 @@ const deleteBoardCollaborator = async ({
     }
 };
 
-const getPotentialCollaborators = async ({
+const getAvailableNewCollaborators = async ({
     boardId,
 }: {
     boardId: Board['id'];
@@ -245,5 +245,5 @@ export {
     deleteBoard,
     addBoardCollaborator,
     deleteBoardCollaborator,
-    getPotentialCollaborators,
+    getAvailableNewCollaborators,
 };

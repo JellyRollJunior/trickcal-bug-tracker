@@ -7,7 +7,6 @@ import {
     boardIdParamSchema,
 } from '@trickcal-bug-tracker/shared';
 import { getIo } from '@/sockets/ioInstance.js';
-import { assertBoardAccess } from '@/features/boards/board.services.js';
 import {
     toBoardDto,
     toBoardWithSectionsAndTicketsDto,
@@ -54,7 +53,7 @@ const getBoard = async (
         const userId = req.user?.id;
         if (!userId) throw new AuthenticationError();
         const { boardId } = boardIdParamSchema.parse(req.params);
-        await assertBoardAccess({ userId, boardId });
+        await boardServices.assertBoardAccess({ userId, boardId });
 
         const data = await boardQueries.getBoardWithSectionsAndTicketsById({
             boardId,
@@ -174,6 +173,24 @@ const deleteBoardCollaborator = async (
     }
 }
 
+const getAvailableNewCollaborators = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+) => {
+    try {
+        const userId = req.user?.id;
+        if (!userId) throw new AuthenticationError();
+        const { boardId } = boardIdParamSchema.parse(req.params);
+        await boardServices.assertBoardOwner({ userId, boardId });
+
+        const data = await boardQueries.getAvailableNewCollaborators({ boardId });
+        res.json(data.map(toUserDto));
+    } catch (error) {
+        next(error);
+    }
+};
+
 export {
     getBoards,
     postBoards,
@@ -182,5 +199,6 @@ export {
     deleteBoard,
     postBoardCollaborator,
     deleteBoardCollaborator,
+    getAvailableNewCollaborators,
 };
 
