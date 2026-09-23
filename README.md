@@ -26,7 +26,7 @@ Typescript React Express monorepo v2
 - Frontend
     - Presence tracking
     - CRUD Sections
-    
+
 
 - Repository
     - PNPM workspaces monorepo using TurboRepo
@@ -263,3 +263,6 @@ $ turbo dev
 - Socket Response Type is incorrect
     - should be SocketErrorResponse | SocketSuccessResponse & { data }
     - I wrote SocketErrorResponse | SocketSuccessResponse | SocketSuccessResponse & { data }
+- Implement get board meta data & get board data
+    - can update only metadata
+    - when updating board metadata, need to fetch /board/:boardId which also fetches data unnecessarily

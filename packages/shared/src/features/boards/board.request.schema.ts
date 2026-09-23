@@ -8,6 +8,7 @@ const postBoardsRequestBodySchema = z.object({
     name: boardShape.name,
     description: boardShape.description,
 });
+type PatchboardsRequestBody = z.infer<typeof patchboardsRequestBodySchema>;
 const patchboardsRequestBodySchema = z.object({
     name: boardShape.name.optional(),
     description: boardShape.description.optional(),
@@ -27,6 +28,9 @@ const boardIdAndSectionIdParamSchema = z.object({
     sectionId: sectionShape.id,
 });
 
+export type {
+    PatchboardsRequestBody
+}
 export {
     postBoardsRequestBodySchema,
     patchboardsRequestBodySchema,

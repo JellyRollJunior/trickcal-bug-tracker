@@ -1,3 +1,5 @@
+import settings from '@/assets/icons/settings.svg';
+
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -22,16 +24,13 @@ const Board = ({ boardId }: BoardProps) => {
   const { board, viewerList } = useBoardPage(boardId);
 
   // Create Ticket Modal
-  const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
   const [createTicketSectionId, setCreateTicketSectionId] = useState<
     SectionDto['id'] | null
   >(null);
   const openCreateTicket = (sectionId: SectionDto['id']) => {
     setCreateTicketSectionId(sectionId);
-    setIsCreateTicketOpen(true);
   };
   const closeCreateTicket = () => {
-    setIsCreateTicketOpen(false);
     setCreateTicketSectionId(null);
   };
   const allCollaborators = board ? [board.owner, ...board.collaborators] : [];
@@ -58,9 +57,15 @@ const Board = ({ boardId }: BoardProps) => {
     <div className="relative mx-2 mt-3 mb-3 flex flex-1 flex-col gap-2">
       {board && (
         <>
-          <h2 className="block-primary w-fit px-3 py-2">{board.name}</h2>
-          <div className="block-primary w-fit px-3 py-2">
-            {board.description}
+          <div className="block-primary flex w-full justify-between px-3 py-2">
+            <h2>
+              {board.name}
+              <br />
+              {board.description}
+            </h2>
+            <button className="button-primary h-fit shrink-0 rounded-full p-0.5">
+              <img src={settings} />
+            </button>
           </div>
 
           {/* Presence Tracking */}
@@ -106,9 +111,9 @@ const Board = ({ boardId }: BoardProps) => {
           </AnimatePresence>
 
           {/* Create Ticket */}
-          {isCreateTicketOpen && createTicketSectionId && (
+          {createTicketSectionId && (
             <CreateTicketModal
-              open={isCreateTicketOpen}
+              open={createTicketSectionId !== null}
               closeModal={closeCreateTicket}
               boardId={board.id}
               sectionId={createTicketSectionId}

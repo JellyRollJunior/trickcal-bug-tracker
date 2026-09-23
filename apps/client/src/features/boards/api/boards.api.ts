@@ -1,7 +1,11 @@
 import {
     getBoardResponseSchema,
     getBoardsResponseSchema,
+    patchBoardResponseSchema,
+    patchboardsRequestBodySchema,
+    ValidationError,
     type BoardDto,
+    type PatchboardsRequestBody,
 } from '@trickcal-bug-tracker/shared';
 import { makeRequest, safeParse } from '@/lib/apiClient.ts';
 
@@ -19,4 +23,26 @@ const getBoard = async (boardId: BoardDto['id']) => {
     return parsedResponse;
 };
 
-export { getBoards, getBoard };
+const patchBoard = async (
+    boardId: BoardDto['id'],
+    data: PatchboardsRequestBody
+) => {
+    const path = `/boards/${boardId}`;
+    const parsedBody = safeParse(patchboardsRequestBodySchema, data);
+    if (Object.keys(parsedBody).length <= 0) {
+        throw new ValidationError({
+            'At least one value required': [
+                'name is undefined',
+                'description is undefined',
+            ],
+        });
+    }
+    const response = await makeRequest(path, {
+        method: 'PATCH',
+        body: JSON.stringify(parsedBody),
+    });
+    const parsedResponse = safeParse(patchBoardResponseSchema, response)
+    return parsedResponse;
+};
+
+export { getBoards, getBoard, patchBoard };

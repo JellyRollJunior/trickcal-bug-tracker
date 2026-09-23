@@ -5,5 +5,6 @@ import {
 
 const getBoardsResponseSchema = boardDtoSchema.array();
 const getBoardResponseSchema = boardWithSectionsAndTicketsDtoSchema;
+const patchBoardResponseSchema = boardDtoSchema;
 
-export { getBoardsResponseSchema, getBoardResponseSchema };
+export { getBoardsResponseSchema, getBoardResponseSchema, patchBoardResponseSchema };
