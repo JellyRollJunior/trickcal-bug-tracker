@@ -10,14 +10,14 @@ const userJoinedRoomPayloadSchema = z.object({
     userId: userShape.id,
     viewers: userDtoSchema.array(),
 });
-type UserJoinedPayload = z.infer<typeof userJoinedRoomPayloadSchema>;
+type UserJoinedRoomPayload = z.infer<typeof userJoinedRoomPayloadSchema>;
 
 // board:user-left-room
 const userLeftRoomPayloadSchema = z.object({
     userId: userShape.id,
     viewers: userDtoSchema.array(),
 });
-type UserLeftPayload = z.infer<typeof userLeftRoomPayloadSchema>;
+type UserLeftRoomPayload = z.infer<typeof userLeftRoomPayloadSchema>;
 
 // board:edited
 const boardEditedPayloadSchema = z.object({
@@ -36,12 +36,15 @@ const boardAddedCollaboratorPayloadSchema = z.object({
     user: userDtoSchema,
     board: boardDtoSchema,
 });
-type BoardAddedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
+type BoardAddedCollaborator = z.infer<
+    typeof boardAddedCollaboratorPayloadSchema
+>;
 
 // board:removed-collaborator
 const boardRemovedCollaboratorSchema = boardAddedCollaboratorPayloadSchema;
-type BoardRemovedCollaborator = z.infer<typeof boardAddedCollaboratorPayloadSchema>;
-
+type BoardRemovedCollaborator = z.infer<
+    typeof boardAddedCollaboratorPayloadSchema
+>;
 
 /* ---------- Sections ---------- */
 // section:created
@@ -58,7 +61,6 @@ type SectionEditedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
 // section:deleted
 const sectionDeletedPayloadSchema = sectionCreatedPayloadSchema;
 type SectionDeletedPayload = z.infer<typeof sectionCreatedPayloadSchema>;
-
 
 /* ---------- Tickets ---------- */
 // ticket:created
@@ -80,7 +82,7 @@ type TicketMovedPayload = z.infer<typeof ticketMovedPayloadSchema>;
 const ticketUpdatedPayloadSchema = z.object({
     updatedBy: userDtoSchema,
     ticket: ticketDtoSchema,
-})
+});
 type TicketUpdatedPayload = z.infer<typeof ticketUpdatedPayloadSchema>;
 
 // ticket:updated-assignee
@@ -88,14 +90,16 @@ const ticketAssigneeUpdatedPayloadSchema = z.object({
     updatedBy: userDtoSchema,
     previousAssignee: userDtoSchema.nullable(),
     ticket: ticketDtoSchema,
-})
-type TicketAssigneeUpdatedPayload = z.infer<typeof ticketAssigneeUpdatedPayloadSchema>;
+});
+type TicketAssigneeUpdatedPayload = z.infer<
+    typeof ticketAssigneeUpdatedPayloadSchema
+>;
 
 // ticket:deleted
 const ticketDeletedPayloadSchema = z.object({
     deletedBy: userDtoSchema,
     ticket: ticketDtoSchema,
-})
+});
 type TicketDeletedPayload = z.infer<typeof ticketDeletedPayloadSchema>;
 
 export type {
@@ -103,36 +107,30 @@ export type {
     BoardRemovedCollaborator,
     BoardDeletedPayload,
     BoardEditedPayload,
-    
     SectionCreatedPayload,
     SectionDeletedPayload,
     SectionEditedPayload,
-    
     TicketCreatedPayload,
     TicketUpdatedPayload,
     TicketAssigneeUpdatedPayload,
     TicketMovedPayload,
     TicketDeletedPayload,
-    
-    UserJoinedPayload,
-    UserLeftPayload,
+    UserJoinedRoomPayload,
+    UserLeftRoomPayload,
 };
 export {
     boardAddedCollaboratorPayloadSchema,
     boardEditedPayloadSchema,
     boardRemovedCollaboratorSchema,
     boardDeletedPayloadSchema,
-    
     sectionCreatedPayloadSchema,
     sectionEditedPayloadSchema,
     sectionDeletedPayloadSchema,
-    
     ticketCreatedPayloadSchema,
     ticketMovedPayloadSchema,
     ticketUpdatedPayloadSchema,
     ticketAssigneeUpdatedPayloadSchema,
     ticketDeletedPayloadSchema,
-    
     userJoinedRoomPayloadSchema,
     userLeftRoomPayloadSchema,
 };

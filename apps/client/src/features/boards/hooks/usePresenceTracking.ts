@@ -1,9 +1,15 @@
+import type {
+    BoardDto,
+    UserDto,
+    SocketJoinRoomResponse,
+    UserJoinedRoomPayload,
+    UserLeftRoomPayload,
+} from '@trickcal-bug-tracker/shared';
 import {
     joinRoomOutputSchema,
-    type BoardDto,
-    type UserDto,
+    userJoinedRoomPayloadSchema,
+    userLeftRoomPayloadSchema,
 } from '@trickcal-bug-tracker/shared';
-import type { SocketJoinRoomResponse } from '@trickcal-bug-tracker/shared';
 import { useCallback, useEffect, useState } from 'react';
 import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
@@ -51,14 +57,30 @@ const usePresenceTracking = (boardId: BoardDto['id']) => {
         if (!isConnected || !socket) return;
 
         // board:user-joined-room
-        const handleUserJoined = (payload: { viewers: UserDto[] }) => {
-            setViewerList(payload.viewers);
+        const handleUserJoined = (payload: UserJoinedRoomPayload) => {
+            try {
+                const parsedPayload = safeParse(
+                    userJoinedRoomPayloadSchema,
+                    payload
+                );
+                setViewerList(parsedPayload.viewers);
+            } catch (error) {
+                handleError(error);
+            }
         };
         socket.on('board:user-joined-room', handleUserJoined);
 
         // board:user-left-room
-        const handleUserLeft = (payload: { viewers: UserDto[] }) => {
-            setViewerList(payload.viewers);
+        const handleUserLeft = (payload: UserLeftRoomPayload) => {
+            try {
+                const parsedPayload = safeParse(
+                    userLeftRoomPayloadSchema,
+                    payload
+                );
+                setViewerList(parsedPayload.viewers);
+            } catch (error) {
+                handleError(error);
+            }
         };
         socket.on('board:user-left-room', handleUserLeft);
 

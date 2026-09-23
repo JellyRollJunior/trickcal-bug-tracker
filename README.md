@@ -201,10 +201,6 @@ $ turbo dev
 
 ## Current
 
-- parse response
-    - user-left-room
-    - user-joined-room
-
 - usePresenceTracking
     - race condition?
 

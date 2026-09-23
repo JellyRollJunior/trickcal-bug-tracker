@@ -16,8 +16,8 @@ import {
     TicketDeletedPayload,
     TicketMovedPayload,
     TicketUpdatedPayload,
-    UserJoinedPayload,
-    UserLeftPayload,
+    UserJoinedRoomPayload,
+    UserLeftRoomPayload,
 } from './socket.server-client.schema.js';
 import {
     SocketBaseResponse,
@@ -26,8 +26,8 @@ import {
 import { BoardDto } from '../features/boards/index.js';
 
 type ServerToClientEvents = {
-    'board:user-joined-room': (payload: UserJoinedPayload) => void;
-    'board:user-left-room': (payload: UserLeftPayload) => void;
+    'board:user-joined-room': (payload: UserJoinedRoomPayload) => void;
+    'board:user-left-room': (payload: UserLeftRoomPayload) => void;
     'board:edited': (payload: BoardEditedPayload) => void;
     'board:deleted': (payload: BoardDeletedPayload) => void;
     'board:added-collaborator': (payload: BoardAddedCollaborator) => void;
