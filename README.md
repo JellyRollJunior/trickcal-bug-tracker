@@ -225,7 +225,6 @@ $ turbo dev
     - delete colalborator
 - section
     - edit section
-    - delete seciton
 - tickets
     - edit ticket
     - edit ticket assignee
