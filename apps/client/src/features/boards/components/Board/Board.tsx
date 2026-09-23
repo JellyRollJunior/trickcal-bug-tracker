@@ -22,7 +22,9 @@ const Board = ({ boardId }: BoardProps) => {
 
   // Create Ticket Modal
   const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false);
-  const [createTicketSectionId, setCreateTicketSectionId] = useState<SectionDto['id'] | null>(null);
+  const [createTicketSectionId, setCreateTicketSectionId] = useState<
+    SectionDto['id'] | null
+  >(null);
   const openCreateTicket = (sectionId: SectionDto['id']) => {
     setCreateTicketSectionId(sectionId);
     setIsCreateTicketOpen(true);
@@ -37,15 +39,18 @@ const Board = ({ boardId }: BoardProps) => {
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   // Section Settings
-  const [isSectionSettingsOpen, setIsSectionSettingsOpen] = useState(false);
-  const [settingsSectionId, setSettingsSectionId] = useState<SectionDto['id'] | null>(null);
-  const openSectionSettings = (sectionId: SectionDto['id']) => {
-    setSettingsSectionId(sectionId);
-    setIsSectionSettingsOpen(true);
+  const [settingsDrawerData, setSettingsDrawerData] = useState<Pick<
+    SectionDto,
+    'id' | 'name'
+  > | null>(null);
+  const openSectionSettings = (
+    id: SectionDto['id'],
+    name: SectionDto['name']
+  ) => {
+    setSettingsDrawerData({ id, name });
   };
   const closeSectionSettings = () => {
-    setIsSectionSettingsOpen(false);
-    setSettingsSectionId(null);
+    setSettingsDrawerData(null);
   };
 
   return (
@@ -72,7 +77,9 @@ const Board = ({ boardId }: BoardProps) => {
             {board.sections.map((section) => (
               <Section
                 openCreateTicketModal={() => openCreateTicket(section.id)}
-                openSectionSettings={() => openSectionSettings(section.id)}
+                openSectionSettings={() =>
+                  openSectionSettings(section.id, section.name)
+                }
                 key={section.id}
                 section={section}
               />
@@ -86,12 +93,13 @@ const Board = ({ boardId }: BoardProps) => {
           </ol>
 
           {/* Section Settings drawer */}
-          {isSectionSettingsOpen && settingsSectionId && (
+          {settingsDrawerData && (
             <SectionSettingsDrawer
-              open={isSectionSettingsOpen}
+              open={settingsDrawerData !== null}
               closeDrawer={closeSectionSettings}
               boardId={board.id}
-              sectionId={settingsSectionId}
+              sectionId={settingsDrawerData.id}
+              sectionName={settingsDrawerData.name}
             />
           )}
 

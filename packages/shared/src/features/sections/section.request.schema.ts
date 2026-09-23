@@ -9,7 +9,7 @@ const postSectionsRequestBodySchema = z.object({
 type PostSectionsRequestBody = z.infer<typeof postSectionsRequestBodySchema>;
 
 const patchSectionsRequestBodySchema = z.object({
-    name: sectionShape.name.optional(),
+    name: sectionShape.name,
 });
 type PatchSectionsRequestBody = z.infer<typeof patchSectionsRequestBodySchema>;
 

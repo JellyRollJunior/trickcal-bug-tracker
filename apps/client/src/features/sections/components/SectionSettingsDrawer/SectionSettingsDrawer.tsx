@@ -9,15 +9,24 @@ type SectionSettingsDrawerProps = {
   closeDrawer: () => void;
   boardId: BoardDto['id'];
   sectionId: SectionDto['id'];
+  sectionName: SectionDto['name'];
 };
 const SectionSettingsDrawer = ({
   open,
   closeDrawer,
   boardId,
   sectionId,
+  sectionName,
 }: SectionSettingsDrawerProps) => {
-  const { handleDeleteSection, isPendingDeleteSection } =
-    useSectionSettingsDrawer(boardId, sectionId, closeDrawer);
+  const {
+    handleDeleteSection,
+    isPendingDeleteSection,
+    handlePatchSection,
+    isPendingPatchSection,
+    newName,
+    setNewName,
+    reset,
+  } = useSectionSettingsDrawer(boardId, sectionId, closeDrawer);
 
   const [isDeleteSectionOpen, setIsDeleteSectionOpen] = useState(false);
   const openDeleteSection = () => setIsDeleteSectionOpen(true);
@@ -35,7 +44,10 @@ const SectionSettingsDrawer = ({
         >
           <button
             className="absolute -top-1.5 right-1.5 h-fit text-2xl"
-            onClick={closeDrawer}
+            onClick={() => {
+              closeDrawer();
+              reset();
+            }}
           >
             ×
           </button>
@@ -45,10 +57,33 @@ const SectionSettingsDrawer = ({
           <button
             className="button-caution w-fit px-1 py-0.5 text-xs"
             onClick={openDeleteSection}
+            disabled={isPendingDeleteSection || isPendingPatchSection}
           >
             Remove section
           </button>
           <hr className="mt-3 h-px border-0 bg-gray-300" />
+
+          {/* Patch Section */}
+          <form className="mt-3" onSubmit={handlePatchSection}>
+            <label htmlFor="newSectionName">Edit section name</label>
+            <input
+              className="block-primary mt-2 w-full py-1 pr-1 pl-2"
+              id="newSectionName"
+              placeholder={sectionName}
+              type="text"
+              value={newName}
+              onChange={(event) => setNewName(event.target.value)}
+              required
+            />
+            <button
+              className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300"
+              disabled={isPendingDeleteSection || isPendingPatchSection}
+            >
+              Save changes
+            </button>
+          </form>
+
+          {/* Delete Section Modal */}
           <Modal
             open={isDeleteSectionOpen}
             closeModal={closeDeleteSection}
