@@ -214,6 +214,27 @@ const deleteBoardCollaborator = async ({
     }
 };
 
+const getPotentialCollaborators = async ({
+    boardId,
+}: {
+    boardId: Board['id'];
+}) => {
+    try {
+        const data = await prisma.user.findMany({
+            where: {
+                boards: {
+                    none: {
+                        id: boardId,
+                    },
+                },
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new DatabaseError('Unable to fetch potential collaborators');
+    }
+};
+
 export {
     getBoardsByUserId,
     getBoardWithSectionsById,
@@ -224,4 +245,5 @@ export {
     deleteBoard,
     addBoardCollaborator,
     deleteBoardCollaborator,
+    getPotentialCollaborators,
 };

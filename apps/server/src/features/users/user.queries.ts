@@ -1,4 +1,5 @@
 import type { User } from '@prisma/client';
+import { DatabaseError } from '@trickcal-bug-tracker/shared';
 import { prisma } from '@/db/prisma.js';
 
 const getUserById = async ({ id }: Pick<User, 'id'>) => {
@@ -10,7 +11,7 @@ const getUserById = async ({ id }: Pick<User, 'id'>) => {
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to fetch user');
+        throw new DatabaseError('Unable to fetch user');
     }
 };
 
@@ -23,7 +24,7 @@ const getUserByUsername = async ({ username }: Pick<User, 'username'>) => {
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to fetch user');
+        throw new DatabaseError('Unable to fetch user');
     }
 };
 
@@ -37,7 +38,7 @@ const getUserByGithubId = async ({ githubId }: Pick<User, 'githubId'>) => {
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to fetch user');
+        throw new DatabaseError('Unable to fetch user');
     }
 };
 
@@ -51,7 +52,7 @@ const getUserByGoogleId = async ({ googleId }: Pick<User, 'googleId'>) => {
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to fetch user');
+        throw new DatabaseError('Unable to fetch user');
     }
 };
 
@@ -70,7 +71,7 @@ const createUser = async ({
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to create user');
+        throw new DatabaseError('Unable to create user');
     }
 };
 
@@ -87,7 +88,7 @@ const createGithubUser = async ({
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to create user');
+        throw new DatabaseError('Unable to create user');
     }
 };
 
@@ -104,7 +105,7 @@ const createGoogleUser = async ({
         });
         return data;
     } catch (error) {
-        throw new Error('Unable to create user');
+        throw new DatabaseError('Unable to create user');
     }
 };
 
