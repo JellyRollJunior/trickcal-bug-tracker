@@ -1,7 +1,6 @@
-import { Modal } from '@/common/components/Modal';
 import type { BoardDto } from '@trickcal-bug-tracker/shared';
-import { useState } from 'react';
-import { usePatchBoard } from '../../hooks/usePatchBoard';
+import { Modal } from '@/common/components/Modal';
+import { usePatchBoardModal } from '@/features/boards/components/PatchBoardModal/usePatchBoardModal.ts';
 
 type PatchBoardModalProps = {
   open: boolean;
@@ -17,33 +16,15 @@ const PatchBoardModal = ({
   boardName,
   boardDescription,
 }: PatchBoardModalProps) => {
-  const [newBoardName, setNewBoardName] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-
-  const reset = () => {
-    setNewBoardName('');
-    setNewDescription('');
-  };
-  const { mutate: patchBoard, isPending: isPendingPatchBoard } =
-    usePatchBoard(boardId);
-
-  const handlePatchBoard = () => {    
-    patchBoard(
-      {
-        boardId,
-        data: {
-          name: newBoardName !== '' ? newBoardName : undefined,
-          description: newDescription !== '' ? newDescription : undefined,
-        },
-      },
-      {
-        onSuccess: () => {
-          closeModal();
-          reset();
-        },
-      }
-    );
-  };
+  const {
+    newBoardName,
+    setNewBoardName,
+    newDescription,
+    setNewDescription,
+    reset,
+    handlePatchBoard,
+    isPendingPatchBoard,
+  } = usePatchBoardModal(boardId, closeModal);
 
   return (
     <Modal open={open} closeModal={closeModal} title={'Edit Board'}>
