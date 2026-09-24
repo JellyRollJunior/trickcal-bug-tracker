@@ -211,7 +211,7 @@ $ turbo dev
     - does calling patch with empty body cause refresh
     - how to ensure at least one value is included?
     - bug -> refresh on patch board w/ empty state
-- parse board deleted data
+- test board deleted socket redirect
 
 ## Todo list
 
@@ -236,23 +236,6 @@ $ turbo dev
     - edit ticket
     - edit ticket assignee
     - delete ticket
-
-- socket
-    - move ticket
-    - presence tracking
-    - board edited
-    - board deleted
-    - collab added
-    - collab deleted
-    - section edited
-    - section deleted
-    - section created
-
-    - ticket created
-    - ticket updated
-    - ticket deleted
-    - ticket moved
-    - ticket assignee changed
 
 ## Improvements
 

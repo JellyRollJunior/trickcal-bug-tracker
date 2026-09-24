@@ -1,6 +1,7 @@
-import type {
-    BoardDeletedPayload,
-    BoardDto,
+import {
+    boardDeletedPayloadSchema,
+    type BoardDeletedPayload,
+    type BoardDto,
 } from '@trickcal-bug-tracker/shared';
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -9,6 +10,7 @@ import { toast } from 'sonner';
 import { useBoard } from '@/features/boards/hooks/useBoard.ts';
 import { usePresenceTracking } from '@/features/boards/hooks/usePresenceTracking.ts';
 import { useSocket } from '@/context/socket/useSocket.ts';
+import { safeParse } from '@/lib/apiClient';
 
 const useBoardPage = (boardId: BoardDto['id']) => {
     const {
@@ -35,8 +37,9 @@ const useBoardPage = (boardId: BoardDto['id']) => {
         socket.on('board:added-collaborator', refetchBoard);
         socket.on('board:removed-collaborator', refetchBoard);
         const handleBoardDeleted = (payload: BoardDeletedPayload) => {
+            const parsedPayload = safeParse(boardDeletedPayloadSchema, payload);
+            toast.error(`Board: ${parsedPayload.board.name} was deleted`);
             navigate('/');
-            toast.error(`Board: ${payload.board.name} was deleted`);
         };
         socket.on('board:deleted', handleBoardDeleted);
 
