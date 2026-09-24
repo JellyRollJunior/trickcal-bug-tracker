@@ -2,7 +2,7 @@ import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { useSectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/useSectionSettingsDrawer.ts';
-import { Modal } from '@/common/components/Modal.tsx';
+import { CautionModal } from '@/common/components/CautionModal.tsx';
 
 type SectionSettingsDrawerProps = {
   closeDrawer: () => void;
@@ -80,32 +80,14 @@ const SectionSettingsDrawer = ({
       </form>
 
       {/* Delete Section Modal */}
-      <Modal
+      <CautionModal
         open={isDeleteSectionOpen}
         closeModal={closeDeleteSection}
-        title="Remove section"
-      >
-        <form onSubmit={handleDeleteSection}>
-          <p className="mt-5 text-center text-sm">
-            Are you sure you want to remove section?
-          </p>
-          <div className="mt-8 flex justify-end gap-3">
-            <button
-              className="button-primary px-3 py-1"
-              type="button"
-              onClick={closeDeleteSection}
-            >
-              Cancel
-            </button>
-            <button
-              className="button-caution px-3 py-1"
-              disabled={isPendingDeleteSection}
-            >
-              Remove section
-            </button>
-          </div>
-        </form>
-      </Modal>
+        onSubmit={handleDeleteSection}
+        isSubmitDisabled={isPendingDeleteSection}
+        title="Are you sure you want to remove section?"
+        submitActionLabel="Remove section"
+      />
     </motion.aside>
   );
 };
