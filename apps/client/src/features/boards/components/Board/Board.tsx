@@ -3,12 +3,13 @@ import settings from '@/assets/icons/settings.svg';
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AnimatePresence } from 'motion/react';
 import { Section } from '@/features/sections/components/Section.tsx';
 import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.ts';
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
-import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer';
-import { AnimatePresence } from 'motion/react';
+import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer.tsx';
+import { PatchBoardModal } from '@/features/boards/components/PatchBoardModal/PatchBoardModal.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -22,6 +23,11 @@ const BoardContainer = () => {
 
 const Board = ({ boardId }: BoardProps) => {
   const { board, viewerList } = useBoardPage(boardId);
+
+  // Patch Board Modal
+  const [isPatchBoardOpen, setIsPatchBoardOpen] = useState(false);
+  const openPatchBoard = () => setIsPatchBoardOpen(true);
+  const closePatchBoard = () => setIsPatchBoardOpen(false);
 
   // Create Ticket Modal
   const [createTicketSectionId, setCreateTicketSectionId] = useState<
@@ -57,13 +63,17 @@ const Board = ({ boardId }: BoardProps) => {
     <div className="relative mx-2 mt-3 mb-3 flex flex-1 flex-col gap-2">
       {board && (
         <>
+          {/* Board Data + controls */}
           <div className="block-primary flex w-full justify-between px-3 py-2">
             <h2>
               {board.name}
               <br />
               {board.description}
             </h2>
-            <button className="button-primary h-fit shrink-0 rounded-full p-0.5">
+            <button
+              className="button-primary h-fit shrink-0 rounded-full p-0.5"
+              onClick={openPatchBoard}
+            >
               <img src={settings} />
             </button>
           </div>
@@ -97,6 +107,15 @@ const Board = ({ boardId }: BoardProps) => {
               insertAfterSectionId={lastSectionId}
             />
           </ol>
+
+          {/* Patch Board */}
+          <PatchBoardModal
+            open={isPatchBoardOpen}
+            closeModal={closePatchBoard}
+            boardId={board.id}
+            boardName={board.name}
+            boardDescription={board.description}
+          />
 
           {/* Section Settings drawer */}
           <AnimatePresence>

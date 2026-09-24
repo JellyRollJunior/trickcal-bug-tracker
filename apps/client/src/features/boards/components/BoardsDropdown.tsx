@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import { useBoards } from '@/features/boards/hooks/useBoards.tsx';
+import { useBoards } from '@/features/boards/hooks/useBoards.ts';
 
 const BoardsDropdown = () => {
   const { data, isSuccess, isPending } = useBoards();
@@ -25,7 +25,7 @@ const BoardsDropdown = () => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="border-sand-beige absolute w-full overflow-hidden rounded-b-md border-2 border-t-0 bg-white"
+              className="border-sand-beige absolute w-full overflow-hidden rounded-b-md border-2 border-t-0 z-10 bg-white"
             >
               {data.map((board) => (
                 <li
