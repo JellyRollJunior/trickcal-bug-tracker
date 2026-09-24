@@ -15,6 +15,7 @@ import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
 import { resolveError } from '@/lib/resolveError.ts';
 import { handleError } from '@/lib/errorHandler.ts';
+import { withSocketErrorHandling } from '@/lib/socketErrorWrapper.ts';
 
 const usePresenceTracking = (boardId: BoardDto['id']) => {
     const { socket, isConnected } = useSocket();
@@ -57,17 +58,15 @@ const usePresenceTracking = (boardId: BoardDto['id']) => {
         if (!isConnected || !socket) return;
 
         // board:user-joined-room
-        const handleUserJoined = (payload: UserJoinedRoomPayload) => {
-            try {
+        const handleUserJoined = withSocketErrorHandling(
+            (payload: UserJoinedRoomPayload) => {
                 const parsedPayload = safeParse(
                     userJoinedRoomPayloadSchema,
                     payload
                 );
                 setViewerList(parsedPayload.viewers);
-            } catch (error) {
-                handleError(error);
             }
-        };
+        );
         socket.on('board:user-joined-room', handleUserJoined);
 
         // board:user-left-room
