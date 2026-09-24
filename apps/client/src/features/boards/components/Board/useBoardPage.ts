@@ -1,5 +1,5 @@
 import type { BoardDto } from '@trickcal-bug-tracker/shared';
-import { useBoard } from '@/features/boards/hooks/useBoard.tsx';
+import { useBoard } from '@/features/boards/hooks/useBoard.ts';
 import { usePresenceTracking } from '@/features/boards/hooks/usePresenceTracking.ts';
 
 const useBoardPage = (boardId: BoardDto['id']) => {

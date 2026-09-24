@@ -23,10 +23,13 @@ const getBoard = async (boardId: BoardDto['id']) => {
     return parsedResponse;
 };
 
-const patchBoard = async (
-    boardId: BoardDto['id'],
-    data: PatchboardsRequestBody
-) => {
+const patchBoard = async ({
+    boardId,
+    data,
+}: {
+    boardId: BoardDto['id'];
+    data: PatchboardsRequestBody;
+}) => {
     const path = `/boards/${boardId}`;
     const parsedBody = safeParse(patchboardsRequestBodySchema, data);
     if (Object.keys(parsedBody).length <= 0) {
@@ -41,7 +44,7 @@ const patchBoard = async (
         method: 'PATCH',
         body: JSON.stringify(parsedBody),
     });
-    const parsedResponse = safeParse(patchBoardResponseSchema, response)
+    const parsedResponse = safeParse(patchBoardResponseSchema, response);
     return parsedResponse;
 };
 
