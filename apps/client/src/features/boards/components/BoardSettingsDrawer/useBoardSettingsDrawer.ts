@@ -2,7 +2,7 @@ import type { BoardDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { usePatchBoard } from '@/features/boards/hooks/usePatchBoard.ts';
 
-const usePatchBoardModal = (
+const useBoardSettingsDrawer = (
     boardId: BoardDto['id'],
     closeModal: () => void
 ) => {
@@ -46,4 +46,4 @@ const usePatchBoardModal = (
     };
 };
 
-export { usePatchBoardModal };
+export { useBoardSettingsDrawer };

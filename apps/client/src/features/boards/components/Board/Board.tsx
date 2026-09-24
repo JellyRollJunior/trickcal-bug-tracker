@@ -9,7 +9,7 @@ import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.ts
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
 import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer.tsx';
-import { PatchBoardModal } from '@/features/boards/components/PatchBoardModal/PatchBoardModal.tsx';
+import { BoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/BoardSettingsDrawer.tsx';
 
 type BoardProps = { boardId: BoardDto['id'] };
 
@@ -109,9 +109,9 @@ const Board = ({ boardId }: BoardProps) => {
           </ol>
 
           {/* Patch Board */}
-          <PatchBoardModal
+          <BoardSettingsDrawer
             open={isPatchBoardOpen}
-            closeModal={closePatchBoard}
+            closeDrawer={closePatchBoard}
             boardId={board.id}
             boardName={board.name}
             boardDescription={board.description}
