@@ -1,6 +1,14 @@
-import type { BoardDto } from '@trickcal-bug-tracker/shared';
+import type {
+    BoardDeletedPayload,
+    BoardDto,
+} from '@trickcal-bug-tracker/shared';
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { useBoard } from '@/features/boards/hooks/useBoard.ts';
 import { usePresenceTracking } from '@/features/boards/hooks/usePresenceTracking.ts';
+import { useSocket } from '@/context/socket/useSocket.ts';
 
 const useBoardPage = (boardId: BoardDto['id']) => {
     const {
@@ -9,6 +17,61 @@ const useBoardPage = (boardId: BoardDto['id']) => {
         isPending: isPendingGetBoard,
     } = useBoard(boardId);
     const { viewerList } = usePresenceTracking(boardId);
+
+    const { socket, isConnected } = useSocket();
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
+
+    // Socket update listeners
+    useEffect(() => {
+        if (!isConnected || !socket) return;
+
+        const refetchBoard = () => {
+            queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
+        };
+
+        // board
+        socket.on('board:edited', refetchBoard);
+        socket.on('board:added-collaborator', refetchBoard);
+        socket.on('board:removed-collaborator', refetchBoard);
+        const handleBoardDeleted = (payload: BoardDeletedPayload) => {
+            navigate('/');
+            toast.error(`Board: ${payload.board.name} was deleted`);
+        };
+        socket.on('board:deleted', handleBoardDeleted);
+
+        // section
+        socket.on('section:created', refetchBoard);
+        socket.on('section:edited', refetchBoard);
+        socket.on('section:deleted', refetchBoard);
+
+        // ticket
+        socket.on('ticket:created', refetchBoard);
+        socket.on('ticket:updated', refetchBoard);
+        socket.on('ticket:updated-assignee', refetchBoard);
+        socket.on('ticket:moved', refetchBoard);
+        socket.on('ticket:deleted', refetchBoard);
+
+        return () => {
+            // board
+            socket.off('board:edited', refetchBoard);
+            socket.off('board:added-collaborator', refetchBoard);
+            socket.off('board:removed-collaborator', refetchBoard);
+            socket.off('board:deleted', handleBoardDeleted);
+
+            // section
+            socket.off('section:created', refetchBoard);
+            socket.off('section:edited', refetchBoard);
+            socket.off('section:deleted', refetchBoard);
+
+            // ticket
+            socket.off('ticket:created', refetchBoard);
+            socket.off('ticket:updated', refetchBoard);
+            socket.off('ticket:updated-assignee', refetchBoard);
+            socket.off('ticket:moved', refetchBoard);
+            socket.off('ticket:deleted', refetchBoard);
+        };
+    }, [socket, isConnected, navigate, queryClient, boardId]);
 
     return {
         board,

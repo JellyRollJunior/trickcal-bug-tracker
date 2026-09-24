@@ -4,14 +4,13 @@ import {
     ValidationError,
 } from '@trickcal-bug-tracker/shared';
 import { toast } from 'sonner';
-import { router } from '@/routes/router.tsx';
 
 const handleError = (error: unknown) => {
     if (error instanceof AuthenticationError) {
         // notify user of authentication error
-        const currentPath = router.state.location.pathname;
+        const currentPath = window.location.pathname;
         if (currentPath !== '/auth/login') {
-            router.navigate('/auth/login', { replace: true });
+            window.location.replace('/auth/login')
         }
         toast.error('Login expired. Please login again.');
     } else if (error instanceof ValidationError) {

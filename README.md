@@ -201,6 +201,7 @@ $ turbo dev
     - Root cause: Forgot to use useCallback on joinRoom function
     - everytime a state updates, joinRoom is recreated
     - joinRoom is called again each time it is recreated
+- Debugging circular import with vite --debug hmr
 
 ## Current
 
@@ -210,6 +211,7 @@ $ turbo dev
     - does calling patch with empty body cause refresh
     - how to ensure at least one value is included?
     - bug -> refresh on patch board w/ empty state
+- parse board deleted data
 
 ## Todo list
 
@@ -226,7 +228,6 @@ $ turbo dev
     - signup
 - board
     - delete board
-    - patch board
     - add collaborator
     - delete colalborator
 - section
