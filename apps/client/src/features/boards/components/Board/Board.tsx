@@ -4,10 +4,9 @@ import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
-import { Section } from '@/features/sections/components/Section.tsx';
 import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.ts';
+import { BoardContent } from '@/features/boards/components/BoardContent.tsx';
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
-import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
 import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer.tsx';
 import { BoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/BoardSettingsDrawer.tsx';
 
@@ -40,9 +39,6 @@ const Board = ({ boardId }: BoardProps) => {
     setCreateTicketSectionId(null);
   };
   const allCollaborators = board ? [board.owner, ...board.collaborators] : [];
-
-  // Create Section List Item
-  const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   // Section Settings
   const [settingsDrawerData, setSettingsDrawerData] = useState<Pick<
@@ -86,25 +82,11 @@ const Board = ({ boardId }: BoardProps) => {
             ))}
           </ul>
 
-          {/* Section List */}
-          <ol className="flex flex-1 gap-3 overflow-x-auto">
-            {board.sections.map((section) => (
-              <Section
-                openCreateTicketModal={() => openCreateTicket(section.id)}
-                openSectionSettings={() =>
-                  openSectionSettings(section.id, section.name)
-                }
-                key={section.id}
-                section={section}
-              />
-            ))}
-
-            {/* Create Section */}
-            <CreateSectionListItem
-              boardId={board.id}
-              insertAfterSectionId={lastSectionId}
-            />
-          </ol>
+          <BoardContent
+            board={board}
+            openCreateTicket={openCreateTicket}
+            openSectionSettings={openSectionSettings}
+          />
 
           {/* Patch Board */}
           <BoardSettingsDrawer
