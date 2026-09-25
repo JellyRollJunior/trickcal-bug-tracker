@@ -1,9 +1,11 @@
 import type {
   BoardWithSectionsAndTicketsDto,
   SectionDto,
+  TicketDto,
 } from '@trickcal-bug-tracker/shared';
 import { Section } from '@/features/sections/components/Section';
 import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem';
+import { useEffect, useState } from 'react';
 
 type BoardContentProps = {
   board: BoardWithSectionsAndTicketsDto;
@@ -18,18 +20,41 @@ const BoardContent = ({
   // Create Section List Item
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
+  const [activeTicket, setActiveTicket] = useState<TicketDto['id'] | null>(
+    null
+  );
+
+  const handleMoveTicket = (
+    sectionId: SectionDto['id'],
+    order: TicketDto['order'] | null
+  ) => {
+    if (!activeTicket) return;
+
+    // insert code here: if order + section are the same, do not move
+    console.log(
+      `moving [ticket ${activeTicket}] to [section ${sectionId} - order ${order}]`
+    );
+  };
+
+  useEffect(() => {
+    console.log(activeTicket)
+  }, [activeTicket])
+
   return (
     <main>
       {/* Section List */}
       <ol className="flex flex-1 gap-3 overflow-x-auto">
         {board.sections.map((section) => (
           <Section
+            key={section.id}
+            section={section}
             openCreateTicketModal={() => openCreateTicket(section.id)}
             openSectionSettings={() =>
               openSectionSettings(section.id, section.name)
             }
-            key={section.id}
-            section={section}
+            handleMoveTicket={handleMoveTicket}
+            activeTicket={activeTicket}
+            setActiveTicket={setActiveTicket}
           />
         ))}
 
