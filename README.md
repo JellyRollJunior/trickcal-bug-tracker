@@ -213,6 +213,8 @@ $ turbo dev
     - bug -> refresh on patch board w/ empty state
 - test board deleted socket redirect
 
+- hide add/remove collaborators if not owner
+
 ## Todo list
 
 - optimistic updates with tanstack for ticket move
