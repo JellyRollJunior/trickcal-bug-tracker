@@ -2,12 +2,14 @@ import type { BoardDto } from '@trickcal-bug-tracker/shared';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/useBoardSettingsDrawer';
 import { AddCollaboratorForm } from '../AddCollaboratorForm/AddCollaboratorForm';
+import { DeleteCollaboratorForm } from '../DeleteCollaboratorForm/DeleteCollaboratorForm';
 
 type BoardSettingsDrawerProps = {
   open: boolean;
   closeDrawer: () => void;
   boardId: BoardDto['id'];
   boardOwnerId: BoardDto['owner']['id'];
+  boardCollaborators: BoardDto['collaborators']
   boardName: BoardDto['name'];
   boardDescription: BoardDto['description'];
 };
@@ -16,6 +18,7 @@ const BoardSettingsDrawer = ({
   closeDrawer,
   boardId,
   boardOwnerId,
+  boardCollaborators,
   boardName,
   boardDescription,
 }: BoardSettingsDrawerProps) => {
@@ -96,6 +99,7 @@ const BoardSettingsDrawer = ({
 
               {/* Remove Board Collaborators */}
               <hr className="mt-3 h-px border-0 bg-gray-300" />
+              <DeleteCollaboratorForm boardId={boardId} collaborators={boardCollaborators} isDisabled={isPendingPatchBoard} />
             </>
           )}
         </motion.aside>
