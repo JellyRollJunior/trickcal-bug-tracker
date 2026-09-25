@@ -1,4 +1,5 @@
 import {
+    getAvailableNewCollaboratorsResponseSchema,
     getBoardResponseSchema,
     getBoardsResponseSchema,
     patchBoardResponseSchema,
@@ -48,4 +49,20 @@ const patchBoard = async ({
     return parsedResponse;
 };
 
-export { getBoards, getBoard, patchBoard };
+const getAvailableNewCollaborators = async ({
+    boardId,
+}: {
+    boardId: BoardDto['id'];
+}) => {
+    const path = `/boards/${boardId}/collaborators/available`;
+    const response = await makeRequest(path, {
+        method: 'GET',
+    });
+    const parsedResponse = safeParse(
+        getAvailableNewCollaboratorsResponseSchema,
+        response
+    );
+    return parsedResponse;
+};
+
+export { getBoards, getBoard, patchBoard, getAvailableNewCollaborators };

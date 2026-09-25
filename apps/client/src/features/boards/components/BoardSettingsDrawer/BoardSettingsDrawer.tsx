@@ -1,6 +1,7 @@
-import type { BoardDto } from '@trickcal-bug-tracker/shared';
+import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/useBoardSettingsDrawer';
+import { useState } from 'react';
 
 type BoardSettingsDrawerProps = {
   open: boolean;
@@ -24,7 +25,12 @@ const BoardSettingsDrawer = ({
     reset,
     handlePatchBoard,
     isPendingPatchBoard,
+    potentialCollaborators,
   } = useBoardSettingsDrawer(boardId, closeDrawer);
+
+  const [newCollaboratorId, setNewcollaboratorId] = useState<
+    UserDto['id'] | ''
+  >('');
 
   return (
     <AnimatePresence>
@@ -46,7 +52,6 @@ const BoardSettingsDrawer = ({
             ×
           </button>
           <h3 className="font-semibold">Board settings</h3>
-
           <hr className="mt-3 h-px border-0 bg-gray-300" />
 
           {/* Patch Board */}
@@ -79,6 +84,32 @@ const BoardSettingsDrawer = ({
               disabled={isPendingPatchBoard}
             >
               Save changes
+            </button>
+          </form>
+
+          {/* Board Collaborators */}
+          <hr className="mt-3 h-px border-0 bg-gray-300" />
+          <form className="mt-5" onSubmit={(event) => event.preventDefault()}>
+            <select
+              className="block"
+              value={newCollaboratorId}
+              onChange={(event) =>
+                setNewcollaboratorId(event.target.value as UserDto['id'])
+              }
+              required
+            >
+              <option value="" disabled>
+                Select new collaborator
+              </option>
+              {potentialCollaborators &&
+                potentialCollaborators.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+            </select>
+            <button className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300">
+              Add collaborator
             </button>
           </form>
         </motion.aside>

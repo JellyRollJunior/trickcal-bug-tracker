@@ -20,7 +20,7 @@ const Section = ({
         <h3 className='self-center'>{section.name}</h3>
         <div className="grid h-fit grid-cols-2 gap-1">
           <button
-            className="rounded-full button-primary"
+            className="rounded-full button-primary p-0.5"
             onClick={openCreateTicketModal}
           >
             <img src={add} />
