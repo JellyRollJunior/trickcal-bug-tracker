@@ -26,13 +26,13 @@ const BoardContent = ({
 
   const handleMoveTicket = (
     sectionId: SectionDto['id'],
-    order: TicketDto['order'] | null
+    prevTicketId: TicketDto['id'] | null
   ) => {
     if (!activeTicket) return;
 
     // insert code here: if order + section are the same, do not move
     console.log(
-      `moving [ticket ${activeTicket}] to [section ${sectionId} - order ${order}]`
+      `moving [ticket ${activeTicket}] to [section ${sectionId} - after ticket: ${prevTicketId}]`
     );
   };
 

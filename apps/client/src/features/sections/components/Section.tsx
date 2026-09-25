@@ -7,7 +7,7 @@ import type {
   TicketDto,
 } from '@trickcal-bug-tracker/shared';
 import { Ticket } from '@/features/tickets/components/Ticket.tsx';
-import { useState, type DragEventHandler } from 'react';
+import { Fragment, useState, type DragEventHandler } from 'react';
 
 type DropAreaProps = { isDragging: boolean; onDropHandler: DragEventHandler };
 const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
@@ -15,7 +15,7 @@ const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
 
   return (
     <li
-      className="rounded border-black border bg-gray-300/50 my-1 flex h-10 w-full items-center justify-center"
+      className="my-1 flex h-10 w-full items-center justify-center rounded border border-black bg-gray-300/50"
       style={
         isVisible
           ? { opacity: 100, transition: 'all 0.2s ease-in-out' }
@@ -42,7 +42,7 @@ type SectionProps = {
   openSectionSettings: () => void;
   handleMoveTicket: (
     sectionId: SectionDto['id'],
-    order: TicketDto['order'] | null
+    prevTicketId: TicketDto['id'] | null
   ) => void;
   activeTicket: TicketDto['id'] | null;
   setActiveTicket: (ticketId: TicketDto['id'] | null) => void;
@@ -83,12 +83,17 @@ const Section = ({
           onDropHandler={() => handleMoveTicket(section.id, '0')}
         />
         {section.tickets.map((ticket) => (
-          <Ticket
-            key={ticket.id}
-            ticket={ticket}
-            onDragStartHandler={() => setActiveTicket(ticket.id)}
-            onDragEndHandler={() => setActiveTicket(null)}
-          />
+          <Fragment key={ticket.id}>
+            <Ticket
+              ticket={ticket}
+              onDragStartHandler={() => setActiveTicket(ticket.id)}
+              onDragEndHandler={() => setActiveTicket(null)}
+            />
+            <DropArea
+              isDragging={activeTicket !== null}
+              onDropHandler={() => handleMoveTicket(section.id, ticket.id)}
+            />
+          </Fragment>
         ))}
       </ol>
     </div>
