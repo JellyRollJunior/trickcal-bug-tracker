@@ -38,9 +38,6 @@ const useBoardPage = (boardId: BoardDto['id']) => {
         };
 
         // board
-        socket.on('board:edited', refetchBoard);
-        socket.on('board:added-collaborator', refetchBoard);
-        socket.on('board:removed-collaborator', refetchBoard);
         const handleBoardDeleted = withSocketErrorHandling(
             (payload: BoardDeletedPayload) => {
                 const parsedPayload = safeParse(
@@ -51,6 +48,9 @@ const useBoardPage = (boardId: BoardDto['id']) => {
                 navigate('/');
             }
         );
+        socket.on('board:edited', refetchBoard);
+        socket.on('board:added-collaborator', refetchBoard);
+        socket.on('board:removed-collaborator', refetchBoard);
         socket.on('board:deleted', handleBoardDeleted);
 
         // section

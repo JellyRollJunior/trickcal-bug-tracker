@@ -1,4 +1,5 @@
 import {
+    deleteBoardCollaboratorResponseSchema,
     getAvailableNewCollaboratorsResponseSchema,
     getBoardResponseSchema,
     getBoardsResponseSchema,
@@ -88,10 +89,29 @@ const postCollaborator = async ({
     return parsedResponse;
 };
 
+const deleteCollaborator = async ({
+    boardId,
+    collaboratorId,
+}: {
+    boardId: BoardDto['id'];
+    collaboratorId: UserDto['id'];
+}) => {
+    const path = `/boards/${boardId}/collaborators/${collaboratorId}`;
+    const response = await makeRequest(path, {
+        method: 'DELETE',
+    });
+    const parsedResponse = safeParse(
+        deleteBoardCollaboratorResponseSchema,
+        response
+    );
+    return parsedResponse;
+};
+
 export {
     getBoards,
     getBoard,
     patchBoard,
     getAvailableNewCollaborators,
     postCollaborator,
+    deleteCollaborator,
 };

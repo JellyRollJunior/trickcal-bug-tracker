@@ -9,6 +9,7 @@ const getBoardResponseSchema = boardWithSectionsAndTicketsDtoSchema;
 const patchBoardResponseSchema = boardDtoSchema;
 const getAvailableNewCollaboratorsResponseSchema = userDtoSchema.array();
 const postBoardCollaboratorResponseSchema = boardDtoSchema;
+const deleteBoardCollaboratorResponseSchema = boardDtoSchema;
 
 export {
     getBoardsResponseSchema,
@@ -16,4 +17,5 @@ export {
     patchBoardResponseSchema,
     getAvailableNewCollaboratorsResponseSchema,
     postBoardCollaboratorResponseSchema,
+    deleteBoardCollaboratorResponseSchema,
 };
