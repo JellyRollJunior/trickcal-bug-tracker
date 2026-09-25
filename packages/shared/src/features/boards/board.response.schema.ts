@@ -8,10 +8,12 @@ const getBoardsResponseSchema = boardDtoSchema.array();
 const getBoardResponseSchema = boardWithSectionsAndTicketsDtoSchema;
 const patchBoardResponseSchema = boardDtoSchema;
 const getAvailableNewCollaboratorsResponseSchema = userDtoSchema.array();
+const postBoardCollaboratorResponseSchema = boardDtoSchema;
 
 export {
     getBoardsResponseSchema,
     getBoardResponseSchema,
     patchBoardResponseSchema,
     getAvailableNewCollaboratorsResponseSchema,
+    postBoardCollaboratorResponseSchema,
 };

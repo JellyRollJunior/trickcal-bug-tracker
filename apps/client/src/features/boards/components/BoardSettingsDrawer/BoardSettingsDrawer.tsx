@@ -1,7 +1,6 @@
 import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/useBoardSettingsDrawer';
-import { useState } from 'react';
 
 type BoardSettingsDrawerProps = {
   open: boolean;
@@ -26,11 +25,9 @@ const BoardSettingsDrawer = ({
     handlePatchBoard,
     isPendingPatchBoard,
     potentialCollaborators,
+    newCollaboratorId,
+    setNewcollaboratorId,
   } = useBoardSettingsDrawer(boardId, closeDrawer);
-
-  const [newCollaboratorId, setNewcollaboratorId] = useState<
-    UserDto['id'] | ''
-  >('');
 
   return (
     <AnimatePresence>
@@ -86,9 +83,9 @@ const BoardSettingsDrawer = ({
               Save changes
             </button>
           </form>
-
-          {/* Board Collaborators */}
           <hr className="mt-3 h-px border-0 bg-gray-300" />
+
+          {/* Add Board Collaborators */}
           <form className="mt-5" onSubmit={(event) => event.preventDefault()}>
             <select
               className="block"

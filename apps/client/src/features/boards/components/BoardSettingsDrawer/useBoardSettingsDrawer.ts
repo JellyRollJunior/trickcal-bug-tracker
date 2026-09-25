@@ -1,4 +1,4 @@
-import type { BoardDto } from '@trickcal-bug-tracker/shared';
+import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { usePatchBoard } from '@/features/boards/hooks/usePatchBoard.ts';
 import { useAvailableNewCollaborators } from '@/features/boards/hooks/useAvailableNewCollaborators.ts';
@@ -11,10 +11,12 @@ const useBoardSettingsDrawer = (
     const { data: potentialCollaborators, isPending: isPendingPotentialCollaborators } = useAvailableNewCollaborators(boardId);
     const [newBoardName, setNewBoardName] = useState('');
     const [newDescription, setNewDescription] = useState('');
-
+    const [newCollaboratorId, setNewcollaboratorId] = useState<UserDto['id'] | ''>('');
+    
     const reset = () => {
         setNewBoardName('');
         setNewDescription('');
+        setNewcollaboratorId('');
     };
 
     const handlePatchBoard = () => {
@@ -46,6 +48,8 @@ const useBoardSettingsDrawer = (
         isPendingPatchBoard,
         potentialCollaborators,
         isPendingPotentialCollaborators,
+        newCollaboratorId,
+        setNewcollaboratorId,
     };
 };
 

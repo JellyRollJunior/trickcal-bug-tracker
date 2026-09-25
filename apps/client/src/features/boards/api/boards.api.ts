@@ -4,9 +4,12 @@ import {
     getBoardsResponseSchema,
     patchBoardResponseSchema,
     patchboardsRequestBodySchema,
+    postBoardCollaboratorRequestBodySchema,
+    postBoardCollaboratorResponseSchema,
     ValidationError,
     type BoardDto,
     type PatchboardsRequestBody,
+    type UserDto,
 } from '@trickcal-bug-tracker/shared';
 import { makeRequest, safeParse } from '@/lib/apiClient.ts';
 
@@ -65,4 +68,30 @@ const getAvailableNewCollaborators = async ({
     return parsedResponse;
 };
 
-export { getBoards, getBoard, patchBoard, getAvailableNewCollaborators };
+const postNewCollaborator = async ({
+    boardId,
+    data,
+}: {
+    boardId: BoardDto['id'];
+    data: { collaboratorId: UserDto['id'] };
+}) => {
+    const path = `/boards/${boardId}/collaborators`;
+    const parsedBody = safeParse(postBoardCollaboratorRequestBodySchema, data);
+    const response = await makeRequest(path, {
+        method: 'POST',
+        body: JSON.stringify(parsedBody),
+    });
+    const parsedResponse = safeParse(
+        postBoardCollaboratorResponseSchema,
+        response
+    );
+    return parsedResponse;
+};
+
+export {
+    getBoards,
+    getBoard,
+    patchBoard,
+    getAvailableNewCollaborators,
+    postNewCollaborator,
+};
