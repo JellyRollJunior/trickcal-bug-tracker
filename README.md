@@ -27,7 +27,6 @@ Typescript React Express monorepo v2
     - Presence tracking
     - CRUD Sections
 
-
 - Repository
     - PNPM workspaces monorepo using TurboRepo
     - Repo wide build commands for local development with turborepo
@@ -76,6 +75,7 @@ $ turbo dev
 | POST   | /auth/github/callback                          | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
 | POST   | /auth/google                                   | Google oauth2 callback     |                                                                                                |                                | Login with Google oauth. Creates an account if no account exists                |
 | POST   | /auth/google/callback                          | Google oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
+| GET    | /users/me                                      | Get logged in user info    |                                                                                                | userDto                        |                                                                                 |
 | GET    | /boards                                        | get boards                 |                                                                                                | boardDto[]                     |                                                                                 |
 | POST   | /boards                                        | create boards              | { name, description }                                                                          | boardDto                       | name: { min: 1, max: 100 }, description: { min: 0, max: 1000 }                  |
 | GET    | /boards/:boardId                               | get board by id            |                                                                                                | boardWithSectionsAndTicketsDto |                                                                                 |
@@ -254,3 +254,4 @@ $ turbo dev
 - Implement get board meta data & get board data
     - can update only metadata
     - when updating board metadata, need to fetch /board/:boardId which also fetches data unnecessarily
+- Type controller response in controller param definition
