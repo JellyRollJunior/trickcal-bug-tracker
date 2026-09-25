@@ -111,6 +111,7 @@ const Board = ({ boardId }: BoardProps) => {
             open={isPatchBoardOpen}
             closeDrawer={closePatchBoard}
             boardId={board.id}
+            boardOwnerId={board.owner.id}
             boardName={board.name}
             boardDescription={board.description}
           />
