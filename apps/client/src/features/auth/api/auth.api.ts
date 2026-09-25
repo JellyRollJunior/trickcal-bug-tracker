@@ -1,5 +1,6 @@
 import z from 'zod';
 import {
+    getMeResponseSchema,
     postLoginRequestBodySchema,
     postLoginResponseSchema,
 } from '@trickcal-bug-tracker/shared';
@@ -19,4 +20,13 @@ const postLogin = async ({ username, password }: PostLoginParams) => {
     return parsedResponse;
 };
 
-export { postLogin };
+const getMe = async () => {
+    const path = '/users/me';
+    const response = await makeRequest(path, {
+        method: 'GET',
+    });
+    const parsedResponse = safeParse(getMeResponseSchema, response);
+    return parsedResponse;
+};
+
+export { postLogin, getMe };
