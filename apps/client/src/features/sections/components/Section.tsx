@@ -9,7 +9,32 @@ import type {
 import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 import { useState, type DragEventHandler } from 'react';
 
+type DropAreaProps = { isDragging: boolean; onDropHandler: DragEventHandler };
+const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
+  const [isVisible, setIsVisible] = useState(false);
 
+  return (
+    <li
+      className="rounded border-black border bg-gray-300/50 my-1 flex h-10 w-full items-center justify-center"
+      style={
+        isVisible
+          ? { opacity: 100, transition: 'all 0.2s ease-in-out' }
+          : { height: 5, opacity: 0, transition: 'all 0.1s ease-in-out' }
+      }
+      onDragEnter={() => {
+        if (isDragging) setIsVisible(true);
+      }}
+      onDragLeave={() => setIsVisible(false)}
+      onDragOver={(event) => event.preventDefault()}
+      onDrop={(event) => {
+        onDropHandler(event);
+        setIsVisible(false);
+      }}
+    >
+      Drop Area
+    </li>
+  );
+};
 
 type SectionProps = {
   section: SectionWithTicketsDto;
@@ -53,6 +78,10 @@ const Section = ({
 
       {/* Section Data */}
       <ol className="mt-1 flex flex-col gap-1">
+        <DropArea
+          isDragging={activeTicket !== null}
+          onDropHandler={() => handleMoveTicket(section.id, '0')}
+        />
         {section.tickets.map((ticket) => (
           <Ticket
             key={ticket.id}
