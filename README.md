@@ -255,3 +255,4 @@ $ turbo dev
     - can update only metadata
     - when updating board metadata, need to fetch /board/:boardId which also fetches data unnecessarily
 - Type controller response in controller param definition
+- Unique identifier for display name

@@ -27,6 +27,8 @@ const BoardSettingsDrawer = ({
     potentialCollaborators,
     newCollaboratorId,
     setNewcollaboratorId,
+    handlePostCollaborator,
+    isPendingPostCollaborator,
   } = useBoardSettingsDrawer(boardId, closeDrawer);
 
   return (
@@ -78,7 +80,7 @@ const BoardSettingsDrawer = ({
             />
             <button
               className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300"
-              disabled={isPendingPatchBoard}
+              disabled={isPendingPostCollaborator || isPendingPatchBoard}
             >
               Save changes
             </button>
@@ -86,9 +88,9 @@ const BoardSettingsDrawer = ({
           <hr className="mt-3 h-px border-0 bg-gray-300" />
 
           {/* Add Board Collaborators */}
-          <form className="mt-5" onSubmit={(event) => event.preventDefault()}>
+          <form className="mt-5" onSubmit={handlePostCollaborator}>
             <select
-              className="block"
+              className="block block-primary py-0.5 pr-1"
               value={newCollaboratorId}
               onChange={(event) =>
                 setNewcollaboratorId(event.target.value as UserDto['id'])
@@ -105,7 +107,10 @@ const BoardSettingsDrawer = ({
                   </option>
                 ))}
             </select>
-            <button className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300">
+            <button
+              className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300"
+              disabled={isPendingPostCollaborator || isPendingPatchBoard}
+            >
               Add collaborator
             </button>
           </form>

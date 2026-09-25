@@ -68,7 +68,7 @@ const getAvailableNewCollaborators = async ({
     return parsedResponse;
 };
 
-const postNewCollaborator = async ({
+const postCollaborator = async ({
     boardId,
     data,
 }: {
@@ -93,5 +93,5 @@ export {
     getBoard,
     patchBoard,
     getAvailableNewCollaborators,
-    postNewCollaborator,
+    postCollaborator,
 };
