@@ -222,11 +222,22 @@ const getAvailableNewCollaborators = async ({
     try {
         const data = await prisma.user.findMany({
             where: {
-                boards: {
-                    none: {
-                        id: boardId,
+                AND: [
+                    {
+                        boards: {
+                            none: {
+                                id: boardId,
+                            },
+                        },
                     },
-                },
+                    {
+                        collaboratorBoards: {
+                            none: {
+                                id: boardId,
+                            },
+                        },
+                    },
+                ],
             },
         });
         return data;
