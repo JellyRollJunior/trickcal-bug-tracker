@@ -22,6 +22,10 @@ const routes: RouteObject[] = [
             path: '/boards/:boardId',
             element: <Board />
           },
+          {
+            path: '/boards/:boardId/tickets/:ticketId',
+            element: <><Board /></>
+          },
         ],
       },
       {

@@ -24,8 +24,12 @@ Typescript React Express monorepo v2
     - Horizontal Scaling On Sessions & SocketIO
 
 - Frontend
-    - Presence tracking
+    - Presence tracking with socket
+        - currents viewers by board
     - CRUD Sections
+    - Move ticket on drag
+        - drag ticket item to drop areas located in gaps between tickets
+    - All actions (create/edit/delete/move) update board in realtime for all viewers
 
 - Repository
     - PNPM workspaces monorepo using TurboRepo
@@ -204,6 +208,22 @@ $ turbo dev
 - Debugging circular import with vite --debug hmr
 
 ## Current
+
+- TICKET URL VIEW
+    - half board half ticket view
+    - ticket edit
+    - ticket update assignee
+    - ticket delete
+
+- board
+    - delete board
+    - post board
+
+- auth
+    - signup
+    - login redirect
+    - google auth
+    - github auth
 
 - patch board
     - does calling patch with empty body cause refresh
