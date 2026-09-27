@@ -232,6 +232,10 @@ $ turbo dev
 - test board deleted socket redirect
 
 
+- bug
+    - move ticket to same order bug
+
+
 ## Todo list
 
 - optimistic updates with tanstack for ticket move

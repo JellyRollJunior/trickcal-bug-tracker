@@ -1,12 +1,10 @@
 import type {
   BoardWithSectionsAndTicketsDto,
   SectionDto,
-  TicketDto,
 } from '@trickcal-bug-tracker/shared';
-import { useState } from 'react';
 import { Section } from '@/features/sections/components/Section.tsx';
 import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
-import { useMoveTicket } from '@/features/tickets/hooks/useMoveTicket';
+import { useBoardContent } from '@/features/boards/components/BoardContent/useBoardContent.ts';
 
 type BoardContentProps = {
   board: BoardWithSectionsAndTicketsDto;
@@ -18,21 +16,9 @@ const BoardContent = ({
   openCreateTicket,
   openSectionSettings,
 }: BoardContentProps) => {
-  const [activeTicket, setActiveTicket] = useState<TicketDto['id'] | null>(
-    null
+  const { activeTicket, setActiveTicket, handleMoveTicket } = useBoardContent(
+    board.id
   );
-  const { moveTicket } = useMoveTicket();
-
-  const handleMoveTicket = (
-    sectionId: SectionDto['id'],
-    previousTicketId: TicketDto['id'] | null
-  ) => {
-    if (!activeTicket) return;
-
-    // insert code here: if order + section are the same, do not move
-
-    moveTicket(activeTicket, sectionId, board.id, previousTicketId);
-  };
 
   // Create Section List Item
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
