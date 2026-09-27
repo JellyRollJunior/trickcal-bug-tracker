@@ -44,7 +44,7 @@ const useBoardPage = (boardId: BoardDto['id']) => {
                     boardDeletedPayloadSchema,
                     payload
                 );
-                toast.error(`Board: ${parsedPayload.board.name} was deleted`);
+                toast(`Board: ${parsedPayload.board.name} was deleted`);
                 navigate('/');
             }
         );

@@ -205,15 +205,12 @@ $ turbo dev
 
 ## Current
 
-- usePresenceTracking
-    - race condition?
 - patch board
     - does calling patch with empty body cause refresh
     - how to ensure at least one value is included?
     - bug -> refresh on patch board w/ empty state
 - test board deleted socket redirect
 
-- hide add/remove collaborators if not owner
 
 ## Todo list
 

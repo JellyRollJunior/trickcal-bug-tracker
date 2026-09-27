@@ -6,6 +6,7 @@ import type {
 import { useState } from 'react';
 import { Section } from '@/features/sections/components/Section.tsx';
 import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
+import { useMoveTicket } from '@/features/tickets/hooks/useMoveTicket';
 
 type BoardContentProps = {
   board: BoardWithSectionsAndTicketsDto;
@@ -20,17 +21,17 @@ const BoardContent = ({
   const [activeTicket, setActiveTicket] = useState<TicketDto['id'] | null>(
     null
   );
+  const { moveTicket } = useMoveTicket();
 
   const handleMoveTicket = (
     sectionId: SectionDto['id'],
-    prevTicketId: TicketDto['id'] | null
+    previousTicketId: TicketDto['id'] | null
   ) => {
     if (!activeTicket) return;
 
     // insert code here: if order + section are the same, do not move
-    console.log(
-      `moving [ticket ${activeTicket}] to [section ${sectionId} - after ticket: ${prevTicketId}]`
-    );
+
+    moveTicket(activeTicket, sectionId, board.id, previousTicketId);
   };
 
   // Create Section List Item

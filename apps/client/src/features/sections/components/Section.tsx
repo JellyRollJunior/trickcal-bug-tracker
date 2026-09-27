@@ -42,7 +42,7 @@ type SectionProps = {
   openSectionSettings: () => void;
   handleMoveTicket: (
     sectionId: SectionDto['id'],
-    prevTicketId: TicketDto['id'] | null
+    previousTicketId: TicketDto['id'] | null
   ) => void;
   activeTicket: TicketDto['id'] | null;
   setActiveTicket: (ticketId: TicketDto['id'] | null) => void;
@@ -80,7 +80,7 @@ const Section = ({
       <ol className="mt-1 flex flex-col gap-0.5">
         <DropArea
           isDragging={activeTicket !== null}
-          onDropHandler={() => handleMoveTicket(section.id, '0')}
+          onDropHandler={() => handleMoveTicket(section.id, null)}
         />
         {section.tickets.map((ticket) => (
           <Fragment key={ticket.id}>
