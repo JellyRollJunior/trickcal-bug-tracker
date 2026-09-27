@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import { useBoardPage } from '@/features/boards/components/Board/useBoardPage.ts';
-import { BoardContent } from '@/features/boards/components/BoardContent.tsx';
+import { BoardContent } from '@/features/boards/components/BoardContent/BoardContent.tsx';
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer.tsx';
 import { BoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/BoardSettingsDrawer.tsx';

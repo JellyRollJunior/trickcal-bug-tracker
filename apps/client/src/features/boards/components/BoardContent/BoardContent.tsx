@@ -3,9 +3,9 @@ import type {
   SectionDto,
   TicketDto,
 } from '@trickcal-bug-tracker/shared';
-import { Section } from '@/features/sections/components/Section';
-import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Section } from '@/features/sections/components/Section.tsx';
+import { CreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/CreateSectionListItem.tsx';
 
 type BoardContentProps = {
   board: BoardWithSectionsAndTicketsDto;
@@ -17,9 +17,6 @@ const BoardContent = ({
   openCreateTicket,
   openSectionSettings,
 }: BoardContentProps) => {
-  // Create Section List Item
-  const lastSectionId = board?.sections.at(-1)?.id ?? '';
-
   const [activeTicket, setActiveTicket] = useState<TicketDto['id'] | null>(
     null
   );
@@ -36,9 +33,8 @@ const BoardContent = ({
     );
   };
 
-  useEffect(() => {
-    console.log(activeTicket)
-  }, [activeTicket])
+  // Create Section List Item
+  const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   return (
     <main>

@@ -15,11 +15,11 @@ const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
 
   return (
     <li
-      className="my-1 flex h-10 w-full items-center justify-center rounded border border-black bg-gray-300/50"
+      className="flex h-10 w-full items-center justify-center rounded border border-black bg-gray-300/50"
       style={
         isVisible
           ? { opacity: 100, transition: 'all 0.2s ease-in-out' }
-          : { height: 5, opacity: 0, transition: 'all 0.1s ease-in-out' }
+          : { height: 3, opacity: 0, transition: 'all 0.1s ease-in-out' }
       }
       onDragEnter={() => {
         if (isDragging) setIsVisible(true);
@@ -31,7 +31,7 @@ const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
         setIsVisible(false);
       }}
     >
-      Drop Area
+      Move here
     </li>
   );
 };
@@ -77,7 +77,7 @@ const Section = ({
       </div>
 
       {/* Section Data */}
-      <ol className="mt-1 flex flex-col gap-1">
+      <ol className="mt-1 flex flex-col gap-0.5">
         <DropArea
           isDragging={activeTicket !== null}
           onDropHandler={() => handleMoveTicket(section.id, '0')}
