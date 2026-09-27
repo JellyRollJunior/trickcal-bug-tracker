@@ -41,7 +41,7 @@ const BoardSettingsDrawer = ({
           animate={{ translateX: 0, opacity: 1 }}
           exit={{ translateX: '100%', opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="block-primary absolute top-0 right-0 flex h-full min-w-1/3 flex-col gap-1.5 px-3 py-2"
+          className="block-primary absolute top-0 right-0 flex h-full min-w-1/3 flex-col gap-1.5 px-3 py-2 overflow-scroll"
         >
           <button
             className="absolute -top-1.5 right-1.5 h-fit text-2xl"

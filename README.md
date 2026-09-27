@@ -191,6 +191,7 @@ $ turbo dev
 - Extracting component logic into hook to separate logic and UI
 - Sonner toast library
 - Typing socket.io-client
+- Outlet contexts
 
 ## Neat Bugs
 
@@ -231,10 +232,14 @@ $ turbo dev
     - bug -> refresh on patch board w/ empty state
 - test board deleted socket redirect
 
+- Loaders????
 
+- loading anim
+
+- extract drawer
 - bug
     - move ticket to same order bug
-
+    - constant errors on cannot connext to server
 
 ## Todo list
 

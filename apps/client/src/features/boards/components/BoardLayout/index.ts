@@ -1,0 +1,1 @@
+export * from '@/features/boards/components/BoardLayout/BoardLayout.tsx';

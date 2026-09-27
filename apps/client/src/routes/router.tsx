@@ -5,6 +5,7 @@ import { MainLayout } from '@/layout/MainLayout.tsx';
 import { AuthLayout } from '@/layout/AuthLayout.tsx';
 import { LoginForm } from '@/features/auth/components/Login/LoginForm.tsx';
 import { Board } from '@/features/boards/components/Board/Board.tsx';
+import { BoardLayout } from '@/features/boards/components/BoardLayout';
 
 const routes: RouteObject[] = [
   {
@@ -20,11 +21,22 @@ const routes: RouteObject[] = [
           },
           {
             path: '/boards/:boardId',
-            element: <Board />
-          },
-          {
-            path: '/boards/:boardId/tickets/:ticketId',
-            element: <><Board /></>
+            element: <BoardLayout />,
+            children: [
+              { index: true, element: <Board /> },
+              {
+                path: 'tickets/:ticketId',
+                element: (
+                  <div className="grid flex-1 grid-cols-2">
+                    <Board />
+                    {/* <TicketView /> */}
+                    <h1 className="bold self-center justify-self-center text-white">
+                      Speaki deru ji bazeyo
+                    </h1>
+                  </div>
+                ),
+              },
+            ],
           },
         ],
       },
