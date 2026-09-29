@@ -17,8 +17,11 @@ const Board = () => {
   const closePatchBoard = () => setIsPatchBoardOpen(false);
 
   // Create Ticket Modal
-  const [createTicketSectionId, setCreateTicketSectionId] = useState<SectionDto['id'] | null>(null);
-  const openCreateTicket = (sectionId: SectionDto['id']): void => setCreateTicketSectionId(sectionId);
+  const [createTicketSectionId, setCreateTicketSectionId] = useState<
+    SectionDto['id'] | null
+  >(null);
+  const openCreateTicket = (sectionId: SectionDto['id']): void =>
+    setCreateTicketSectionId(sectionId);
   const closeCreateTicket = () => setCreateTicketSectionId(null);
   const allCollaborators = [board.owner, ...board.collaborators];
 
@@ -34,7 +37,7 @@ const Board = () => {
   const closeSectionSettings = () => setSettingsDrawerData(null);
 
   return (
-    <div className="relative mx-2 mt-3 mb-3 flex flex-1 flex-col gap-2">
+    <div className="relative mx-2 my-3 flex min-h-0 flex-1 flex-col gap-2">
       {/* Board Data + controls */}
       <div className="block-primary flex w-full justify-between px-3 py-2">
         <h2>

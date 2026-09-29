@@ -233,6 +233,19 @@ $ turbo dev
 - test board deleted socket redirect
 
 - Loaders????
+    - loaders are a React Router (v6.4+) feature that ties data-fetching directly to route definitions, so a route's data starts loading before (or in parallel with) the component tree for that route renders, rather than fetching inside a useEffect after mount.
+    - trigger react query data fatch on route enter
+    - trigger react query data fetch on component mount
+    - component mount fetch triggers cache hit
+    - (small speed optimization) -> (cache/loading/query stuff still handled by react query)
+    
+    - loading state is exposed to useNavigation on fetching loader data
+    - so we can show a loading state from mainlayout
+    - no more showing a loading state for each individual component if we dont want to
+    - loading state is exposed on const navgation} = useNavigation()
+    -   const isLoading = navigation.state === 'loading';
+    -  {isLoading && <TopLoadingBar />}
+
 
 - loading anim
 

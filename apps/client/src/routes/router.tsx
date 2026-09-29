@@ -6,6 +6,7 @@ import { AuthLayout } from '@/layout/AuthLayout.tsx';
 import { LoginForm } from '@/features/auth/components/Login/LoginForm.tsx';
 import { Board } from '@/features/boards/components/Board/Board.tsx';
 import { BoardLayout } from '@/features/boards/components/BoardLayout';
+import { TicketView } from '@/features/tickets/components/TicketView.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -27,12 +28,10 @@ const routes: RouteObject[] = [
               {
                 path: 'tickets/:ticketId',
                 element: (
-                  <div className="grid flex-1 grid-cols-2">
+                  <div className="grid flex-1 min-h-0 grid-cols-2">
                     <Board />
                     {/* <TicketView /> */}
-                    <h1 className="bold self-center justify-self-center text-white">
-                      Speaki deru ji bazeyo
-                    </h1>
+                    <TicketView />
                   </div>
                 ),
               },
