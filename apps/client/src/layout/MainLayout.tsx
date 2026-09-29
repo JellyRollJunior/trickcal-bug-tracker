@@ -4,13 +4,11 @@ import { BoardsDropdown } from '@/features/boards/components/BoardsDropdown.tsx'
 
 const MainLayout = () => {
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden">
+    <div className="h-dvh grid grid-rows-[auto_minmax(0,1fr)]">
       <header className="bg-kommy-hair-white-dark/80 flex w-full justify-center pt-4 pb-3">
         <BoardsDropdown />
       </header>
-      <div className="flex min-h-0 flex-1 flex-col">
-        <Outlet />
-      </div>
+      <Outlet />
       <Background />
     </div>
   );

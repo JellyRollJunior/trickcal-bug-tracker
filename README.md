@@ -210,6 +210,9 @@ $ turbo dev
 
 ## Current
 
+- boardcontext
+    - expose is pending board
+
 - TICKET URL VIEW
     - half board half ticket view
     - ticket edit
