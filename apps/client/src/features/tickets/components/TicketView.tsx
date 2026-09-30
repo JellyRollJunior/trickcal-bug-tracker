@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useBoardOutletContext } from '@/features/boards/context/useBoardOutletContext.ts';
+import { TicketEditView } from './TicketEditView/TicketEditView';
 
 const TicketView = () => {
   const { boardId, ticketId } = useParams();
@@ -26,6 +27,8 @@ const TicketView = () => {
   if (!ticket) return null;
 
   const formatDate = (iso: string) => new Date(iso).toLocaleString();
+
+  const allCollaborators = [board.owner, ...board.collaborators];
 
   return (
     <main className="block-primary mx-2 my-3 min-h-0 overflow-y-auto px-3 py-2">
@@ -92,7 +95,18 @@ const TicketView = () => {
         </>
       )}
       {isEditing && (
-        <div>Edit view</div>
+        <>
+          <button
+            className="button-primary ml-auto block px-3 py-1"
+            onClick={() => setIsEditing(false)}
+          >
+            X
+          </button>
+          <TicketEditView
+            collaborators={allCollaborators}
+            closeEditView={() => setIsEditing(false)}
+          />
+        </>
       )}
     </main>
   );

@@ -44,7 +44,7 @@ const TicketForm = ({
   } = ticketFormStates;
 
   return (
-    <form className="mt-2 h-fit w-full px-3 py-2" onSubmit={onSubmit}>
+    <form className="h-fit w-full" onSubmit={onSubmit}>
       <textarea
         className="block-primary mt-2 w-full py-1 pr-1 pl-2"
         placeholder="Summary"

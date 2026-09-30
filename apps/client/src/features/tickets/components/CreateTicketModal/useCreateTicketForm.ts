@@ -6,7 +6,7 @@ import type {
 } from '@trickcal-bug-tracker/shared';
 import type { SubmitEvent } from 'react';
 import { useCreateTicket } from '@/features/tickets/hooks/useCreateTicket.ts';
-import { useTicketFormStates } from '../TicketForm/useTicketFormStates';
+import { useTicketFormStates } from '@/features/tickets/components/TicketForm/useTicketFormStates.ts';
 
 type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 
