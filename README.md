@@ -234,7 +234,6 @@ $ turbo dev
     - signup
     - login redirect
     - google auth
-    - github auth
 
 - test board deleted socket redirect
 
