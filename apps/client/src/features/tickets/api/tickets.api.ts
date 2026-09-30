@@ -1,8 +1,11 @@
 import {
+    deleteTicketResponseSchema,
     patchTicketsRequestBodySchema,
     patchTicketsResponseSchema,
     postTicketsRequestBodySchema,
     postTicketsResponseSchema,
+    putAssigneeRequestBodySchema,
+    putAssigneeResponseSchema,
     type BoardDto,
     type SectionDto,
     type TicketDto,
@@ -35,17 +38,44 @@ const patchTickets = async ({
     ticketId,
     data,
 }: {
-    ticketId: TicketDto['id']
-    data: PatchTicketRequestBody
+    ticketId: TicketDto['id'];
+    data: PatchTicketRequestBody;
 }) => {
     const path = `/tickets/${ticketId}`;
-    const parsedBody = safeParse(patchTicketsRequestBodySchema, data)
+    const parsedBody = safeParse(patchTicketsRequestBodySchema, data);
     const response = await makeRequest(path, {
         method: 'PATCH',
-        body: JSON.stringify(parsedBody)
-    })
+        body: JSON.stringify(parsedBody),
+    });
     const parsedResponse = safeParse(patchTicketsResponseSchema, response);
     return parsedResponse;
-}
+};
 
-export { postTickets, patchTickets };
+type PutTicketRequestBody = z.infer<typeof putAssigneeRequestBodySchema>;
+const putAssignee = async ({
+    ticketId,
+    data,
+}: {
+    ticketId: TicketDto['id'];
+    data: PutTicketRequestBody;
+}) => {
+    const path = `/tickets/${ticketId}/assignee`;
+    const parsedBody = safeParse(putAssigneeRequestBodySchema, data);
+    const response = makeRequest(path, {
+        method: 'PUT',
+        body: JSON.stringify(parsedBody),
+    });
+    const parsedResponse = safeParse(putAssigneeResponseSchema, response);
+    return parsedResponse;
+};
+
+const deleteTicket = async ({ ticketId }: { ticketId: TicketDto['id'] }) => {
+    const path = `/tickets/${ticketId}`;
+    const response = makeRequest(path, {
+        method: 'DELETE',
+    });
+    const parsedResponse = safeParse(deleteTicketResponseSchema, response);
+    return parsedResponse;
+};
+
+export { postTickets, patchTickets, putAssignee, deleteTicket };
