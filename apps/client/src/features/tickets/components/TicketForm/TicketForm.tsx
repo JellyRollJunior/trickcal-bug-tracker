@@ -13,12 +13,16 @@ type TicketForm = {
   collaborators: UserDto[];
   onSubmit: (event: SubmitEvent<HTMLFormElement>) => void;
   onCancel: () => void;
+  isDisabled: boolean;
+  submitButtonText: string;
 };
 const TicketForm = ({
   ticketFormStates,
   collaborators,
   onSubmit,
   onCancel,
+  isDisabled,
+  submitButtonText = 'create',
 }: TicketForm) => {
   const {
     summary,
@@ -161,13 +165,17 @@ const TicketForm = ({
       </select>
 
       <div className="mt-2 flex justify-start gap-1">
-        <button className="button-primary px-3 py-1 disabled:bg-gray-300">
-          Create
+        <button
+          className="button-primary px-3 py-1 disabled:bg-gray-300"
+          disabled={isDisabled}
+        >
+          {submitButtonText}
         </button>
         <button
           className="button-primary px-3 py-1 disabled:bg-gray-300"
           type="button"
           onClick={onCancel}
+          disabled={isDisabled}
         >
           Cancel
         </button>

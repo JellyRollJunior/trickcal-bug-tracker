@@ -4,40 +4,34 @@ import type {
     postTicketsRequestBodySchema,
     SectionDto,
 } from '@trickcal-bug-tracker/shared';
-import { useState, type SubmitEvent } from 'react';
+import type { SubmitEvent } from 'react';
 import { useCreateTicket } from '@/features/tickets/hooks/useCreateTicket.ts';
+import { useTicketFormStates } from '../TicketForm/useTicketFormStates';
 
 type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 
 const useCreateTicketForm = (
     boardId: BoardDto['id'],
     sectionId: SectionDto['id'],
-    closeModal: () => void,
+    closeModal: () => void
 ) => {
-    const [summary, setSummary] = useState<TicketPayload['summary']>('');
-    const [description, setDescription] = useState<TicketPayload['description']>('');
-    const [issueType, setIssueType] = useState<TicketPayload['issueType'] | ''>('');
-    const [category, setCategory] = useState<TicketPayload['category'] | ''>('');
-    const [priority, setPriority] = useState<TicketPayload['priority'] | ''>('');
-    const [severity, setSeverity] = useState<TicketPayload['severity'] | ''>('');
-    const [reproducibility, setReproducibility] = useState<TicketPayload['reproducibility']>(false);
-    const [assigneeId, setAssigneeId] = useState<TicketPayload['assigneeId']>(null);
-    const { 
-        mutate: createTicket, 
+    const ticketFormStates = useTicketFormStates();
+    const {
+        summary,
+        description,
+        issueType,
+        category,
+        priority,
+        severity,
+        reproducibility,
+        assigneeId,
+        reset,
+    } = ticketFormStates;
+    const {
+        mutate: createTicket,
         isPending: isPendingCreateTicket,
-        isSuccess: isSuccessCreateTicket, 
+        isSuccess: isSuccessCreateTicket,
     } = useCreateTicket(boardId);
-        
-    const reset = () => {
-        setSummary('');
-        setDescription('');
-        setIssueType('');
-        setCategory('');
-        setPriority('');
-        setSeverity('');
-        setReproducibility(false);
-        setAssigneeId(null);
-    };
 
     const toPayload = (): TicketPayload => ({
         summary,
@@ -52,7 +46,7 @@ const useCreateTicketForm = (
 
     const handleCreateTicket = async (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-         createTicket(
+        createTicket(
             {
                 boardId,
                 sectionId,
@@ -68,22 +62,7 @@ const useCreateTicketForm = (
     };
 
     return {
-        summary,
-        setSummary,
-        description,
-        setDescription,
-        issueType,
-        setIssueType,
-        category,
-        setCategory,
-        priority,
-        setPriority,
-        severity,
-        setSeverity,
-        reproducibility,
-        setReproducibility,
-        assigneeId,
-        setAssigneeId,
+        ticketFormStates,
         reset,
         handleCreateTicket,
         isPendingCreateTicket,
