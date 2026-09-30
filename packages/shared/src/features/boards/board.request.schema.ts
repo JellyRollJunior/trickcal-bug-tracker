@@ -9,10 +9,15 @@ const postBoardsRequestBodySchema = z.object({
     description: boardShape.description,
 });
 type PatchboardsRequestBody = z.infer<typeof patchboardsRequestBodySchema>;
-const patchboardsRequestBodySchema = z.object({
-    name: boardShape.name.optional(),
-    description: boardShape.description.optional(),
-});
+const patchboardsRequestBodySchema = z
+    .object({
+        name: boardShape.name.optional(),
+        description: boardShape.description.optional(),
+    })
+    .refine(
+        (body) => Object.values(body).some((value) => value !== undefined),
+        { message: 'At least one field must be provided' }
+    );
 const postBoardCollaboratorRequestBodySchema = z.object({
     collaboratorId: userShape.id,
 });
@@ -28,9 +33,7 @@ const boardIdAndSectionIdParamSchema = z.object({
     sectionId: sectionShape.id,
 });
 
-export type {
-    PatchboardsRequestBody
-}
+export type { PatchboardsRequestBody };
 export {
     postBoardsRequestBodySchema,
     patchboardsRequestBodySchema,

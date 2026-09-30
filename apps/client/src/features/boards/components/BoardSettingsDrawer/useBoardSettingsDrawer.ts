@@ -7,7 +7,8 @@ const useBoardSettingsDrawer = (
     boardId: BoardDto['id'],
     closeModal: () => void
 ) => {
-    const { mutate: patchBoard, isPending: isPendingPatchBoard } = usePatchBoard(boardId);
+    const { mutate: patchBoard, isPending: isPendingPatchBoard } =
+        usePatchBoard(boardId);
     const { user } = useAuth();
     const [newBoardName, setNewBoardName] = useState('');
     const [newDescription, setNewDescription] = useState('');
@@ -19,22 +20,28 @@ const useBoardSettingsDrawer = (
 
     const handlePatchBoard = (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        patchBoard(
-            {
-                boardId,
-                data: {
-                    name: newBoardName !== '' ? newBoardName : undefined,
-                    description:
-                        newDescription !== '' ? newDescription : undefined,
-                },
-            },
-            {
-                onSuccess: () => {
-                    closeModal();
-                    reset();
-                },
-            }
+
+        const payload = {
+            name: newBoardName !== '' ? newBoardName : undefined,
+            description: newDescription !== '' ? newDescription : undefined,
+        };
+        const hasChanges = Object.values(payload).some(
+            (values) => values !== undefined
         );
+        if (hasChanges) {
+            patchBoard(
+                {
+                    boardId,
+                    data: payload,
+                },
+                {
+                    onSuccess: () => {
+                        closeModal();
+                        reset();
+                    },
+                }
+            );
+        }
     };
 
     return {
