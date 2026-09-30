@@ -12,10 +12,10 @@ type TicketPayload = z.infer<typeof patchTicketsRequestBodySchema>;
 
 const useTicketEditView = (
     boardId: BoardDto['id'],
-    ticketId: TicketDto['id'],
-    closeUi: () => void,
+    ticket: TicketDto,
+    closeUi: () => void
 ) => {
-    const ticketFormStates = useTicketFormStates();
+    const ticketFormStates = useTicketFormStates(ticket);
     const {
         summary,
         description,
@@ -26,7 +26,8 @@ const useTicketEditView = (
         reproducibility,
         reset,
     } = ticketFormStates;
-    const { mutate: patchTicket, isPending: isPendingPatchTicket } = usePatchTicket(boardId);
+    const { mutate: patchTicket, isPending: isPendingPatchTicket } =
+        usePatchTicket(boardId);
 
     const toPayload = (): TicketPayload => ({
         summary: summary ? summary : undefined,
@@ -40,7 +41,6 @@ const useTicketEditView = (
 
     const handleSubmitEditForm = (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        let mutated = false;
 
         // if payload contains >= 1 non undefined value, patch ticket
         const patchPayload = toPayload();
@@ -48,17 +48,26 @@ const useTicketEditView = (
             (value) => value !== undefined
         );
         if (hasChanges) {
-            patchTicket({ ticketId, data: patchPayload });
-            mutated = true;
+            patchTicket(
+                { ticketId: ticket.id, data: patchPayload },
+                {
+                    onSuccess: (data) => {
+                        reset(data);
+                        closeUi();
+                    },
+                }
+            );
         }
 
         // if assigneeId set, update assignee
-        if (mutated) {
-            closeUi();
-        }
     };
 
-    return { ticketFormStates, reset, handleSubmitEditForm, isPendingPatchTicket };
+    return {
+        ticketFormStates,
+        reset,
+        handleSubmitEditForm,
+        isPendingPatchTicket,
+    };
 };
 
 export { useTicketEditView };

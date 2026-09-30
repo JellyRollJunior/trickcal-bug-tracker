@@ -4,16 +4,16 @@ import type {
   UserDto,
 } from '@trickcal-bug-tracker/shared';
 import { TicketForm } from '@/features/tickets/components/TicketForm/TicketForm';
-import { useTicketEditView } from './useTicketEditView';
+import { useTicketEditView } from '@/features/tickets/components/TicketEditView/useTicketEditView.ts';
 
 type TicketEditViewProps = {
-  ticketId: TicketDto['id'];
+  ticket: TicketDto;
   boardId: BoardDto['id'];
   collaborators: UserDto[];
   closeEditView: () => void;
 };
 const TicketEditView = ({
-  ticketId,
+  ticket,
   boardId,
   collaborators,
   closeEditView,
@@ -23,7 +23,7 @@ const TicketEditView = ({
     reset,
     handleSubmitEditForm,
     isPendingPatchTicket,
-  } = useTicketEditView(boardId, ticketId, closeEditView);
+  } = useTicketEditView(boardId, ticket, closeEditView);
 
   return (
     <TicketForm
@@ -31,7 +31,7 @@ const TicketEditView = ({
       collaborators={collaborators}
       onSubmit={handleSubmitEditForm}
       onCancel={() => {
-        reset();
+        reset(ticket);
         closeEditView();
       }}
       isDisabled={isPendingPatchTicket}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useBoardOutletContext } from '@/features/boards/context/useBoardOutletContext.ts';
-import { TicketEditView } from './TicketEditView/TicketEditView';
+import { TicketEditView } from '@/features/tickets/components/TicketEditView/TicketEditView.tsx';
 
 const TicketView = () => {
   const { boardId, ticketId } = useParams();
@@ -103,7 +103,7 @@ const TicketView = () => {
             X
           </button>
           <TicketEditView
-            ticketId={ticketId}
+            ticket={ticket}
             boardId={boardId}
             collaborators={allCollaborators}
             closeEditView={() => setIsEditing(false)}
