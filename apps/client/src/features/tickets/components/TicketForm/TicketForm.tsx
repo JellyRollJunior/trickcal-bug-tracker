@@ -14,7 +14,8 @@ type TicketForm = {
   onSubmit: (event: SubmitEvent<HTMLFormElement>) => void;
   onCancel: () => void;
   isDisabled: boolean;
-  submitButtonText: string;
+  isRequired?: boolean;
+  submitButtonText?: string;
 };
 const TicketForm = ({
   ticketFormStates,
@@ -22,6 +23,7 @@ const TicketForm = ({
   onSubmit,
   onCancel,
   isDisabled,
+  isRequired = true,
   submitButtonText = 'create',
 }: TicketForm) => {
   const {
@@ -53,7 +55,7 @@ const TicketForm = ({
         maxLength={200}
         value={summary}
         onChange={(event) => setSummary(event.target.value)}
-        required
+        required={isRequired}
       />
 
       <textarea
@@ -64,7 +66,7 @@ const TicketForm = ({
         maxLength={5000}
         value={description}
         onChange={(event) => setDescription(event.target.value)}
-        required
+        required={isRequired}
       />
 
       <div className="mt-2 flex gap-2">
@@ -74,7 +76,7 @@ const TicketForm = ({
           onChange={(event) =>
             setIssueType(event.target.value as TicketPayload['issueType'])
           }
-          required
+          required={isRequired}
         >
           <option value="" disabled>
             Issue Type
@@ -91,7 +93,7 @@ const TicketForm = ({
           onChange={(event) =>
             setCategory(event.target.value as TicketPayload['category'])
           }
-          required
+          required={isRequired}
         >
           <option value="" disabled>
             Category
@@ -111,7 +113,7 @@ const TicketForm = ({
           onChange={(event) =>
             setPriority(event.target.value as TicketPayload['priority'])
           }
-          required
+          required={isRequired}
         >
           <option value="" disabled>
             Priority
@@ -129,7 +131,7 @@ const TicketForm = ({
           onChange={(event) =>
             setSeverity(event.target.value as TicketPayload['severity'])
           }
-          required
+          required={isRequired}
         >
           <option value="" disabled>
             Severity

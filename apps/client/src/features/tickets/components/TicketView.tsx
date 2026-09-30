@@ -103,6 +103,8 @@ const TicketView = () => {
             X
           </button>
           <TicketEditView
+            ticketId={ticketId}
+            boardId={boardId}
             collaborators={allCollaborators}
             closeEditView={() => setIsEditing(false)}
           />
