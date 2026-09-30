@@ -48,7 +48,7 @@ const CreateTicketModal = ({
   return (
     <Modal open={open} closeModal={closeModal} title="Create Ticket">
       <form
-        className="mt-2 h-fit w-fit px-3 py-2"
+        className="mt-2 h-fit w-full px-3 py-2"
         onSubmit={handleCreateTicket}
       >
         <textarea

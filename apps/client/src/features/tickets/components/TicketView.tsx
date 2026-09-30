@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useBoardOutletContext } from '@/features/boards/context/useBoardOutletContext.ts';
@@ -7,6 +7,7 @@ const TicketView = () => {
   const { boardId, ticketId } = useParams();
   const { board } = useBoardOutletContext();
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
 
   // Get current ticket
   const ticket = board.sections
@@ -28,58 +29,71 @@ const TicketView = () => {
 
   return (
     <main className="block-primary mx-2 my-3 min-h-0 overflow-y-auto px-3 py-2">
-      <header>
-        <h2 className="mt-2 text-xl font-bold">{ticket.summary}</h2>
-        <dd>
-          {ticket.issueType} · {ticket.category}
-        </dd>
-      </header>
+      {!isEditing && (
+        <>
+          <button
+            className="button-primary ml-auto block px-3 py-1"
+            onClick={() => setIsEditing(true)}
+          >
+            Edit
+          </button>
+          <header>
+            <h2 className="text-xl font-bold">{ticket.summary}</h2>
+            <dd>
+              {ticket.issueType} · {ticket.category}
+            </dd>
+          </header>
 
-      <section className="mt-4">
-        <dt className="mt-2 font-bold">Description</dt>
-        <dd>{ticket.description}</dd>
-      </section>
+          <section className="mt-4">
+            <dt className="mt-2 font-bold">Description</dt>
+            <dd>{ticket.description}</dd>
+          </section>
 
-      <section className="mt-4">
-        <dl>
-          <div className="grid grid-cols-3">
-            <div className="mt-2">
-              <dt className="font-bold">Priority</dt>
-              <dd>{ticket.priority}</dd>
-            </div>
-            <div className="mt-2">
-              <dt className="font-bold">Severity</dt>
-              <dd>{ticket.severity}</dd>
-            </div>
-            <div className="mt-2">
-              <dt className="font-bold">Reproducible</dt>
-              <dd>{ticket.reproducibility ? 'Yes' : 'No'}</dd>
-            </div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div className="mt-2">
-              <dt className="font-bold">Reporter</dt>
-              <dd>
-                {ticket.reporter.name} ({ticket.reporter.role})
-              </dd>
-            </div>
-            <div className="mt-2">
-              <dt className="font-bold">Assignee</dt>
-              <dd>{ticket.assignee?.name ?? 'Unassigned'}</dd>
-            </div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div className="mt-2">
-              <dt className="font-bold">Created</dt>
-              <dd>{formatDate(ticket.creationDate)}</dd>
-            </div>
-            <div className="mt-2">
-              <dt className="font-bold">Last updated</dt>
-              <dd>{formatDate(ticket.lastUpdate)}</dd>
-            </div>
-          </div>
-        </dl>
-      </section>
+          <section className="mt-4">
+            <dl>
+              <div className="grid grid-cols-3">
+                <div className="mt-2">
+                  <dt className="font-bold">Priority</dt>
+                  <dd>{ticket.priority}</dd>
+                </div>
+                <div className="mt-2">
+                  <dt className="font-bold">Severity</dt>
+                  <dd>{ticket.severity}</dd>
+                </div>
+                <div className="mt-2">
+                  <dt className="font-bold">Reproducible</dt>
+                  <dd>{ticket.reproducibility ? 'Yes' : 'No'}</dd>
+                </div>
+              </div>
+              <div className="grid grid-cols-2">
+                <div className="mt-2">
+                  <dt className="font-bold">Reporter</dt>
+                  <dd>
+                    {ticket.reporter.name} ({ticket.reporter.role})
+                  </dd>
+                </div>
+                <div className="mt-2">
+                  <dt className="font-bold">Assignee</dt>
+                  <dd>{ticket.assignee?.name ?? 'Unassigned'}</dd>
+                </div>
+              </div>
+              <div className="grid grid-cols-2">
+                <div className="mt-2">
+                  <dt className="font-bold">Created</dt>
+                  <dd>{formatDate(ticket.creationDate)}</dd>
+                </div>
+                <div className="mt-2">
+                  <dt className="font-bold">Last updated</dt>
+                  <dd>{formatDate(ticket.lastUpdate)}</dd>
+                </div>
+              </div>
+            </dl>
+          </section>
+        </>
+      )}
+      {isEditing && (
+        <div>Edit view</div>
+      )}
     </main>
   );
 };

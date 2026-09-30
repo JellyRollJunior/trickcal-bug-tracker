@@ -211,10 +211,9 @@ $ turbo dev
 ## Current
 
 - boardcontext
-    - expose is pending board
+    - expose ispending board variable
 
 - TICKET URL VIEW
-    - half board half ticket view
     - ticket edit
     - ticket update assignee
     - ticket delete
