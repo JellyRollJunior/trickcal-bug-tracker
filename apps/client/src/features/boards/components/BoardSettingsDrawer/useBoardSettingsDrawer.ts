@@ -1,30 +1,43 @@
-import type { BoardDto } from '@trickcal-bug-tracker/shared';
+import type {
+    BoardDto,
+    patchboardsRequestBodySchema,
+} from '@trickcal-bug-tracker/shared';
+import type { z } from 'zod';
 import { useState, type SubmitEvent } from 'react';
 import { usePatchBoard } from '@/features/boards/hooks/usePatchBoard.ts';
-import { useAuth } from '@/context/auth/useAuth';
+import { useAuth } from '@/context/auth/useAuth.ts';
+import { toast } from 'sonner';
+
+type PatchBoardPayload = z.infer<typeof patchboardsRequestBodySchema>;
 
 const useBoardSettingsDrawer = (
     boardId: BoardDto['id'],
+    boardName: BoardDto['name'],
+    boardDescription: BoardDto['description'],
     closeModal: () => void
 ) => {
     const { mutate: patchBoard, isPending: isPendingPatchBoard } =
         usePatchBoard(boardId);
     const { user } = useAuth();
-    const [newBoardName, setNewBoardName] = useState('');
-    const [newDescription, setNewDescription] = useState('');
+    const [newBoardName, setNewBoardName] = useState(boardName);
+    const [newDescription, setNewDescription] = useState(boardDescription);
 
-    const reset = () => {
-        setNewBoardName('');
-        setNewDescription('');
+    const reset = (name = boardName, description = boardDescription) => {
+        setNewBoardName(name);
+        setNewDescription(description);
     };
 
+    const changed = <T>(next: T | '' | null, prev: T): T | undefined => {
+        return next === '' || next === null || next === prev ? undefined : next;
+    };
+    const toPatchBoardPayload = (): PatchBoardPayload => ({
+        name: changed(newBoardName, boardName),
+        description: changed(newDescription, boardDescription),
+    });
     const handlePatchBoard = (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const payload = {
-            name: newBoardName !== '' ? newBoardName : undefined,
-            description: newDescription !== '' ? newDescription : undefined,
-        };
+        const payload = toPatchBoardPayload();
         const hasChanges = Object.values(payload).some(
             (values) => values !== undefined
         );
@@ -35,12 +48,14 @@ const useBoardSettingsDrawer = (
                     data: payload,
                 },
                 {
-                    onSuccess: () => {
+                    onSuccess: (data) => {
                         closeModal();
-                        reset();
+                        reset(data.name, data.description);
                     },
                 }
             );
+        } else {
+            toast('No changes detected');
         }
     };
 

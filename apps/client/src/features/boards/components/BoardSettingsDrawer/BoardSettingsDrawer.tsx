@@ -31,7 +31,7 @@ const BoardSettingsDrawer = ({
     handlePatchBoard,
     isPendingPatchBoard,
     me,
-  } = useBoardSettingsDrawer(boardId, closeDrawer);
+  } = useBoardSettingsDrawer(boardId, boardName, boardDescription, closeDrawer);
 
   return (
     <AnimatePresence>
@@ -61,7 +61,6 @@ const BoardSettingsDrawer = ({
             <input
               className="block-primary mt-2 w-full py-1 pr-1 pl-2"
               id="newBoardName"
-              placeholder={boardName}
               minLength={1}
               maxLength={100}
               value={newBoardName}
@@ -73,7 +72,6 @@ const BoardSettingsDrawer = ({
             <textarea
               className="block-primary w-full py-1 pr-1 pl-2"
               id="newDescription"
-              placeholder={boardDescription}
               rows={4}
               minLength={1}
               maxLength={2000}
