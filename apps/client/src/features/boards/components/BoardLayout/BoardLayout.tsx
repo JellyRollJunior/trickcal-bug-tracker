@@ -7,7 +7,7 @@ const BoardLayoutContainer = () => {
   const { boardId } = useParams();
 
   if (!boardId) return <h3>Loading...</h3>;
-  
+
   return <BoardLayout boardId={boardId} />;
 };
 
@@ -19,7 +19,11 @@ const BoardLayout = ({ boardId }: BoardLayoutProps) => {
 
   const context: BoardOutletContext = { board, viewerList };
 
-  return <Outlet context={context} />;
+  return (
+    <div className="grid min-h-0 flex-1 grid-cols-1">
+      <Outlet context={context} />
+    </div>
+  );
 };
 
 export { BoardLayoutContainer as BoardLayout };
