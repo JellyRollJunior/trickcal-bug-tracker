@@ -230,15 +230,14 @@ $ turbo dev
     - move ticket to same order bug
     - constant errors on cannot connext to server
 
-
 - ugly scroll bars
-
-bug: drawer overflow on fade in animation
-
 
 fail login: Login expired. Please login again.
 
 socket event: refetch boards on being added as collaboratr
+
+themeing
+internationalization
 
 ## Todo list
 
@@ -250,10 +249,6 @@ socket event: refetch boards on being added as collaboratr
     - login w/ github
     - login w/ google
     - signup
-- board
-    - delete board
-- tickets
-    - delete ticket
 
 ## Improvements
 

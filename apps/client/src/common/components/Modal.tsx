@@ -28,7 +28,7 @@ const Modal = ({ open, closeModal, title, children }: ModalProps) => {
         if (event.target === ref.current) closeModal();
       }}
     >
-      <div className="flex h-full flex-col overflow-scroll px-3 pt-3 pb-2.5">
+      <div className="flex h-full flex-col overflow-y-auto px-3 pt-3 pb-2.5">
         <header className="relative pt-2.5 pb-1.5">
           <button
             className="absolute -top-1.5 right-1.5 h-fit text-2xl"
