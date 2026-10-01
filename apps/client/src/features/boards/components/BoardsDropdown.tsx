@@ -12,7 +12,7 @@ const BoardsDropdown = () => {
     <>
       <div className="relative w-md">
         <button
-          className="border-sand-beige mt-1 w-full rounded-md border-2 bg-white px-3 py-2"
+          className="border-sand-beige w-full rounded-md border-2 bg-white px-3 py-2"
           onClick={toggleDropdown}
         >
           Select board

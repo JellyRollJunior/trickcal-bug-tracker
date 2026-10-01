@@ -1,0 +1,2 @@
+const useCreateBoardButton = () => {};
+export { useCreateBoardButton };
