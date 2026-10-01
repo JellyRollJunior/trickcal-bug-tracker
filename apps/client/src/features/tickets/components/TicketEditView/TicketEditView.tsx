@@ -22,7 +22,7 @@ const TicketEditView = ({
     ticketFormStates,
     reset,
     handleSubmitEditForm,
-    isPendingPatchTicket,
+    isPendingSubmit,
   } = useTicketEditView(boardId, ticket, closeEditView);
 
   return (
@@ -34,7 +34,7 @@ const TicketEditView = ({
         reset(ticket);
         closeEditView();
       }}
-      isDisabled={isPendingPatchTicket}
+      isDisabled={isPendingSubmit}
       isRequired={false}
       submitButtonText="Save changes"
     />

@@ -244,13 +244,16 @@ $ turbo dev
     - move ticket to same order bug
     - constant errors on cannot connext to server
 
+
+- ugly scroll bars
+
+- update ticket
+    - socket event sent to self
+
 ## Todo list
 
 - optimistic updates with tanstack for ticket move
-  backend
 
-- get /users
-- get /current
 - dont crash on unable to fetch users
 
 - auth
@@ -259,13 +262,7 @@ $ turbo dev
     - signup
 - board
     - delete board
-    - add collaborator
-    - delete colalborator
-- section
-    - edit section
 - tickets
-    - edit ticket
-    - edit ticket assignee
     - delete ticket
 
 ## Improvements

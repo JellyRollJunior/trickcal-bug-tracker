@@ -61,7 +61,7 @@ const putAssignee = async ({
 }) => {
     const path = `/tickets/${ticketId}/assignee`;
     const parsedBody = safeParse(putAssigneeRequestBodySchema, data);
-    const response = makeRequest(path, {
+    const response = await makeRequest(path, {
         method: 'PUT',
         body: JSON.stringify(parsedBody),
     });
@@ -71,7 +71,7 @@ const putAssignee = async ({
 
 const deleteTicket = async ({ ticketId }: { ticketId: TicketDto['id'] }) => {
     const path = `/tickets/${ticketId}`;
-    const response = makeRequest(path, {
+    const response = await makeRequest(path, {
         method: 'DELETE',
     });
     const parsedResponse = safeParse(deleteTicketResponseSchema, response);

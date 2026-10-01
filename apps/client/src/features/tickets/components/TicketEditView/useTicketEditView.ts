@@ -1,14 +1,17 @@
 import type {
     BoardDto,
     patchTicketsRequestBodySchema,
+    putAssigneeRequestBodySchema,
     TicketDto,
 } from '@trickcal-bug-tracker/shared';
 import type { z } from 'zod';
+import type { SubmitEvent } from 'react';
 import { useTicketFormStates } from '@/features/tickets/components/TicketForm/useTicketFormStates.ts';
 import { usePatchTicket } from '@/features/tickets/hooks/usePatchTicket.ts';
-import type { SubmitEvent } from 'react';
+import { usePutAssignee } from '@/features/tickets/hooks/usePutAssignee.ts';
 
-type TicketPayload = z.infer<typeof patchTicketsRequestBodySchema>;
+type PatchTicketPayload = z.infer<typeof patchTicketsRequestBodySchema>;
+type PutAssigneePayload = z.infer<typeof putAssigneeRequestBodySchema>;
 
 const useTicketEditView = (
     boardId: BoardDto['id'],
@@ -24,12 +27,13 @@ const useTicketEditView = (
         priority,
         severity,
         reproducibility,
+        assigneeId,
         reset,
     } = ticketFormStates;
-    const { mutate: patchTicket, isPending: isPendingPatchTicket } =
-        usePatchTicket(boardId);
+    const patchTicket = usePatchTicket(boardId);
+    const putAssignee = usePutAssignee(boardId);
 
-    const toPayload = (): TicketPayload => ({
+    const toPatchTicketPayload = (): PatchTicketPayload => ({
         summary: summary ? summary : undefined,
         description: description ? description : undefined,
         issueType: issueType ? issueType : undefined,
@@ -39,34 +43,55 @@ const useTicketEditView = (
         reproducibility: reproducibility !== null ? reproducibility : undefined,
     });
 
-    const handleSubmitEditForm = (event: SubmitEvent<HTMLFormElement>) => {
+    const toPutAssigneePayload = (): PutAssigneePayload => ({
+        assigneeId: assigneeId,
+    });
+
+    const handleSubmitEditForm = async (
+        event: SubmitEvent<HTMLFormElement>
+    ) => {
         event.preventDefault();
+        let mutated = false;
 
         // if payload contains >= 1 non undefined value, patch ticket
-        const patchPayload = toPayload();
+        const patchPayload = toPatchTicketPayload();
         const hasChanges = Object.values(patchPayload).some(
             (value) => value !== undefined
         );
         if (hasChanges) {
-            patchTicket(
+            await patchTicket.mutateAsync(
                 { ticketId: ticket.id, data: patchPayload },
                 {
-                    onSuccess: (data) => {
-                        reset(data);
-                        closeUi();
+                    onSuccess: () => {
+                        mutated = true;
                     },
                 }
             );
         }
 
         // if assigneeId set, update assignee
+        if (assigneeId !== ticket.assignee?.id) {
+            await putAssignee.mutateAsync(
+                { ticketId: ticket.id, data: toPutAssigneePayload() },
+                {
+                    onSuccess: () => {
+                        mutated = true;
+                    },
+                }
+            );
+        }
+
+        if (mutated) {
+            reset(ticket);
+            closeUi();
+        }
     };
 
     return {
         ticketFormStates,
         reset,
         handleSubmitEditForm,
-        isPendingPatchTicket,
+        isPendingSubmit: patchTicket.isPending || putAssignee.isPending,
     };
 };
 
