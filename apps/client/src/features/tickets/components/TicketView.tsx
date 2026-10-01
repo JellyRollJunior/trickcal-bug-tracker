@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useBoardOutletContext } from '@/features/boards/context/useBoardOutletContext.ts';
 import { TicketEditView } from '@/features/tickets/components/TicketEditView/TicketEditView.tsx';
@@ -34,12 +34,20 @@ const TicketView = () => {
     <main className="block-primary mx-2 my-3 min-h-0 overflow-y-auto px-3 py-2">
       {!isEditing && (
         <>
-          <button
-            className="button-primary ml-auto block px-3 py-1"
-            onClick={() => setIsEditing(true)}
-          >
-            Edit
-          </button>
+          <div className="ml-auto flex w-fit gap-2">
+            <button
+              className="button-primary px-3 py-1"
+              onClick={() => setIsEditing(true)}
+            >
+              Edit
+            </button>
+            <Link
+              className="button-primary ml-auto block px-3 py-1"
+              to={`/boards/${boardId}`}
+            >
+              ×
+            </Link>
+          </div>
           <header>
             <h2 className="text-xl font-bold">{ticket.summary}</h2>
             <dd>
@@ -96,12 +104,12 @@ const TicketView = () => {
       )}
       {isEditing && (
         <>
-          <button
-            className="button-primary ml-auto block px-3 py-1"
-            onClick={() => setIsEditing(false)}
+          <Link
+            className="button-primary ml-auto w-fit block px-3 py-1"
+            to={`/boards/${boardId}`}
           >
-            X
-          </button>
+            ×
+          </Link>
           <TicketEditView
             ticket={ticket}
             boardId={boardId}

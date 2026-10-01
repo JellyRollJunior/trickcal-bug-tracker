@@ -214,16 +214,12 @@ $ turbo dev
 - ticketEditView
     - compare patch -> dont patch on no changes
     - close X button
-    - assigneeID
-
-
 
 
 - boardcontext
     - expose ispending board variable
 
 - TICKET URL VIEW
-    - ticket update assignee
     - ticket delete
 
 - board
