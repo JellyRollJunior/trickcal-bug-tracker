@@ -14,13 +14,16 @@ const useBoardSettingsDrawer = (
     boardId: BoardDto['id'],
     boardName: BoardDto['name'],
     boardDescription: BoardDto['description'],
+    boardOwnerId: BoardDto['owner']['id'],
     closeModal: () => void
 ) => {
     const { mutate: patchBoard, isPending: isPendingPatchBoard } =
         usePatchBoard(boardId);
-    const { user } = useAuth();
+    const { user: me } = useAuth();
     const [newBoardName, setNewBoardName] = useState(boardName);
     const [newDescription, setNewDescription] = useState(boardDescription);
+
+    const isOwner = me && me.id === boardOwnerId;
 
     const reset = (name = boardName, description = boardDescription) => {
         setNewBoardName(name);
@@ -67,7 +70,7 @@ const useBoardSettingsDrawer = (
         reset,
         handlePatchBoard,
         isPendingPatchBoard,
-        me: user,
+        isOwner,
     };
 };
 

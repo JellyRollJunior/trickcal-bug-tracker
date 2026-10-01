@@ -16,7 +16,6 @@ const useCreateBoardButton = (closeUi: () => void) => {
     });
     const handlePostBoard = (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-
         createBoard(
             { data: toPostBoardsPayload() },
             {

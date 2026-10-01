@@ -11,6 +11,7 @@ const patchBoardResponseSchema = boardDtoSchema;
 const getAvailableNewCollaboratorsResponseSchema = userDtoSchema.array();
 const postBoardCollaboratorResponseSchema = boardDtoSchema;
 const deleteBoardCollaboratorResponseSchema = boardDtoSchema;
+const deleteBoardResponseSchema = boardDtoSchema;
 
 export {
     getBoardsResponseSchema,
@@ -20,4 +21,5 @@ export {
     getAvailableNewCollaboratorsResponseSchema,
     postBoardCollaboratorResponseSchema,
     deleteBoardCollaboratorResponseSchema,
+    deleteBoardResponseSchema,
 };

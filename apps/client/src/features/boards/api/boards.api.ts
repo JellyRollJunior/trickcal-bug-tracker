@@ -1,5 +1,6 @@
 import {
     deleteBoardCollaboratorResponseSchema,
+    deleteBoardResponseSchema,
     getAvailableNewCollaboratorsResponseSchema,
     getBoardResponseSchema,
     getBoardsResponseSchema,
@@ -121,6 +122,19 @@ const deleteCollaborator = async ({
     return parsedResponse;
 };
 
+const deleteBoard = async ({
+    boardId,
+}: {
+    boardId: BoardDto['id'];
+}) => {
+    const path = `/boards/${boardId}`;
+    const response = await makeRequest(path, {
+        method: 'DELETE',
+    });
+    const parsedResponse = safeParse(deleteBoardResponseSchema, response);
+    return parsedResponse;
+};
+
 export {
     getBoards,
     postBoards,
@@ -129,4 +143,5 @@ export {
     getAvailableNewCollaborators,
     postCollaborator,
     deleteCollaborator,
+    deleteBoard,
 };

@@ -235,6 +235,11 @@ $ turbo dev
 
 bug: drawer overflow on fade in animation
 
+
+fail login: Login expired. Please login again.
+
+socket event: refetch boards on being added as collaboratr
+
 ## Todo list
 
 - optimistic updates with tanstack for ticket move

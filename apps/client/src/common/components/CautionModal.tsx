@@ -22,7 +22,9 @@ const CautionModal = ({
   return (
     <Modal open={open} closeModal={closeModal} title={title}>
       <form onSubmit={onSubmit}>
-        <p className="mt-5 text-center text-sm">{message}</p>
+        <p className="mt-5 text-center text-sm whitespace-pre-line">
+          {message}
+        </p>
         <div className="mt-8 flex justify-end gap-3">
           <button
             className="button-primary px-3 py-1"

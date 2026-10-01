@@ -1,15 +1,16 @@
 import type { BoardDto } from '@trickcal-bug-tracker/shared';
 import { AnimatePresence, motion } from 'motion/react';
-import { useBoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/useBoardSettingsDrawer';
-import { AddCollaboratorForm } from '../AddCollaboratorForm/AddCollaboratorForm';
-import { DeleteCollaboratorForm } from '../DeleteCollaboratorForm/DeleteCollaboratorForm';
+import { useBoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/useBoardSettingsDrawer.ts';
+import { AddCollaboratorForm } from '@/features/boards/components/AddCollaboratorForm/AddCollaboratorForm.tsx';
+import { DeleteCollaboratorForm } from '@/features/boards/components/DeleteCollaboratorForm/DeleteCollaboratorForm.tsx';
+import { DeleteBoardButton } from '@/features/boards/components/DeleteBoardButton/DeleteBoardButton.tsx';
 
 type BoardSettingsDrawerProps = {
   open: boolean;
   closeDrawer: () => void;
   boardId: BoardDto['id'];
   boardOwnerId: BoardDto['owner']['id'];
-  boardCollaborators: BoardDto['collaborators']
+  boardCollaborators: BoardDto['collaborators'];
   boardName: BoardDto['name'];
   boardDescription: BoardDto['description'];
 };
@@ -30,8 +31,14 @@ const BoardSettingsDrawer = ({
     reset,
     handlePatchBoard,
     isPendingPatchBoard,
-    me,
-  } = useBoardSettingsDrawer(boardId, boardName, boardDescription, closeDrawer);
+    isOwner,
+  } = useBoardSettingsDrawer(
+    boardId,
+    boardName,
+    boardDescription,
+    boardOwnerId,
+    closeDrawer
+  );
 
   return (
     <AnimatePresence>
@@ -41,7 +48,7 @@ const BoardSettingsDrawer = ({
           animate={{ translateX: 0, opacity: 1 }}
           exit={{ translateX: '100%', opacity: 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="block-primary absolute top-0 right-0 flex h-full min-w-1/3 flex-col gap-1.5 px-3 py-2 overflow-scroll"
+          className="block-primary absolute top-0 right-0 flex h-full min-w-1/3 flex-col gap-1.5 overflow-scroll px-3 py-2"
         >
           <button
             className="absolute -top-1.5 right-1.5 h-fit text-2xl"
@@ -53,6 +60,9 @@ const BoardSettingsDrawer = ({
             ×
           </button>
           <h3 className="font-semibold">Board settings</h3>
+
+          {/* Delete Board */}
+          {isOwner && <DeleteBoardButton boardId={boardId} />}
 
           {/* Patch Board */}
           <hr className="mt-3 h-px border-0 bg-gray-300" />
@@ -86,7 +96,7 @@ const BoardSettingsDrawer = ({
             </button>
           </form>
 
-          {me && me.id === boardOwnerId && (
+          {isOwner && (
             <>
               {/* Add Board Collaborators */}
               <hr className="mt-3 h-px border-0 bg-gray-300" />
@@ -97,7 +107,11 @@ const BoardSettingsDrawer = ({
 
               {/* Remove Board Collaborators */}
               <hr className="mt-3 h-px border-0 bg-gray-300" />
-              <DeleteCollaboratorForm boardId={boardId} collaborators={boardCollaborators} isDisabled={isPendingPatchBoard} />
+              <DeleteCollaboratorForm
+                boardId={boardId}
+                collaborators={boardCollaborators}
+                isDisabled={isPendingPatchBoard}
+              />
             </>
           )}
         </motion.aside>
