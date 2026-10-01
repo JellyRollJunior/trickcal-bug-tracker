@@ -7,6 +7,7 @@ type CautionModalProps = {
   onSubmit: (event: SubmitEvent<HTMLFormElement>) => void;
   isSubmitDisabled: boolean;
   title: string;
+  message: string;
   submitActionLabel: string;
 };
 const CautionModal = ({
@@ -15,12 +16,13 @@ const CautionModal = ({
   onSubmit,
   isSubmitDisabled,
   title,
+  message,
   submitActionLabel,
 }: CautionModalProps) => {
   return (
-    <Modal open={open} closeModal={closeModal} title="Remove section">
+    <Modal open={open} closeModal={closeModal} title={title}>
       <form onSubmit={onSubmit}>
-        <p className="mt-5 text-center text-sm">{title}</p>
+        <p className="mt-5 text-center text-sm">{message}</p>
         <div className="mt-8 flex justify-end gap-3">
           <button
             className="button-primary px-3 py-1"

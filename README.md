@@ -210,16 +210,8 @@ $ turbo dev
 
 ## Current
 
-
-- ticketEditView
-    - compare patch -> dont patch on no changes
-
-
 - boardcontext
     - expose ispending board variable
-
-- TICKET URL VIEW
-    - ticket delete
 
 - board
     - delete board

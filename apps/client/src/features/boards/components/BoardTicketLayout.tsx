@@ -1,5 +1,5 @@
-import { Board } from '@/features/boards/components/Board/Board';
-import { TicketView } from '@/features/tickets/components/TicketView.tsx';
+import { Board } from '@/features/boards/components/Board/Board.tsx';
+import { TicketView } from '@/features/tickets/components/TicketView/TicketView.tsx';
 
 const BoardTicketLayout = () => {
   return (

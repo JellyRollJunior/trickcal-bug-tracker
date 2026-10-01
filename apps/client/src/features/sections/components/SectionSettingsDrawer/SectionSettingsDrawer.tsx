@@ -85,7 +85,8 @@ const SectionSettingsDrawer = ({
         closeModal={closeDeleteSection}
         onSubmit={handleDeleteSection}
         isSubmitDisabled={isPendingDeleteSection}
-        title="Are you sure you want to remove section?"
+        title="Remove Section"
+        message="Are you sure you want to remove section?"
         submitActionLabel="Remove section"
       />
     </motion.aside>
