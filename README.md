@@ -213,15 +213,10 @@ $ turbo dev
 - boardcontext
     - expose ispending board variable
 
-- board
-    - delete board
-
 - auth
     - signup
     - login redirect
     - google auth
-
-- test board deleted socket redirect
 
 - loading anim
 

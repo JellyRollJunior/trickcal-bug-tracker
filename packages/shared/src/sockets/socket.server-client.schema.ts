@@ -36,13 +36,13 @@ const boardAddedCollaboratorPayloadSchema = z.object({
     user: userDtoSchema,
     board: boardDtoSchema,
 });
-type BoardAddedCollaborator = z.infer<
+type BoardAddedCollaboratorPayload = z.infer<
     typeof boardAddedCollaboratorPayloadSchema
 >;
 
 // board:removed-collaborator
 const boardRemovedCollaboratorSchema = boardAddedCollaboratorPayloadSchema;
-type BoardRemovedCollaborator = z.infer<
+type BoardRemovedCollaboratorPayload = z.infer<
     typeof boardAddedCollaboratorPayloadSchema
 >;
 
@@ -103,8 +103,8 @@ const ticketDeletedPayloadSchema = z.object({
 type TicketDeletedPayload = z.infer<typeof ticketDeletedPayloadSchema>;
 
 export type {
-    BoardAddedCollaborator,
-    BoardRemovedCollaborator,
+    BoardAddedCollaboratorPayload,
+    BoardRemovedCollaboratorPayload,
     BoardDeletedPayload,
     BoardEditedPayload,
     SectionCreatedPayload,

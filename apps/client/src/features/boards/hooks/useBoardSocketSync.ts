@@ -1,11 +1,13 @@
 import {
-  boardDeletedPayloadSchema,
-  ticketMovedPayloadSchema,
-  ticketUpdatedPayloadSchema,
-  type BoardDeletedPayload,
-  type BoardDto,
-  type TicketMovedPayload,
-  type TicketUpdatedPayload,
+    boardDeletedPayloadSchema,
+    boardRemovedCollaboratorSchema,
+    ticketMovedPayloadSchema,
+    ticketUpdatedPayloadSchema,
+    type BoardDeletedPayload,
+    type BoardDto,
+    type BoardRemovedCollaboratorPayload,
+    type TicketMovedPayload,
+    type TicketUpdatedPayload,
 } from '@trickcal-bug-tracker/shared';
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,82 +16,104 @@ import { toast } from 'sonner';
 import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
 import { withSocketErrorHandling } from '@/lib/socketErrorWrapper.ts';
+import { useAuth } from '@/context/auth/useAuth.ts';
 
 const useBoardSocketSync = (boardId: BoardDto['id']) => {
-  const { socket, isConnected } = useSocket();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+    const { socket, isConnected } = useSocket();
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
+    const { user } = useAuth();
 
-  useEffect(() => {
-    if (!isConnected || !socket) return;
+    useEffect(() => {
+        if (!isConnected || !socket || !user) return;
 
-    const refetchBoard = () => {
-      queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
-    };
+        const refetchBoard = () => {
+            queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
+        };
 
-    // board
-    const handleBoardDeleted = withSocketErrorHandling(
-      (payload: BoardDeletedPayload) => {
-        const parsedPayload = safeParse(boardDeletedPayloadSchema, payload);
-        toast(`Board: ${parsedPayload.board.name} was deleted`);
-        navigate('/');
-      }
-    );
-    socket.on('board:edited', refetchBoard);
-    socket.on('board:added-collaborator', refetchBoard);
-    socket.on('board:removed-collaborator', refetchBoard);
-    socket.on('board:deleted', handleBoardDeleted);
-
-    // section
-    socket.on('section:created', refetchBoard);
-    socket.on('section:edited', refetchBoard);
-    socket.on('section:deleted', refetchBoard);
-
-    // ticket
-    const handleTicketUpdated = withSocketErrorHandling(
-      (payload: TicketUpdatedPayload) => {
-        const parsedPayload = safeParse(ticketUpdatedPayloadSchema, payload);
-        toast(
-          `${parsedPayload.updatedBy.name} updated ticket: ${parsedPayload.ticket.summary}`
+        // board
+        const handleBoardDeleted = withSocketErrorHandling(
+            (payload: BoardDeletedPayload) => {
+                const parsedPayload = safeParse(
+                    boardDeletedPayloadSchema,
+                    payload
+                );
+                toast(`Board: ${parsedPayload.board.name} was deleted`);
+                navigate('/');
+            }
         );
-        refetchBoard();
-      }
-    );
-    const handleTicketMoved = withSocketErrorHandling(
-      (payload: TicketMovedPayload) => {
-        const parsedPayload = safeParse(ticketMovedPayloadSchema, payload);
-        toast(
-          `${parsedPayload.movedBy.name} moved ticket: ${parsedPayload.ticket.summary}`
+        const handleRemovedCollaborator = withSocketErrorHandling(
+            (payload: BoardRemovedCollaboratorPayload) => {
+                const parsedPayload = safeParse(
+                    boardRemovedCollaboratorSchema,
+                    payload
+                );
+                if (user.id !== parsedPayload.user.id) {
+                    refetchBoard();
+                }
+            }
         );
-        refetchBoard();
-      }
-    );
-    socket.on('ticket:created', refetchBoard);
-    socket.on('ticket:updated', handleTicketUpdated);
-    socket.on('ticket:updated-assignee', refetchBoard);
-    socket.on('ticket:moved', handleTicketMoved);
-    socket.on('ticket:deleted', refetchBoard);
+        socket.on('board:edited', refetchBoard);
+        socket.on('board:added-collaborator', refetchBoard);
+        socket.on('board:removed-collaborator', handleRemovedCollaborator);
+        socket.on('board:deleted', handleBoardDeleted);
 
-    return () => {
-      // board
-      socket.off('board:edited', refetchBoard);
-      socket.off('board:added-collaborator', refetchBoard);
-      socket.off('board:removed-collaborator', refetchBoard);
-      socket.off('board:deleted', handleBoardDeleted);
+        // section
+        socket.on('section:created', refetchBoard);
+        socket.on('section:edited', refetchBoard);
+        socket.on('section:deleted', refetchBoard);
 
-      // section
-      socket.off('section:created', refetchBoard);
-      socket.off('section:edited', refetchBoard);
-      socket.off('section:deleted', refetchBoard);
+        // ticket
+        const handleTicketUpdated = withSocketErrorHandling(
+            (payload: TicketUpdatedPayload) => {
+                const parsedPayload = safeParse(
+                    ticketUpdatedPayloadSchema,
+                    payload
+                );
+                toast(
+                    `${parsedPayload.updatedBy.name} updated ticket: ${parsedPayload.ticket.summary}`
+                );
+                refetchBoard();
+            }
+        );
+        const handleTicketMoved = withSocketErrorHandling(
+            (payload: TicketMovedPayload) => {
+                const parsedPayload = safeParse(
+                    ticketMovedPayloadSchema,
+                    payload
+                );
+                toast(
+                    `${parsedPayload.movedBy.name} moved ticket: ${parsedPayload.ticket.summary}`
+                );
+                refetchBoard();
+            }
+        );
+        socket.on('ticket:created', refetchBoard);
+        socket.on('ticket:updated', handleTicketUpdated);
+        socket.on('ticket:updated-assignee', refetchBoard);
+        socket.on('ticket:moved', handleTicketMoved);
+        socket.on('ticket:deleted', refetchBoard);
 
-      // ticket
-      socket.off('ticket:created', refetchBoard);
-      socket.off('ticket:updated', handleTicketUpdated);
-      socket.off('ticket:updated-assignee', refetchBoard);
-      socket.off('ticket:moved', handleTicketMoved);
-      socket.off('ticket:deleted', refetchBoard);
-    };
-  }, [socket, isConnected, navigate, queryClient, boardId]);
+        return () => {
+            // board
+            socket.off('board:edited', refetchBoard);
+            socket.off('board:added-collaborator', refetchBoard);
+            socket.off('board:removed-collaborator', handleRemovedCollaborator);
+            socket.off('board:deleted', handleBoardDeleted);
+
+            // section
+            socket.off('section:created', refetchBoard);
+            socket.off('section:edited', refetchBoard);
+            socket.off('section:deleted', refetchBoard);
+
+            // ticket
+            socket.off('ticket:created', refetchBoard);
+            socket.off('ticket:updated', handleTicketUpdated);
+            socket.off('ticket:updated-assignee', refetchBoard);
+            socket.off('ticket:moved', handleTicketMoved);
+            socket.off('ticket:deleted', refetchBoard);
+        };
+    }, [socket, isConnected, navigate, queryClient, user, boardId]);
 };
 
 export { useBoardSocketSync };
