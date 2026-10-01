@@ -215,7 +215,6 @@ $ turbo dev
 
 - board
     - delete board
-    - post board
 
 - auth
     - signup
@@ -234,6 +233,7 @@ $ turbo dev
 
 - ugly scroll bars
 
+bug: drawer overflow on fade in animation
 
 ## Todo list
 
