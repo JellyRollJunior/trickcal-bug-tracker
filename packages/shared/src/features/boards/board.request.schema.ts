@@ -4,6 +4,7 @@ import { sectionShape } from '../sections/section.schema.js';
 import { userShape } from '../users/user.schema.js';
 
 /* Request Body */
+type PostBoardsRequestBody = z.infer<typeof postBoardsRequestBodySchema>;
 const postBoardsRequestBodySchema = z.object({
     name: boardShape.name,
     description: boardShape.description,
@@ -33,7 +34,7 @@ const boardIdAndSectionIdParamSchema = z.object({
     sectionId: sectionShape.id,
 });
 
-export type { PatchboardsRequestBody };
+export type { PostBoardsRequestBody, PatchboardsRequestBody };
 export {
     postBoardsRequestBodySchema,
     patchboardsRequestBodySchema,

@@ -5,6 +5,7 @@ import {
 } from './board.schema.js';
 
 const getBoardsResponseSchema = boardDtoSchema.array();
+const postBoardsResponseSchema = boardDtoSchema;
 const getBoardResponseSchema = boardWithSectionsAndTicketsDtoSchema;
 const patchBoardResponseSchema = boardDtoSchema;
 const getAvailableNewCollaboratorsResponseSchema = userDtoSchema.array();
@@ -13,6 +14,7 @@ const deleteBoardCollaboratorResponseSchema = boardDtoSchema;
 
 export {
     getBoardsResponseSchema,
+    postBoardsResponseSchema,
     getBoardResponseSchema,
     patchBoardResponseSchema,
     getAvailableNewCollaboratorsResponseSchema,

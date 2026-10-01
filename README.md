@@ -234,8 +234,6 @@ $ turbo dev
 
 - ugly scroll bars
 
-- update ticket
-    - socket event sent to self
 
 ## Todo list
 
