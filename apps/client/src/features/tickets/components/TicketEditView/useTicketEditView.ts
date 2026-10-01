@@ -9,6 +9,7 @@ import type { SubmitEvent } from 'react';
 import { useTicketFormStates } from '@/features/tickets/components/TicketForm/useTicketFormStates.ts';
 import { usePatchTicket } from '@/features/tickets/hooks/usePatchTicket.ts';
 import { usePutAssignee } from '@/features/tickets/hooks/usePutAssignee.ts';
+import { toast } from 'sonner';
 
 type PatchTicketPayload = z.infer<typeof patchTicketsRequestBodySchema>;
 type PutAssigneePayload = z.infer<typeof putAssigneeRequestBodySchema>;
@@ -33,14 +34,17 @@ const useTicketEditView = (
     const patchTicket = usePatchTicket(boardId);
     const putAssignee = usePutAssignee(boardId);
 
+    const changed = <T>(next: T | '' | null, prev: T): T | undefined => {
+        return next === '' || next === null || next === prev ? undefined : next;
+    };
     const toPatchTicketPayload = (): PatchTicketPayload => ({
-        summary: summary ? summary : undefined,
-        description: description ? description : undefined,
-        issueType: issueType ? issueType : undefined,
-        category: category ? category : undefined,
-        priority: priority ? priority : undefined,
-        severity: severity ? severity : undefined,
-        reproducibility: reproducibility !== null ? reproducibility : undefined,
+        summary: changed(summary, ticket.summary),
+        description: changed(description, ticket.description),
+        issueType: changed(issueType, ticket.issueType),
+        category: changed(category, ticket.category),
+        priority: changed(priority, ticket.priority),
+        severity: changed(severity, ticket.severity),
+        reproducibility: changed(reproducibility, ticket.reproducibility),
     });
 
     const toPutAssigneePayload = (): PutAssigneePayload => ({
@@ -70,7 +74,7 @@ const useTicketEditView = (
         }
 
         // if assigneeId set, update assignee
-        if (assigneeId !== ticket.assignee?.id) {
+        if (assigneeId != ticket.assignee?.id) {
             await putAssignee.mutateAsync(
                 { ticketId: ticket.id, data: toPutAssigneePayload() },
                 {
@@ -84,6 +88,8 @@ const useTicketEditView = (
         if (mutated) {
             reset(ticket);
             closeUi();
+        } else {
+            toast('No ticket changes detected');
         }
     };
 

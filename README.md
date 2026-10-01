@@ -213,7 +213,6 @@ $ turbo dev
 
 - ticketEditView
     - compare patch -> dont patch on no changes
-    - close X button
 
 
 - boardcontext
