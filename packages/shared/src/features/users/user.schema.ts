@@ -2,12 +2,10 @@ import { z } from 'zod';
 import { ROLE } from './user.enums.js';
 
 // error messages
-const LOWERCASE_ERROR_MESSAGE = 'must contain at least one lowercase letter';
-const UPPERCASE_ERROR_MESSAGE = 'must contain at least one uppercase letter';
-const NUMBER_ERROR_MESSAGE = 'must contain at least one number';
-const SPECIAL_CHARACTER_ERROR_MESSAGE =
-    'must contain at least one special character: !@#$%^&*';
 const INVALID_CHARACTER_ERROR_MESSAGE = 'contains invalid characters: <>';
+const PASSWORD_ERROR_MESSAGE = "must contain at least one uppercase letter, one lowercase letter, one number, one special character (!@#$%^&*), and cannot contain '<' or '>'"
+
+const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[^<>]*$/;
 
 const userShape = {
     id: z.uuid(),
@@ -22,20 +20,8 @@ const userShape = {
         .string()
         .min(8)
         .max(16)
-        .refine((password) => /[A-Z]/.test(password), {
-            message: `password ${UPPERCASE_ERROR_MESSAGE}`,
-        })
-        .refine((password) => /[a-z]/.test(password), {
-            message: `password ${LOWERCASE_ERROR_MESSAGE}`,
-        })
-        .refine((password) => /[0-9]/.test(password), {
-            message: `password ${NUMBER_ERROR_MESSAGE}`,
-        })
-        .refine((password) => /[!@#$%^&*]/.test(password), {
-            message: `password ${SPECIAL_CHARACTER_ERROR_MESSAGE}`,
-        })
-        .regex(/^[^<>]*$/, {
-            message: `password ${INVALID_CHARACTER_ERROR_MESSAGE}`,
+        .regex(passwordRegex, {
+            message: `Password ${PASSWORD_ERROR_MESSAGE}`,
         }),
     name: z
         .string()
@@ -55,4 +41,4 @@ const userDtoSchema = z.object({
 type UserDto = z.infer<typeof userDtoSchema>;
 
 export type { UserDto };
-export { userShape, userDtoSchema };
+export { userShape, userDtoSchema, passwordRegex };

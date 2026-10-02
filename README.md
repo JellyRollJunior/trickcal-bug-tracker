@@ -212,8 +212,13 @@ $ turbo dev
 
 - auth
     - signup
+        - set custom error messages
+        - test signup
     - login redirect
     - google auth
+
+- bug
+    - calls to /me & socket on auth layout
 
 - loading anim
 

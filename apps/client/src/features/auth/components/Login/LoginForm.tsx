@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useLoginForm } from '@/features/auth/components/Login/useLoginForm.tsx';
 
 const LoginForm = () => {
@@ -21,7 +22,7 @@ const LoginForm = () => {
           id="username"
           type="text"
           name="username"
-          min={1}
+          minLength={1}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           required
@@ -35,25 +36,19 @@ const LoginForm = () => {
           id="password"
           type="password"
           name="password"
-          min={1}
+          minLength={1}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           required
         />
 
-        <div className="my-3 flex gap-3">
-          <button
-            className="bg-sand-beige-light text-sand-beige-dark border-sand-beige-dark rounded-md border-2 px-5 py-1"
-            disabled={isPending}
-          >
+        <div className="my-3 flex justify-around gap-3">
+          <button className="button-primary px-3 py-1" disabled={isPending}>
             Log in
           </button>
-          <button
-            className="bg-sand-beige-light text-sand-beige-dark border-sand-beige-dark rounded-md border-2 px-5 py-1"
-            disabled={isPending}
-          >
-            Sign up
-          </button>
+          <Link className="button-primary block px-3 py-1" to={`/auth/signup`}>
+            Sign Up
+          </Link>
         </div>
       </form>
     </div>

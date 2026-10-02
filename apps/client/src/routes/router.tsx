@@ -7,6 +7,7 @@ import { LoginForm } from '@/features/auth/components/Login/LoginForm.tsx';
 import { Board } from '@/features/boards/components/Board/Board.tsx';
 import { BoardLayout } from '@/features/boards/components/BoardLayout';
 import { BoardTicketLayout } from '@/features/boards/components/BoardTicketLayout.tsx';
+import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -40,6 +41,10 @@ const routes: RouteObject[] = [
             path: '/auth/login',
             element: <LoginForm />,
           },
+          {
+            path: '/auth/signup',
+            element: <SignupForm />
+          }
         ],
       },
     ],

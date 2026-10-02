@@ -1,7 +1,7 @@
 import type { SubmitEvent } from 'react';
 import { useState } from 'react';
 import { useAuth } from '@/context/auth/useAuth.ts';
-import { useLogin } from '@/features/auth/hooks/useLogin.tsx';
+import { useLogin } from '@/features/auth/hooks/useLogin.ts';
 
 const useLoginForm = () => {
   const authContext = useAuth();
