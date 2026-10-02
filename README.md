@@ -210,9 +210,6 @@ $ turbo dev
 
 ## Current
 
-- boardcontext
-    - expose ispending board variable
-
 - auth
     - signup
     - login redirect
@@ -220,7 +217,6 @@ $ turbo dev
 
 - loading anim
 
-- extract drawer
 - bug
     - move ticket to same order bug
     - constant errors on cannot connext to server
@@ -229,8 +225,6 @@ $ turbo dev
 
 fail login: Login expired. Please login again.
 
-socket event: refetch boards on being added as collaboratr
-
 themeing
 internationalization
 
@@ -238,12 +232,7 @@ internationalization
 
 - optimistic updates with tanstack for ticket move
 
-- dont crash on unable to fetch users
-
-- auth
-    - login w/ github
-    - login w/ google
-    - signup
+- server: dont crash on unable to fetch users
 
 ## Improvements
 
@@ -266,3 +255,5 @@ internationalization
 - Unique identifier for display name
 
 - collaborators -> rename to potentialAssignees
+- extract drawer
+- extract board data form
