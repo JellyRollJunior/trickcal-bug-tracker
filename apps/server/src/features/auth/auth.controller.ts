@@ -7,6 +7,7 @@ import { toUserDto } from '@/features/users/user.mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
 import { signToken } from '@/lib/auth/signToken.js';
 import { loginLimiterByUsername, loginLimiterByIp, IP_FALLBACK_KEY } from '@/lib/rate-limiting/login.limiter.js';
+import { getClientOauthRedirectURL } from '@/features/auth/auth.service.js';
 import * as userQueries from '@/features/users/user.queries.js';
 
 const postSignup = async (
@@ -77,7 +78,7 @@ const getGithubCallback = (
             if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with GitHub'));
             
             const token = signToken(user);
-            res.json({ message: 'GitHub authentication success', token })
+            res.redirect(getClientOauthRedirectURL(token));
         }
     );
     authMiddleware(req, res, next);
@@ -96,7 +97,7 @@ const getGoogleCallback = (
             if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with Google'));
             
             const token = signToken(user);
-            res.json({ message: 'Google authentication success', token })
+            res.redirect(getClientOauthRedirectURL(token));
         }
     );
     authMiddleware(req, res, next);
