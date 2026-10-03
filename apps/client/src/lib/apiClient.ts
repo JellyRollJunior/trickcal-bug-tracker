@@ -1,9 +1,10 @@
+import z, { ZodError, type ZodType } from 'zod';
+import { ValidationError } from '@trickcal-bug-tracker/shared';
 import { resolveError } from '@/lib/resolveError.ts';
 import { getToken } from '@/lib/TokenStorage.ts';
-import { ValidationError } from '@trickcal-bug-tracker/shared';
-import z, { ZodError, type ZodType } from 'zod';
+import { env } from '@/config/env.ts';
 
-const BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
+const BASE_URL = env.serverBaseUrl;
 
 const getAuthHeader = (): HeadersInit => {
     const token = getToken();

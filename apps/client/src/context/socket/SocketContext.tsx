@@ -6,8 +6,7 @@ import type { ReactNode } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { useAuth } from '@/context/auth/useAuth.ts';
-
-const SERVER_URL = import.meta.env.VITE_SERVER_BASE_URL;
+import { env } from '@/config/env.ts';
 
 type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 
@@ -24,7 +23,7 @@ const SocketProvider = ({ children }: { children: ReactNode }) => {
   const { token } = useAuth();
 
   useEffect(() => {
-    const newSocket: AppSocket = io(SERVER_URL, {
+    const newSocket: AppSocket = io(env.serverBaseUrl, {
       auth: { token },
       withCredentials: true,
     });

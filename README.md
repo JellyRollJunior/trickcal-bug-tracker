@@ -192,6 +192,7 @@ $ turbo dev
 - Sonner toast library
 - Typing socket.io-client
 - Outlet contexts
+- Extract typed env variables using vite-env.d.ts
 
 ## Neat Bugs
 

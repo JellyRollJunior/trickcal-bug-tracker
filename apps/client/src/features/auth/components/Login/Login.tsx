@@ -1,9 +1,9 @@
 import { AUTH_ROUTES_SERVER } from '@trickcal-bug-tracker/shared';
 import { LoginForm } from '@/features/auth/components/LoginForm/LoginForm.tsx';
+import { env } from '@/config/env.ts';
 
-const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
-const GOOGLE_AUTH_URI = `${SERVER_BASE_URL}${AUTH_ROUTES_SERVER.google}`;
-const GITHUB_AUTH_URI = `${SERVER_BASE_URL}${AUTH_ROUTES_SERVER.github}`;
+const GOOGLE_AUTH_URI = `${env.serverBaseUrl}${AUTH_ROUTES_SERVER.google}`;
+const GITHUB_AUTH_URI = `${env.serverBaseUrl}${AUTH_ROUTES_SERVER.github}`;
 
 const Login = () => {
   return (
