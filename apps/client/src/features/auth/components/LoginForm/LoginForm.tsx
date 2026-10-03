@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useLoginForm } from '@/features/auth/components/Login/useLoginForm.tsx';
+import { useLoginForm } from '@/features/auth/components/LoginForm/useLoginForm';
 
 const LoginForm = () => {
   const {

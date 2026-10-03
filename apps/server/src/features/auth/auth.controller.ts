@@ -1,13 +1,13 @@
 import type { User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
+import { RateLimiterRes } from 'rate-limiter-flexible';
+import { AuthenticationError, RateLimitError } from '@trickcal-bug-tracker/shared';
 import { toUserDto } from '@/features/users/user.mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
-import { AuthenticationError, RateLimitError } from '@trickcal-bug-tracker/shared';
 import { signToken } from '@/lib/auth/signToken.js';
-import * as userQueries from '@/features/users/user.queries.js';
 import { loginLimiterByUsername, loginLimiterByIp, IP_FALLBACK_KEY } from '@/lib/rate-limiting/login.limiter.js';
-import { RateLimiterRes } from 'rate-limiter-flexible';
+import * as userQueries from '@/features/users/user.queries.js';
 
 const postSignup = async (
     req: Request<{}, {}, Pick<User, 'username' | 'password' | 'name'>>,

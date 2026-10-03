@@ -3,9 +3,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
 import { MainLayout } from '@/layout/MainLayout.tsx';
 import { AuthLayout } from '@/layout/AuthLayout.tsx';
-import { LoginForm } from '@/features/auth/components/Login/LoginForm.tsx';
+import { Login } from '@/features/auth/components/Login/Login.tsx';
 import { Board } from '@/features/boards/components/Board/Board.tsx';
-import { BoardLayout } from '@/features/boards/components/BoardLayout';
+import { BoardLayout } from '@/features/boards/components/BoardLayout/BoardLayout.tsx';
 import { BoardTicketLayout } from '@/features/boards/components/BoardTicketLayout.tsx';
 import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx';
 
@@ -19,7 +19,7 @@ const routes: RouteObject[] = [
         children: [
           {
             path: '/auth/login',
-            element: <LoginForm />,
+            element: <Login />,
           },
           {
             path: '/auth/signup',

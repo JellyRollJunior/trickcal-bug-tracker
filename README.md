@@ -212,6 +212,7 @@ $ turbo dev
 
 - auth
     - google auth
+        - redirect to google auth -> server redirect to client address + send cookie -> create cookie route to process token to local storage -> redirect to '/'
     - github auth
 
 - loading anim
