@@ -5,8 +5,8 @@ import type {
 import type { z } from 'zod';
 import { useState, type SubmitEvent } from 'react';
 import { usePatchBoard } from '@/features/boards/hooks/usePatchBoard.ts';
-import { useAuth } from '@/context/auth/useAuth.ts';
 import { toast } from 'sonner';
+import { useMeContext } from '@/context/me/useMeContext.ts';
 
 type PatchBoardPayload = z.infer<typeof patchboardsRequestBodySchema>;
 
@@ -19,7 +19,7 @@ const useBoardSettingsDrawer = (
 ) => {
     const { mutate: patchBoard, isPending: isPendingPatchBoard } =
         usePatchBoard(boardId);
-    const { user: me } = useAuth();
+    const { user: me } = useMeContext();
     const [newBoardName, setNewBoardName] = useState(boardName);
     const [newDescription, setNewDescription] = useState(boardDescription);
 

@@ -216,6 +216,7 @@ $ turbo dev
         - test signup
     - login redirect
     - google auth
+    - set login error
 
 - bug
     - calls to /me & socket on auth layout

@@ -16,13 +16,13 @@ import { toast } from 'sonner';
 import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
 import { withSocketErrorHandling } from '@/lib/socketErrorWrapper.ts';
-import { useAuth } from '@/context/auth/useAuth.ts';
+import { useMeContext } from '@/context/me/useMeContext.ts';
 
 const useBoardSocketSync = (boardId: BoardDto['id']) => {
     const { socket, isConnected } = useSocket();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user } = useMeContext();
 
     useEffect(() => {
         if (!isConnected || !socket || !user) return;

@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useSocket } from '@/context/socket/useSocket.ts';
 import { safeParse } from '@/lib/apiClient.ts';
-import { useAuth } from '@/context/auth/useAuth.ts';
 import { withSocketErrorHandling } from '@/lib/socketErrorWrapper.ts';
+import { useMeContext } from '@/context/me/useMeContext.ts';
 
 const useBoardsSocketSync = () => {
     const { socket, isConnected } = useSocket();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user } = useMeContext();
 
     useEffect(() => {
         if (!isConnected || !socket || !user) return;

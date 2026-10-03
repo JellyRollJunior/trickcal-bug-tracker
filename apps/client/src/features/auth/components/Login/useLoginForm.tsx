@@ -4,7 +4,7 @@ import { useAuth } from '@/context/auth/useAuth.ts';
 import { useLogin } from '@/features/auth/hooks/useLogin.ts';
 
 const useLoginForm = () => {
-  const authContext = useAuth();
+  const { setToken } = useAuth();
   const { mutate: login, isPending, error } = useLogin();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const useLoginForm = () => {
       { username, password },
       {
         onSuccess: (data) => {
-          authContext.setToken(data.token);
+          setToken(data.token);
         },
         onError: (error) => {
           console.log(error);
