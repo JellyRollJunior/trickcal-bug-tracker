@@ -2,6 +2,7 @@ import { useState, type SubmitEvent } from 'react';
 import { passwordRegex } from '@trickcal-bug-tracker/shared';
 import { toast } from 'sonner';
 import { useSignUp } from '@/features/auth/hooks/useSignUp.ts';
+import { useNavigate } from 'react-router-dom';
 
 const useSignupForm = () => {
     const { mutate: signup, isPending: isPendingSignup } = useSignUp();
@@ -9,6 +10,7 @@ const useSignupForm = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
+    const navigate = useNavigate();
     
     // errors
     const [isConfirmPasswordError, setIsConfirmPasswordError] = useState<boolean>(false);
@@ -20,20 +22,21 @@ const useSignupForm = () => {
         // validate password matches regex
         if (!passwordRegex.test(password)) {
             setIsPasswordRegexError(true);
+            return;
         }
 
         // Validate password & confirm password match
         if (confirmPassword !== password) {
             setIsConfirmPasswordError(true);
+            return;
         }
-
-        if (isPasswordRegexError || isConfirmPasswordError) return;
 
         signup(
             { data: { username, password, name } },
             {
                 onSuccess: (user) => {
                     toast(`Signup for ${user.name} successful`);
+                    navigate('/auth/login');
                 },
             }
         );

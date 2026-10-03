@@ -218,9 +218,6 @@ $ turbo dev
     - google auth
     - set login error
 
-- bug
-    - calls to /me & socket on auth layout
-
 - loading anim
 
 - bug

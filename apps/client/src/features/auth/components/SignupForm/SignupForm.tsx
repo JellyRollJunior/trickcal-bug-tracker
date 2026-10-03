@@ -18,7 +18,7 @@ const SignupForm = () => {
   } = useSignupForm();
 
   return (
-    <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light mt-5 rounded-sm border-2 px-5">
+    <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light w-full max-w-md rounded-sm border-2 px-5">
       <form className="flex flex-col" onSubmit={handleSignup}>
         <label className="mt-3" htmlFor="name">
           Display name
@@ -60,10 +60,9 @@ const SignupForm = () => {
           Password
         </label>
         {isPasswordRegexError && (
-          <span className="text-red-400 text-sm">
-            Password must contain must contain at least one uppercase letter,
-            one lowercase letter, one number, one special character (!@#$%^&*),
-            and cannot contain '&lt;' '&gt;'{' '}
+          <span className="text-sm text-red-400">
+            Use upper and lowercase letters, a number, and a symbol (!@#$%^&*).
+            No '&lt;' or '&gt;'.
           </span>
         )}
         <input
@@ -84,7 +83,7 @@ const SignupForm = () => {
           Confirm password
         </label>
         {isConfirmPasswordError && (
-          <span className="text-red-400 text-sm">Passwords must match</span>
+          <span className="text-sm text-red-400">Passwords must match</span>
         )}
         <input
           className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
