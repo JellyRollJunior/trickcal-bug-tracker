@@ -211,12 +211,8 @@ $ turbo dev
 ## Current
 
 - auth
-    - signup
-        - set custom error messages
-        - test signup
-    - login redirect
     - google auth
-    - set login error
+    - github auth
 
 - loading anim
 

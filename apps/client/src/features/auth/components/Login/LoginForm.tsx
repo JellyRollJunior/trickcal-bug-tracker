@@ -7,12 +7,13 @@ const LoginForm = () => {
     setUsername,
     password,
     setPassword,
+    authError,
     handleSubmit,
     isPending,
   } = useLoginForm();
 
   return (
-    <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light mt-5 rounded-sm border-2 px-5">
+    <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light mt-5 max-w-sm w-full rounded-sm border-2 px-5">
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <label className="mt-3" htmlFor="username">
           Username
@@ -31,6 +32,7 @@ const LoginForm = () => {
         <label className="mt-3" htmlFor="password">
           Password
         </label>
+        {authError && <span className='text-red-400 text-sm'>The password you entered is incorrect.</span>}
         <input
           className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
           id="password"
