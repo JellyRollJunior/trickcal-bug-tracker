@@ -1,4 +1,3 @@
-import { passwordRegex } from '@trickcal-bug-tracker/shared';
 import { useSignupForm } from '@/features/auth/components/SignupForm/useSignupForm.ts';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +11,8 @@ const SignupForm = () => {
     setConfirmPassword,
     name,
     setName,
+    isPasswordRegexError,
+    isConfirmPasswordError,
     handleSignup,
     isPendingSignup,
   } = useSignupForm();
@@ -58,6 +59,13 @@ const SignupForm = () => {
         <label className="mt-3" htmlFor="password">
           Password
         </label>
+        {isPasswordRegexError && (
+          <span className="text-red-400 text-sm">
+            Password must contain must contain at least one uppercase letter,
+            one lowercase letter, one number, one special character (!@#$%^&*),
+            and cannot contain '&lt;' '&gt;'{' '}
+          </span>
+        )}
         <input
           className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
           id="password"
@@ -67,7 +75,6 @@ const SignupForm = () => {
           maxLength={16}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          pattern={passwordRegex.source}
           autoCapitalize="off"
           autoCorrect="off"
           autoComplete="off"
@@ -76,6 +83,9 @@ const SignupForm = () => {
         <label className="mt-3" htmlFor="confirmPassword">
           Confirm password
         </label>
+        {isConfirmPasswordError && (
+          <span className="text-red-400 text-sm">Passwords must match</span>
+        )}
         <input
           className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
           id="confirmPassword"
@@ -93,15 +103,15 @@ const SignupForm = () => {
 
         {/* Control Buttons */}
         <div className="my-3 flex justify-around gap-3">
+          <Link className="button-primary block px-3 py-1" to={`/auth/login`}>
+            Cancel
+          </Link>
           <button
             className="button-primary px-3 py-1"
             disabled={isPendingSignup}
           >
             Sign up
           </button>
-          <Link className="button-primary block px-3 py-1" to={`/auth/login`}>
-            Cancel
-          </Link>
         </div>
       </form>
     </div>

@@ -15,6 +15,19 @@ const routes: RouteObject[] = [
     element: <App />,
     children: [
       {
+        element: <AuthLayout />,
+        children: [
+          {
+            path: '/auth/login',
+            element: <LoginForm />,
+          },
+          {
+            path: '/auth/signup',
+            element: <SignupForm />,
+          },
+        ],
+      },
+      {
         element: <MainLayout />,
         children: [
           {
@@ -32,19 +45,6 @@ const routes: RouteObject[] = [
               },
             ],
           },
-        ],
-      },
-      {
-        element: <AuthLayout />,
-        children: [
-          {
-            path: '/auth/login',
-            element: <LoginForm />,
-          },
-          {
-            path: '/auth/signup',
-            element: <SignupForm />
-          }
         ],
       },
     ],
