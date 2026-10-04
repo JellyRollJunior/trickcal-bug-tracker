@@ -8,6 +8,7 @@ import { Board } from '@/features/boards/components/Board/Board.tsx';
 import { BoardLayout } from '@/features/boards/components/BoardLayout/BoardLayout.tsx';
 import { BoardTicketLayout } from '@/features/boards/components/BoardTicketLayout.tsx';
 import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx';
+import { OAuthCallback } from '@/features/auth/components/OAuthCallback/OAuthCallback.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -24,6 +25,10 @@ const routes: RouteObject[] = [
           {
             path: '/auth/signup',
             element: <SignupForm />,
+          },
+          {
+            path: '/auth/callback',
+            element: <OAuthCallback />,
           },
         ],
       },
