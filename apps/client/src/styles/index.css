@@ -1,6 +1,14 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root { --bg: #fff; --fg: #111; }
+.dark { --bg: #0b0b0f; --fg: #eee; }
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+}
+
 @theme {
   /* Colors */
   --color-cheek-blush: #fdd8d7;
@@ -26,7 +34,7 @@
 }
 
 @utility block-primary {
-  @apply rounded-sm border-2 border-black bg-white;
+  @apply rounded-sm border-2 border-black bg-bg;
 }
 
 @utility button-primary {

@@ -6,6 +6,10 @@ const getIsSystemThemeDark = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
+const getIsCurrentThemeDark = () => {
+    return document.documentElement.classList.contains('dark');
+}
+
 const applyTheme = (theme: Theme) => {
     const isDark =
         theme === 'dark' || (theme === 'system' && getIsSystemThemeDark());
@@ -23,7 +27,7 @@ const useTheme = () => {
         applyTheme(theme);
     }, [theme]);
 
-    return { theme, setTheme };
+    return { getTheme: getIsCurrentThemeDark, setTheme };
 };
 
 export { useTheme };

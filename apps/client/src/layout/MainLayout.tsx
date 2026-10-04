@@ -5,6 +5,7 @@ import { CreateBoardButton } from '@/features/boards/components/CreateBoardButto
 import { useBoardsSocketSync } from '@/features/boards/hooks/useBoardsSocketSync.ts';
 import { SocketProvider } from '@/context/socket/SocketContext.tsx';
 import { MeProvider } from '@/context/me/MeContext.tsx';
+import { ThemeToggle } from '@/common/components/ThemeToggle.tsx';
 
 const MainLayoutWrapper = () => {
   return (
@@ -24,7 +25,10 @@ const MainLayout = () => {
       <header className="bg-kommy-hair-white-dark/80 flex w-full items-center justify-between px-3 pt-4 pb-3">
         <div />
         <BoardsDropdown />
-        <CreateBoardButton />
+        <div className='flex gap-2'>
+          <ThemeToggle />
+          <CreateBoardButton />
+        </div>
       </header>
       <Outlet />
       <Background />

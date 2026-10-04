@@ -211,7 +211,6 @@ $ turbo dev
 
 ## Current
 
-- light / dark theme
 - internationalization
 - web design
 
