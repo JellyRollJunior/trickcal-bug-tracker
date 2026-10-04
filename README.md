@@ -211,24 +211,23 @@ $ turbo dev
 
 ## Current
 
-- loading anim
-
-- bug
-    - move ticket to same order bug
-    - constant errors on cannot connext to server
-
-- ugly scroll bars
-
-fail login: Login expired. Please login again.
-
-themeing
-internationalization
+- light / dark theme
+- internationalization
+- web design
 
 ## Todo list
 
-- optimistic updates with tanstack for ticket move
+- Client
+    - optimistic updates with tanstack for ticket move
+    - loading anim
+    - bug
+        - move ticket to same order bug
+        - constant errors on cannot connext to server
+    - ugly scroll bars
+    - fail login: Login expired. Please login again.
 
-- server: dont crash on unable to fetch users
+- server
+    - dont crash on unable to fetch users
 
 ## Improvements
 
