@@ -56,9 +56,6 @@
   background-blend-mode: difference;
 }
 
-@utility block-title {
-  @apply bg-jade-green text-ivory text-sm;
-}
 
 @utility block-container-primary {
   @apply bg-pistachio-cream border-pistachio-cream-light rounded-md border;
@@ -68,8 +65,12 @@
   @apply bg-lime-frost border-lime-frost-dark rounded-md border-2;
 }
 
+@utility block-primary-title {
+  @apply bg-jade-green text-ivory text-sm rounded-md;
+}
+
 @utility block-primary-label {
-  @apply bg-sunflower rounded-lg p-0.5 px-4 text-xs font-semibold text-black;
+  @apply bg-indigo-violet rounded-lg p-0.5 px-4 text-xs font-semibold text-ivory;
 }
 
 @utility button-primary {

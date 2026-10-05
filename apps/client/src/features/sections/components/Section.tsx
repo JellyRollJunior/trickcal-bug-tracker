@@ -58,7 +58,7 @@ const Section = ({
   return (
     <section className="block-container-primary h-full min-h-0 w-full p-1">
       {/* Section Data & Controls */}
-      <div className="block-primary block-title flex justify-between gap-1 p-2">
+      <div className="block-primary-title flex justify-between gap-1 p-2">
         <h3 className="self-center">{section.name}</h3>
         <div className="grid h-fit grid-cols-2 gap-1">
           <button

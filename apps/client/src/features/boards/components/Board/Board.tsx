@@ -39,27 +39,40 @@ const Board = () => {
   return (
     <div className="relative mx-2 my-3 flex min-h-0 flex-1 flex-col gap-2">
       {/* Board Data + controls */}
-      <div className="block-primary flex w-full justify-between px-3 py-2">
-        <h2>
+      <div className="block-primary flex w-full flex-col justify-between p-1">
+        <h2 className="block-primary-title p-2 text-center font-bold">
           {board.name}
-          <br />
-          {board.description}
         </h2>
-        <button
-          className="button-primary h-fit shrink-0 rounded-full p-0.5"
-          onClick={openPatchBoard}
-        >
-          <img src={settings} />
-        </button>
+        <p className="mt-1.5 p-2 text-sm">{board.description}</p>
       </div>
 
-      {/* Presence Tracking */}
-      <ul className="block-primary flex flex-col gap-1 px-3 py-2">
-        <li>Viewers</li>
-        {viewerList.map((viewer) => (
-          <li key={viewer.id}>{viewer.name}</li>
-        ))}
-      </ul>
+      {/* Widgets */}
+      <section className="grid w-full grid-cols-3 gap-2">
+        {/* Presence Tracking */}
+        <div className="block-container-primary col-span-2 flex gap-2 p-1">
+          <div className="block-primary flex flex-col items-center justify-center px-5 py-3">
+            <div className="text-center text-lg font-bold">
+              {viewerList.length}
+            </div>
+            <div className="text-center text-sm font-bold">Viewer(s)</div>
+          </div>
+          <ul className="block-primary flex max-h-20 w-full flex-col gap-1 overflow-y-auto px-3 py-1.5">
+            {viewerList.map((viewer) => (
+              <li key={viewer.id}>{viewer.name}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Settings */}
+        <div className="block-primary flex h-full w-full items-center justify-center">
+          <button
+            className="button-primary h-fit shrink-0 rounded-full p-2"
+            onClick={openPatchBoard}
+          >
+            <img src={settings} />
+          </button>
+        </div>
+      </section>
 
       <main className="flex-1">
         <BoardContent
