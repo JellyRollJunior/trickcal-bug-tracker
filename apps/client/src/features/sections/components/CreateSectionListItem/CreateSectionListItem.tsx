@@ -40,7 +40,7 @@ const CreateSectionListItem = ({
     <>
       {!isOpen && (
         <button
-          className="block-primary flex h-fit flex-1 justify-between py-2 pr-4 pl-3 text-nowrap disabled:bg-gray-300"
+          className="button-floating h-fit rounded-md py-2 pr-4 pl-3 text-nowrap disabled:bg-gray-300"
           disabled={isPendingCreateSection}
           onClick={openCreateSection}
         >
@@ -50,7 +50,7 @@ const CreateSectionListItem = ({
       {isOpen && (
         <form
           ref={createSectionRef}
-          className="block-primary h-fit w-fit px-3 py-2"
+          className="block-container-primary h-fit w-fit px-3 py-2"
           onSubmit={(event) => {
             handleCreateSection(event);
             closeCreateSection();
@@ -66,21 +66,22 @@ const CreateSectionListItem = ({
             onChange={(event) => setSectionName(event?.target.value)}
             required
           />
-          <div className="mt-2 flex justify-start gap-1">
+          <div className="mt-2 flex justify-start gap-3">
             <button
-              className="button-primary px-3 py-1 disabled:bg-gray-300"
-              disabled={isPendingCreateSection}
-            >
-              Create
-            </button>
-            <button
-              className="button-primary px-3 py-1 disabled:bg-gray-300"
+              className="button-back"
               type="button"
               onClick={closeCreateSection}
               disabled={isPendingCreateSection}
             >
               Cancel
             </button>
+            <button
+              className="button-confirm"
+              disabled={isPendingCreateSection}
+            >
+              Create
+            </button>
+            
           </div>
         </form>
       )}
@@ -88,4 +89,4 @@ const CreateSectionListItem = ({
   );
 };
 
-export { CreateSectionListItem }
+export { CreateSectionListItem };

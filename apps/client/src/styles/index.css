@@ -40,7 +40,11 @@
 
   /* buttons */
   --color-sunflower: #ffdf73;
+  --color-sunflower-dark: #f2d46d;
   --color-marigold: #e8a63c;
+  --color-button-back: #fff4ca;
+  --color-button-back-hover: #f2e8c0;
+  --color-button-back-border: #e3c97b;
   --color-silver-gray: #acacac;
   --color-stone-gray: #848580;
   --color-spring-lime: #b0f27e;
@@ -56,7 +60,7 @@
 }
 
 @utility select-primary {
-  @apply bg-pistachio-cream border-pistachio-cream-dark border-2 hover:bg-lime-frost;
+  @apply bg-pistachio-cream border-pistachio-cream-dark hover:bg-lime-frost border-2;
 }
 
 @utility block-container-primary {
@@ -79,12 +83,24 @@
   @apply duration-200 ease-out;
 }
 
-@utility button-image {
-  @apply button-transition hover:bg-fern-green bg-jade-green flex h-8 w-8 items-center justify-center;
+@utility button-floating {
+  @apply button-transition hover:bg-fern-green bg-jade-green text-ivory;
 }
 
-@utility button-primary {
-  @apply rounded-sm duration-200 ease-out;
+@utility button-image {
+  @apply button-floating flex h-8 w-8 items-center justify-center;
+}
+
+@utility button-text-base {
+  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4;
+}
+
+@utility button-confirm {
+  @apply bg-sunflower border-marigold hover:bg-sunflower-dark button-text-base;
+}
+
+@utility button-back {
+  @apply bg-button-back hover:bg-button-back-hover border-button-back-border button-text-base;
 }
 
 @utility button-caution {
