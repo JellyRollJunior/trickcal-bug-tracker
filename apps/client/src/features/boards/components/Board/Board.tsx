@@ -37,42 +37,37 @@ const Board = () => {
   const closeSectionSettings = () => setSettingsDrawerData(null);
 
   return (
-    <div className="relative mx-2 my-3 flex min-h-0 flex-1 flex-col gap-2">
+    <div className="relative flex min-h-0 flex-1 flex-col gap-2">
       {/* Board Data + controls */}
-      <div className="block-primary flex w-full flex-col justify-between p-1">
-        <h2 className="block-primary-title p-2 text-center font-bold">
-          {board.name}
-        </h2>
-        <p className="mt-1.5 p-2 text-sm">{board.description}</p>
-      </div>
-
-      {/* Widgets */}
-      <section className="grid w-full grid-cols-3 gap-2">
-        {/* Presence Tracking */}
-        <div className="block-container-primary col-span-2 flex gap-2 p-1">
-          <div className="block-primary flex flex-col items-center justify-center px-5 py-3">
-            <div className="text-center text-lg font-bold">
-              {viewerList.length}
-            </div>
-            <div className="text-center text-sm font-bold">Viewer(s)</div>
-          </div>
-          <ul className="block-primary flex max-h-20 w-full flex-col gap-1 overflow-y-auto px-3 py-1.5">
-            {viewerList.map((viewer) => (
-              <li key={viewer.id}>{viewer.name}</li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Settings */}
-        <div className="block-primary flex h-full w-full items-center justify-center">
+      <div className="block-container-primary flex w-full flex-col justify-between p-1">
+        <div className="block-primary-title flex items-center justify-between p-2">
+          <h2 className="w-full text-center font-bold">{board.name}</h2>
           <button
-            className="button-primary h-fit shrink-0 rounded-full p-2"
+            className="button-primary h-fit shrink-0 rounded-full p-0.5"
             onClick={openPatchBoard}
           >
             <img src={settings} />
           </button>
         </div>
-      </section>
+
+        {/* Description, Viewer Count, Viewer List */}
+        <section className="mt-1 grid w-full grid-cols-6 gap-2">
+          <p className="block-primary col-span-3 h-20 w-full px-2 py-1 text-sm font-semibold">
+            {board.description}
+          </p>
+          <div className="block-primary flex h-20 flex-col px-2 py-1  ">
+            <div className="text-sm font-semibold">Viewer(s)</div>
+            <div className="text-center text-lg flex justify-center items-center font-bold  flex-1">
+              {viewerList.length}
+            </div>
+          </div>
+          <ul className="block-primary col-span-2 flex h-20 w-full flex-col font-semibold gap-1 overflow-y-auto px-2 py-1 text-sm">
+            {viewerList.map((viewer) => (
+              <li key={viewer.id}>{viewer.name}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
       <main className="flex-1">
         <BoardContent

@@ -19,11 +19,7 @@ const BoardLayout = ({ boardId }: BoardLayoutProps) => {
 
   const context: BoardOutletContext = { board, viewerList };
 
-  return (
-    <div className="grid min-h-0 flex-1 grid-cols-1">
-      <Outlet context={context} />
-    </div>
-  );
+  return <Outlet context={context} />;
 };
 
 export { BoardLayoutContainer as BoardLayout };
