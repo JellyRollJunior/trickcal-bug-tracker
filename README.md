@@ -211,12 +211,13 @@ $ turbo dev
 
 ## Current
 
-- internationalization
 - web design
 
 ## Todo list
 
 - Client
+    - index page
+    - error page
     - optimistic updates with tanstack for ticket move
     - loading anim
     - bug

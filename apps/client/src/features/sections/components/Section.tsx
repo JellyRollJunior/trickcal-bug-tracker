@@ -56,9 +56,9 @@ const Section = ({
   setActiveTicket,
 }: SectionProps) => {
   return (
-    <div className="max-w-80 min-w-45 flex-1">
+    <section className="block-container-primary h-full min-h-0 w-full p-1">
       {/* Section Data & Controls */}
-      <div className="block-primary flex justify-between gap-1 p-2">
+      <div className="block-primary block-title flex justify-between gap-1 p-2">
         <h3 className="self-center">{section.name}</h3>
         <div className="grid h-fit grid-cols-2 gap-1">
           <button
@@ -77,7 +77,7 @@ const Section = ({
       </div>
 
       {/* Section Data */}
-      <ol className="mt-1 flex flex-col gap-0.5">
+      <ol className="mt-3 flex flex-col gap-0.5">
         <DropArea
           isDragging={activeTicket !== null}
           onDropHandler={() => handleMoveTicket(section.id, null)}
@@ -96,7 +96,7 @@ const Section = ({
           </Fragment>
         ))}
       </ol>
-    </div>
+    </section>
   );
 };
 

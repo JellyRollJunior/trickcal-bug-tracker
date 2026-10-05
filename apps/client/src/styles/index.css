@@ -1,8 +1,14 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root { --bg: #fff; --fg: #111; }
-.dark { --bg: #0b0b0f; --fg: #eee; }
+:root {
+  --bg: #fff;
+  --fg: #111;
+}
+.dark {
+  --bg: #0b0b0f;
+  --fg: #eee;
+}
 
 @theme inline {
   --color-bg: var(--bg);
@@ -10,19 +16,36 @@
 }
 
 @theme {
-  /* Colors */
-  --color-cheek-blush: #fdd8d7;
-  --color-butter-clothes-yellow: #fee3b1;
-  --color-butter-clothes-yellow-dark: #ffd68b;
-  --color-butter-hair-brown: #e5c0a8;
-  --color-butter-hair-brown-dark: #c9a093;
-  --color-butter-stocking-slate: #9f7e7c;
-  --color-butter-cheek-pink: #fca9a7;
-  --color-butter-skin-white: #fdf0eb;
+  /* white */
+  --color-ivory: #fafcf4;
 
-  --color-kommy-hair-white-dark: #eedbdf;
-  --color-kommy-hair-pink-light: #fdd8d7;
-  --color-kommy-pants-pink-dark: #ffbcbe;
+  /* green text */
+  --color-leaf-green: #8cb138;
+
+  /* title bg */
+  --color-jade-green: #45aa6f;
+
+  /* primary block */
+  --color-lime-frost: #f5fde8;
+  --color-lime-frost-dark: #e7f5c6;
+
+  /* primary block container */
+  --color-pistachio-cream: #eaf7d0;
+  --color-pistachio-cream-light: #ecf7da;
+
+  /* red label */
+  --color-brick-red: #b51711;
+  /* blue label */
+  --color-indigo-violet: #564ad2;
+  /* yellow btn */
+  --color-sunflower: #ffdf73;
+  --color-marigold: #e8a63c;
+  /* gray btn */
+  --color-silver-gray: #acacac;
+  --color-stone-gray: #848580;
+  /* green btn */
+  --color-spring-lime: #b0f27e;
+  --color-fern-green: #86bd5e;
 }
 
 @utility site-bg {
@@ -33,8 +56,20 @@
   background-blend-mode: difference;
 }
 
+@utility block-title {
+  @apply bg-jade-green text-ivory text-sm;
+}
+
+@utility block-container-primary {
+  @apply bg-pistachio-cream border-pistachio-cream-light rounded-md border;
+}
+
 @utility block-primary {
-  @apply rounded-sm border-2 border-black bg-bg;
+  @apply bg-lime-frost border-lime-frost-dark rounded-md border-2;
+}
+
+@utility block-primary-label {
+  @apply bg-sunflower rounded-lg p-0.5 px-4 text-xs font-semibold text-black;
 }
 
 @utility button-primary {

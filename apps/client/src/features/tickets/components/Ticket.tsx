@@ -16,12 +16,14 @@ const Ticket = ({
   return (
     <li onDragStart={onDragStartHandler} onDragEnd={onDragEndHandler} draggable>
       <Link
-        className="block-primary block px-3 py-2 hover:bg-gray-200"
+        className="block-primary block px-4 py-3 hover:bg-gray-200"
         to={`/boards/${boardId}/tickets/${ticket.id}`}
         draggable={false}
       >
-        {ticket.summary}
-        <br />
+        <h4 className="font-semibold">{ticket.summary}</h4>
+        <div className="mt-2 flex w-full justify-end gap-2">
+          <div className="block-primary-label">{ticket.category}</div>
+        </div>
       </Link>
     </li>
   );

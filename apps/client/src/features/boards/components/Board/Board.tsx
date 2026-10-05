@@ -61,12 +61,15 @@ const Board = () => {
         ))}
       </ul>
 
-      <BoardContent
-        board={board}
-        openCreateTicket={openCreateTicket}
-        openSectionSettings={openSectionSettings}
-      />
+      <main className="flex-1">
+        <BoardContent
+          board={board}
+          openCreateTicket={openCreateTicket}
+          openSectionSettings={openSectionSettings}
+        />
+      </main>
 
+      {/* Modals + Drawers */}
       {/* Patch Board */}
       <BoardSettingsDrawer
         open={isPatchBoardOpen}
