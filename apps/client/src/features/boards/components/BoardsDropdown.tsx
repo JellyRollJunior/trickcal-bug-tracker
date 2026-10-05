@@ -1,3 +1,5 @@
+import arrow_drop_down from '@/assets/icons/arrow_drop_down.svg';
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
@@ -12,10 +14,13 @@ const BoardsDropdown = () => {
     <>
       <div className="relative w-md">
         <button
-          className="border-sand-beige w-full rounded-md border-2 bg-white px-3 py-2"
+          className={`select-primary w-full px-3 py-1 ${isOpen ? 'rounded-t-md' : 'rounded-md'}`}
           onClick={toggleDropdown}
         >
-          Select board
+          <div className="flex">
+            <div className="flex-1">Select board</div>
+            <img src={arrow_drop_down} aria-hidden={true} />
+          </div>
         </button>
 
         <AnimatePresence>
@@ -25,7 +30,7 @@ const BoardsDropdown = () => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="border-sand-beige absolute w-full overflow-hidden rounded-b-md border-2 border-t-0 z-10 bg-white"
+              className="select-primary absolute z-10 w-full overflow-hidden rounded-b-md border-t-0"
             >
               {data.map((board) => (
                 <li

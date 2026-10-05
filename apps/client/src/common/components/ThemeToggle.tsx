@@ -1,6 +1,6 @@
 // ThemeToggle.tsx
-import light_mode from '@/assets/icons/light_mode.svg';
-import dark_mode from '@/assets/icons/dark_mode.svg';
+import light_mode from '@/assets/icons/light_mode_white.svg';
+import dark_mode from '@/assets/icons/dark_mode_white.svg';
 
 import { useTheme } from '@/common/hooks/useTheme.ts';
 
@@ -13,7 +13,7 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-gray-100"
+      className="button-primary rounded-full transition-colors p-0.5 button-image"
       type="button"
       onClick={toggle}
       aria-label="Toggle light and dark theme"

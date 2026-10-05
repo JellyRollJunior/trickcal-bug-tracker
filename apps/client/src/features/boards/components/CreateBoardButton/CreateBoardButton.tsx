@@ -1,4 +1,4 @@
-import add from '@/assets/icons/add.svg';
+import add from '@/assets/icons/add_white.svg';
 
 import { useState } from 'react';
 import { Modal } from '@/common/components/Modal.tsx';
@@ -21,7 +21,7 @@ const CreateBoardButton = () => {
     <>
       {/* Add Board Button */}
       <button
-        className="button-primary block-primary p-0.5"
+        className="button-primary button-image p-0.5 rounded-full transition-colors"
         onClick={openModal}
       >
         <img src={add} />

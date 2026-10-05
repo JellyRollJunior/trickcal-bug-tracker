@@ -41,7 +41,7 @@ const Board = () => {
       {/* Board Data + controls */}
       <div className="block-container-primary flex w-full flex-col justify-between p-1">
         <div className="block-primary-title flex items-center justify-between p-2">
-          <h2 className="w-full text-center font-bold">{board.name}</h2>
+          <h2 className="w-full text-center text-lg font-bold">{board.name}</h2>
           <button
             className="button-primary h-fit shrink-0 rounded-full p-0.5"
             onClick={openPatchBoard}

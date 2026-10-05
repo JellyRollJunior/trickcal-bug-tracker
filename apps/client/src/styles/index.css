@@ -32,18 +32,17 @@
   /* primary block container */
   --color-pistachio-cream: #eaf7d0;
   --color-pistachio-cream-light: #ecf7da;
+  --color-pistachio-cream-dark: #c7d2b1;
 
-  /* red label */
+  /* labels */
   --color-brick-red: #b51711;
-  /* blue label */
   --color-indigo-violet: #564ad2;
-  /* yellow btn */
+
+  /* buttons */
   --color-sunflower: #ffdf73;
   --color-marigold: #e8a63c;
-  /* gray btn */
   --color-silver-gray: #acacac;
   --color-stone-gray: #848580;
-  /* green btn */
   --color-spring-lime: #b0f27e;
   --color-fern-green: #86bd5e;
 }
@@ -56,6 +55,9 @@
   background-blend-mode: difference;
 }
 
+@utility select-primary {
+  @apply bg-pistachio-cream border-pistachio-cream-dark border-2;
+}
 
 @utility block-container-primary {
   @apply bg-pistachio-cream border-pistachio-cream-light rounded-md border;
@@ -66,15 +68,23 @@
 }
 
 @utility block-primary-title {
-  @apply bg-jade-green text-ivory text-sm rounded-md;
+  @apply bg-jade-green text-ivory rounded-md text-sm;
 }
 
 @utility block-primary-label {
-  @apply bg-indigo-violet rounded-lg p-0.5 px-4 text-xs font-semibold text-ivory;
+  @apply bg-indigo-violet text-ivory rounded-lg p-0.5 px-4 text-xs font-semibold;
+}
+
+@utility button-transition {
+  @apply duration-200 ease-out;
+}
+
+@utility button-image {
+  @apply button-transition hover:bg-fern-green bg-jade-green flex h-8 w-8 items-center justify-center;
 }
 
 @utility button-primary {
-  @apply rounded-sm duration-200 ease-out hover:bg-gray-200;
+  @apply rounded-sm duration-200 ease-out;
 }
 
 @utility button-caution {

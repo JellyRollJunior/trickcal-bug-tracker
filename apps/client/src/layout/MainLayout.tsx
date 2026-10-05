@@ -22,13 +22,10 @@ const MainLayout = () => {
 
   return (
     <div className="grid h-dvh w-screen grid-rows-[auto_minmax(0,1fr)] overflow-clip">
-      <header className="flex w-full items-center justify-between">
-        <div />
+      <header className="flex w-full items-center justify-end gap-2 px-2 pt-1">
         <BoardsDropdown />
-        <div className="flex gap-2">
-          <ThemeToggle />
-          <CreateBoardButton />
-        </div>
+        <ThemeToggle />
+        <CreateBoardButton />
       </header>
       <div className="grid min-h-0 grid-cols-1 p-2">
         <Outlet />
