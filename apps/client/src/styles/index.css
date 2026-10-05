@@ -56,7 +56,7 @@
 }
 
 @utility select-primary {
-  @apply bg-pistachio-cream border-pistachio-cream-dark border-2;
+  @apply bg-pistachio-cream border-pistachio-cream-dark border-2 hover:bg-lime-frost;
 }
 
 @utility block-container-primary {

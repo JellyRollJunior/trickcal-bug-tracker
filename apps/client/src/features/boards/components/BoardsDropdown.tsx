@@ -35,7 +35,6 @@ const BoardsDropdown = () => {
               {data.map((board) => (
                 <li
                   key={board.id}
-                  className="px-3 py-2 hover:bg-gray-100"
                   onClick={toggleDropdown}
                 >
                   <Link to={`/boards/${board.id}`} className="block px-3 py-2">
