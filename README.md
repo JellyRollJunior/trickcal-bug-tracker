@@ -213,8 +213,10 @@ $ turbo dev
 
 - web design
     - disabled button styling
-    - dark mode
     - ticket view
+- dark mode
+    - design dark mode
+    - extract image buttons for light/dark mode switching
 - rework drag area
 - add ticket item data
 

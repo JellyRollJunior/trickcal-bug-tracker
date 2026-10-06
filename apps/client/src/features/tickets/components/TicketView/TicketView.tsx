@@ -64,12 +64,12 @@ const TicketView = ({
   const allCollaborators = [board.owner, ...board.collaborators];
 
   return (
-    <main className="block-container-primary min-h-0 overflow-y-auto p-1">
+    <article className="block-container-primary min-h-0 overflow-y-auto px-1 py-1.5 flex flex-col">
       {/* Ticket data */}
       {!isEditing && (
         <>
           {/* Summary & Control Buttons */}
-          <div className="flex items-center justify-end gap-2 p-1.5">
+          <div className="flex items-center justify-end gap-2 px-1.5">
             <button
               className="button-image-caution rounded-full"
               onClick={openDeleteTicket}
@@ -92,61 +92,63 @@ const TicketView = ({
             </Link>
           </div>
 
-          {/* Summary */}
-          <header>
-            <h2 className="text-xl font-bold">{ticket.summary}</h2>
-            <dd>
-              {ticket.issueType} · {ticket.category}
-            </dd>
-          </header>
-
-          {/* Description */}
-          <section className="mt-4">
-            <dt className="mt-2 font-bold">Description</dt>
-            <dd>{ticket.description}</dd>
-          </section>
-
-          {/* Classification & Metadata */}
-          <section className="mt-4">
-            <dl>
-              <div className="grid grid-cols-3">
-                <div className="mt-2">
-                  <dt className="font-bold">Priority</dt>
-                  <dd>{ticket.priority}</dd>
+          <main className='block-primary px-4 py-3 flex-1 mt-1.5'>
+            {/* Summary */}
+            <header>
+              <h2 className="text-xl font-bold">{ticket.summary}</h2>
+              <dd>
+                {ticket.issueType} · {ticket.category}
+              </dd>
+            </header>
+            
+            {/* Description */}
+            <section className="mt-4">
+              <dt className="mt-2 font-bold">Description</dt>
+              <dd>{ticket.description}</dd>
+            </section>
+            
+            {/* Classification & Metadata */}
+            <section className="mt-4">
+              <dl>
+                <div className="grid grid-cols-3">
+                  <div className="mt-2">
+                    <dt className="font-bold">Priority</dt>
+                    <dd>{ticket.priority}</dd>
+                  </div>
+                  <div className="mt-2">
+                    <dt className="font-bold">Severity</dt>
+                    <dd>{ticket.severity}</dd>
+                  </div>
+                  <div className="mt-2">
+                    <dt className="font-bold">Reproducible</dt>
+                    <dd>{ticket.reproducibility ? 'Yes' : 'No'}</dd>
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <dt className="font-bold">Severity</dt>
-                  <dd>{ticket.severity}</dd>
+                <div className="grid grid-cols-2">
+                  <div className="mt-2">
+                    <dt className="font-bold">Reporter</dt>
+                    <dd>
+                      {ticket.reporter.name} ({ticket.reporter.role})
+                    </dd>
+                  </div>
+                  <div className="mt-2">
+                    <dt className="font-bold">Assignee</dt>
+                    <dd>{ticket.assignee?.name ?? 'Unassigned'}</dd>
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <dt className="font-bold">Reproducible</dt>
-                  <dd>{ticket.reproducibility ? 'Yes' : 'No'}</dd>
+                <div className="grid grid-cols-2">
+                  <div className="mt-2">
+                    <dt className="font-bold">Created</dt>
+                    <dd>{formatDate(ticket.creationDate)}</dd>
+                  </div>
+                  <div className="mt-2">
+                    <dt className="font-bold">Last updated</dt>
+                    <dd>{formatDate(ticket.lastUpdate)}</dd>
+                  </div>
                 </div>
-              </div>
-              <div className="grid grid-cols-2">
-                <div className="mt-2">
-                  <dt className="font-bold">Reporter</dt>
-                  <dd>
-                    {ticket.reporter.name} ({ticket.reporter.role})
-                  </dd>
-                </div>
-                <div className="mt-2">
-                  <dt className="font-bold">Assignee</dt>
-                  <dd>{ticket.assignee?.name ?? 'Unassigned'}</dd>
-                </div>
-              </div>
-              <div className="grid grid-cols-2">
-                <div className="mt-2">
-                  <dt className="font-bold">Created</dt>
-                  <dd>{formatDate(ticket.creationDate)}</dd>
-                </div>
-                <div className="mt-2">
-                  <dt className="font-bold">Last updated</dt>
-                  <dd>{formatDate(ticket.lastUpdate)}</dd>
-                </div>
-              </div>
-            </dl>
-          </section>
+              </dl>
+            </section>
+          </main>
 
           <CautionModal
             open={isDeleteTicketOpen}
@@ -177,7 +179,7 @@ const TicketView = ({
           />
         </>
       )}
-    </main>
+    </article>
   );
 };
 
