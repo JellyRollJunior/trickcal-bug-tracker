@@ -18,8 +18,15 @@ const DeleteCollaboratorForm = ({
   } = useDeleteCollaboratorForm(boardId);
 
   return (
-    <form className="mt-5" onSubmit={handleDeleteCollaborator}>
+    <form
+      className="block-primary mt-2 px-3 py-2"
+      onSubmit={handleDeleteCollaborator}
+    >
+      <label className="lock font-semibold" htmlFor="deleteCollaborator">
+        Remove collaborator
+      </label>
       <select
+        id="deleteCollaborator"
         className="block-primary block py-0.5 pr-1"
         value={deleteCollaboratorId}
         onChange={(event) =>
@@ -28,7 +35,7 @@ const DeleteCollaboratorForm = ({
         required
       >
         <option value="" disabled>
-          Select a collaborator
+          Select collaborator
         </option>
         {collaborators.map((user) => (
           <option key={user.id} value={user.id}>
@@ -37,7 +44,7 @@ const DeleteCollaboratorForm = ({
         ))}
       </select>
       <button
-        className="button-caution mt-2 px-3 py-1 disabled:bg-gray-300"
+        className="button-caution button-text-base mt-2 px-3 py-1 disabled:bg-gray-300"
         disabled={isPendingDeleteCollaborator || isDisabled}
       >
         Remove collaborator

@@ -16,7 +16,7 @@ const DeleteBoardButton = ({ boardId }: DeleteBoardButtonProps) => {
   return (
     <>
       <button
-        className="button-caution w-fit px-1 py-0.5 text-xs"
+        className="button-caution w-full rounded-md py-1 text-sm"
         onClick={openModal}
         disabled={isPendingDeleteBoard}
       >

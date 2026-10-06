@@ -17,8 +17,12 @@ const AddCollaboratorForm = ({
   } = useAddCollaboratorForm(boardId);
 
   return (
-    <form className="mt-5" onSubmit={handlePostCollaborator}>
+    <form className="block-primary mt-2 px-3 py-2" onSubmit={handlePostCollaborator}>
+      <label className="lock font-semibold" htmlFor="newCollaborator">
+        Add collaborator
+      </label>
       <select
+        id="newCollaborator"
         className="block-primary block py-0.5 pr-1"
         value={newCollaboratorId}
         onChange={(event) =>
@@ -27,7 +31,7 @@ const AddCollaboratorForm = ({
         required
       >
         <option value="" disabled>
-          Select new collaborator
+          Select collaborator
         </option>
         {potentialCollaborators &&
           potentialCollaborators.map((user) => (
@@ -37,7 +41,7 @@ const AddCollaboratorForm = ({
           ))}
       </select>
       <button
-        className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300"
+        className="button-confirm mt-3"
         disabled={isPendingPostCollaborator || isDisabled}
       >
         Add collaborator
