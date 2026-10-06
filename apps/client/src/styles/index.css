@@ -90,6 +90,11 @@
   @apply bg-indigo-violet text-ivory rounded-lg p-0.5 px-4 text-xs font-semibold;
 }
 
+/* Input */
+@utility input-text {
+  @apply block-primary w-full py-1 pr-1 pl-2
+}
+
 /* Buttons */
 @utility button-transition {
   @apply duration-200 ease-out;

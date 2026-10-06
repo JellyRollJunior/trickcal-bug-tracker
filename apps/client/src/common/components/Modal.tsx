@@ -22,22 +22,22 @@ const Modal = ({ open, closeModal, title, children }: ModalProps) => {
 
   return (
     <dialog
-      className="xs:w-sm block-primary m-auto h-fit"
+      className="xs:w-sm block-container-primary m-auto h-fit"
       ref={ref}
       onClick={(event) => {
         if (event.target === ref.current) closeModal();
       }}
     >
-      <div className="flex h-full flex-col overflow-y-auto px-3 pt-3 pb-2.5">
-        <header className="relative pt-2.5 pb-1.5">
+      <div className="flex h-full flex-col overflow-y-auto p-1">
+        <div className="block-primary-title flex items-center justify-between p-1.5">
+          <h3 className="w-full font-bold">{title}</h3>
           <button
-            className="absolute -top-1.5 right-1.5 h-fit text-2xl"
+            className="button-image h-7 w-7 rounded-full text-lg"
             onClick={closeModal}
           >
             ×
           </button>
-          <h2 className="text-center text-lg">{title}</h2>
-        </header>
+        </div>
         {children}
       </div>
     </dialog>

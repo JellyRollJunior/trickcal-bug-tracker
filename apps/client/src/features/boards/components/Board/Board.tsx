@@ -21,8 +21,9 @@ const Board = () => {
   const [createTicketSectionId, setCreateTicketSectionId] = useState<
     SectionDto['id'] | null
   >(null);
-  const openCreateTicket = (sectionId: SectionDto['id']): void =>
+  const openCreateTicket = (sectionId: SectionDto['id']): void => {
     setCreateTicketSectionId(sectionId);
+  };
   const closeCreateTicket = () => setCreateTicketSectionId(null);
   const allCollaborators = [board.owner, ...board.collaborators];
 
@@ -94,6 +95,7 @@ const Board = () => {
       <AnimatePresence>
         {settingsDrawerData && (
           <SectionSettingsDrawer
+            open={settingsDrawerData !== null}
             closeDrawer={closeSectionSettings}
             boardId={board.id}
             sectionId={settingsDrawerData.id}

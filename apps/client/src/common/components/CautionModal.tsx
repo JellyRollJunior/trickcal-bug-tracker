@@ -22,23 +22,23 @@ const CautionModal = ({
   return (
     <Modal open={open} closeModal={closeModal} title={title}>
       <form onSubmit={onSubmit}>
-        <p className="mt-5 text-center text-sm whitespace-pre-line">
+        <p className="block-primary mt-2 px-3 py-2 text-center text-sm whitespace-pre-line">
           {message}
         </p>
-        <div className="mt-8 flex justify-end gap-3">
+        <div className="mx-1 mt-2 mb-1 flex justify-end gap-3">
           <button
-            className="button-primary px-3 py-1"
+            className="button-caution button-text-base"
+            disabled={isSubmitDisabled}
+          >
+            {submitActionLabel}
+          </button>
+          <button
+            className="button-back"
             type="button"
             onClick={closeModal}
             disabled={isSubmitDisabled}
           >
             Cancel
-          </button>
-          <button
-            className="button-caution px-3 py-1"
-            disabled={isSubmitDisabled}
-          >
-            {submitActionLabel}
           </button>
         </div>
       </form>

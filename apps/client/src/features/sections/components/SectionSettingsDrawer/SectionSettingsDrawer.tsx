@@ -1,16 +1,18 @@
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
-import { motion } from 'motion/react';
 import { useSectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/useSectionSettingsDrawer.ts';
 import { CautionModal } from '@/common/components/CautionModal.tsx';
+import { Drawer } from '@/common/components/Drawer';
 
 type SectionSettingsDrawerProps = {
+  open: boolean;
   closeDrawer: () => void;
   boardId: BoardDto['id'];
   sectionId: SectionDto['id'];
   sectionName: SectionDto['name'];
 };
 const SectionSettingsDrawer = ({
+  open,
   closeDrawer,
   boardId,
   sectionId,
@@ -31,40 +33,34 @@ const SectionSettingsDrawer = ({
   const closeDeleteSection = () => setIsDeleteSectionOpen(false);
 
   return (
-    <motion.aside
-      initial={{ translateX: '100%', opacity: 0 }}
-      animate={{ translateX: 0, opacity: 1 }}
-      exit={{ translateX: '100%', opacity: 0 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
-      className="block-primary absolute top-0 right-0 flex h-full min-w-1/3 flex-col gap-1.5 px-3 py-2"
+    <Drawer
+      open={open}
+      closeDrawer={closeDrawer}
+      reset={reset}
+      title={'Board settings'}
     >
-      <button
-        className="absolute -top-1.5 right-1.5 h-fit text-2xl"
-        onClick={() => {
-          closeDrawer();
-          reset();
-        }}
-      >
-        ×
-      </button>
-      <h3 className="font-semibold">Section settings</h3>
-
       {/* Delete Section */}
       <button
-        className="button-caution w-fit px-1 py-0.5 text-xs"
+        className="button-caution mt-1 w-full rounded-md py-1 text-sm"
         onClick={openDeleteSection}
         disabled={isPendingDeleteSection || isPendingPatchSection}
       >
         Remove section
       </button>
-      <hr className="mt-3 h-px border-0 bg-gray-300" />
 
       {/* Patch Section */}
-      <form className="mt-3" onSubmit={handlePatchSection}>
-        <label htmlFor="newSectionName">Edit section name</label>
+      <form
+        className="block-primary mt-2 px-3 py-2"
+        onSubmit={handlePatchSection}
+      >
+        <label className="font-semibold" htmlFor="newSectionName">
+          Edit section name
+        </label>
         <input
-          className="block-primary mt-2 w-full py-1 pr-1 pl-2"
+          className="input-text block"
           id="newSectionName"
+          minLength={1}
+          maxLength={26}
           placeholder={sectionName}
           type="text"
           value={newName}
@@ -72,7 +68,7 @@ const SectionSettingsDrawer = ({
           required
         />
         <button
-          className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300"
+          className="button-confirm mt-2"
           disabled={isPendingDeleteSection || isPendingPatchSection}
         >
           Save changes
@@ -89,7 +85,7 @@ const SectionSettingsDrawer = ({
         message="Are you sure you want to remove section?"
         submitActionLabel="Remove section"
       />
-    </motion.aside>
+    </Drawer>
   );
 };
 

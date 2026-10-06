@@ -63,7 +63,7 @@ const BoardSettingsDrawer = ({
           Edit board name
         </label>
         <input
-          className="block-primary w-full py-1 pr-1 pl-2"
+          className="input-text"
           id="newBoardName"
           minLength={1}
           maxLength={100}
