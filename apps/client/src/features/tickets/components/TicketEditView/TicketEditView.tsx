@@ -18,26 +18,27 @@ const TicketEditView = ({
   collaborators,
   closeEditView,
 }: TicketEditViewProps) => {
-  const {
-    ticketFormStates,
-    reset,
-    handleSubmitEditForm,
-    isPendingSubmit,
-  } = useTicketEditView(boardId, ticket, closeEditView);
+  const { ticketFormStates, reset, handleSubmitEditForm, isPendingSubmit } =
+    useTicketEditView(boardId, ticket, closeEditView);
 
   return (
-    <TicketForm
-      ticketFormStates={ticketFormStates}
-      collaborators={collaborators}
-      onSubmit={handleSubmitEditForm}
-      onCancel={() => {
-        reset(ticket);
-        closeEditView();
-      }}
-      isDisabled={isPendingSubmit}
-      isRequired={false}
-      submitButtonText="Save changes"
-    />
+    <>
+      <h2 className="block-primary mt-2 px-4 py-3 text-xl font-bold">
+        Edit Ticket
+      </h2>
+      <TicketForm
+        ticketFormStates={ticketFormStates}
+        collaborators={collaborators}
+        onSubmit={handleSubmitEditForm}
+        onCancel={() => {
+          reset(ticket);
+          closeEditView();
+        }}
+        isDisabled={isPendingSubmit}
+        isRequired={false}
+        submitButtonText="Save changes"
+      />
+    </>
   );
 };
 

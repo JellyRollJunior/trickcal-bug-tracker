@@ -1,5 +1,5 @@
 import close from '@/assets/icons/close_white.svg';
-import settings from '@/assets/icons/settings_white.svg';
+import edit from '@/assets/icons/edit_white.svg';
 import trash from '@/assets/icons/trash_white.svg';
 
 import type { BoardDto, TicketDto } from '@trickcal-bug-tracker/shared';
@@ -64,7 +64,7 @@ const TicketView = ({
   const allCollaborators = [board.owner, ...board.collaborators];
 
   return (
-    <article className="block-container-primary min-h-0 overflow-y-auto px-1 py-1.5 flex flex-col">
+    <article className="block-container-primary flex min-h-0 flex-col overflow-y-auto px-1 py-1.5">
       {/* Ticket data */}
       {!isEditing && (
         <>
@@ -81,7 +81,7 @@ const TicketView = ({
               className="button-image rounded-full"
               onClick={openIsEditing}
             >
-              <img src={settings} />
+              <img src={edit} />
             </button>
 
             <Link
@@ -92,21 +92,26 @@ const TicketView = ({
             </Link>
           </div>
 
-          <main className='block-primary px-4 py-3 flex-1 mt-1.5'>
+          <main className="block-primary mt-1.5 flex-1 px-4 py-3">
             {/* Summary */}
             <header>
               <h2 className="text-xl font-bold">{ticket.summary}</h2>
               <dd>
-                <span className='block-primary-label-secondary'>{ticket.issueType}</span> <span className='block-primary-label'>{ticket.category}</span>
+                <span className="block-primary-label-secondary">
+                  {ticket.issueType}
+                </span>
+                <span className="block-primary-label ml-1">
+                  {ticket.category}
+                </span>
               </dd>
             </header>
-            
+
             {/* Description */}
             <section className="mt-4">
               <dt className="mt-2 font-bold">Description</dt>
               <dd>{ticket.description}</dd>
             </section>
-            
+
             {/* Classification & Metadata */}
             <section className="mt-4">
               <dl>
@@ -166,10 +171,10 @@ const TicketView = ({
       {isEditing && (
         <>
           <Link
-            className="button-primary ml-auto block w-fit px-3 py-1"
+            className="button-image ml-auto w-fit rounded-full"
             to={`/boards/${boardId}`}
           >
-            ×
+            <img src={close} />
           </Link>
           <TicketEditView
             ticket={ticket}
