@@ -12,7 +12,7 @@ const BoardsDropdown = () => {
 
   return (
     <>
-      <div className="relative w-md">
+      <div className="relative w-full">
         <button
           className={`select-primary w-full px-3 py-1 ${isOpen ? 'rounded-t-md' : 'rounded-md'}`}
           onClick={toggleDropdown}

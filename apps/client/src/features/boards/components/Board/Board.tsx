@@ -1,4 +1,5 @@
-import settings from '@/assets/icons/settings.svg';
+import settings from '@/assets/icons/settings_white.svg';
+
 import type { SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { AnimatePresence } from 'motion/react';
@@ -40,10 +41,10 @@ const Board = () => {
     <div className="relative flex min-h-0 flex-1 flex-col gap-2">
       {/* Board Data + controls */}
       <div className="block-container-primary flex w-full flex-col justify-between p-1">
-        <div className="block-primary-title flex items-center justify-between p-2">
+        <div className="block-primary-title flex items-center justify-between p-1.5">
           <h2 className="w-full text-center text-lg font-bold">{board.name}</h2>
           <button
-            className="button-primary h-fit shrink-0 rounded-full p-0.5"
+            className="button-image rounded-full"
             onClick={openPatchBoard}
           >
             <img src={settings} />
@@ -55,13 +56,13 @@ const Board = () => {
           <p className="block-primary col-span-3 h-20 w-full px-2 py-1 text-sm font-semibold">
             {board.description}
           </p>
-          <div className="block-primary flex h-20 flex-col px-2 py-1  ">
+          <div className="block-primary flex h-20 flex-col px-2 py-1">
             <div className="text-sm font-semibold">Viewer(s)</div>
-            <div className="text-center text-lg flex justify-center items-center font-bold  flex-1">
+            <div className="flex flex-1 items-center justify-center text-center text-lg font-bold">
               {viewerList.length}
             </div>
           </div>
-          <ul className="block-primary col-span-2 flex h-20 w-full flex-col font-semibold gap-1 overflow-y-auto px-2 py-1 text-sm">
+          <ul className="block-primary col-span-2 flex h-20 w-full flex-col gap-1 overflow-y-auto px-2 py-1 text-sm font-semibold">
             {viewerList.map((viewer) => (
               <li key={viewer.id}>{viewer.name}</li>
             ))}

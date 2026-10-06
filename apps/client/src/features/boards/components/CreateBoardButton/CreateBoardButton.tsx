@@ -20,10 +20,7 @@ const CreateBoardButton = () => {
   return (
     <>
       {/* Add Board Button */}
-      <button
-        className="button-primary button-image p-0.5 rounded-full transition-colors"
-        onClick={openModal}
-      >
+      <button className="button-image rounded-full" onClick={openModal}>
         <img src={add} />
       </button>
 

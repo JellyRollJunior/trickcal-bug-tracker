@@ -88,7 +88,7 @@
 }
 
 @utility button-image {
-  @apply button-floating flex h-8 w-8 items-center justify-center;
+  @apply button-floating flex items-center justify-center p-1;
 }
 
 @utility button-text-base {

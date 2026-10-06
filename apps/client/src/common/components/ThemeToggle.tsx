@@ -13,7 +13,7 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="button-primary rounded-full transition-colors p-0.5 button-image"
+      className="button-image rounded-full"
       type="button"
       onClick={toggle}
       aria-label="Toggle light and dark theme"
