@@ -1,11 +1,11 @@
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
-import { MainLayout } from '@/layout/MainLayout.tsx';
+import { BoardLayout } from '@/layout/BoardLayout.tsx';
 import { AuthLayout } from '@/layout/AuthLayout.tsx';
 import { Login } from '@/features/auth/components/Login/Login.tsx';
 import { Board } from '@/features/boards/components/Board/Board.tsx';
-import { BoardLayout } from '@/features/boards/components/BoardLayout/BoardLayout.tsx';
+import { BoardDataLayer } from '@/features/boards/components/BoardDataLayer/BoardDataLayer.tsx';
 import { BoardTicketLayout } from '@/features/boards/components/BoardTicketLayout.tsx';
 import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx';
 import { OAuthCallback } from '@/features/auth/components/OAuthCallback/OAuthCallback.tsx';
@@ -33,7 +33,7 @@ const routes: RouteObject[] = [
         ],
       },
       {
-        element: <MainLayout />,
+        element: <BoardLayout />,
         children: [
           {
             index: true,
@@ -41,7 +41,7 @@ const routes: RouteObject[] = [
           },
           {
             path: '/boards/:boardId',
-            element: <BoardLayout />,
+            element: <BoardDataLayer />,
             children: [
               { index: true, element: <Board /> },
               {

@@ -1,18 +1,18 @@
 import type { BoardDto } from '@trickcal-bug-tracker/shared';
-import { Outlet, useParams } from 'react-router-dom';
-import { useBoardLayout } from '@/features/boards/components/BoardLayout/useBoardLayout.ts';
 import type { BoardOutletContext } from '@/features/boards/context/useBoardOutletContext.ts';
+import { Outlet, useParams } from 'react-router-dom';
+import { useBoardLayout } from '@/features/boards/components/BoardDataLayer/useBoardDataLayer.ts';
 
-const BoardLayoutContainer = () => {
+const BoardDataLayerContainer = () => {
   const { boardId } = useParams();
 
   if (!boardId) return <h3>Loading...</h3>;
 
-  return <BoardLayout boardId={boardId} />;
+  return <BoardDataLayer boardId={boardId} />;
 };
 
-type BoardLayoutProps = { boardId: BoardDto['id'] };
-const BoardLayout = ({ boardId }: BoardLayoutProps) => {
+type BoardDataLayerProps = { boardId: BoardDto['id'] };
+const BoardDataLayer = ({ boardId }: BoardDataLayerProps) => {
   const { board, isPendingGetBoard, viewerList } = useBoardLayout(boardId);
 
   if (isPendingGetBoard || !board) return <h3>Loading...</h3>;
@@ -22,4 +22,4 @@ const BoardLayout = ({ boardId }: BoardLayoutProps) => {
   return <Outlet context={context} />;
 };
 
-export { BoardLayoutContainer as BoardLayout };
+export { BoardDataLayerContainer as BoardDataLayer };

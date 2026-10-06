@@ -1,23 +1,23 @@
 import { Outlet } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
 import { BoardsDropdown } from '@/features/boards/components/BoardsDropdown.tsx';
-import { CreateBoardButton } from '@/features/boards/components/CreateBoardButton/CreateBoardButton';
+import { CreateBoardButton } from '@/features/boards/components/CreateBoardButton/CreateBoardButton.tsx';
 import { useBoardsSocketSync } from '@/features/boards/hooks/useBoardsSocketSync.ts';
 import { SocketProvider } from '@/context/socket/SocketContext.tsx';
 import { MeProvider } from '@/context/me/MeContext.tsx';
 import { ThemeToggle } from '@/common/components/ThemeToggle.tsx';
 
-const MainLayoutWrapper = () => {
+const BoardLayoutWrapper = () => {
   return (
     <SocketProvider>
       <MeProvider>
-        <MainLayout />
+        <BoardLayout />
       </MeProvider>
     </SocketProvider>
   );
 };
 
-const MainLayout = () => {
+const BoardLayout = () => {
   useBoardsSocketSync();
 
   return (
@@ -35,4 +35,4 @@ const MainLayout = () => {
   );
 };
 
-export { MainLayoutWrapper as MainLayout };
+export { BoardLayoutWrapper as BoardLayout };
