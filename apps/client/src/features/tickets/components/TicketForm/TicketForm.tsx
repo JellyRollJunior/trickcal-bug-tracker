@@ -46,9 +46,12 @@ const TicketForm = ({
   } = ticketFormStates;
 
   return (
-    <form className="h-fit w-full" onSubmit={onSubmit}>
+    <form
+      className="block-primary mt-2 h-fit w-full px-3 py-2"
+      onSubmit={onSubmit}
+    >
       <textarea
-        className="block-primary mt-2 w-full py-1 pr-1 pl-2"
+        className="input mt-2"
         placeholder="Summary"
         rows={2}
         minLength={1}
@@ -59,7 +62,7 @@ const TicketForm = ({
       />
 
       <textarea
-        className="block-primary mt-2 w-full py-1 pr-1 pl-2"
+        className="input mt-2"
         placeholder="Description"
         rows={4}
         minLength={1}
@@ -71,7 +74,7 @@ const TicketForm = ({
 
       <div className="mt-2 flex gap-2">
         <select
-          className="block-primary py-1 pr-1 pl-2"
+          className="input"
           value={issueType}
           onChange={(event) =>
             setIssueType(event.target.value as TicketPayload['issueType'])
@@ -88,7 +91,7 @@ const TicketForm = ({
         </select>
 
         <select
-          className="block-primary py-1 pr-1 pl-2"
+          className="input"
           value={category}
           onChange={(event) =>
             setCategory(event.target.value as TicketPayload['category'])
@@ -108,7 +111,7 @@ const TicketForm = ({
 
       <div className="mt-2 flex gap-2">
         <select
-          className="block-primary py-1 pr-1 pl-2"
+          className="input"
           value={priority}
           onChange={(event) =>
             setPriority(event.target.value as TicketPayload['priority'])
@@ -126,7 +129,7 @@ const TicketForm = ({
         </select>
 
         <select
-          className="block-primary py-1 pr-1 pl-2"
+          className="input"
           value={severity}
           onChange={(event) =>
             setSeverity(event.target.value as TicketPayload['severity'])
@@ -154,7 +157,7 @@ const TicketForm = ({
       </label>
 
       <select
-        className="block-primary mt-2 w-full py-1 pr-1 pl-2"
+        className="input mt-2"
         value={assigneeId ?? ''}
         onChange={(event) => setAssigneeId(event.target.value || null)}
       >
@@ -166,20 +169,17 @@ const TicketForm = ({
         ))}
       </select>
 
-      <div className="mt-2 flex justify-start gap-1">
+      <div className="mx-1 my-1 mt-4 flex justify-end gap-3">
         <button
-          className="button-primary px-3 py-1 disabled:bg-gray-300"
-          disabled={isDisabled}
-        >
-          {submitButtonText}
-        </button>
-        <button
-          className="button-primary px-3 py-1 disabled:bg-gray-300"
+          className="button-back"
           type="button"
           onClick={onCancel}
           disabled={isDisabled}
         >
           Cancel
+        </button>
+        <button className="button-confirm" disabled={isDisabled}>
+          {submitButtonText}
         </button>
       </div>
     </form>

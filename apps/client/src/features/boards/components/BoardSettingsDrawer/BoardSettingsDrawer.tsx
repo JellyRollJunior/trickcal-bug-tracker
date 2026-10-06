@@ -63,7 +63,7 @@ const BoardSettingsDrawer = ({
           Edit board name
         </label>
         <input
-          className="input-text"
+          className="input"
           id="newBoardName"
           minLength={1}
           maxLength={100}
@@ -74,7 +74,7 @@ const BoardSettingsDrawer = ({
           Edit description
         </label>
         <textarea
-          className="block-primary w-full py-1 pr-1 pl-2"
+          className="input"
           id="newDescription"
           rows={4}
           minLength={1}

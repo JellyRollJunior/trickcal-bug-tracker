@@ -24,7 +24,7 @@ const BoardContent = ({
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   return (
-    <div className="flex h-full min-h-0 w-full flex-1 flex-col overflow-x-auto pb-1.5">
+    <div className="flex h-full min-h-0 w-full flex-1 flex-col overflow-x-auto ">
       {/* Section List */}
       <ol className="flex flex-1 gap-3">
         {board.sections.map((section) => (

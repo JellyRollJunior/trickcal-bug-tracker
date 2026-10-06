@@ -57,7 +57,7 @@ const SectionSettingsDrawer = ({
           Edit section name
         </label>
         <input
-          className="input-text block"
+          className="input block"
           id="newSectionName"
           minLength={1}
           maxLength={26}

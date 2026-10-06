@@ -1,3 +1,7 @@
+import close from '@/assets/icons/close_white.svg';
+import settings from '@/assets/icons/settings_white.svg';
+import trash from '@/assets/icons/trash_white.svg';
+
 import type { BoardDto, TicketDto } from '@trickcal-bug-tracker/shared';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -60,30 +64,31 @@ const TicketView = ({
   const allCollaborators = [board.owner, ...board.collaborators];
 
   return (
-    <main className="block-primary mx-2 my-3 min-h-0 overflow-y-auto px-3 py-2">
+    <main className="block-container-primary min-h-0 overflow-y-auto p-1">
       {/* Ticket data */}
       {!isEditing && (
         <>
-          {/* Control Buttons */}
-          <div className="ml-auto flex w-fit gap-2">
+          {/* Summary & Control Buttons */}
+          <div className="flex items-center justify-end gap-2 p-1.5">
             <button
-              className="button-primary px-3 py-1"
-              onClick={openIsEditing}
-            >
-              Edit
-            </button>
-            <button
-              className="button-caution w-fit px-1 py-0.5 text-xs"
+              className="button-image-caution rounded-full"
               onClick={openDeleteTicket}
               disabled={isPendingDeleteTicket}
             >
-              Remove ticket
+              <img src={trash} />
             </button>
+            <button
+              className="button-image rounded-full"
+              onClick={openIsEditing}
+            >
+              <img src={settings} />
+            </button>
+
             <Link
-              className="button-primary ml-auto block px-3 py-1"
+              className="button-image rounded-full"
               to={`/boards/${boardId}`}
             >
-              ×
+              <img src={close} />
             </Link>
           </div>
 

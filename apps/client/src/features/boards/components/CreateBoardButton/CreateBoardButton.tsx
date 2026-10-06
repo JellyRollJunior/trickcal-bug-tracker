@@ -27,10 +27,15 @@ const CreateBoardButton = () => {
       {/* Create Board Modal */}
       {isOpen && (
         <Modal open={isOpen} closeModal={closeModal} title="Create Board">
-          <form className="mt-3" onSubmit={handlePostBoard}>
-            <label htmlFor="BoardName">Edit board name</label>
+          <form
+            className="block-primary mt-2 px-3 py-2"
+            onSubmit={handlePostBoard}
+          >
+            <label htmlFor="BoardName mt-2 font-semibold">
+              Edit board name
+            </label>
             <input
-              className="block-primary mt-2 w-full py-1 pr-1 pl-2"
+              className="input"
               id="BoardName"
               minLength={1}
               maxLength={100}
@@ -38,11 +43,11 @@ const CreateBoardButton = () => {
               onChange={(event) => setBoardName(event.target.value)}
               required={true}
             />
-            <label className="mt-2 block" htmlFor="Description">
+            <label className="mt-2 block font-semibold" htmlFor="Description">
               Edit description
             </label>
             <textarea
-              className="block-primary w-full py-1 pr-1 pl-2"
+              className="input"
               id="Description"
               rows={4}
               minLength={1}
@@ -51,10 +56,7 @@ const CreateBoardButton = () => {
               onChange={(event) => setDescription(event.target.value)}
               required={true}
             />
-            <button
-              className="button-primary mt-2 px-3 py-1 disabled:bg-gray-300"
-              disabled={isPendingCreateBoard}
-            >
+            <button className="button-confirm" disabled={isPendingCreateBoard}>
               Create board
             </button>
           </form>

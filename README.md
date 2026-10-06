@@ -208,10 +208,15 @@ $ turbo dev
     - everytime a state updates, joinRoom is recreated
     - joinRoom is called again each time it is recreated
 - Debugging circular import with vite --debug hmr
-
+ 
 ## Current
 
 - web design
+    - disabled button styling
+    - dark mode
+    - ticket view
+- rework drag area
+- add ticket item data
 
 ## Todo list
 

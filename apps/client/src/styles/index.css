@@ -90,8 +90,8 @@
   @apply bg-indigo-violet text-ivory rounded-lg p-0.5 px-4 text-xs font-semibold;
 }
 
-/* Input */
-@utility input-text {
+/* Inputs */
+@utility input {
   @apply block-primary w-full py-1 pr-1 pl-2
 }
 
@@ -106,6 +106,10 @@
 
 @utility button-image {
   @apply button-floating flex items-center justify-center p-1;
+}
+
+@utility button-image-caution {
+  @apply button-caution button-transition flex items-center justify-center p-1;
 }
 
 @utility button-text-base {

@@ -40,7 +40,7 @@ const CreateSectionListItem = ({
     <>
       {!isOpen && (
         <button
-          className="button-floating h-fit rounded-md py-2 pr-4 pl-3 text-nowrap disabled:bg-gray-300"
+          className="button-floating h-fit rounded-md py-2 pr-4 pl-3 text-nowrap"
           disabled={isPendingCreateSection}
           onClick={openCreateSection}
         >
@@ -57,7 +57,7 @@ const CreateSectionListItem = ({
           }}
         >
           <input
-            className="block-primary w-full py-1 pr-1 pl-2"
+            className="input"
             type="text"
             placeholder="Section name"
             minLength={1}
@@ -81,7 +81,6 @@ const CreateSectionListItem = ({
             >
               Create
             </button>
-            
           </div>
         </form>
       )}
