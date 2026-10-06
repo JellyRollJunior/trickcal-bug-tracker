@@ -97,7 +97,7 @@ const TicketView = ({
             <header>
               <h2 className="text-xl font-bold">{ticket.summary}</h2>
               <dd>
-                {ticket.issueType} · {ticket.category}
+                <span className='block-primary-label-secondary'>{ticket.issueType}</span> <span className='block-primary-label'>{ticket.category}</span>
               </dd>
             </header>
             

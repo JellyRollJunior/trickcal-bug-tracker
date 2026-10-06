@@ -28,32 +28,32 @@
   /* primary block */
   --color-lime-frost: #f5fde8;
   --color-lime-frost-dark: #e7f5c6;
-
+  
   /* primary block container */
   --color-pistachio-cream: #eaf7d0;
   --color-pistachio-cream-light: #ecf7da;
   --color-pistachio-cream-dark: #c7d2b1;
-
+  
   /* labels */
   --color-brick-red: #b51711;
   --color-indigo-violet: #564ad2;
-
+  
   /* buttons */
   --color-sunflower: #ffdf73;
   --color-sunflower-dark: #f2d46d;
   --color-marigold: #e8a63c;
-
+  
   --color-button-back: #fff4ca;
   --color-button-back-hover: #f2e8c0;
   --color-button-back-border: #e3c97b;
-
+  
   --color-button-caution: #f45471;
   --color-button-caution-hover: #dc4c66;
   --color-button-caution-border: #e04865;
-
+  
   --color-silver-gray: #acacac;
   --color-stone-gray: #848580;
-  --color-spring-lime: #b0f27e;
+  
   --color-fern-green: #86bd5e;
 }
 
@@ -88,6 +88,10 @@
 
 @utility block-primary-label {
   @apply bg-indigo-violet text-ivory rounded-lg p-0.5 px-4 text-xs font-semibold;
+}
+
+@utility block-primary-label-secondary {
+  @apply bg-sunflower-dark text-black rounded-lg p-0.5 px-4 text-xs font-semibold;
 }
 
 /* Inputs */

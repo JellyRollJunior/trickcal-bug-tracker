@@ -21,8 +21,11 @@ const Ticket = ({
         draggable={false}
       >
         <h4 className="font-semibold">{ticket.summary}</h4>
-        <div className="mt-2 flex w-full justify-end gap-2">
-          <div className="block-primary-label">{ticket.category}</div>
+        <div className="mt-1 ml-auto w-fit">
+          <span className="block-primary-label-secondary">
+            {ticket.issueType}
+          </span>
+          <span className="ml-1 block-primary-label">{ticket.category}</span>
         </div>
       </Link>
     </li>
