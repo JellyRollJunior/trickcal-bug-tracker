@@ -69,6 +69,10 @@
   @apply bg-pistachio-cream border-pistachio-cream-dark hover:bg-lime-frost border-2;
 }
 
+@utility select-primary-item {
+  @apply bg-pistachio-cream hover:bg-lime-frost 
+}
+
 @utility drawer {
   @apply border-pistachio-cream-dark border-l;
 }

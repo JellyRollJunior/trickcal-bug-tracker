@@ -31,8 +31,8 @@ const CreateBoardButton = () => {
             className="block-primary mt-2 px-3 py-2"
             onSubmit={handlePostBoard}
           >
-            <label htmlFor="BoardName mt-2 font-semibold">
-              Edit board name
+            <label className="font-semibold" htmlFor="BoardName">
+              Board name
             </label>
             <input
               className="input"
@@ -44,7 +44,7 @@ const CreateBoardButton = () => {
               required={true}
             />
             <label className="mt-2 block font-semibold" htmlFor="Description">
-              Edit description
+              Description
             </label>
             <textarea
               className="input"
@@ -56,7 +56,7 @@ const CreateBoardButton = () => {
               onChange={(event) => setDescription(event.target.value)}
               required={true}
             />
-            <button className="button-confirm" disabled={isPendingCreateBoard}>
+            <button className="button-confirm mt-2" disabled={isPendingCreateBoard}>
               Create board
             </button>
           </form>

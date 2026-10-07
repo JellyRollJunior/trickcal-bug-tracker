@@ -9,6 +9,7 @@ import { BoardDataLayer } from '@/features/boards/components/BoardDataLayer/Boar
 import { BoardTicketLayout } from '@/features/boards/components/BoardTicketLayout.tsx';
 import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx';
 import { OAuthCallback } from '@/features/auth/components/OAuthCallback/OAuthCallback.tsx';
+import { BoardStartPage } from '@/features/boards/components/BoardStartPage';
 
 const routes: RouteObject[] = [
   {
@@ -36,7 +37,8 @@ const routes: RouteObject[] = [
         element: <BoardLayout />,
         children: [
           {
-            index: true,
+            path: '/boards',
+            element: <BoardStartPage />
           },
           {
             path: '/boards/:boardId',
