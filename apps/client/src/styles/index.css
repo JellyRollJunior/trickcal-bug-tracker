@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Global Styling */
+:root {
+  scroll-behavior: smooth;
+}
+
+/* Colors */
 :root {
   --bg: #fff;
   --fg: #111;
@@ -17,7 +23,7 @@
 
 @theme {
   /* white */
-  --color-ivory: #fafcf4;
+  --color-ivory: #fffff0;
 
   /* green text */
   --color-leaf-green: #8cb138;
@@ -79,6 +85,19 @@
   @apply border-pistachio-cream-dark border-l;
 }
 
+/* Text */
+@utility text-default {
+  @apply text-ivory;
+}
+
+@utility text-hero {
+  @apply from-ivory via-ivory/90 bg-linear-to-b to-gray-300 bg-clip-text text-transparent;
+}
+
+@utility text-secondary {
+  @apply text-gray-400;
+}
+
 /* Blocks */
 @utility block-container-primary {
   @apply bg-pistachio-cream border-pistachio-cream-light rounded-md border;
@@ -123,11 +142,11 @@
 }
 
 @utility button-text-base {
-  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4;
+  @apply button-transition shadow-sm rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4;
 }
 
 @utility button-confirm {
-  @apply bg-sunflower border-marigold hover:bg-sunflower-dark button-text-base;
+  @apply bg-sunflower border-marigold hover:bg-sunflower-dark button-text-base text-black;
 }
 
 @utility button-back {
@@ -135,9 +154,13 @@
 }
 
 @utility button-caution {
-  @apply border-button-caution-border bg-button-caution hover:bg-button-caution-hover text-white;
+  @apply border-button-caution-border bg-button-caution hover:bg-button-caution-hover text-ivory;
 }
 
 @utility button-special {
   @apply button-text-base bg-indigo-violet border-indigo-violet-dark text-ivory hover:bg-indigo-violet-light;
+}
+
+@utility button-lowkey {
+  @apply button-text-base bg-silver-gray border-stone-gray hover:bg-stone-gray text-ivory
 }

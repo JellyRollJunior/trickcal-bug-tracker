@@ -223,8 +223,11 @@ $ turbo dev
 ## Todo list
 
 - Client
+    - landing page
+        - images
+        - features
+
 - rework
-    - auth page
 
     - error page
     - optimistic updates with tanstack for ticket move
