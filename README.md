@@ -213,7 +213,7 @@ $ turbo dev
 
 - web design
     - disabled button styling
-    - ticket view
+    - restyle login, signup
 - dark mode
     - design dark mode
     - extract image buttons for light/dark mode switching
@@ -223,7 +223,14 @@ $ turbo dev
 ## Todo list
 
 - Client
+- rework
+    - landing page
+    - auth page
+    - board page
+
     - index page
+
+
     - error page
     - optimistic updates with tanstack for ticket move
     - loading anim
@@ -232,9 +239,15 @@ $ turbo dev
         - constant errors on cannot connext to server
     - ugly scroll bars
     - fail login: Login expired. Please login again.
+    - bugs
+        - make sections scroll
+        - bug: ordering is fucked a bit...
+            - ok i found the issue -> I think the drop areas orders are not being updated on ticket move -> therefore we moveone ticket, then
+            - i think its a client issue
 
 - server
     - dont crash on unable to fetch users
+    
 
 ## Improvements
 
