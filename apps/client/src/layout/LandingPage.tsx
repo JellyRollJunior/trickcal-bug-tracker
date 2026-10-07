@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
+import { Footer } from './Footer';
 
 const LandingPage = () => {
   return (
-    <div className="text-ivory min-h-dvh w-full min-w-dvw flex flex-col">
+    <div className="text-ivory flex min-h-dvh w-full min-w-dvw flex-col">
       <nav className="fixed top-0 left-0 flex w-full px-5 py-3 backdrop-blur-xl">
         <p className="text-xl font-bold md:ml-6 lg:ml-12">
           Trickcal Bug Tracker
@@ -15,7 +16,7 @@ const LandingPage = () => {
           Get started
         </Link>
       </nav>
-      <main className='flex-1'>
+      <main className="flex-1">
         {/* Hero */}
         <section className="w-full py-50">
           <div className="flex w-full flex-col items-center gap-6">
@@ -43,7 +44,7 @@ const LandingPage = () => {
         {/* Features */}
         <section id="features">I am feature list!</section>
       </main>
-      <footer className="block">I am a footer</footer>
+      <Footer />
       <Background opacity={0.9} />
     </div>
   );
