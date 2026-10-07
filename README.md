@@ -224,12 +224,7 @@ $ turbo dev
 
 - Client
 - rework
-    - landing page
     - auth page
-    - board page
-
-    - index page
-
 
     - error page
     - optimistic updates with tanstack for ticket move

@@ -3,7 +3,7 @@ import instagram from '@/assets/icons/instagram.png';
 import linkedin from '@/assets/icons/linkedin.png';
 
 type IconLinkProps = { src: string; size?: number; href: string };
-const IconLink = ({ src, href, size = 20 }: IconLinkProps) => {
+const IconLink = ({ src, href, size = 40 }: IconLinkProps) => {
   return (
     <a href={href} target="”_blank”" rel="noopener noreferrer nofollow">
       <img style={{ height: size, width: size }} src={src} />
@@ -13,7 +13,7 @@ const IconLink = ({ src, href, size = 20 }: IconLinkProps) => {
 
 const Footer = () => {
   return (
-    <footer className="border-kommy-hair-white-dark flex w-full items-center justify-center border-t-2 pt-3 pb-8">
+    <footer className="block-container-primary flex w-full items-center justify-center border-t-2 p-2 pb-3">
       <div className="flex gap-3">
         <IconLink src={github} href="https://github.com/jellyrolljunior" />
         <IconLink

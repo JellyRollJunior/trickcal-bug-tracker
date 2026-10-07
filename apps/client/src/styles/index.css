@@ -28,32 +28,34 @@
   /* primary block */
   --color-lime-frost: #f5fde8;
   --color-lime-frost-dark: #e7f5c6;
-  
+
   /* primary block container */
   --color-pistachio-cream: #eaf7d0;
   --color-pistachio-cream-light: #ecf7da;
   --color-pistachio-cream-dark: #c7d2b1;
-  
+
   /* labels */
   --color-brick-red: #b51711;
   --color-indigo-violet: #564ad2;
-  
+  --color-indigo-violet-light: #675cd7;
+  --color-indigo-violet-dark: #5246c8;
+
   /* buttons */
   --color-sunflower: #ffdf73;
   --color-sunflower-dark: #f2d46d;
   --color-marigold: #e8a63c;
-  
+
   --color-button-back: #fff4ca;
   --color-button-back-hover: #f2e8c0;
   --color-button-back-border: #e3c97b;
-  
+
   --color-button-caution: #f45471;
   --color-button-caution-hover: #dc4c66;
   --color-button-caution-border: #e04865;
-  
+
   --color-silver-gray: #acacac;
   --color-stone-gray: #848580;
-  
+
   --color-fern-green: #86bd5e;
 }
 
@@ -70,7 +72,7 @@
 }
 
 @utility select-primary-item {
-  @apply bg-pistachio-cream hover:bg-lime-frost 
+  @apply bg-pistachio-cream hover:bg-lime-frost;
 }
 
 @utility drawer {
@@ -95,12 +97,12 @@
 }
 
 @utility block-primary-label-secondary {
-  @apply bg-sunflower-dark text-black rounded-lg p-0.5 px-4 text-xs font-semibold;
+  @apply bg-sunflower-dark rounded-lg p-0.5 px-4 text-xs font-semibold text-black;
 }
 
 /* Inputs */
 @utility input {
-  @apply block-primary w-full py-1 pr-1 pl-2
+  @apply block-primary w-full py-1 pr-1 pl-2;
 }
 
 /* Buttons */
@@ -134,4 +136,8 @@
 
 @utility button-caution {
   @apply border-button-caution-border bg-button-caution hover:bg-button-caution-hover text-white;
+}
+
+@utility button-special {
+  @apply button-text-base bg-indigo-violet border-indigo-violet-dark text-ivory hover:bg-indigo-violet-light;
 }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useBoards } from '../hooks/useBoards';
-import { CreateBoardButton } from './CreateBoardButton/CreateBoardButton';
+import { useBoards } from '@/features/boards/hooks/useBoards.ts';
+import { CreateBoardButton } from '@/features/boards/components/CreateBoardButton/CreateBoardButton.tsx';
 
 const BoardStartPage = () => {
   const { data: boards } = useBoards();
@@ -8,7 +8,7 @@ const BoardStartPage = () => {
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto">
       {/* Create Board Prompt */}
-      <section className="block-container-primary mt-20 flex w-full max-w-md items-center gap-2 p-1">
+      <section className="block-container-primary mt-20 flex w-full max-w-md items-center gap-1 p-1">
         <h3 className="block-primary-title w-full px-3 py-1 text-center text-xl font-semibold">
           Create a new idea/bug tracking board
         </h3>
@@ -17,7 +17,7 @@ const BoardStartPage = () => {
         </div>
       </section>
 
-      {/* Select Existing Board Prompt */}
+      {/* Select Existing Board */}
       <section className="block-container-primary mt-3 w-full max-w-md p-1">
         <h3 className="block-primary-title px-3 py-1 text-center text-xl font-semibold">
           Recent boards

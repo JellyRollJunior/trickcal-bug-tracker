@@ -9,13 +9,18 @@ import { BoardDataLayer } from '@/features/boards/components/BoardDataLayer/Boar
 import { BoardTicketLayout } from '@/features/boards/components/BoardTicketLayout.tsx';
 import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx';
 import { OAuthCallback } from '@/features/auth/components/OAuthCallback/OAuthCallback.tsx';
-import { BoardStartPage } from '@/features/boards/components/BoardStartPage';
+import { BoardStartPage } from '@/features/boards/components/BoardStartPage.tsx';
+import { LandingPage } from '@/layout/LandingPage.tsx';
 
 const routes: RouteObject[] = [
   {
     path: '/',
     element: <App />,
     children: [
+      {
+        index: true,
+        element: <LandingPage />,
+      },
       {
         element: <AuthLayout />,
         children: [
@@ -38,7 +43,7 @@ const routes: RouteObject[] = [
         children: [
           {
             path: '/boards',
-            element: <BoardStartPage />
+            element: <BoardStartPage />,
           },
           {
             path: '/boards/:boardId',
