@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
-import { Footer } from './Footer';
+import { Footer } from '@/layout/Footer.tsx';
 
 const LandingPage = () => {
   return (
-    <div className="text-ivory flex min-h-dvh w-full min-w-dvw flex-col">
+    <div className="text-ivory flex min-h-dvh w-full flex-col">
       <nav className="fixed top-0 left-0 flex w-full px-5 py-3 backdrop-blur-xl">
         <p className="text-xl font-bold md:ml-6 lg:ml-12">
           Trickcal Bug Tracker
@@ -23,7 +23,7 @@ const LandingPage = () => {
             <h1 className="text-hero text-center font-bold lg:text-7xl">
               Collaborate in Real Time and Launch Cleaner Apps
             </h1>
-            <p className="text-secondary mx-auto max-w-xl text-center font-medium sm:text-lg md:text-xl">
+            <p className="text-secondary max-w-xl text-center font-medium sm:text-lg md:text-xl">
               A real-time Kanban board for developers & QAs. Create a board,
               invite your team, and watch every issue, ticket move, and update
               appear instantly for everyone, no refresh needed.

@@ -226,6 +226,7 @@ $ turbo dev
     - landing page
         - images
         - features
+        - footer
 
 - rework
 
