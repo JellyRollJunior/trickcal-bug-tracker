@@ -228,7 +228,6 @@ $ turbo dev
     - landing page
         - images
     - app icon
-    - dark mode
 
 - rework
 

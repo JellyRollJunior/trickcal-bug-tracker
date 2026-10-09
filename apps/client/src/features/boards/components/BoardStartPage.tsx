@@ -27,13 +27,13 @@ const BoardStartPage = () => {
         <h3 className="block-primary-title px-3 py-1 text-center text-xl font-semibold">
           Recent boards
         </h3>
-        <ul className="mt-1 flex flex-col">
+        <ul className="mt-1 flex flex-col gap-1 ">
           {boards &&
             boards.map((board) => (
               <li key={board.id}>
                 <Link
                   to={`/boards/${board.id}`}
-                  className="select-primary-item block px-3 py-2"
+                  className="block-primary block px-3 py-2 dark:hover:brightness-90"
                 >
                   {board.name}
                 </Link>
