@@ -22,7 +22,7 @@ const Modal = ({ open, closeModal, title, children }: ModalProps) => {
 
   return (
     <dialog
-      className="xs:w-sm block-container-primary m-auto h-fit"
+      className="xs:w-sm block-container-primary m-auto h-fit backdrop:bg-black/35 backdrop:backdrop-blur-xs"
       ref={ref}
       onClick={(event) => {
         if (event.target === ref.current) closeModal();

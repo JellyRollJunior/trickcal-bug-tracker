@@ -10,7 +10,7 @@ const BoardStartPage = () => {
       {/* Create Board Prompt */}
       <section className="mt-20 flex w-full flex-col items-center gap-3">
         <h2 className="text-hero text-center text-4xl font-bold">
-          Create a new idea/bug <br /> tracking board
+          Create a new idea/bug tracking board
         </h2>
 
         <CreateBoardButton />
