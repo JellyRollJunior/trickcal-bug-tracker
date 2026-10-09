@@ -225,8 +225,8 @@ $ turbo dev
 - Client
     - landing page
         - images
-        - features
-        - footer
+    - app icon
+    - dark mode
 
 - rework
 

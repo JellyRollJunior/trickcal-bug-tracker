@@ -48,7 +48,7 @@
 
   /* buttons */
   --color-sunflower: #ffdf73;
-  --color-sunflower-dark: #f2d46d;
+  --color-sunflower-dark: #e6c968;
   --color-marigold: #e8a63c;
 
   --color-button-back: #fff4ca;
@@ -87,17 +87,18 @@
 }
 
 /* Text */
-@utility text-default {
+@utility text-primary {
   @apply text-ivory;
+}
+
+@utility text-secondary {
+  @apply text-gray-400;
 }
 
 @utility text-hero {
   @apply from-ivory via-ivory/90 bg-linear-to-b to-gray-300 bg-clip-text text-transparent;
 }
 
-@utility text-secondary {
-  @apply text-gray-400;
-}
 
 /* Blocks */
 @utility block-container-primary {

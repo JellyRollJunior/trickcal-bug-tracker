@@ -8,14 +8,19 @@ const BoardStartPage = () => {
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto">
       {/* Create Board Prompt */}
-      <section className="block-container-primary mt-20 flex w-full max-w-md items-center gap-1 p-1">
-        <h3 className="block-primary-title w-full px-3 py-1 text-center text-xl font-semibold">
-          Create a new idea/bug tracking board
-        </h3>
-        <div className="h-fit">
-          <CreateBoardButton />
-        </div>
+      <section className="mt-20 flex w-full flex-col items-center gap-3">
+        <h2 className="text-hero text-center text-4xl font-bold">
+          Create a new idea/bug <br /> tracking board
+        </h2>
+
+        <CreateBoardButton />
       </section>
+
+      <div className="text-ivory flex w-full items-center gap-2 p-8">
+        <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
+        <p className="mb-1">or</p>
+        <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
+      </div>
 
       {/* Select Existing Board */}
       <section className="block-container-primary mt-3 w-full max-w-md p-1">

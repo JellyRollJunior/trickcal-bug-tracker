@@ -20,7 +20,7 @@ const LandingPage = () => {
         {/* Hero */}
         <section className="w-full py-50">
           <div className="flex w-full flex-col items-center gap-6">
-            <h1 className="text-hero text-center font-bold lg:text-7xl">
+            <h1 className="text-hero text-center font-bold text-4xl lg:text-7xl">
               Collaborate in Real Time and Launch Cleaner Apps
             </h1>
             <p className="text-secondary max-w-xl text-center font-medium sm:text-lg md:text-xl">

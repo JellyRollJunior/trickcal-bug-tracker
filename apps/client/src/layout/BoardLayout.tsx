@@ -30,7 +30,7 @@ const BoardLayout = () => {
       <div className="grid min-h-0 grid-cols-1 p-2">
         <Outlet />
       </div>
-      <Background />
+      <Background opacity={0.85} />
     </div>
   );
 };
