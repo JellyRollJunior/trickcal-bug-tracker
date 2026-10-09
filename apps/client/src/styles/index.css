@@ -1,124 +1,202 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Variables */
+:root {
+  /* Site background */
+  --site-bg-image: url('../assets/images/background.jpeg');
+
+  /* Colors */
+  --ivory: #fffff0;
+  --buttercream: #fff4ca;
+  --buttercream-light: #f2e8c0;
+  --buttercream-dark: #e3c97b;
+  --sunflower: #ffdf73;
+  --sunflower-dark: #e6c968;
+  --marigold: #e8a63c;
+
+  --lime-frost: #f5fde8;
+  --lime-frost-dark: #e7f5c6;
+  --pistachio-cream: #eaf7d0;
+  --pistachio-cream-light: #ecf7da;
+  --pistachio-cream-dark: #c7d2b1;
+  --leaf-green: #8cb138;
+  --fern-green: #86bd5e;
+  --jade-green: #45aa6f;
+
+  --indigo-violet: #564ad2;
+  --indigo-violet-light: #675cd7;
+  --indigo-violet-dark: #5246c8;
+
+  --raspberry: #dc4c66;
+  --raspberry-light: #f45471;
+  --raspberry-dark: #e04865;
+
+  --stone-gray: #848580;
+  --stone-gray-dark: #8a8b86;
+}
+
 /* Global Styling */
 :root {
   scroll-behavior: smooth;
+  color: var(--ivory);
 }
 
-/* Colors */
+/* Light mode styling */
 :root {
-  --bg: #fff;
-  --fg: #111;
+  /* Selects */
+  --select-primary-bg: var(--pistachio-cream);
+  --select-primary-border: var(--pistachio-cream-dark);
+  --select-primary-hover: var(--lime-frost);
+
+  /* Text */
+  --text-primary: var(--ivory);
+  --text-secondary: #9ca3af;
+  --text-landing-auth: var(--ivory);
+  --text-hero-start: var(--ivory);
+  --text-hero-mid: rgb(255 255 240 / 90%);
+  --text-hero-end: #d1d5db;
+  --text-board: black;
+
+  /* Blocks */
+  --block-container-primary-bg: var(--pistachio-cream);
+  --block-container-primary-border: var(--pistachio-cream-light);
+
+  --block-primary-bg: var(--lime-frost);
+  --block-primary-border: var(--lime-frost-dark);
+
+  --block-primary-title-bg: var(--jade-green);
+  --block-primary-title-text: var(--ivory);
+
+  --block-primary-label-bg: var(--indigo-violet);
+  --block-primary-label-text: var(--ivory);
+
+  --block-primary-label-secondary-bg: var(--sunflower-dark);
+  --block-primary-label-secondary-text: #000;
+
+  /* Inputs */
+  --input-dark-border: var(--stone-gray);
+
+  /* Buttons */
+  --button-floating-bg: var(--jade-green);
+  --button-floating-hover: var(--fern-green);
+  --button-floating-text: var(--ivory);
+
+  --button-confirm-bg: var(--sunflower);
+  --button-confirm-hover: var(--sunflower-dark);
+  --button-confirm-border: var(--marigold);
+  --button-confirm-text: #000;
+
+  --button-back-bg: var(--buttercream);
+  --button-back-hover: var(--buttercream-light);
+  --button-back-border: var(--buttercream-dark);
+  --button-back-text: black;
+
+  --button-caution-bg: var(--raspberry-light);
+  --button-caution-hover: var(--raspberry);
+  --button-caution-border: var(--raspberry-dark);
+  --button-caution-text: var(--ivory);
+
+  --button-special-bg: var(--indigo-violet);
+  --button-special-hover: var(--indigo-violet-light);
+  --button-special-border: var(--indigo-violet-dark);
+  --button-special-text: var(--ivory);
+
+  --button-lowkey-bg: rgb(107 114 128 / 70%);
+  --button-lowkey-hover: rgb(107 114 128 / 90%);
+  --button-lowkey-text: var(--ivory);
 }
+
 .dark {
-  --bg: #0b0b0f;
-  --fg: #eee;
 }
 
-@theme inline {
-  --color-bg: var(--bg);
-  --color-fg: var(--fg);
-}
-
-@theme {
-  /* white */
-  --color-ivory: #fffff0;
-
-  /* green text */
-  --color-leaf-green: #8cb138;
-
-  /* title bg */
-  --color-jade-green: #45aa6f;
-
-  /* primary block */
-  --color-lime-frost: #f5fde8;
-  --color-lime-frost-dark: #e7f5c6;
-
-  /* primary block container */
-  --color-pistachio-cream: #eaf7d0;
-  --color-pistachio-cream-light: #ecf7da;
-  --color-pistachio-cream-dark: #c7d2b1;
-
-  /* labels */
-  --color-brick-red: #b51711;
-  --color-indigo-violet: #564ad2;
-  --color-indigo-violet-light: #675cd7;
-  --color-indigo-violet-dark: #5246c8;
-
-  /* buttons */
-  --color-sunflower: #ffdf73;
-  --color-sunflower-dark: #e6c968;
-  --color-marigold: #e8a63c;
-
-  --color-button-back: #fff4ca;
-  --color-button-back-hover: #f2e8c0;
-  --color-button-back-border: #e3c97b;
-
-  --color-button-caution: #f45471;
-  --color-button-caution-hover: #dc4c66;
-  --color-button-caution-border: #e04865;
-
-  --color-silver-gray: #acacac;
-  --color-stone-gray: #848580;
-  --color-stone-gray-dark: #8a8b86;
-
-  --color-fern-green: #86bd5e;
-}
-
+/* Site background */
 @utility site-bg {
-  background-image: url('../assets/images/background.jpeg');
+  background-image: var(--site-bg-image);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   background-blend-mode: difference;
 }
 
+/* Selects */
 @utility select-primary {
-  @apply bg-pistachio-cream border-pistachio-cream-dark hover:bg-lime-frost border-2;
+  @apply border-2;
+  background-color: var(--select-primary-bg);
+  border-color: var(--select-primary-border);
+  color: black;
+
+
+  &:hover {
+    background-color: var(--select-primary-hover);
+  }
 }
 
 @utility select-primary-item {
-  @apply bg-pistachio-cream hover:bg-lime-frost;
+  background-color: var(--select-primary-bg);
+
+  &:hover {
+    background-color: var(--select-primary-hover);
+  }
 }
 
 @utility drawer {
-  @apply border-pistachio-cream-dark border-l;
+  border-left: 1px solid var(--select-primary-border);
 }
 
 /* Text */
-@utility text-primary {
-  @apply text-ivory;
-}
-
 @utility text-secondary {
-  @apply text-gray-400;
+  color: var(--text-secondary);
 }
 
 @utility text-hero {
-  @apply from-ivory via-ivory/90 bg-linear-to-b to-gray-300 bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    to bottom,
+    var(--text-hero-start),
+    var(--text-hero-mid),
+    var(--text-hero-end)
+  );
+  background-clip: text;
+  color: transparent;
 }
-
 
 /* Blocks */
 @utility block-container-primary {
-  @apply bg-pistachio-cream border-pistachio-cream-light rounded-md border;
+  background-color: var(--block-container-primary-bg);
+  border: 1px solid var(--block-container-primary-border);
+  border-radius: var(--radius-md);
+  color: black;
 }
 
 @utility block-primary {
-  @apply bg-lime-frost border-lime-frost-dark rounded-md border-2;
+  background-color: var(--block-primary-bg);
+  border: 2px solid var(--block-primary-border);
+  border-radius: var(--radius-md);
 }
 
 @utility block-primary-title {
-  @apply bg-jade-green text-ivory rounded-md text-sm;
+  background-color: var(--block-primary-title-bg);
+  color: var(--block-primary-title-text);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
 }
 
 @utility block-primary-label {
-  @apply bg-indigo-violet text-ivory rounded-lg p-0.5 px-4 text-xs font-semibold;
+  background-color: var(--block-primary-label-bg);
+  color: var(--block-primary-label-text);
+  border-radius: var(--radius-lg);
+  padding: 0.125rem 1rem;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
 @utility block-primary-label-secondary {
-  @apply bg-sunflower-dark rounded-lg p-0.5 px-4 text-xs font-semibold text-black;
+  background-color: var(--block-primary-label-secondary-bg);
+  color: var(--block-primary-label-secondary-text);
+  border-radius: var(--radius-lg);
+  padding: 0.125rem 1rem;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* Inputs */
@@ -127,7 +205,11 @@
 }
 
 @utility input-dark {
-  @apply border-stone-gray w-full rounded-md border py-1 pr-1 pl-2 backdrop-blur-3xl;
+  width: 100%;
+  border: 1px solid var(--input-dark-border);
+  border-radius: var(--radius-md);
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  backdrop-filter: blur(64px);
 }
 
 /* Buttons */
@@ -136,7 +218,13 @@
 }
 
 @utility button-floating {
-  @apply button-transition hover:bg-fern-green bg-jade-green text-ivory;
+  @apply button-transition;
+  background-color: var(--button-floating-bg);
+  color: var(--button-floating-text);
+
+  &:hover {
+    background-color: var(--button-floating-hover);
+  }
 }
 
 @utility button-image {
@@ -148,25 +236,59 @@
 }
 
 @utility button-text-base {
-  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4 shadow-sm text-center;
+  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4 text-center shadow-sm;
 }
 
 @utility button-confirm {
-  @apply bg-sunflower border-marigold hover:bg-sunflower-dark button-text-base text-black;
+  @apply button-text-base;
+  background-color: var(--button-confirm-bg);
+  border-color: var(--button-confirm-border);
+  color: var(--button-confirm-text);
+
+  &:hover {
+    background-color: var(--button-confirm-hover);
+  }
 }
 
 @utility button-back {
-  @apply bg-button-back hover:bg-button-back-hover border-button-back-border button-text-base;
+  @apply button-text-base;
+  background-color: var(--button-back-bg);
+  border-color: var(--button-back-border);
+  color: var(--button-back-text);
+
+  &:hover {
+    background-color: var(--button-back-hover);
+  }
 }
 
 @utility button-caution {
-  @apply border-button-caution-border bg-button-caution hover:bg-button-caution-hover text-ivory;
+  @apply button-text-base;
+  background-color: var(--button-caution-bg);
+  border-color: var(--button-caution-border);
+  color: var(--button-caution-text);
+
+  &:hover {
+    background-color: var(--button-caution-hover);
+  }
 }
 
 @utility button-special {
-  @apply button-text-base bg-indigo-violet border-indigo-violet-dark text-ivory hover:bg-indigo-violet-light;
+  @apply button-text-base;
+  background-color: var(--button-special-bg);
+  border-color: var(--button-special-border);
+  color: var(--button-special-text);
+
+  &:hover {
+    background-color: var(--button-special-hover);
+  }
 }
 
 @utility button-lowkey {
-  @apply button-text-base text-ivory border-none bg-gray-500/70 hover:bg-gray-500/90;
+  @apply button-text-base border-none;
+  background-color: var(--button-lowkey-bg);
+  color: var(--button-lowkey-text);
+
+  &:hover {
+    background-color: var(--button-lowkey-hover);
+  }
 }

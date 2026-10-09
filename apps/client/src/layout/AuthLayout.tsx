@@ -4,7 +4,7 @@ import { Background } from '@/common/components/Background.tsx';
 
 const AuthLayout = () => {
   return (
-    <div className="text-ivory flex min-h-screen w-full flex-col items-center">
+    <div className="flex min-h-screen w-full flex-col items-center">
       <header className="fixed top-0 left-0 flex w-full px-5 py-3 backdrop-blur-xl">
         <p className="text-xl font-bold md:ml-6 lg:ml-12">
           Trickcal Bug Tracker

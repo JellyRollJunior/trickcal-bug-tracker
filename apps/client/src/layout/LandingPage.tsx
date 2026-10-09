@@ -4,7 +4,7 @@ import { Footer } from '@/layout/Footer.tsx';
 
 const LandingPage = () => {
   return (
-    <div className="text-ivory flex min-h-dvh w-full flex-col">
+    <div className="flex min-h-dvh w-full flex-col">
       <nav className="fixed top-0 left-0 flex w-full px-5 py-3 backdrop-blur-xl">
         <p className="text-xl font-bold md:ml-6 lg:ml-12">
           Trickcal Bug Tracker
@@ -20,7 +20,7 @@ const LandingPage = () => {
         {/* Hero */}
         <section className="w-full py-50">
           <div className="flex w-full flex-col items-center gap-6">
-            <h1 className="text-hero text-center font-bold text-4xl lg:text-7xl">
+            <h1 className="text-hero text-center text-4xl font-bold lg:text-7xl">
               Collaborate in Real Time and Launch Cleaner Apps
             </h1>
             <p className="text-secondary max-w-xl text-center font-medium sm:text-lg md:text-xl">

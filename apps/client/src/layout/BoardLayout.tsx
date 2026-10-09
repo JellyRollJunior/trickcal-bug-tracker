@@ -21,7 +21,7 @@ const BoardLayout = () => {
   useBoardsSocketSync();
 
   return (
-    <div className="grid h-dvh w-screen grid-rows-[auto_minmax(0,1fr)] overflow-clip">
+    <div className="grid boards h-dvh w-screen grid-rows-[auto_minmax(0,1fr)] overflow-clip">
       <header className="flex w-full items-center justify-end gap-2 px-2 pt-1.5">
         <BoardsDropdown />
         <ThemeToggle />
@@ -30,7 +30,7 @@ const BoardLayout = () => {
       <div className="grid min-h-0 grid-cols-1 p-2">
         <Outlet />
       </div>
-      <Background opacity={0.85} />
+      <Background opacity={0.9} />
     </div>
   );
 };

@@ -18,7 +18,7 @@ const BoardStartPage = () => {
 
       <div className="text-ivory flex w-full items-center gap-2 p-8">
         <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
-        <p className="mb-1">or</p>
+        <p className="mb-1 text-hero">or</p>
         <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
       </div>
 
