@@ -18,13 +18,17 @@ const SignupForm = () => {
   } = useSignupForm();
 
   return (
-    <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light w-full max-w-md rounded-sm border-2 px-5">
+    <div className="w-full max-w-sm pt-45">
       <form className="flex flex-col" onSubmit={handleSignup}>
-        <label className="mt-3" htmlFor="name">
+        <h2 className="text-center text-xl">
+          Get Started with Trickcal Bug Tracker
+        </h2>
+
+        <label className="mt-6" htmlFor="name">
           Display name
         </label>
         <input
-          className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
+          className="input-dark mt-1 h-8"
           id="username"
           type="text"
           name="username"
@@ -42,7 +46,7 @@ const SignupForm = () => {
           Username
         </label>
         <input
-          className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
+          className="input-dark mt-1 h-8"
           id="username"
           type="text"
           name="username"
@@ -66,7 +70,7 @@ const SignupForm = () => {
           </span>
         )}
         <input
-          className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
+          className="input-dark mt-1 h-8"
           id="password"
           type="password"
           name="password"
@@ -86,7 +90,7 @@ const SignupForm = () => {
           <span className="text-sm text-red-400">Passwords must match</span>
         )}
         <input
-          className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
+          className="input-dark mt-1 h-8"
           id="confirmPassword"
           type="password"
           name="confirmPassword"
@@ -101,17 +105,12 @@ const SignupForm = () => {
         />
 
         {/* Control Buttons */}
-        <div className="my-3 flex justify-around gap-3">
-          <Link className="button-primary block px-3 py-1" to={`/auth/login`}>
-            Cancel
-          </Link>
-          <button
-            className="button-primary px-3 py-1"
-            disabled={isPendingSignup}
-          >
-            Sign up
-          </button>
-        </div>
+        <button className="button-confirm mt-5" disabled={isPendingSignup}>
+          Sign up
+        </button>
+        <Link className="button-lowkey mt-2.5" to={`/auth/login`}>
+          Return to Login
+        </Link>
       </form>
     </div>
   );

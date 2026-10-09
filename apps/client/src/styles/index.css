@@ -147,7 +147,7 @@
 }
 
 @utility button-text-base {
-  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4 shadow-sm;
+  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4 shadow-sm text-center;
 }
 
 @utility button-confirm {
