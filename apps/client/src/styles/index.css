@@ -61,6 +61,7 @@
 
   --color-silver-gray: #acacac;
   --color-stone-gray: #848580;
+  --color-stone-gray-dark: #8a8b86;
 
   --color-fern-green: #86bd5e;
 }
@@ -124,6 +125,10 @@
   @apply block-primary w-full py-1 pr-1 pl-2;
 }
 
+@utility input-dark {
+  @apply border-stone-gray w-full rounded-md border py-1 pr-1 pl-2 backdrop-blur-3xl;
+}
+
 /* Buttons */
 @utility button-transition {
   @apply duration-200 ease-out;
@@ -142,7 +147,7 @@
 }
 
 @utility button-text-base {
-  @apply button-transition shadow-sm rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4;
+  @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4 shadow-sm;
 }
 
 @utility button-confirm {
@@ -162,5 +167,5 @@
 }
 
 @utility button-lowkey {
-  @apply button-text-base bg-silver-gray border-stone-gray hover:bg-stone-gray text-ivory
+  @apply button-text-base text-ivory border-none bg-gray-500/70 hover:bg-gray-500/90;
 }

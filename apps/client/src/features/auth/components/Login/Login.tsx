@@ -1,3 +1,6 @@
+import google_oauth from '@/assets/icons/google_oauth.svg';
+import github_oauth from '@/assets/icons/github_oauth.svg';
+
 import { AUTH_ROUTES_SERVER } from '@trickcal-bug-tracker/shared';
 import { env } from '@/config/env.ts';
 import { LoginForm } from '@/features/auth/components/LoginForm/LoginForm.tsx';
@@ -8,18 +11,32 @@ const GITHUB_AUTH_URI = `${env.serverBaseUrl}${AUTH_ROUTES_SERVER.github}`;
 const Login = () => {
   return (
     <>
-      <LoginForm />
-      <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light mt-5 w-full max-w-sm rounded-sm border-2 px-5 py-2">
-        <div className="flex w-full flex-col items-center gap-1">
-          <div className='flex w-full items-center gap-2'>
-            <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
-            <p className="mb-1">Sign in with</p>
-            <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
-          </div>
-          <a href={GOOGLE_AUTH_URI}>Google</a>
-          <a href={GITHUB_AUTH_URI}>GitHub</a>
-        </div>
+      <div className="flex w-full items-center justify-center pt-50">
+        <LoginForm />
       </div>
+      <section className="mt-6 flex w-full max-w-sm flex-col items-center">
+        <div className="flex w-full items-center gap-2">
+          <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
+          <p className="mb-1">or sign in with</p>
+          <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
+        </div>
+        <div className="mt-4 flex w-full flex-col gap-2">
+          <a
+            className="button-lowkey flex items-center justify-center text-center"
+            href={GOOGLE_AUTH_URI}
+          >
+            <img src={google_oauth} className="" aria-hidden />
+            Google
+          </a>
+          <a
+            className="button-lowkey flex items-center justify-center gap-0.5 py-1 text-center"
+            href={GITHUB_AUTH_URI}
+          >
+            <img src={github_oauth} className="" aria-hidden />
+            GitHub
+          </a>
+        </div>
+      </section>
     </>
   );
 };

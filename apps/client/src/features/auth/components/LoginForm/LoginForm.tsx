@@ -13,13 +13,14 @@ const LoginForm = () => {
   } = useLoginForm();
 
   return (
-    <div className="bg-kommy-hair-white-dark/80 border-kommy-hair-pink-light mt-5 max-w-sm w-full rounded-sm border-2 px-5">
+    <div className="w-full max-w-sm">
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label className="mt-3" htmlFor="username">
+        <h2 className='text-center text-xl'>Log In to Trickcal Bug Tracker</h2>
+        <label className="mt-6" htmlFor="username">
           Username
         </label>
         <input
-          className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
+          className="input-dark mt-1 h-8"
           id="username"
           type="text"
           name="username"
@@ -28,13 +29,16 @@ const LoginForm = () => {
           onChange={(event) => setUsername(event.target.value)}
           required
         />
-
         <label className="mt-3" htmlFor="password">
           Password
         </label>
-        {authError && <span className='text-red-400 text-sm'>The password you entered is incorrect.</span>}
+        {authError && (
+          <span className="text-sm text-red-400">
+            The password you entered is incorrect.
+          </span>
+        )}
         <input
-          className="border-sand-beige mt-1 h-8 w-full rounded-md border-2 pr-1 pl-2"
+          className="input-dark mt-1 h-8"
           id="password"
           type="password"
           name="password"
@@ -43,12 +47,11 @@ const LoginForm = () => {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-
-        <div className="my-3 flex justify-around gap-3">
-          <button className="button-primary px-3 py-1" disabled={isPending}>
+        <div className="mt-5 flex text-center flex-col w-full justify-around gap-2.5">
+          <button className="button-confirm" disabled={isPending}>
             Log in
           </button>
-          <Link className="button-primary block px-3 py-1" to={`/auth/signup`}>
+          <Link className="button-special" to={`/auth/signup`}>
             Sign Up
           </Link>
         </div>
