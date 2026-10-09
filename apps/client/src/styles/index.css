@@ -48,6 +48,7 @@
   --select-primary-bg: var(--pistachio-cream);
   --select-primary-border: var(--pistachio-cream-dark);
   --select-primary-hover: var(--lime-frost);
+  --select-primary-text: black;
 
   /* Text */
   --text-primary: var(--ivory);
@@ -64,15 +65,17 @@
 
   --block-primary-bg: var(--lime-frost);
   --block-primary-border: var(--lime-frost-dark);
+  --block-primary-text: black;
 
   --block-primary-title-bg: var(--jade-green);
+  --block-primary-title-border: none;
   --block-primary-title-text: var(--ivory);
 
   --block-primary-label-bg: var(--indigo-violet);
   --block-primary-label-text: var(--ivory);
 
   --block-primary-label-secondary-bg: var(--sunflower-dark);
-  --block-primary-label-secondary-text: #000;
+  --block-primary-label-secondary-text: black;
 
   /* Inputs */
   --input-dark-border: var(--stone-gray);
@@ -81,6 +84,7 @@
   --button-floating-bg: var(--jade-green);
   --button-floating-hover: var(--fern-green);
   --button-floating-text: var(--ivory);
+  --button-floating-border: var(--jade-green);
 
   --button-confirm-bg: var(--sunflower);
   --button-confirm-hover: var(--sunflower-dark);
@@ -108,6 +112,29 @@
 }
 
 .dark {
+  /* Selects */
+  --select-primary-bg: none;
+  --select-primary-border: var(--stone-gray-dark);
+  --select-primary-hover: var(--lime-frost);
+  --select-primary-text: var(--ivory);
+
+  /* Blocks */
+  --block-container-primary-bg: none;
+  --block-container-primary-border: none;
+
+  --block-primary-bg: none;
+  --block-primary-border: var(--stone-gray-dark);
+  --block-primary-text: var(--ivory);
+
+  --block-primary-title-bg: none;
+  --block-primary-title-border: var(--stone-gray-dark);
+  --block-primary-title-text: var(--ivory);
+
+  /* Buttons */
+  /* --button-floating-bg: none;
+  --button-floating-hover: none;
+  --button-floating-text: var(--ivory);
+  --button-floating-border: var(--stone-gray-dark); */
 }
 
 /* Site background */
@@ -121,23 +148,16 @@
 
 /* Selects */
 @utility select-primary {
-  @apply border-2;
+  @apply dark:backdrop-blur-xl;
   background-color: var(--select-primary-bg);
   border-color: var(--select-primary-border);
-  color: black;
-
-
-  &:hover {
-    background-color: var(--select-primary-hover);
-  }
+  border-width: 2px;
+  color: var(--select-primary-text);
 }
 
 @utility select-primary-item {
   background-color: var(--select-primary-bg);
-
-  &:hover {
-    background-color: var(--select-primary-hover);
-  }
+  color: var(--select-primary-text);
 }
 
 @utility drawer {
@@ -169,15 +189,19 @@
 }
 
 @utility block-primary {
+  @apply dark:backdrop-blur-lg;
   background-color: var(--block-primary-bg);
-  border: 2px solid var(--block-primary-border);
+  border: 1px solid var(--block-primary-border);
   border-radius: var(--radius-md);
+  color: var(--block-primary-text);
 }
 
 @utility block-primary-title {
+  @apply dark:backdrop-blur-lg;
   background-color: var(--block-primary-title-bg);
   color: var(--block-primary-title-text);
   border-radius: var(--radius-md);
+  border: 1px solid var(--block-primary-title-border);
   font-size: var(--text-sm);
 }
 

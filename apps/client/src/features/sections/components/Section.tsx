@@ -60,7 +60,7 @@ const Section = ({
       {/* Section Data & Controls */}
       <div className="block-primary-title flex justify-between gap-1 p-2">
         <h3 className="self-center">{section.name}</h3>
-        <div className="grid h-fit grid-cols-2">
+        <div className="grid h-fit gap-2 grid-cols-2">
           <button
             className="button-image rounded-full"
             onClick={openCreateTicketModal}

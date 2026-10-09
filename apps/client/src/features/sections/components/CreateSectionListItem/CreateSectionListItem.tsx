@@ -40,7 +40,7 @@ const CreateSectionListItem = ({
     <>
       {!isOpen && (
         <button
-          className="button-floating h-fit rounded-md py-2 pr-4 pl-3 text-nowrap"
+          className="button-floating dark:block-primary dark:hover: h-fit rounded-md py-2 pr-4 pl-3 text-nowrap"
           disabled={isPendingCreateSection}
           onClick={openCreateSection}
         >

@@ -16,7 +16,7 @@ const Ticket = ({
   return (
     <li onDragStart={onDragStartHandler} onDragEnd={onDragEndHandler} draggable>
       <Link
-        className="block-primary block px-4 py-3 hover:bg-gray-200"
+        className="block-primary block px-4 py-3 hover:brightness-90"
         to={`/boards/${boardId}/tickets/${ticket.id}`}
         draggable={false}
       >

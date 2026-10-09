@@ -27,7 +27,7 @@ const useTheme = () => {
         applyTheme(theme);
     }, [theme]);
 
-    return { getTheme: getIsCurrentThemeDark, setTheme };
+    return { getIsCurrentThemeDark, setTheme };
 };
 
 export { useTheme };

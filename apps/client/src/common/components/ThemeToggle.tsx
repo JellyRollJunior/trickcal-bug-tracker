@@ -5,10 +5,10 @@ import dark_mode from '@/assets/icons/dark_mode_white.svg';
 import { useTheme } from '@/common/hooks/useTheme.ts';
 
 const ThemeToggle = () => {
-  const { getTheme, setTheme } = useTheme();
+  const { getIsCurrentThemeDark, setTheme } = useTheme();
 
   function toggle() {
-    setTheme(getTheme() ? 'light' : 'dark');
+    setTheme(getIsCurrentThemeDark() ? 'light' : 'dark');
   }
 
   return (
