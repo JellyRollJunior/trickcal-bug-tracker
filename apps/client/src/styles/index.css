@@ -129,12 +129,6 @@
   --block-primary-title-bg: none;
   --block-primary-title-border: var(--stone-gray-dark);
   --block-primary-title-text: var(--ivory);
-
-  /* Buttons */
-  /* --button-floating-bg: none;
-  --button-floating-hover: none;
-  --button-floating-text: var(--ivory);
-  --button-floating-border: var(--stone-gray-dark); */
 }
 
 /* Site background */

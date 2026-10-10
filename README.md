@@ -224,7 +224,6 @@ $ turbo dev
 - Client
     - landing page
         - images
-    - app icon
 
 - rework
 

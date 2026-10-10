@@ -1,3 +1,5 @@
+import kommy from '@/../public/favicon.png';
+
 import { Outlet } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
 import { BoardsDropdown } from '@/features/boards/components/BoardsDropdown.tsx';
@@ -21,8 +23,9 @@ const BoardLayout = () => {
   useBoardsSocketSync();
 
   return (
-    <div className="grid boards h-dvh w-screen grid-rows-[auto_minmax(0,1fr)] ">
+    <div className="boards grid h-dvh w-screen grid-rows-[auto_minmax(0,1fr)]">
       <header className="flex w-full items-center justify-end gap-2 px-2 pt-1.5">
+        <img src={kommy} className="size-8" />
         <BoardsDropdown />
         <ThemeToggle />
         <CreateBoardButton />

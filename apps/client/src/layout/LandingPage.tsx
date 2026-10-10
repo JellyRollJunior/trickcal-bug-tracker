@@ -1,3 +1,5 @@
+import kommy from '@/../public/favicon.png';
+
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
 import { Footer } from '@/layout/Footer.tsx';
@@ -6,9 +8,8 @@ const LandingPage = () => {
   return (
     <div className="flex min-h-dvh w-full flex-col">
       <nav className="fixed top-0 left-0 flex w-full px-5 py-3 backdrop-blur-xl">
-        <p className="text-xl font-bold md:ml-6 lg:ml-12">
-          Trickcal Bug Tracker
-        </p>
+        <img src={kommy} className="size-8 md:ml-6 lg:ml-12" />
+        <p className="mt-0.5 ml-2 text-xl font-bold">Trickcal Bug Tracker</p>
         <Link className="button-confirm ml-auto block" to={'/auth/login'}>
           Login
         </Link>
@@ -18,7 +19,7 @@ const LandingPage = () => {
       </nav>
       <main className="flex-1">
         {/* Hero */}
-        <section className="w-full py-50">
+        <section className="w-full px-3 py-50">
           <div className="flex w-full flex-col items-center gap-6">
             <h1 className="text-hero text-center text-4xl font-bold lg:text-7xl">
               Collaborate in Real Time and Launch Cleaner Apps
