@@ -64,7 +64,7 @@ const TicketView = ({
   const allCollaborators = [board.owner, ...board.collaborators];
 
   return (
-    <article className="block-container-primary flex min-h-0 flex-col overflow-y-auto px-1 py-1.5">
+    <article className="block-container-primary flex min-h-0 flex-1 flex-col px-1 py-1.5">
       {/* Ticket data */}
       {!isEditing && (
         <>
@@ -92,7 +92,7 @@ const TicketView = ({
             </Link>
           </div>
 
-          <main className="block-primary mt-1.5 flex-1 px-4 py-3">
+          <main className="block-primary mt-1.5 min-h-0 flex-1 overflow-y-auto px-4 py-3">
             {/* Summary */}
             <header>
               <h2 className="text-xl font-bold">{ticket.summary}</h2>
