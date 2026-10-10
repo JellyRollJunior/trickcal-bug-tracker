@@ -233,7 +233,6 @@ $ turbo dev
     - bug
         - move ticket to same order bug
         - constant errors on cannot connext to server
-    - ugly scroll bars
     - fail login: Login expired. Please login again.
     - bugs
         - bug: ordering is fucked a bit...

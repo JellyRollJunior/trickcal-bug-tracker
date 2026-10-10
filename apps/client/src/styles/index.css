@@ -40,6 +40,9 @@
 :root {
   scroll-behavior: smooth;
   color: var(--ivory);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--stone-gray-dark) transparent;
 }
 
 /* Light mode styling */
