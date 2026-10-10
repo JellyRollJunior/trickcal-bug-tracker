@@ -30,6 +30,7 @@ Typescript React Express monorepo v2
     - Move ticket on drag
         - drag ticket item to drop areas located in gaps between tickets
     - All actions (create/edit/delete/move) update board in realtime for all viewers
+    - Dark mode & Light mode
 
 - Repository
     - PNPM workspaces monorepo using TurboRepo
@@ -213,10 +214,6 @@ $ turbo dev
 
 - web design
     - disabled button styling
-    - restyle login, signup
-- dark mode
-    - design dark mode
-    - extract image buttons for light/dark mode switching
 - rework drag area
 - add ticket item data
 
@@ -240,7 +237,6 @@ $ turbo dev
     - ugly scroll bars
     - fail login: Login expired. Please login again.
     - bugs
-        - make sections scroll
         - bug: ordering is fucked a bit...
             - ok i found the issue -> I think the drop areas orders are not being updated on ticket move -> therefore we moveone ticket, then
             - i think its a client issue

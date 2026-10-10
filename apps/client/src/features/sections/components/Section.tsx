@@ -6,8 +6,8 @@ import type {
   SectionWithTicketsDto,
   TicketDto,
 } from '@trickcal-bug-tracker/shared';
-import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 import { Fragment, useState, type DragEventHandler } from 'react';
+import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 
 type DropAreaProps = { isDragging: boolean; onDropHandler: DragEventHandler };
 const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
@@ -56,11 +56,11 @@ const Section = ({
   setActiveTicket,
 }: SectionProps) => {
   return (
-    <section className="block-container-primary h-full min-h-0 w-full p-1">
+    <section className="block-container-primary flex h-full min-h-0 w-full flex-col p-1">
       {/* Section Data & Controls */}
       <div className="block-primary-title flex justify-between gap-1 p-2">
         <h3 className="self-center">{section.name}</h3>
-        <div className="grid h-fit gap-2 grid-cols-2">
+        <div className="grid h-fit grid-cols-2 gap-2">
           <button
             className="button-image rounded-full"
             onClick={openCreateTicketModal}
@@ -77,7 +77,7 @@ const Section = ({
       </div>
 
       {/* Section Data */}
-      <ol className="mt-3 flex flex-col gap-0.5">
+      <ol className="mt-3 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
         <DropArea
           isDragging={activeTicket !== null}
           onDropHandler={() => handleMoveTicket(section.id, null)}

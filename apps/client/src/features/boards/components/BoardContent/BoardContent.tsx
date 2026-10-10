@@ -24,32 +24,29 @@ const BoardContent = ({
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   return (
-    <div className="flex h-full min-h-0 w-full flex-1 flex-col overflow-x-auto ">
-      {/* Section List */}
-      <ol className="flex flex-1 gap-3">
-        {board.sections.map((section) => (
-          <div className="max-w-100 min-w-75 flex-1">
-            <Section
-              key={section.id}
-              section={section}
-              openCreateTicketModal={() => openCreateTicket(section.id)}
-              openSectionSettings={() =>
-                openSectionSettings(section.id, section.name)
-              }
-              handleMoveTicket={handleMoveTicket}
-              activeTicket={activeTicket}
-              setActiveTicket={setActiveTicket}
-            />
-          </div>
-        ))}
+    <ol className="flex h-full min-h-0 w-full flex-1 gap-3 overflow-x-auto">
+      {board.sections.map((section) => (
+        <div className="min-h-0 max-w-100 min-w-75 flex-1">
+          <Section
+            key={section.id}
+            section={section}
+            openCreateTicketModal={() => openCreateTicket(section.id)}
+            openSectionSettings={() =>
+              openSectionSettings(section.id, section.name)
+            }
+            handleMoveTicket={handleMoveTicket}
+            activeTicket={activeTicket}
+            setActiveTicket={setActiveTicket}
+          />
+        </div>
+      ))}
 
-        {/* Create Section */}
-        <CreateSectionListItem
-          boardId={board.id}
-          insertAfterSectionId={lastSectionId}
-        />
-      </ol>
-    </div>
+      {/* Create Section */}
+      <CreateSectionListItem
+        boardId={board.id}
+        insertAfterSectionId={lastSectionId}
+      />
+    </ol>
   );
 };
 
