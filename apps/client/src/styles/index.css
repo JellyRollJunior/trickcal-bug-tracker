@@ -112,6 +112,9 @@
   --button-lowkey-bg: rgb(107 114 128 / 70%);
   --button-lowkey-hover: rgb(107 114 128 / 90%);
   --button-lowkey-text: var(--ivory);
+
+  --button-disabled-bg: var(--stone-gray);
+  --button-disabled-border: var(--stone-gray-dark);
 }
 
 .dark {
@@ -250,6 +253,12 @@
 
 @utility button-image {
   @apply button-floating flex items-center justify-center p-1;
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: var(--button-disabled-bg);
+    border-color: var(--button-disabled-border);
+  }
 }
 
 @utility button-image-caution {
@@ -258,6 +267,12 @@
 
 @utility button-text-base {
   @apply button-transition rounded-tl-2xl rounded-tr-lg rounded-br-2xl rounded-bl-lg border p-0.5 px-4 text-center shadow-sm;
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: var(--button-disabled-bg);
+    border-color: var(--button-disabled-border);
+  }
 }
 
 @utility button-confirm {

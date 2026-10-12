@@ -209,11 +209,9 @@ $ turbo dev
     - everytime a state updates, joinRoom is recreated
     - joinRoom is called again each time it is recreated
 - Debugging circular import with vite --debug hmr
- 
+
 ## Current
 
-- web design
-    - disabled button styling
 - rework drag area
 - add ticket item data
 
@@ -224,13 +222,12 @@ $ turbo dev
         - images
 
 - rework
-
     - optimistic updates with tanstack for ticket move
     - loading anim
     - bug
         - move ticket to same order bug
         - constant errors on cannot connext to server
-    - fail login: Login expired. Please login again.
+        - fail login: Login expired. Please login again.
     - bugs
         - bug: ordering is fucked a bit...
             - ok i found the issue -> I think the drop areas orders are not being updated on ticket move -> therefore we moveone ticket, then
@@ -238,7 +235,6 @@ $ turbo dev
 
 - server
     - dont crash on unable to fetch users
-    
 
 ## Improvements
 
