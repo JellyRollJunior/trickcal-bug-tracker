@@ -19,7 +19,7 @@ const useLoginForm = () => {
       {
         onSuccess: (data) => {
           setToken(data.token);
-          navigate('/');
+          navigate('/boards');
         },
         onError: (error) => {
           console.log(error);

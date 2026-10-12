@@ -217,8 +217,6 @@ $ turbo dev
 - rework drag area
 - add ticket item data
 
-- navigate to new board on board creation
-
 ## Todo list
 
 - Client
