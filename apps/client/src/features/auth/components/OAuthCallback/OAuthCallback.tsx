@@ -17,7 +17,7 @@ const OAuthCallback = () => {
 
     if (token) {
       setToken(token);
-      navigate('/', { replace: true });
+      navigate('/boards', { replace: true });
     } else if (!storedToken) {
       navigate('/auth/login?error=oauth', { replace: true });
     }

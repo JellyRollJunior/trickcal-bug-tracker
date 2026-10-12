@@ -45,6 +45,7 @@ const getSectionWithTickets = async ({
             include: {
                 tickets: {
                     include: ticketInclude,
+                    orderBy: { order: 'asc' },
                 },
             },
         });
@@ -112,5 +113,5 @@ export {
     getSectionWithTickets,
     createSection,
     updateSection,
-    deleteSection
+    deleteSection,
 };

@@ -9,17 +9,27 @@ import type {
 import { Fragment, useState, type DragEventHandler } from 'react';
 import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 
-type DropAreaProps = { isDragging: boolean; onDropHandler: DragEventHandler };
-const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
+type DropAreaProps = {
+  isDragging: boolean;
+  onDropHandler: DragEventHandler;
+  debug?: { ticketSummary: TicketDto['summary'] } | false;
+};
+const DropArea = ({
+  isDragging,
+  onDropHandler,
+  debug = false,
+}: DropAreaProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <li
       className="flex h-10 w-full items-center justify-center rounded border border-black bg-gray-300/50"
       style={
-        isVisible
-          ? { opacity: 100, transition: 'all 0.2s ease-in-out' }
-          : { height: 3, opacity: 0, transition: 'all 0.1s ease-in-out' }
+        debug
+          ? {}
+          : isVisible
+            ? { opacity: 100, transition: 'all 0.2s ease-in-out' }
+            : { height: 3, opacity: 0, transition: 'all 0.1s ease-in-out' }
       }
       onDragEnter={() => {
         if (isDragging) setIsVisible(true);
@@ -31,7 +41,7 @@ const DropArea = ({ isDragging, onDropHandler }: DropAreaProps) => {
         setIsVisible(false);
       }}
     >
-      Move here
+      Move here {debug && debug.ticketSummary}
     </li>
   );
 };
@@ -81,6 +91,7 @@ const Section = ({
         <DropArea
           isDragging={activeTicket !== null}
           onDropHandler={() => handleMoveTicket(section.id, null)}
+          // debug={{ ticketSummary: 'top'}}
         />
         {section.tickets.map((ticket) => (
           <Fragment key={ticket.id}>
@@ -92,6 +103,7 @@ const Section = ({
             <DropArea
               isDragging={activeTicket !== null}
               onDropHandler={() => handleMoveTicket(section.id, ticket.id)}
+              // debug={{ ticketSummary: ticket.summary }}
             />
           </Fragment>
         ))}

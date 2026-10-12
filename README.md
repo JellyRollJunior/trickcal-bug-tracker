@@ -228,10 +228,8 @@ $ turbo dev
         - move ticket to same order bug
         - constant errors on cannot connext to server
         - fail login: Login expired. Please login again.
-    - bugs
-        - bug: ordering is fucked a bit...
-            - ok i found the issue -> I think the drop areas orders are not being updated on ticket move -> therefore we moveone ticket, then
-            - i think its a client issue
+            
+    - favicon error
 
 - server
     - dont crash on unable to fetch users
