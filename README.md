@@ -227,7 +227,6 @@ $ turbo dev
 
 - rework
 
-    - error page
     - optimistic updates with tanstack for ticket move
     - loading anim
     - bug
