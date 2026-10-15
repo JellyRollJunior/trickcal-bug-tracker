@@ -214,6 +214,7 @@ $ turbo dev
 
 - rework drag area
 - add ticket item data
+- mobile view
 
 ## Todo list
 
@@ -228,8 +229,6 @@ $ turbo dev
         - move ticket to same order bug
         - constant errors on cannot connext to server
         - fail login: Login expired. Please login again.
-            
-    - favicon error
 
 - server
     - dont crash on unable to fetch users

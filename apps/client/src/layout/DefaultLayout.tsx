@@ -1,4 +1,4 @@
-import kommy from '@/../public/favicon.png';
+import kommy from '@/assets/icons/favicon.png';
 
 import type { ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import kommy from '@/../public/favicon.png';
+import kommy from '@/assets/icons/favicon.png';
 
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
