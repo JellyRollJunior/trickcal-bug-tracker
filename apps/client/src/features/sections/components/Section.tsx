@@ -97,6 +97,7 @@ const Section = ({
           <Fragment key={ticket.id}>
             <Ticket
               ticket={ticket}
+              activeTicketId={activeTicket}
               onDragStartHandler={() => setActiveTicket(ticket.id)}
               onDragEndHandler={() => setActiveTicket(null)}
             />

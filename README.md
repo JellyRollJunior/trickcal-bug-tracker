@@ -232,6 +232,7 @@ $ turbo dev
 
 - server
     - dont crash on unable to fetch users
+    - return boards by last update
 
 ## Improvements
 
