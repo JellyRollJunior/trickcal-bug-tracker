@@ -26,7 +26,7 @@ const BoardContent = ({
   return (
     <ol className="flex h-full min-h-0 w-full flex-1 gap-3 overflow-x-auto">
       {board.sections.map((section) => (
-        <div className="min-h-0 max-w-100 min-w-75 flex-1">
+        <div className="min-h-0 max-w-100 min-w-75 flex-1" key={section.id}>
           <Section
             key={section.id}
             section={section}

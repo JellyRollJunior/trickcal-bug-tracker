@@ -3,7 +3,7 @@ import { useBoard } from '@/features/boards/hooks/useBoard.ts';
 import { usePresenceTracking } from '@/features/boards/hooks/usePresenceTracking.ts';
 import { useBoardSocketSync } from '@/features/boards/hooks/useBoardSocketSync.ts';
 
-const useBoardLayout = (boardId: BoardDto['id']) => {
+const useBoardDataLayer = (boardId: BoardDto['id']) => {
   const {
     data: board,
     isSuccess: isSuccessGetBoard,
@@ -21,4 +21,4 @@ const useBoardLayout = (boardId: BoardDto['id']) => {
   };
 };
 
-export { useBoardLayout };
+export { useBoardDataLayer };

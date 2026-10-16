@@ -1,25 +1,79 @@
-import type { TicketDto } from '@trickcal-bug-tracker/shared';
-import type { DragEventHandler } from 'react';
+import type { SectionDto, TicketDto } from '@trickcal-bug-tracker/shared';
+import { useCallback, type DragEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 type TicketProps = {
   ticket: TicketDto;
+  previousTicketId: TicketDto['id'] | null;
   activeTicketId: TicketDto['id'] | null;
-  onDragStartHandler: DragEventHandler;
-  onDragEndHandler: DragEventHandler;
+  moveTicket: (
+    sectionId: SectionDto['id'],
+    previousTicketId: TicketDto['id'] | null
+  ) => void;
+  setActiveTicket: (ticketId: TicketDto['id'] | null) => void;
 };
 const Ticket = ({
   ticket,
+  previousTicketId,
   activeTicketId,
-  onDragStartHandler,
-  onDragEndHandler,
+  moveTicket,
+  setActiveTicket,
 }: TicketProps) => {
   const { boardId } = useParams();
 
+  const isCursorOnTopHalfOfItem = (event: DragEvent) => {
+    // item halfway point == top + height / 2
+    const item = event.currentTarget.getBoundingClientRect();
+    const cursorY = event.clientY;
+    const itemHalfPoint = item.top + item.height / 2;
+    return cursorY <= itemHalfPoint;
+  };
+
+  const moveDraggedItem = useCallback(
+    (event: DragEvent) => {
+      // validate drag operation
+      // is ticket dragged self below
+      // is ticket dragged self above
+      // is ticket dragged self+1 below
+      // is ticket dragged self-1 above
+
+      if (!activeTicketId) return;
+      if (isCursorOnTopHalfOfItem(event)) {
+        // prev == current + 1
+        moveTicket(ticket.sectionId, previousTicketId);
+        console.log(`moving ${activeTicketId} above ${ticket.summary}`);
+      } else {
+        // prev == current
+        moveTicket(ticket.sectionId, ticket.id);
+        console.log(`moving ${activeTicketId} below ${ticket.summary}`);
+      }
+    },
+    [moveTicket, ticket, previousTicketId, activeTicketId]
+  );
+
+  const handleDragStart = () => {
+    setActiveTicket(ticket.id);
+    console.log(ticket.id);
+  };
+
+  const handleDragOver = (event: DragEvent) => {
+    event.preventDefault();
+  };
+
+  const handleDragEnd = () => {
+    setActiveTicket(null);
+  };
+
+  const handleDrop = (event: DragEvent) => {
+    moveDraggedItem(event);
+  };
+
   return (
     <li
-      onDragStart={onDragStartHandler}
-      onDragEnd={onDragEndHandler}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
       draggable
       style={{
         opacity: ticket.id === activeTicketId ? 0.25 : 1,

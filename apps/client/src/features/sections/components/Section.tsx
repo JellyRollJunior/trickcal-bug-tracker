@@ -6,7 +6,7 @@ import type {
   SectionWithTicketsDto,
   TicketDto,
 } from '@trickcal-bug-tracker/shared';
-import { Fragment, useState, type DragEventHandler } from 'react';
+import { useState, type DragEventHandler } from 'react';
 import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 
 type DropAreaProps = {
@@ -23,13 +23,13 @@ const DropArea = ({
 
   return (
     <li
-      className="flex h-10 w-full items-center justify-center rounded border border-black bg-gray-300/50"
+      className="flex w-full flex-1 h-full items-center justify-center rounded border border-black bg-gray-300/50"
       style={
         debug
           ? {}
           : isVisible
             ? { opacity: 100, transition: 'all 0.2s ease-in-out' }
-            : { height: 3, opacity: 0, transition: 'all 0.1s ease-in-out' }
+            : { opacity: 0, transition: 'all 0.1s ease-in-out' }
       }
       onDragEnter={() => {
         if (isDragging) setIsVisible(true);
@@ -88,26 +88,24 @@ const Section = ({
 
       {/* Section Data */}
       <ol className="mt-3 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
-        <DropArea
-          isDragging={activeTicket !== null}
-          onDropHandler={() => handleMoveTicket(section.id, null)}
-          // debug={{ ticketSummary: 'top'}}
-        />
-        {section.tickets.map((ticket) => (
-          <Fragment key={ticket.id}>
-            <Ticket
-              ticket={ticket}
-              activeTicketId={activeTicket}
-              onDragStartHandler={() => setActiveTicket(ticket.id)}
-              onDragEndHandler={() => setActiveTicket(null)}
-            />
-            <DropArea
-              isDragging={activeTicket !== null}
-              onDropHandler={() => handleMoveTicket(section.id, ticket.id)}
-              // debug={{ ticketSummary: ticket.summary }}
-            />
-          </Fragment>
+        {section.tickets.map((ticket, index) => (
+          <Ticket
+            key={ticket.id}
+            ticket={ticket}
+            previousTicketId={
+              index === 0 ? null : section.tickets[index - 1].id
+            }
+            activeTicketId={activeTicket}
+            moveTicket={handleMoveTicket}
+            setActiveTicket={setActiveTicket}
+          />
         ))}
+        {section.tickets.length === 0 && (
+          <DropArea
+            isDragging={activeTicket !== null}
+            onDropHandler={() => handleMoveTicket(section.id, null)}
+          />
+        )}
       </ol>
     </section>
   );
