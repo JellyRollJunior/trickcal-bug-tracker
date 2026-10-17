@@ -16,8 +16,13 @@ const BoardContent = ({
   openCreateTicket,
   openSectionSettings,
 }: BoardContentProps) => {
-  const { activeTicketId, setActiveTicketId, handleMoveTicket } =
-    useBoardContent(board);
+  const {
+    activeTicketId,
+    setActiveTicketId,
+    dropTarget,
+    setDropTarget,
+    handleMoveTicket,
+  } = useBoardContent(board);
 
   // Create Section List Item
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
@@ -36,6 +41,8 @@ const BoardContent = ({
             handleMoveTicket={handleMoveTicket}
             activeTicketId={activeTicketId}
             setActiveTicketId={setActiveTicketId}
+            dropTarget={dropTarget}
+            setDropTarget={setDropTarget}
           />
         </div>
       ))}

@@ -1,3 +1,4 @@
+import type { DropTarget } from '@/features/boards/components/BoardContent/useBoardContent.ts';
 import type { TicketDto } from '@trickcal-bug-tracker/shared';
 import type { DragEvent, DragEventHandler } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -6,19 +7,19 @@ type TicketProps = {
   ticket: TicketDto;
   activeTicketId: TicketDto['id'] | null;
   onDragStart: DragEventHandler;
-  onDragOver: DragEventHandler;
   onDragEnd: DragEventHandler;
   moveActiveTicketBefore: () => void;
   moveActiveTicketAfter: () => void;
+  setDropTarget: (dropTarget: DropTarget) => void;
 };
 const Ticket = ({
   ticket,
   activeTicketId,
   onDragStart,
-  onDragOver,
   onDragEnd,
   moveActiveTicketBefore,
   moveActiveTicketAfter,
+  setDropTarget,
 }: TicketProps) => {
   const { boardId } = useParams();
 
@@ -38,10 +39,17 @@ const Ticket = ({
     }
   };
 
+  const handleTicketDragOver = (event: DragEvent) => {
+    event.preventDefault();
+    const position = isCursorOnTopHalfOfItem(event) ? 'BEFORE' : 'AFTER';
+    setDropTarget({ ticketId: ticket.id, position });
+    console.log('drag over');
+  };
+
   return (
     <li
       onDragStart={onDragStart}
-      onDragOver={onDragOver}
+      onDragOver={handleTicketDragOver}
       onDrop={moveDraggedItem}
       onDragEnd={onDragEnd}
       draggable

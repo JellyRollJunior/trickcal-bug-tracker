@@ -1,23 +1,28 @@
 import type {
-    BoardDto,
+    BoardWithSectionsAndTicketsDto,
     SectionWithTicketsDto,
     TicketDto,
 } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useMoveTicket } from '@/features/tickets/hooks/useMoveTicket.ts';
 
-const useBoardContent = (board: BoardDto) => {
+type Position = 'BEFORE' | 'AFTER';
+type DropTarget = {
+    ticketId: TicketDto['id'];
+    position: Position;
+} | null;
+const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
+    const { moveTicket } = useMoveTicket();
     const [activeTicketId, setActiveTicketId] = useState<
         TicketDto['id'] | null
     >(null);
-
-    const { moveTicket } = useMoveTicket();
+    const [dropTarget, setDropTarget] = useState<DropTarget>(null);
 
     const handleMoveTicket = (
         toSection: SectionWithTicketsDto,
         targetTicketId: TicketDto['id'] | null,
         beforeTargetTicketId: TicketDto['id'] | null,
-        position: 'BEFORE' | 'AFTER'
+        position: Position
     ) => {
         if (!activeTicketId) return;
         if (activeTicketId === targetTicketId) return;
@@ -36,7 +41,14 @@ const useBoardContent = (board: BoardDto) => {
         }
     };
 
-    return { activeTicketId, setActiveTicketId, handleMoveTicket };
+    return {
+        activeTicketId,
+        setActiveTicketId,
+        dropTarget,
+        setDropTarget,
+        handleMoveTicket,
+    };
 };
 
+export type { Position, DropTarget };
 export { useBoardContent };
