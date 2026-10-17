@@ -2,7 +2,7 @@ import close from '@/assets/icons/close_white.svg';
 import edit from '@/assets/icons/edit_white.svg';
 import trash from '@/assets/icons/trash_white.svg';
 
-import type { BoardDto, TicketDto } from '@trickcal-bug-tracker/shared';
+import { toSentenceCase, type BoardDto, type TicketDto } from '@trickcal-bug-tracker/shared';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -98,10 +98,10 @@ const TicketView = ({
               <h2 className="text-xl font-bold">{ticket.summary}</h2>
               <dd>
                 <span className="block-primary-label-secondary">
-                  {ticket.issueType}
+                  {toSentenceCase(ticket.issueType)}
                 </span>
                 <span className="block-primary-label ml-1">
-                  {ticket.category}
+                  {toSentenceCase(ticket.category)}
                 </span>
               </dd>
             </header>
@@ -118,11 +118,11 @@ const TicketView = ({
                 <div className="grid grid-cols-3">
                   <div className="mt-2">
                     <dt className="font-bold">Priority</dt>
-                    <dd>{ticket.priority}</dd>
+                    <dd>{toSentenceCase(ticket.priority)}</dd>
                   </div>
                   <div className="mt-2">
                     <dt className="font-bold">Severity</dt>
-                    <dd>{ticket.severity}</dd>
+                    <dd>{toSentenceCase(ticket.severity)}</dd>
                   </div>
                   <div className="mt-2">
                     <dt className="font-bold">Reproducible</dt>

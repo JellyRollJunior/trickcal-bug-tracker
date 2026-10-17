@@ -1,6 +1,6 @@
 import type { DropTarget } from '@/features/boards/components/BoardContent/useBoardContent.ts';
-import type { TicketDto } from '@trickcal-bug-tracker/shared';
 import type { DragEvent, DragEventHandler } from 'react';
+import { type TicketDto, toSentenceCase } from '@trickcal-bug-tracker/shared';
 import { Link, useParams } from 'react-router-dom';
 
 type TicketProps = {
@@ -70,9 +70,11 @@ const Ticket = ({
         <h4 className="font-semibold">{ticket.summary}</h4>
         <div className="mt-1 ml-auto w-fit">
           <span className="block-primary-label-secondary">
-            {ticket.issueType}
+            {toSentenceCase(ticket.issueType)}
           </span>
-          <span className="block-primary-label ml-1">{ticket.category}</span>
+          <span className="block-primary-label ml-1">
+            {toSentenceCase(ticket.category)}
+          </span>
         </div>
       </Link>
     </li>

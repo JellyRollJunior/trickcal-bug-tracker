@@ -212,12 +212,6 @@ $ turbo dev
 
 ## Current
 
-- rework drag area
-    - reject item dragged on itself
-    - validate drag orders
-    - live reorder preview
-
-- add ticket item data
 - mobile view
 
 ## Todo list
