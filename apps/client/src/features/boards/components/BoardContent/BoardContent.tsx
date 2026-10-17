@@ -17,8 +17,8 @@ const BoardContent = ({
   openSectionSettings,
 }: BoardContentProps) => {
   const {
-    activeTicketId,
-    setActiveTicketId,
+    activeTicket,
+    setActiveTicket,
     dropTarget,
     setDropTarget,
     handleMoveTicket,
@@ -39,8 +39,8 @@ const BoardContent = ({
               openSectionSettings(section.id, section.name)
             }
             handleMoveTicket={handleMoveTicket}
-            activeTicketId={activeTicketId}
-            setActiveTicketId={setActiveTicketId}
+            activeTicket={activeTicket}
+            setActiveTicket={setActiveTicket}
             dropTarget={dropTarget}
             setDropTarget={setDropTarget}
           />

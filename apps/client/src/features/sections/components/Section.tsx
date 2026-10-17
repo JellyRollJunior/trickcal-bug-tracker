@@ -16,7 +16,7 @@ import {
   type DragEvent,
   type DragEventHandler,
 } from 'react';
-import { Ticket } from '@/features/tickets/components/Ticket.tsx';
+import { Ticket, TicketGhost } from '@/features/tickets/components/Ticket.tsx';
 
 type DropAreaProps = {
   isDragging: boolean;
@@ -28,7 +28,7 @@ const DropArea = ({ isDragging, onDragOver, onDrop }: DropAreaProps) => {
 
   return (
     <li
-      className="flex h-full w-full flex-1 items-center justify-center rounded border border-gray-400/50 bg-gray-300/50"
+      className="flex h-full w-full flex-1 items-center justify-center rounded border border-gray-400/50 bg-gray-300/50 opacity-60"
       style={
         isVisible
           ? { opacity: 70, transition: 'all 0.2s ease-in-out' }
@@ -49,14 +49,6 @@ const DropArea = ({ isDragging, onDragOver, onDrop }: DropAreaProps) => {
   );
 };
 
-const TicketGhost = () => {
-  return (
-    <div className="flex h-fit w-full items-center justify-center rounded border border-gray-400/50 bg-gray-300/50 px-2 py-1">
-      Move here
-    </div>
-  );
-};
-
 type SectionProps = {
   section: SectionWithTicketsDto;
   openCreateTicketModal: () => void;
@@ -67,8 +59,8 @@ type SectionProps = {
     beforeTargetTicketId: TicketDto['id'] | null,
     position: Position
   ) => void;
-  activeTicketId: TicketDto['id'] | null;
-  setActiveTicketId: (ticketId: TicketDto['id'] | null) => void;
+  activeTicket: TicketDto | null;
+  setActiveTicket: (ticketId: TicketDto | null) => void;
   dropTarget: DropTarget;
   setDropTarget: (dropTarget: DropTarget) => void;
 };
@@ -77,18 +69,18 @@ const Section = ({
   openCreateTicketModal,
   openSectionSettings,
   handleMoveTicket,
-  activeTicketId,
-  setActiveTicketId,
+  activeTicket,
+  setActiveTicket,
   dropTarget,
   setDropTarget,
 }: SectionProps) => {
-  const handleTicketDragStart = (ticketId: TicketDto['id']) => {
-    setActiveTicketId(ticketId);
-    console.log(ticketId);
+  const handleTicketDragStart = (ticket: TicketDto) => {
+    setActiveTicket(ticket);
+    console.log(ticket.id);
   };
 
   const handleTicketDragEnd = () => {
-    setActiveTicketId(null);
+    setActiveTicket(null);
     setDropTarget(null);
     console.log('drag end');
   };
@@ -145,30 +137,34 @@ const Section = ({
       </div>
 
       {/* Section Data */}
-      <ol className="mt-3 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
+      <ol className="mt-3 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
         {section.tickets.map((ticket, index) => (
           <Fragment key={ticket.id}>
-            {activeTicketId !== ticket.id &&
+            {activeTicket?.id !== ticket.id &&
               dropTarget?.ticketId === ticket.id &&
-              dropTarget.position === 'BEFORE' && <TicketGhost />}
+              dropTarget.position === 'BEFORE' && (
+                <TicketGhost ticket={activeTicket} />
+              )}
             <Ticket
               ticket={ticket}
-              activeTicketId={activeTicketId}
-              onDragStart={() => handleTicketDragStart(ticket.id)}
+              activeTicketId={activeTicket?.id ?? null}
+              onDragStart={() => handleTicketDragStart(ticket)}
               onDragEnd={handleTicketDragEnd}
               moveActiveTicketBefore={() => moveTicketBefore(ticket.id, index)}
               moveActiveTicketAfter={() => moveTicketAfter(ticket.id, index)}
               setDropTarget={setDropTarget}
             />
-            {activeTicketId !== ticket.id &&
+            {activeTicket?.id !== ticket.id &&
               dropTarget?.ticketId === ticket.id &&
-              dropTarget.position === 'AFTER' && <TicketGhost />}
+              dropTarget.position === 'AFTER' && (
+                <TicketGhost ticket={activeTicket} />
+              )}
           </Fragment>
         ))}
         {section.tickets.length === 0 && (
           <DropArea
             key={section.id}
-            isDragging={activeTicketId !== null}
+            isDragging={activeTicket !== null}
             onDragOver={(e) => handleEmptySectionDragOver(e, section.id)}
             onDrop={handleEmptySectionDrop}
           />

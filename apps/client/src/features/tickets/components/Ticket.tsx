@@ -79,4 +79,25 @@ const Ticket = ({
   );
 };
 
-export { Ticket };
+type TicketGhostProps = {
+  ticket: TicketDto | null;
+};
+const TicketGhost = ({ ticket }: TicketGhostProps) => {
+  if (ticket == null) return;
+  return (
+    <li
+      className="block-primary block border-gray-400/50 bg-gray-300/50 px-4 py-3 opacity-60"
+      draggable={false}
+    >
+      <h4 className="font-semibold">{ticket.summary}</h4>
+      <div className="mt-1 ml-auto w-fit">
+        <span className="block-primary-label-secondary">
+          {ticket.issueType}
+        </span>
+        <span className="block-primary-label ml-1">{ticket.category}</span>
+      </div>
+    </li>
+  );
+};
+
+export { Ticket, TicketGhost };

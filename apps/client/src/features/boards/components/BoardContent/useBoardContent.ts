@@ -15,9 +15,7 @@ type DropTarget = {
 } | null;
 const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
     const { moveTicket } = useMoveTicket();
-    const [activeTicketId, setActiveTicketId] = useState<
-        TicketDto['id'] | null
-    >(null);
+    const [activeTicket, setActiveTicket] = useState<TicketDto | null>(null);
     const [dropTarget, setDropTarget] = useState<DropTarget>(null);
 
     const handleMoveTicket = (
@@ -26,26 +24,26 @@ const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
         beforeTargetTicketId: TicketDto['id'] | null,
         position: Position
     ) => {
-        if (!activeTicketId) return;
-        if (activeTicketId === targetTicketId) return;
+        if (!activeTicket) return;
+        if (activeTicket.id === targetTicketId) return;
 
         if (position === 'AFTER') {
-            moveTicket(activeTicketId, toSection.id, board.id, targetTicketId);
-            console.log(`Moving ${activeTicketId} after ${targetTicketId}`);
+            moveTicket(activeTicket.id, toSection.id, board.id, targetTicketId);
+            console.log(`Moving ${activeTicket.id} after ${targetTicketId}`);
         } else if (position === 'BEFORE') {
             moveTicket(
-                activeTicketId,
+                activeTicket.id,
                 toSection.id,
                 board.id,
                 beforeTargetTicketId
             );
-            console.log(`Moving ${activeTicketId} before ${targetTicketId}`);
+            console.log(`Moving ${activeTicket.id} before ${targetTicketId}`);
         }
     };
 
     return {
-        activeTicketId,
-        setActiveTicketId,
+        activeTicket,
+        setActiveTicket,
         dropTarget,
         setDropTarget,
         handleMoveTicket,
