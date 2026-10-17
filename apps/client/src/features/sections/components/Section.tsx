@@ -10,44 +10,9 @@ import type {
   DropTarget,
   Position,
 } from '@/features/boards/components/BoardContent/useBoardContent.ts';
-import {
-  Fragment,
-  useState,
-  type DragEvent,
-  type DragEventHandler,
-} from 'react';
+import { Fragment, type DragEvent } from 'react';
 import { Ticket, TicketGhost } from '@/features/tickets/components/Ticket.tsx';
-
-type DropAreaProps = {
-  isDragging: boolean;
-  onDragOver: DragEventHandler;
-  onDrop: DragEventHandler;
-};
-const DropArea = ({ isDragging, onDragOver, onDrop }: DropAreaProps) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  return (
-    <li
-      className="flex h-full w-full flex-1 items-center justify-center rounded border border-gray-400/50 bg-gray-300/50 opacity-60"
-      style={
-        isVisible
-          ? { opacity: 70, transition: 'all 0.2s ease-in-out' }
-          : { opacity: 0, transition: 'all 0.1s ease-in-out' }
-      }
-      onDragEnter={() => {
-        if (isDragging) setIsVisible(true);
-      }}
-      onDragLeave={() => setIsVisible(false)}
-      onDragOver={onDragOver}
-      onDrop={(e) => {
-        onDrop(e);
-        setIsVisible(false);
-      }}
-    >
-      Move here
-    </li>
-  );
-};
+import { EmptySectionDropArea } from '@/features/sections/components/EmptySectionDropArea.tsx';
 
 type SectionProps = {
   section: SectionWithTicketsDto;
@@ -74,17 +39,16 @@ const Section = ({
   dropTarget,
   setDropTarget,
 }: SectionProps) => {
+  /* Ticket drag handlers */
   const handleTicketDragStart = (ticket: TicketDto) => {
     setActiveTicket(ticket);
     console.log(ticket.id);
   };
-
   const handleTicketDragEnd = () => {
     setActiveTicket(null);
     setDropTarget(null);
     console.log('drag end');
   };
-
   const moveTicketBefore = (ticketId: TicketDto['id'], ticketIndex: number) => {
     handleMoveTicket(
       section,
@@ -93,7 +57,6 @@ const Section = ({
       'BEFORE'
     );
   };
-
   const moveTicketAfter = (ticketId: TicketDto['id'], ticketIndex: number) => {
     handleMoveTicket(
       section,
@@ -103,14 +66,17 @@ const Section = ({
     );
   };
 
+  /* Empty section drag handlers */
   const handleEmptySectionDragOver = (
     event: DragEvent,
     sectionId: SectionDto['id']
   ) => {
     event.preventDefault();
+    if (dropTarget?.sectionId === sectionId && dropTarget.ticketId === null) {
+      return;
+    }
     setDropTarget({ sectionId, ticketId: null, position: 'BEFORE' });
   };
-
   const handleEmptySectionDrop = () => {
     handleMoveTicket(section, null, null, 'BEFORE');
   };
@@ -162,11 +128,12 @@ const Section = ({
           </Fragment>
         ))}
         {section.tickets.length === 0 && (
-          <DropArea
+          <EmptySectionDropArea
             key={section.id}
             isDragging={activeTicket !== null}
             onDragOver={(e) => handleEmptySectionDragOver(e, section.id)}
             onDrop={handleEmptySectionDrop}
+            ticket={activeTicket}
           />
         )}
       </ol>

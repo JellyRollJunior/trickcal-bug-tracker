@@ -86,7 +86,7 @@ const TicketGhost = ({ ticket }: TicketGhostProps) => {
   if (ticket == null) return;
   return (
     <li
-      className="block-primary block border-gray-400/50 bg-gray-300/50 px-4 py-3 opacity-60"
+      className="block-primary pointer-events-none block border-gray-400/50 bg-gray-300/50 px-4 py-3 opacity-60"
       draggable={false}
     >
       <h4 className="font-semibold">{ticket.summary}</h4>
