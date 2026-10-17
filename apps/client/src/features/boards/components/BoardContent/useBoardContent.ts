@@ -1,30 +1,42 @@
 import type {
     BoardDto,
-    SectionDto,
+    SectionWithTicketsDto,
     TicketDto,
 } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useMoveTicket } from '@/features/tickets/hooks/useMoveTicket.ts';
 
-const useBoardContent = (boardId: BoardDto['id']) => {
-    const [activeTicket, setActiveTicket] = useState<TicketDto['id'] | null>(null);
+const useBoardContent = (board: BoardDto) => {
+    const [activeTicketId, setActiveTicketId] = useState<
+        TicketDto['id'] | null
+    >(null);
 
     const { moveTicket } = useMoveTicket();
 
     const handleMoveTicket = (
-        sectionId: SectionDto['id'],
-        previousTicketId: TicketDto['id'] | null
+        toSection: SectionWithTicketsDto,
+        targetTicketId: TicketDto['id'] | null,
+        beforeTargetTicketId: TicketDto['id'] | null,
+        position: 'BEFORE' | 'AFTER'
     ) => {
-        if (!activeTicket) return;
+        if (!activeTicketId) return;
+        if (activeTicketId === targetTicketId) return;
 
-        // disallow move below self
-        if (activeTicket === previousTicketId) return
-        // TODO: disallow move below ticket (self + 1)
-
-        moveTicket(activeTicket, sectionId, boardId, previousTicketId);
+        if (position === 'AFTER') {
+            moveTicket(activeTicketId, toSection.id, board.id, targetTicketId);
+            console.log(`Moving ${activeTicketId} after ${targetTicketId}`);
+        } else if (position === 'BEFORE') {
+            moveTicket(
+                activeTicketId,
+                toSection.id,
+                board.id,
+                beforeTargetTicketId
+            );
+            console.log(`Moving ${activeTicketId} before ${targetTicketId}`);
+        }
     };
 
-    return { activeTicket, setActiveTicket, handleMoveTicket };
+    return { activeTicketId, setActiveTicketId, handleMoveTicket };
 };
 
 export { useBoardContent };

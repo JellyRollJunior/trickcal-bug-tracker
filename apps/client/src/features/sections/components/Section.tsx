@@ -2,11 +2,10 @@ import add from '@/assets/icons/add_white.svg';
 import settings from '@/assets/icons/settings_white.svg';
 
 import type {
-  SectionDto,
   SectionWithTicketsDto,
   TicketDto,
 } from '@trickcal-bug-tracker/shared';
-import { useState, type DragEventHandler } from 'react';
+import { useState, type DragEvent, type DragEventHandler } from 'react';
 import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 
 type DropAreaProps = {
@@ -23,7 +22,7 @@ const DropArea = ({
 
   return (
     <li
-      className="flex w-full flex-1 h-full items-center justify-center rounded border border-black bg-gray-300/50"
+      className="flex h-full w-full flex-1 items-center justify-center rounded border border-black bg-gray-300/50"
       style={
         debug
           ? {}
@@ -51,20 +50,48 @@ type SectionProps = {
   openCreateTicketModal: () => void;
   openSectionSettings: () => void;
   handleMoveTicket: (
-    sectionId: SectionDto['id'],
-    previousTicketId: TicketDto['id'] | null
+    toSection: SectionWithTicketsDto,
+    targetTicketId: TicketDto['id'] | null,
+    beforeTargetTicketId: TicketDto['id'] | null,
+    position: 'BEFORE' | 'AFTER'
   ) => void;
-  activeTicket: TicketDto['id'] | null;
-  setActiveTicket: (ticketId: TicketDto['id'] | null) => void;
+  activeTicketId: TicketDto['id'] | null;
+  setActiveTicketId: (ticketId: TicketDto['id'] | null) => void;
 };
 const Section = ({
   section,
   openCreateTicketModal,
   openSectionSettings,
   handleMoveTicket,
-  activeTicket,
-  setActiveTicket,
+  activeTicketId,
+  setActiveTicketId,
 }: SectionProps) => {
+  /* Ticket drag event handlers */
+  const handleTicketDragStart = (ticketId: TicketDto['id']) => {
+    setActiveTicketId(ticketId);
+    console.log(ticketId);
+  };
+  const handleTicketDragOver = (event: DragEvent) => {
+    event.preventDefault();
+  };
+  const handleTicketDragEnd = () => setActiveTicketId(null);
+  const moveTicketBefore = (ticketId: TicketDto['id'], ticketIndex: number) => {
+    handleMoveTicket(
+      section,
+      ticketId,
+      ticketIndex === 0 ? null : section.tickets[ticketIndex - 1].id,
+      'BEFORE'
+    );
+  };
+  const moveTicketAfter = (ticketId: TicketDto['id'], ticketIndex: number) => {
+    handleMoveTicket(
+      section,
+      ticketId,
+      ticketIndex === 0 ? null : section.tickets[ticketIndex - 1].id,
+      'AFTER'
+    );
+  };
+
   return (
     <section className="block-container-primary flex h-full min-h-0 w-full flex-col p-1">
       {/* Section Data & Controls */}
@@ -92,18 +119,20 @@ const Section = ({
           <Ticket
             key={ticket.id}
             ticket={ticket}
-            previousTicketId={
-              index === 0 ? null : section.tickets[index - 1].id
-            }
-            activeTicketId={activeTicket}
-            moveTicket={handleMoveTicket}
-            setActiveTicket={setActiveTicket}
+            activeTicketId={activeTicketId}
+            onDragStart={() => handleTicketDragStart(ticket.id)}
+            onDragOver={handleTicketDragOver}
+            onDragEnd={handleTicketDragEnd}
+            moveActiveTicketBefore={() => moveTicketBefore(ticket.id, index)}
+            moveActiveTicketAfter={() => moveTicketAfter(ticket.id, index)}
           />
         ))}
         {section.tickets.length === 0 && (
           <DropArea
-            isDragging={activeTicket !== null}
-            onDropHandler={() => handleMoveTicket(section.id, null)}
+            isDragging={activeTicketId !== null}
+            onDropHandler={() =>
+              handleMoveTicket(section, null, null, 'BEFORE')
+            }
           />
         )}
       </ol>
