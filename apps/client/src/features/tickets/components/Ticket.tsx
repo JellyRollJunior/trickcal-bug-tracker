@@ -41,8 +41,13 @@ const Ticket = ({
 
   const handleTicketDragOver = (event: DragEvent) => {
     event.preventDefault();
+    if (ticket.id === activeTicketId) return;
     const position = isCursorOnTopHalfOfItem(event) ? 'BEFORE' : 'AFTER';
-    setDropTarget({ ticketId: ticket.id, position });
+    setDropTarget({
+      sectionId: ticket.sectionId,
+      ticketId: ticket.id,
+      position,
+    });
     console.log('drag over');
   };
 

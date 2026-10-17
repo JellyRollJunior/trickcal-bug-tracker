@@ -2,6 +2,7 @@ import add from '@/assets/icons/add_white.svg';
 import settings from '@/assets/icons/settings_white.svg';
 
 import type {
+  SectionDto,
   SectionWithTicketsDto,
   TicketDto,
 } from '@trickcal-bug-tracker/shared';
@@ -9,42 +10,41 @@ import type {
   DropTarget,
   Position,
 } from '@/features/boards/components/BoardContent/useBoardContent.ts';
-import { Fragment, useState, type DragEventHandler } from 'react';
+import {
+  Fragment,
+  useState,
+  type DragEvent,
+  type DragEventHandler,
+} from 'react';
 import { Ticket } from '@/features/tickets/components/Ticket.tsx';
 
 type DropAreaProps = {
   isDragging: boolean;
-  onDropHandler: DragEventHandler;
-  debug?: { ticketSummary: TicketDto['summary'] } | false;
+  onDragOver: DragEventHandler;
+  onDrop: DragEventHandler;
 };
-const DropArea = ({
-  isDragging,
-  onDropHandler,
-  debug = false,
-}: DropAreaProps) => {
+const DropArea = ({ isDragging, onDragOver, onDrop }: DropAreaProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <li
-      className="flex h-full w-full flex-1 items-center justify-center rounded border border-black bg-gray-300/50"
+      className="flex h-full w-full flex-1 items-center justify-center rounded border border-gray-400/50 bg-gray-300/50"
       style={
-        debug
-          ? {}
-          : isVisible
-            ? { opacity: 70, transition: 'all 0.2s ease-in-out' }
-            : { opacity: 0, transition: 'all 0.1s ease-in-out' }
+        isVisible
+          ? { opacity: 70, transition: 'all 0.2s ease-in-out' }
+          : { opacity: 0, transition: 'all 0.1s ease-in-out' }
       }
       onDragEnter={() => {
         if (isDragging) setIsVisible(true);
       }}
       onDragLeave={() => setIsVisible(false)}
-      onDragOver={(event) => event.preventDefault()}
-      onDrop={(event) => {
-        onDropHandler(event);
+      onDragOver={onDragOver}
+      onDrop={(e) => {
+        onDrop(e);
         setIsVisible(false);
       }}
     >
-      Move here {debug && debug.ticketSummary}
+      Move here
     </li>
   );
 };
@@ -111,6 +111,18 @@ const Section = ({
     );
   };
 
+  const handleEmptySectionDragOver = (
+    event: DragEvent,
+    sectionId: SectionDto['id']
+  ) => {
+    event.preventDefault();
+    setDropTarget({ sectionId, ticketId: null, position: 'BEFORE' });
+  };
+
+  const handleEmptySectionDrop = () => {
+    handleMoveTicket(section, null, null, 'BEFORE');
+  };
+
   return (
     <section className="block-container-primary flex h-full min-h-0 w-full flex-col p-1">
       {/* Section Data & Controls */}
@@ -136,7 +148,8 @@ const Section = ({
       <ol className="mt-3 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
         {section.tickets.map((ticket, index) => (
           <Fragment key={ticket.id}>
-            {dropTarget?.ticketId === ticket.id &&
+            {activeTicketId !== ticket.id &&
+              dropTarget?.ticketId === ticket.id &&
               dropTarget.position === 'BEFORE' && <TicketGhost />}
             <Ticket
               ticket={ticket}
@@ -147,16 +160,17 @@ const Section = ({
               moveActiveTicketAfter={() => moveTicketAfter(ticket.id, index)}
               setDropTarget={setDropTarget}
             />
-            {dropTarget?.ticketId === ticket.id &&
+            {activeTicketId !== ticket.id &&
+              dropTarget?.ticketId === ticket.id &&
               dropTarget.position === 'AFTER' && <TicketGhost />}
           </Fragment>
         ))}
         {section.tickets.length === 0 && (
           <DropArea
+            key={section.id}
             isDragging={activeTicketId !== null}
-            onDropHandler={() =>
-              handleMoveTicket(section, null, null, 'BEFORE')
-            }
+            onDragOver={(e) => handleEmptySectionDragOver(e, section.id)}
+            onDrop={handleEmptySectionDrop}
           />
         )}
       </ol>

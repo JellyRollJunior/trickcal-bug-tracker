@@ -1,5 +1,6 @@
 import type {
     BoardWithSectionsAndTicketsDto,
+    SectionDto,
     SectionWithTicketsDto,
     TicketDto,
 } from '@trickcal-bug-tracker/shared';
@@ -8,7 +9,8 @@ import { useMoveTicket } from '@/features/tickets/hooks/useMoveTicket.ts';
 
 type Position = 'BEFORE' | 'AFTER';
 type DropTarget = {
-    ticketId: TicketDto['id'];
+    sectionId: SectionDto['id'];
+    ticketId: TicketDto['id'] | null;
     position: Position;
 } | null;
 const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
