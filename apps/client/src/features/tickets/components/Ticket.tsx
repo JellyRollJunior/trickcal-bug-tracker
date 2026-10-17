@@ -48,7 +48,6 @@ const Ticket = ({
       ticketId: ticket.id,
       position,
     });
-    console.log('drag over');
   };
 
   return (
@@ -83,13 +82,20 @@ const Ticket = ({
 
 type TicketGhostProps = {
   ticket: TicketDto | null;
+  isPointerEventsDisabled?: boolean;
+  onDrop?: DragEventHandler;
 };
-const TicketGhost = ({ ticket }: TicketGhostProps) => {
+const TicketGhost = ({
+  ticket,
+  onDrop,
+  isPointerEventsDisabled = false,
+}: TicketGhostProps) => {
   if (ticket == null) return;
   return (
     <li
-      className="block-primary pointer-events-none block border-gray-400/50 bg-gray-300/50 px-4 py-3 opacity-60"
-      draggable={false}
+      className={`block-primary block border-gray-400/50 bg-gray-300/50 px-4 py-3 opacity-60 ${isPointerEventsDisabled && 'pointer-events-none'}`}
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={onDrop ? onDrop : () => {}}
     >
       <h4 className="font-semibold">{ticket.summary}</h4>
       <div className="mt-1 ml-auto w-fit">

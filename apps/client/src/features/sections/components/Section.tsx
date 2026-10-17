@@ -47,7 +47,6 @@ const Section = ({
   const handleTicketDragEnd = () => {
     setActiveTicket(null);
     setDropTarget(null);
-    console.log('drag end');
   };
   const moveTicketBefore = (ticketId: TicketDto['id'], ticketIndex: number) => {
     handleMoveTicket(
@@ -109,7 +108,12 @@ const Section = ({
             {activeTicket?.id !== ticket.id &&
               dropTarget?.ticketId === ticket.id &&
               dropTarget.position === 'BEFORE' && (
-                <TicketGhost ticket={activeTicket} />
+                <TicketGhost
+                  ticket={activeTicket}
+                  onDrop={() => {
+                    moveTicketBefore(ticket.id, index);
+                  }}
+                />
               )}
             <Ticket
               ticket={ticket}
@@ -123,7 +127,10 @@ const Section = ({
             {activeTicket?.id !== ticket.id &&
               dropTarget?.ticketId === ticket.id &&
               dropTarget.position === 'AFTER' && (
-                <TicketGhost ticket={activeTicket} />
+                <TicketGhost
+                  ticket={activeTicket}
+                  onDrop={() => moveTicketAfter(ticket.id, index)}
+                />
               )}
           </Fragment>
         ))}

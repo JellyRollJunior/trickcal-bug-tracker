@@ -217,14 +217,12 @@ $ turbo dev
 ## Todo list
 
 - Client
-    - landing page
-        - images
+    - landing page images
 
 - rework
     - optimistic updates with tanstack for ticket move
     - loading anim
     - bug
-        - move ticket to same order bug
         - constant errors on cannot connext to server
         - fail login: Login expired. Please login again.
 

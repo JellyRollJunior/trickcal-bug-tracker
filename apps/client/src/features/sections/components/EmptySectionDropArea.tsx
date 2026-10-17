@@ -34,7 +34,9 @@ const EmptySectionDropArea = ({
         setIsVisible(false);
       }}
     >
-      {isVisible && <TicketGhost ticket={ticket} />}
+      {isVisible && (
+        <TicketGhost ticket={ticket} isPointerEventsDisabled={true} />
+      )}
     </li>
   );
 };
