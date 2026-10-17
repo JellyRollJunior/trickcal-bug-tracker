@@ -11,6 +11,7 @@ type TicketProps = {
   moveActiveTicketBefore: () => void;
   moveActiveTicketAfter: () => void;
   setDropTarget: (dropTarget: DropTarget) => void;
+  isPendingMove: boolean;
 };
 const Ticket = ({
   ticket,
@@ -20,6 +21,7 @@ const Ticket = ({
   moveActiveTicketBefore,
   moveActiveTicketAfter,
   setDropTarget,
+  isPendingMove,
 }: TicketProps) => {
   const { boardId } = useParams();
 
@@ -58,7 +60,7 @@ const Ticket = ({
       onDragEnd={onDragEnd}
       draggable
       style={{
-        opacity: ticket.id === activeTicketId ? 0.25 : 1,
+        opacity: ticket.id === activeTicketId || isPendingMove ? 0.25 : 1,
       }}
     >
       <Link
@@ -92,7 +94,7 @@ const TicketGhost = ({
 }: TicketGhostProps) => {
   if (ticket == null) return;
   return (
-    <li
+    <div
       className={`block-primary block border-gray-400/50 bg-gray-300/50 px-4 py-3 opacity-60 ${isPointerEventsDisabled && 'pointer-events-none'}`}
       onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop ? onDrop : () => {}}
@@ -104,7 +106,7 @@ const TicketGhost = ({
         </span>
         <span className="block-primary-label ml-1">{ticket.category}</span>
       </div>
-    </li>
+    </div>
   );
 };
 

@@ -220,8 +220,12 @@ $ turbo dev
     - landing page images
 
 - rework
-    - optimistic updates with tanstack for ticket move
     - loading anim
+        - loading animation
+        - board dropdown
+        - board -> sections
+        - board -> ticketview
+        - form confirm buttons
     - bug
         - constant errors on cannot connext to server
         - fail login: Login expired. Please login again.

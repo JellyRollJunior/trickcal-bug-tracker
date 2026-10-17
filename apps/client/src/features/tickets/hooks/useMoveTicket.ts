@@ -4,7 +4,7 @@ import type {
     SocketBaseResponse,
     TicketDto,
 } from '@trickcal-bug-tracker/shared';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSocket } from '@/context/socket/useSocket.ts';
@@ -14,6 +14,7 @@ import { resolveError } from '@/lib/resolveError.ts';
 const useMoveTicket = () => {
     const { socket, isConnected } = useSocket();
     const queryClient = useQueryClient();
+    const [isPending, setIsPending] = useState<TicketDto['id'] | null>(null);
 
     const moveTicket = useCallback(
         (
@@ -23,18 +24,23 @@ const useMoveTicket = () => {
             previousTicketId: TicketDto['id'] | null,
         ) => {
             if (!isConnected || !socket) return;
-
+            
+            setIsPending(ticketId);
             socket.emit(
                 'ticket:move',
                 { ticketId, sectionId, previousTicketId },
                 (response: SocketBaseResponse) => {
+                    setIsPending(null);
                     try {
                         if (!response.success && response.error) {
-                            return resolveError(response.error);
+                            resolveError(response.error);
+                            return;
                         }
-                        toast(`ticket: ${ticketId} moved to section: ${sectionId}`)
+                        toast(`ticket: ${ticketId} moved to section: ${sectionId}`);
                         queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
                     } catch (error) {
+                        console.log('rollback')
+                        queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
                         handleError(error);
                     }
                 }
@@ -43,7 +49,7 @@ const useMoveTicket = () => {
         [socket, isConnected, queryClient]
     );
 
-    return { moveTicket }
+    return { moveTicket, isPending }
 };
 
 export { useMoveTicket }
