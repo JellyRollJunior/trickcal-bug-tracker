@@ -50,7 +50,7 @@ const BoardsDropdown = () => {
                   <li key={board.id} onClick={toggleDropdown}>
                     <Link
                       to={`/boards/${board.id}`}
-                      className="select-primary-item block px-3 py-2 hover:brightness-95"
+                      className="select-primary-item block px-3 py-2"
                     >
                       {board.name}
                     </Link>

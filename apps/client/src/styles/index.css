@@ -126,7 +126,7 @@
   /* Selects */
   --select-primary-bg: none;
   --select-primary-border: var(--stone-gray-dark);
-  --select-primary-hover: var(--lime-frost);
+  --select-primary-hover: var(--stone-gray);
   --select-primary-text: var(--ivory);
 
   /* Blocks */
@@ -167,6 +167,10 @@
 @utility select-primary-item {
   background-color: var(--select-primary-bg);
   color: var(--select-primary-text);
+
+  &:hover {
+    background-color: var(--select-primary-hover);
+  }
 }
 
 @utility drawer {

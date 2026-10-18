@@ -225,9 +225,6 @@ $ turbo dev
     - fail login: Login expired. Please login again.
     - dont show ticket ghosts on current + 1 (before) && current - 1 (after)
     - drawer triggers scrollbar (on desktop scroll)
-    - darkmode 
-        - drawer
-        - board dropdown
 
 - server
     - dont crash on unable to fetch users
