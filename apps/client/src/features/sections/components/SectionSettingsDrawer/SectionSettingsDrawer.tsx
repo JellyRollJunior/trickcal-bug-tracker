@@ -38,11 +38,11 @@ const SectionSettingsDrawer = ({
       open={open}
       closeDrawer={closeDrawer}
       reset={reset}
-      title={'Board settings'}
+      title={'Section settings'}
     >
       {/* Delete Section */}
       <button
-        className="button-caution mt-1 w-full rounded-md py-1 text-sm"
+        className="button-caution mt-2 w-full rounded-md py-1 text-sm"
         onClick={openDeleteSection}
         disabled={isPendingDeleteSection || isPendingPatchSection}
       >
@@ -69,8 +69,8 @@ const SectionSettingsDrawer = ({
           required
         />
         <SpinnerButton
-          className="button-caution disable:bg-gray-300 mt-2"
-          title="Remove collaborator"
+          className="button-confirm mt-2"
+          title="Save changes"
           isDisabled={isPendingDeleteSection || isPendingPatchSection}
           isLoading={isPendingPatchSection}
         />

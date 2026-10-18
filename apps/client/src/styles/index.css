@@ -170,6 +170,7 @@
 }
 
 @utility drawer {
+  @apply backdrop-blur-3xl;
   border-left: 1px solid var(--select-primary-border);
 }
 

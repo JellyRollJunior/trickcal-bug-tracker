@@ -39,7 +39,7 @@ const Drawer = ({ closeDrawer, reset, title, children }: DrawerProps) => {
       animate={{ translateX: 0, opacity: 1 }}
       exit={{ translateX: '100%', opacity: 0 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
-      className="block-container-primary drawer absolute top-0 right-0 h-full min-w-1/3 p-1 overflow-y-auto"
+      className="block-container-primary drawer absolute top-0 z-10 right-0 h-full min-w-1/3 p-1 overflow-y-auto"
     >
       <div className="block-primary-title flex items-center justify-between p-1.5">
         <h3 className="w-full font-bold">{title}</h3>

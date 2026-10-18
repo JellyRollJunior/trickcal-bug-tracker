@@ -224,7 +224,7 @@ $ turbo dev
     - constant errors on cannot connext to server
     - fail login: Login expired. Please login again.
     - dont show ticket ghosts on current + 1 (before) && current - 1 (after)
-    - drawer triggers scrollbar
+    - drawer triggers scrollbar (on desktop scroll)
     - darkmode 
         - drawer
         - board dropdown
@@ -232,6 +232,9 @@ $ turbo dev
 - server
     - dont crash on unable to fetch users
     - return boards by last update
+
+- logout
+- auto go to /boards on token auth success
 
 ## Improvements
 
