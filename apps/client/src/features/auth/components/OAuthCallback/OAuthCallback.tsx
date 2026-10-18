@@ -2,6 +2,7 @@ import kommyShocked from '@/assets/icons/kommy-shocked.png';
 
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { useAuth } from '@/context/auth/useAuth.ts';
 import { Spinner } from '@/common/components/Spinner.tsx';
 
@@ -21,7 +22,8 @@ const OAuthCallback = () => {
       setToken(token);
       navigate('/boards', { replace: true });
     } else if (!storedToken) {
-      navigate('/auth/login?error=oauth', { replace: true });
+      toast.error('Unable to login with OAuth');
+      navigate(`/auth/login`, { replace: true });
     }
   }, [setToken, navigate, storedToken]);
 

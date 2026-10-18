@@ -218,7 +218,6 @@ $ turbo dev
 
 - Client
     - landing page images
-    - error=oauth login route
 
 - bug
     - constant errors on cannot connext to server
