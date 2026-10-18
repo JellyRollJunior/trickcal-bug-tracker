@@ -12,7 +12,7 @@ const handleError = (error: unknown) => {
         if (currentPath !== '/auth/login') {
             window.location.replace('/auth/login')
         }
-        toast.error('Login expired. Please login again.');
+        toast.error('Unable to validate login');
     } else if (error instanceof ValidationError) {
         // Convert validation errors to [errorFieldName: errorDescription, ...]
         const validationErrorsStringified = Object.keys(
