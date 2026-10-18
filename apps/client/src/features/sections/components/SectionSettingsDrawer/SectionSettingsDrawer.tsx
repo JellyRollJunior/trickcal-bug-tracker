@@ -84,6 +84,7 @@ const SectionSettingsDrawer = ({
         title="Remove Section"
         message="Are you sure you want to remove section?"
         submitActionLabel="Remove section"
+        isLoading={isPendingDeleteSection}
       />
     </Drawer>
   );

@@ -5,7 +5,7 @@ import type {
 } from '@trickcal-bug-tracker/shared';
 import type { SubmitEvent } from 'react';
 import type { useTicketFormStates } from '@/features/tickets/components/TicketForm/useTicketFormStates.ts';
-import { ConfirmButton } from '@/common/components/ConfirmButton.tsx';
+import { SpinnerButton } from '@/common/components/Spinnerbutton';
 
 type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 
@@ -181,7 +181,7 @@ const TicketForm = ({
         >
           Cancel
         </button>
-        <ConfirmButton
+        <SpinnerButton
           title={submitButtonText}
           isDisabled={isDisabled}
           isLoading={isLoading}

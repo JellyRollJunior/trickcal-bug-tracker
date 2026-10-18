@@ -236,6 +236,7 @@ $ turbo dev
     - drawer triggers scrollbar
     - darkmode drawer
     - move confirm button to end
+    - on board delete -> redirected to landing page
 
 - server
     - dont crash on unable to fetch users

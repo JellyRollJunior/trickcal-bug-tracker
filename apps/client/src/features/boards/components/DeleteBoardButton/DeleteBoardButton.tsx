@@ -31,6 +31,7 @@ const DeleteBoardButton = ({ boardId }: DeleteBoardButtonProps) => {
         title="Delete Board"
         message={`Are you sure you want to delete the board?\n All sections and tickets will also be deleted.`}
         submitActionLabel="Delete"
+        isLoading={isPendingDeleteBoard}
       />
     </>
   );

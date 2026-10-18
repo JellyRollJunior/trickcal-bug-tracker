@@ -163,6 +163,7 @@ const TicketView = ({
             title="Remove Ticket"
             message="Are you sure you want to remove ticket?"
             submitActionLabel="Remove ticket"
+            isLoading={isPendingDeleteTicket}
           />
         </>
       )}
