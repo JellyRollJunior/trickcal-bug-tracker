@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBoards } from '@/features/boards/hooks/useBoards.ts';
+import { Spinner } from '@/common/components/Spinner.tsx';
 
 const BoardsDropdown = () => {
   const { data, isSuccess, isPending } = useBoards();
@@ -20,13 +21,21 @@ const BoardsDropdown = () => {
         >
           <div className="flex">
             <div className="flex-1">Select board</div>
-            <img className="block dark:hidden" src={arrow_drop_down} aria-hidden={true} />
-            <img className="hidden dark:block " src={arrow_drop_down_white} aria-hidden={true} />
+            <img
+              className="block dark:hidden"
+              src={arrow_drop_down}
+              aria-hidden={true}
+            />
+            <img
+              className="hidden dark:block"
+              src={arrow_drop_down_white}
+              aria-hidden={true}
+            />
           </div>
         </button>
 
         <AnimatePresence>
-          {isOpen && isSuccess && !isPending && (
+          {isOpen && (
             <motion.ul
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
@@ -34,16 +43,33 @@ const BoardsDropdown = () => {
               transition={{ duration: 0.2, ease: 'easeOut' }}
               className="select-primary absolute z-10 w-full overflow-hidden rounded-b-md border-t-0"
             >
-              {data.map((board) => (
-                <li key={board.id} onClick={toggleDropdown}>
-                  <Link
-                    to={`/boards/${board.id}`}
-                    className="select-primary-item block px-3 py-2 hover:brightness-95"
-                  >
-                    {board.name}
-                  </Link>
+              {/* Show boards */}
+              {isSuccess &&
+                !isPending &&
+                data.map((board) => (
+                  <li key={board.id} onClick={toggleDropdown}>
+                    <Link
+                      to={`/boards/${board.id}`}
+                      className="select-primary-item block px-3 py-2 hover:brightness-95"
+                    >
+                      {board.name}
+                    </Link>
+                  </li>
+                ))}
+
+              {/* No boards */}
+              {isSuccess && !isPending && data.length == 0 && (
+                <li className="flex p-2" onClick={toggleDropdown}>
+                  No boards yet
                 </li>
-              ))}
+              )}
+
+              {/* Loading */}
+              {isPending && (
+                <li className="flex p-2" onClick={toggleDropdown}>
+                  <Spinner />
+                </li>
+              )}
             </motion.ul>
           )}
         </AnimatePresence>
