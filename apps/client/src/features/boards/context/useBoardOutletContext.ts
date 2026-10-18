@@ -3,8 +3,9 @@ import type { usePresenceTracking } from '@/features/boards/hooks/usePresenceTra
 import { useOutletContext } from 'react-router-dom';
 
 type BoardOutletContext = {
-    board: BoardWithSectionsAndTicketsDto;
-    viewerList: ReturnType<typeof usePresenceTracking>['viewerList'];
+    board: BoardWithSectionsAndTicketsDto | null;
+    isPendingGetBoard: boolean;
+    viewerList: ReturnType<typeof usePresenceTracking>['viewerList'] | null;
 };
 
 const useBoardOutletContext = () => {

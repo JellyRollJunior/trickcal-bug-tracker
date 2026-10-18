@@ -15,9 +15,11 @@ type BoardDataLayerProps = { boardId: BoardDto['id'] };
 const BoardDataLayer = ({ boardId }: BoardDataLayerProps) => {
   const { board, isPendingGetBoard, viewerList } = useBoardDataLayer(boardId);
 
-  if (isPendingGetBoard || !board) return <h3>Loading...</h3>;
-
-  const context: BoardOutletContext = { board, viewerList };
+  const context: BoardOutletContext = {
+    board: board ?? null,
+    isPendingGetBoard,
+    viewerList,
+  };
 
   return <Outlet context={context} />;
 };

@@ -157,10 +157,10 @@
 
 /* Selects */
 @utility select-primary {
-  @apply dark:backdrop-blur-xl;
+  @apply dark:backdrop-blur-xl shadow-xl;
   background-color: var(--select-primary-bg);
   border-color: var(--select-primary-border);
-  border-width: 2px;
+  border-width: 1px;
   color: var(--select-primary-text);
 }
 
