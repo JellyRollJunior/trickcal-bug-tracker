@@ -1,4 +1,5 @@
 import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
+import { SpinnerButton } from '@/common/components/Spinnerbutton.tsx';
 import { useDeleteCollaboratorForm } from '@/features/boards/components/DeleteCollaboratorForm/useDeleteCollaboratorForm.ts';
 
 const DeleteCollaboratorForm = ({
@@ -43,12 +44,12 @@ const DeleteCollaboratorForm = ({
           </option>
         ))}
       </select>
-      <button
-        className="button-caution button-text-base mt-2 px-3 py-1 disabled:bg-gray-300"
-        disabled={isPendingDeleteCollaborator || isDisabled}
-      >
-        Remove collaborator
-      </button>
+      <SpinnerButton
+        className="button-caution disable:bg-gray-300 mt-2"
+        title="Remove collaborator"
+        isDisabled={isPendingDeleteCollaborator || isDisabled}
+        isLoading={isPendingDeleteCollaborator}
+      />
     </form>
   );
 };

@@ -3,6 +3,7 @@ import add from '@/assets/icons/add_white.svg';
 import { useState } from 'react';
 import { Modal } from '@/common/components/Modal.tsx';
 import { useCreateBoardButton } from '@/features/boards/components/CreateBoardButton/useCreateBoardButton.ts';
+import { SpinnerButton } from '@/common/components/Spinnerbutton';
 
 const CreateBoardButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,9 +57,12 @@ const CreateBoardButton = () => {
               onChange={(event) => setDescription(event.target.value)}
               required={true}
             />
-            <button className="button-confirm mt-2" disabled={isPendingCreateBoard}>
-              Create board
-            </button>
+            <SpinnerButton
+              className="button-confirm mt-2 ml-auto block"
+              title="Create board"
+              isDisabled={isPendingCreateBoard}
+              isLoading={isPendingCreateBoard}
+            />
           </form>
         </Modal>
       )}

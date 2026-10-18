@@ -221,9 +221,6 @@ $ turbo dev
 
 - rework
     - loading anim
-        - loading spinner
-            - confirm button
-
         - oauth callback page (kitty kat scared animation)
         - board dropdown
         - board -> sections

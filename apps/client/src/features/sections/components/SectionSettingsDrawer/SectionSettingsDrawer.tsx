@@ -2,7 +2,8 @@ import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useSectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/useSectionSettingsDrawer.ts';
 import { CautionModal } from '@/common/components/CautionModal.tsx';
-import { Drawer } from '@/common/components/Drawer';
+import { Drawer } from '@/common/components/Drawer.tsx';
+import { SpinnerButton } from '@/common/components/Spinnerbutton.tsx';
 
 type SectionSettingsDrawerProps = {
   open: boolean;
@@ -67,12 +68,12 @@ const SectionSettingsDrawer = ({
           onChange={(event) => setNewName(event.target.value)}
           required
         />
-        <button
-          className="button-confirm mt-2"
-          disabled={isPendingDeleteSection || isPendingPatchSection}
-        >
-          Save changes
-        </button>
+        <SpinnerButton
+          className="button-caution disable:bg-gray-300 mt-2"
+          title="Remove collaborator"
+          isDisabled={isPendingDeleteSection || isPendingPatchSection}
+          isLoading={isPendingPatchSection}
+        />
       </form>
 
       {/* Delete Section Modal */}

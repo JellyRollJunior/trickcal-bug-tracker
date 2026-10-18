@@ -1,5 +1,6 @@
 import type { BoardDto, UserDto } from '@trickcal-bug-tracker/shared';
 import { useAddCollaboratorForm } from '@/features/boards/components/AddCollaboratorForm/useAddCollaboratorForm.ts';
+import { SpinnerButton } from '@/common/components/Spinnerbutton.tsx';
 
 const AddCollaboratorForm = ({
   boardId,
@@ -17,7 +18,10 @@ const AddCollaboratorForm = ({
   } = useAddCollaboratorForm(boardId);
 
   return (
-    <form className="block-primary mt-2 px-3 py-2" onSubmit={handlePostCollaborator}>
+    <form
+      className="block-primary mt-2 px-3 py-2"
+      onSubmit={handlePostCollaborator}
+    >
       <label className="lock font-semibold" htmlFor="newCollaborator">
         Add collaborator
       </label>
@@ -40,12 +44,12 @@ const AddCollaboratorForm = ({
             </option>
           ))}
       </select>
-      <button
+      <SpinnerButton
         className="button-confirm mt-3"
-        disabled={isPendingPostCollaborator || isDisabled}
-      >
-        Add collaborator
-      </button>
+        title="Add collaborator"
+        isDisabled={isPendingPostCollaborator || isDisabled}
+        isLoading={isPendingPostCollaborator}
+      />
     </form>
   );
 };

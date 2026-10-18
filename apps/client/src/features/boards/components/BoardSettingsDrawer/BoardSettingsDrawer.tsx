@@ -4,6 +4,7 @@ import { useBoardSettingsDrawer } from '@/features/boards/components/BoardSettin
 import { AddCollaboratorForm } from '@/features/boards/components/AddCollaboratorForm/AddCollaboratorForm.tsx';
 import { DeleteCollaboratorForm } from '@/features/boards/components/DeleteCollaboratorForm/DeleteCollaboratorForm.tsx';
 import { DeleteBoardButton } from '@/features/boards/components/DeleteBoardButton/DeleteBoardButton.tsx';
+import { SpinnerButton } from '@/common/components/Spinnerbutton.tsx';
 
 type BoardSettingsDrawerProps = {
   open: boolean;
@@ -82,9 +83,12 @@ const BoardSettingsDrawer = ({
           value={newDescription}
           onChange={(event) => setNewDescription(event.target.value)}
         />
-        <button className="button-confirm mt-2" disabled={isPendingPatchBoard}>
-          Save changes
-        </button>
+        <SpinnerButton
+          className="button-confirm mt-2"
+          title="Save changes"
+          isDisabled={isPendingPatchBoard}
+          isLoading={isPendingPatchBoard}
+        />
       </form>
 
       {isOwner && (

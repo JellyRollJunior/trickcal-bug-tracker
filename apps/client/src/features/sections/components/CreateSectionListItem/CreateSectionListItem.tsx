@@ -1,6 +1,7 @@
 import type { BoardDto, SectionDto } from '@trickcal-bug-tracker/shared';
 import { useEffect, useRef, useState } from 'react';
 import { useCreateSectionListItem } from '@/features/sections/components/CreateSectionListItem/useCreateSectionListItem.ts';
+import { SpinnerButton } from '@/common/components/Spinnerbutton.tsx';
 
 type CreateSectionListItemProps = {
   boardId: BoardDto['id'];
@@ -75,12 +76,11 @@ const CreateSectionListItem = ({
             >
               Cancel
             </button>
-            <button
-              className="button-confirm"
-              disabled={isPendingCreateSection}
-            >
-              Create
-            </button>
+            <SpinnerButton
+              title="Create"
+              isDisabled={isPendingCreateSection}
+              isLoading={isPendingCreateSection}
+            />
           </div>
         </form>
       )}
