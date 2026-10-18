@@ -13,7 +13,7 @@ const ErrorDisplay = ({ title, message }: ErrorDisplayProps) => {
     <div className="w-full px-3 py-50">
       <div className="flex w-full flex-col items-center">
         <img src={kommyShocked} className="size-32" />
-        <h1 className="text-hero text-center mt-3 text-4xl font-bold lg:text-7xl">
+        <h1 className="text-hero mt-3 text-center text-4xl font-bold lg:text-7xl">
           {title}
         </h1>
         <p className="text-secondary mt-3 max-w-xl text-center font-medium sm:text-lg md:text-xl">

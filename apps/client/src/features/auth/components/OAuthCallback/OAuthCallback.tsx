@@ -1,7 +1,9 @@
+import kommyShocked from '@/assets/icons/kommy-shocked.png';
+
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LoadingAnimation } from '@/common/components/LoadingAnimation.tsx';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth/useAuth.ts';
+import { Spinner } from '@/common/components/Spinner.tsx';
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ const OAuthCallback = () => {
   useEffect(() => {
     if (handled.current) return;
     handled.current = true;
-    
+
     const params = new URLSearchParams(window.location.hash.slice(1));
     const token = params.get('token');
 
@@ -23,7 +25,18 @@ const OAuthCallback = () => {
     }
   }, [setToken, navigate, storedToken]);
 
-  return <LoadingAnimation />;
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3 py-50">
+      <img src={kommyShocked} className="size-32" />
+      <div className="flex items-center gap-3">
+        <Spinner />
+        Authorizing...
+      </div>
+      <Link className="button-special" to={'/auth/login'}>
+        Taking a while? Return to login
+      </Link>
+    </div>
+  );
 };
 
 export { OAuthCallback };

@@ -218,10 +218,7 @@ $ turbo dev
 
 - Client
     - landing page images
-
-- rework
-    - loading anim
-        - oauth callback page (kitty kat scared animation)
+    - error=oauth login route
 
 - bug
     - constant errors on cannot connext to server
@@ -231,7 +228,6 @@ $ turbo dev
     - darkmode 
         - drawer
         - board dropdown
-    - move confirm button to end
     - on board delete -> redirected to landing page
 
 - server
