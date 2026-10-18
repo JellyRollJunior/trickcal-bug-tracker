@@ -223,7 +223,6 @@ $ turbo dev
 - bug
     - constant errors on cannot connext to server
     - fail login: Login expired. Please login again.
-    - dont show ticket ghosts on current + 1 (before) && current - 1 (after)
     - drawer triggers scrollbar (on desktop scroll)
 
 - server

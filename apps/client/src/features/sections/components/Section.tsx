@@ -39,7 +39,7 @@ const Section = ({
   setActiveTicket,
   dropTarget,
   setDropTarget,
-  isPendingMoveTicketId
+  isPendingMoveTicketId,
 }: SectionProps) => {
   /* Ticket drag handlers */
   const handleTicketDragStart = (ticket: TicketDto) => {
@@ -82,6 +82,36 @@ const Section = ({
     handleMoveTicket(section, null, null, 'BEFORE');
   };
 
+  const validateShowingTicketGhost = (
+    currentTicketId: TicketDto['id'],
+    currentTicketIndex: number,
+    activeTicketId: TicketDto['id'] | null,
+    dropTarget: DropTarget,
+    sectionTickets: TicketDto[],
+    position: Position
+  ) => {
+    if (!activeTicketId) return false;
+    const isTargetMe = dropTarget?.ticketId === currentTicketId;
+    const isDraggingOnSelf = dropTarget?.ticketId === activeTicketId;
+    const isTargetOnMyPosition = dropTarget?.position === position;
+
+    const isBeforeTheActiveTicketAndPostionBefore =
+      currentTicketIndex > 0 &&
+      sectionTickets[currentTicketIndex - 1].id === activeTicketId &&
+      position === 'BEFORE';
+    const isAfterTheActiveTicketAndPositionAfter =
+      currentTicketIndex < sectionTickets.length - 1 &&
+      sectionTickets[currentTicketIndex + 1].id === activeTicketId &&
+      position === 'AFTER';
+    return (
+      isTargetMe &&
+      !isDraggingOnSelf &&
+      isTargetOnMyPosition &&
+      !isBeforeTheActiveTicketAndPostionBefore &&
+      !isAfterTheActiveTicketAndPositionAfter
+    );
+  };
+
   return (
     <section className="block-container-primary flex h-full min-h-0 w-full flex-col p-1">
       {/* Section Data & Controls */}
@@ -107,16 +137,19 @@ const Section = ({
       <ol className="mt-3 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
         {section.tickets.map((ticket, index) => (
           <Fragment key={ticket.id}>
-            {activeTicket?.id !== ticket.id &&
-              dropTarget?.ticketId === ticket.id &&
-              dropTarget.position === 'BEFORE' && (
-                <TicketGhost
-                  ticket={activeTicket}
-                  onDrop={() => {
-                    moveTicketBefore(ticket.id, index);
-                  }}
-                />
-              )}
+            {validateShowingTicketGhost(
+              ticket.id,
+              index,
+              activeTicket?.id ?? null,
+              dropTarget,
+              section.tickets,
+              'BEFORE'
+            ) && (
+              <TicketGhost
+                ticket={activeTicket}
+                onDrop={() => moveTicketBefore(ticket.id, index)}
+              />
+            )}
             <Ticket
               ticket={ticket}
               activeTicketId={activeTicket?.id ?? null}
@@ -127,14 +160,19 @@ const Section = ({
               setDropTarget={setDropTarget}
               isPendingMove={ticket.id === isPendingMoveTicketId}
             />
-            {activeTicket?.id !== ticket.id &&
-              dropTarget?.ticketId === ticket.id &&
-              dropTarget.position === 'AFTER' && (
-                <TicketGhost
-                  ticket={activeTicket}
-                  onDrop={() => moveTicketAfter(ticket.id, index)}
-                />
-              )}
+            {validateShowingTicketGhost(
+              ticket.id,
+              index,
+              activeTicket?.id ?? null,
+              dropTarget,
+              section.tickets,
+              'AFTER'
+            ) && (
+              <TicketGhost
+                ticket={activeTicket}
+                onDrop={() => moveTicketAfter(ticket.id, index)}
+              />
+            )}
           </Fragment>
         ))}
         {section.tickets.length === 0 && (
