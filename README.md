@@ -228,7 +228,6 @@ $ turbo dev
     - darkmode 
         - drawer
         - board dropdown
-    - on board delete -> redirected to landing page
 
 - server
     - dont crash on unable to fetch users

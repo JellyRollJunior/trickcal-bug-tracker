@@ -9,7 +9,7 @@ const useDeleteBoard = () => {
     return useMutation({
         mutationFn: deleteBoard,
         onSuccess: () => {
-            navigate('/');
+            navigate('/boards');
             queryClient.invalidateQueries({ queryKey: ['boards'] });
         },
     });
