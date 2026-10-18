@@ -6,9 +6,10 @@ import { BoardHeader } from '@/features/boards/components/BoardHeader/BoardHeade
 import { BoardContent } from '@/features/boards/components/BoardContent/BoardContent.tsx';
 import { CreateTicketModal } from '@/features/tickets/components/CreateTicketModal/CreateTicketModal.tsx';
 import { SectionSettingsDrawer } from '@/features/sections/components/SectionSettingsDrawer/SectionSettingsDrawer.tsx';
+import { Spinner } from '@/common/components/Spinner.tsx';
 
 const Board = () => {
-  const { board, isPendingGetBoard, viewerList } = useBoardOutletContext();
+  const { board, viewerList } = useBoardOutletContext();
 
   // Create Ticket Modal
   const [createTicketSectionId, setCreateTicketSectionId] = useState<
@@ -36,11 +37,17 @@ const Board = () => {
       <BoardHeader board={board} viewerList={viewerList} />
 
       <main className="flex min-h-0 flex-1">
-        <BoardContent
-          board={board}
-          openCreateTicket={openCreateTicket}
-          openSectionSettings={openSectionSettings}
-        />
+        {board ? (
+          <BoardContent
+            board={board}
+            openCreateTicket={openCreateTicket}
+            openSectionSettings={openSectionSettings}
+          />
+        ) : (
+          <div className="block-container-primary flex h-full min-h-0 w-full items-center justify-center">
+            <Spinner className="h-10 w-10 border-2" />
+          </div>
+        )}
       </main>
 
       {/* Modals + Drawers */}

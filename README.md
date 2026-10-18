@@ -222,9 +222,6 @@ $ turbo dev
 - rework
     - loading anim
         - oauth callback page (kitty kat scared animation)
-        - board -> sections
-        - board -> ticketview
-        - form confirm buttons
 
 - bug
     - constant errors on cannot connext to server
