@@ -5,6 +5,7 @@ import type {
 } from '@trickcal-bug-tracker/shared';
 import type { SubmitEvent } from 'react';
 import type { useTicketFormStates } from '@/features/tickets/components/TicketForm/useTicketFormStates.ts';
+import { ConfirmButton } from '@/common/components/ConfirmButton.tsx';
 
 type TicketPayload = z.infer<typeof postTicketsRequestBodySchema>;
 
@@ -16,6 +17,7 @@ type TicketForm = {
   isDisabled: boolean;
   isRequired?: boolean;
   submitButtonText?: string;
+  isLoading?: boolean;
 };
 const TicketForm = ({
   ticketFormStates,
@@ -25,6 +27,7 @@ const TicketForm = ({
   isDisabled,
   isRequired = true,
   submitButtonText = 'create',
+  isLoading = false,
 }: TicketForm) => {
   const {
     summary,
@@ -178,9 +181,11 @@ const TicketForm = ({
         >
           Cancel
         </button>
-        <button className="button-confirm" disabled={isDisabled}>
-          {submitButtonText}
-        </button>
+        <ConfirmButton
+          title={submitButtonText}
+          isDisabled={isDisabled}
+          isLoading={isLoading}
+        />
       </div>
     </form>
   );

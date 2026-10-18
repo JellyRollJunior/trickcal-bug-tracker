@@ -35,6 +35,7 @@ const CreateTicketModal = ({
           closeModal();
         }}
         isDisabled={isPendingCreateTicket}
+        isLoading={isPendingCreateTicket}
         submitButtonText="Create ticket"
       />
     </Modal>
