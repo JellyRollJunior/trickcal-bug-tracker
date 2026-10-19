@@ -8,9 +8,9 @@ const getClientOauthRedirectURL = (token: string) => {
     return `${env.client_uri}${AUTH_ROUTES_CLIENT.authCallback}#token=${token}`;
 };
 
-const getLoginRedirectURL = () => {
+const getLoginRedirectURL = (errorCode: string) => {
     const url = new URL(AUTH_ROUTES_CLIENT.loginRedirect, env.client_uri);
-    url.searchParams.set('error', ERROR_REDIRECT_CODES.oauth);
+    url.searchParams.set('error', errorCode);
     return url.toString();
 };
 

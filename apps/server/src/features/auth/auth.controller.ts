@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import { RateLimiterRes } from 'rate-limiter-flexible';
 import {
     AuthenticationError,
+    ERROR_REDIRECT_CODES,
     RateLimitError,
 } from '@trickcal-bug-tracker/shared';
 import { toUserDto } from '@/features/users/user.mapper.js';
@@ -82,7 +83,7 @@ const getGithubCallback = (req: Request, res: Response, next: NextFunction) => {
             // Executed after GithubStrategy
             if (error) {
                 console.error(error);
-                return res.redirect(getLoginRedirectURL());
+                return res.redirect(getLoginRedirectURL(ERROR_REDIRECT_CODES.oauthGithub));
             }
             if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with GitHub'));
             
@@ -100,7 +101,7 @@ const getGoogleCallback = (req: Request, res: Response, next: NextFunction) => {
             // Executed after GoogleStrategy
             if (error) {
                 console.error(error);
-                return res.redirect(getLoginRedirectURL());
+                return res.redirect(getLoginRedirectURL(ERROR_REDIRECT_CODES.oauthGoogle));
             }
             if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with Google'));
 
