@@ -32,7 +32,7 @@ const Board = () => {
   const closeSectionSettings = () => setSettingsDrawerData(null);
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col gap-2">
+    <div className="relative flex min-h-0 flex-1 flex-col gap-2 overflow-hidden">
       {/* Board Data + controls */}
       <BoardHeader board={board} viewerList={viewerList} />
 

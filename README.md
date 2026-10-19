@@ -221,10 +221,9 @@ $ turbo dev
 
 - bug
     - constant errors on cannot connext to server
-    - drawer triggers scrollbar (on desktop scroll)
+    - section settings drawer render exit
 
 - server
-    - dont crash on unable to fetch users
     - return boards by last update
 
 - logout

@@ -5,6 +5,7 @@ import type {
   UserDto,
 } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
+import { AnimatePresence } from 'motion/react';
 import { Spinner } from '@/common/components/Spinner.tsx';
 import { BoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/BoardSettingsDrawer.tsx';
 
@@ -54,17 +55,19 @@ const BoardHeader = ({ board, viewerList }: BoardHeaderProps) => {
       </div>
 
       {/* Patch Board */}
-      {board && (
-        <BoardSettingsDrawer
-          open={isPatchBoardOpen}
-          closeDrawer={closePatchBoard}
-          boardId={board.id}
-          boardOwnerId={board.owner.id}
-          boardCollaborators={board.collaborators}
-          boardName={board.name}
-          boardDescription={board.description}
-        />
-      )}
+      <AnimatePresence>
+        {board && isPatchBoardOpen && (
+          <BoardSettingsDrawer
+            open={isPatchBoardOpen}
+            closeDrawer={closePatchBoard}
+            boardId={board.id}
+            boardOwnerId={board.owner.id}
+            boardCollaborators={board.collaborators}
+            boardName={board.name}
+            boardDescription={board.description}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };
