@@ -21,10 +21,13 @@ const useMoveTicket = () => {
             ticketId: TicketDto['id'],
             sectionId: SectionDto['id'],
             boardId: BoardDto['id'],
-            previousTicketId: TicketDto['id'] | null,
+            previousTicketId: TicketDto['id'] | null
         ) => {
-            if (!isConnected || !socket) return;
-            
+            if (!isConnected || !socket) {
+                toast.error('Unable to move ticket');
+                return;
+            }
+
             setIsPending(ticketId);
             socket.emit(
                 'ticket:move',
@@ -36,11 +39,17 @@ const useMoveTicket = () => {
                             resolveError(response.error);
                             return;
                         }
-                        toast(`ticket: ${ticketId} moved to section: ${sectionId}`);
-                        queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
+                        toast(
+                            `ticket: ${ticketId} moved to section: ${sectionId}`
+                        );
+                        queryClient.invalidateQueries({
+                            queryKey: ['boards', boardId],
+                        });
                     } catch (error) {
-                        console.log('rollback')
-                        queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
+                        console.log('rollback');
+                        queryClient.invalidateQueries({
+                            queryKey: ['boards', boardId],
+                        });
                         handleError(error);
                     }
                 }
@@ -49,7 +58,7 @@ const useMoveTicket = () => {
         [socket, isConnected, queryClient]
     );
 
-    return { moveTicket, isPending }
+    return { moveTicket, isPending };
 };
 
-export { useMoveTicket }
+export { useMoveTicket };

@@ -218,10 +218,10 @@ $ turbo dev
 
 - Client
     - landing page images
+    - wait for socket connection before showing board (?)
 
 - bug
     - constant errors on cannot connext to server
-    - section settings drawer render exit
 
 - server
     - return boards by last update

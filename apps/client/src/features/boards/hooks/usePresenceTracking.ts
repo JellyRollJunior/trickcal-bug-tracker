@@ -55,7 +55,10 @@ const usePresenceTracking = (boardId: BoardDto['id']) => {
     }, [joinRoom, boardId]);
 
     useEffect(() => {
-        if (!isConnected || !socket) return;
+        if (!isConnected || !socket) {
+            console.error('Unable to join board room');
+            return;
+        }
 
         // board:user-joined-room
         const handleUserJoined = withSocketErrorHandling(
