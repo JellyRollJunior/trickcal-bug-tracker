@@ -21,7 +21,7 @@ const CreateBoardButton = () => {
   return (
     <>
       {/* Add Board Button */}
-      <button className="button-image rounded-full" onClick={openModal}>
+      <button className="button-image rounded-full" onClick={openModal} aria-label='Create board'>
         <img src={add} />
       </button>
 

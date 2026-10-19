@@ -219,15 +219,20 @@ $ turbo dev
 - Client
     - landing page images
     - wait for socket connection before showing board (?)
-
-- bug
-    - constant errors on cannot connext to server
+    - redesign board page
 
 - server
     - return boards by last update
+        - cascade updateat?
 
 - logout
 - auto go to /boards on token auth success
+    - default layout -> auth layout -> auth page
+    - auth layout check if user is already logged in, 
+        -> if token, 
+            -> login & redirect to boards
+            -> login fail -> delete token -> do nothing
+        -> if no token, -> do nothing
 
 ## Improvements
 
