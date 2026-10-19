@@ -2,12 +2,22 @@ import type { User } from '@prisma/client';
 import type { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { RateLimiterRes } from 'rate-limiter-flexible';
-import { AuthenticationError, RateLimitError } from '@trickcal-bug-tracker/shared';
+import {
+    AuthenticationError,
+    RateLimitError,
+} from '@trickcal-bug-tracker/shared';
 import { toUserDto } from '@/features/users/user.mapper.js';
 import { passport } from '@/features/auth/passport/passport.js';
 import { signToken } from '@/lib/auth/signToken.js';
-import { loginLimiterByUsername, loginLimiterByIp, IP_FALLBACK_KEY } from '@/lib/rate-limiting/login.limiter.js';
-import { getClientOauthRedirectURL } from '@/features/auth/auth.service.js';
+import {
+    loginLimiterByUsername,
+    loginLimiterByIp,
+    IP_FALLBACK_KEY,
+} from '@/lib/rate-limiting/login.limiter.js';
+import {
+    getClientOauthRedirectURL,
+    getLoginRedirectURL,
+} from '@/features/auth/auth.service.js';
 import * as userQueries from '@/features/users/user.queries.js';
 
 const postSignup = async (
@@ -65,16 +75,15 @@ const postLogin = async (req: Request, res: Response, next: NextFunction) => {
     authMiddleware(req, res, next);
 };
 
-const getGithubCallback = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const getGithubCallback = (req: Request, res: Response, next: NextFunction) => {
     const authMiddleware = passport.authenticate(
         'github',
         (error: Error, user: Express.User, info: { message?: string }) => {
             // Executed after GithubStrategy
-            if (error) return next(error);
+            if (error) {
+                console.error(error);
+                return res.redirect(getLoginRedirectURL());
+            }
             if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with GitHub'));
             
             const token = signToken(user);
@@ -84,18 +93,18 @@ const getGithubCallback = (
     authMiddleware(req, res, next);
 };
 
-const getGoogleCallback = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+const getGoogleCallback = (req: Request, res: Response, next: NextFunction) => {
     const authMiddleware = passport.authenticate(
         'google',
         (error: Error, user: Express.User, info: { message?: string }) => {
             // Executed after GoogleStrategy
-            if (error) return next(error);
+            if (error) {
+                console.error(error);
+                return res.redirect(getLoginRedirectURL());
+            }
             if (!user) return next(new AuthenticationError(info?.message ?? 'Unable to authenticate with Google'));
-            
+
+
             const token = signToken(user);
             res.redirect(getClientOauthRedirectURL(token));
         }
