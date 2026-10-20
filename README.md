@@ -225,15 +225,6 @@ $ turbo dev
     - ticketview board null
     - invalid board id url
 
-- auto go to /boards on token auth success
-    - default layout -> auth layout -> auth page
-    - auth layout check if user is already logged in, 
-        -> if token, 
-            -> login & redirect to boards
-            -> login fail -> delete token -> do nothing
-        -> if no token, -> do nothing
-    - loading while configuring login status
-
 ## Improvements
 
 - assignedTo -> assigneeId
