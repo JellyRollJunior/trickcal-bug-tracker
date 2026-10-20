@@ -8,6 +8,7 @@ import { useBoardsSocketSync } from '@/features/boards/hooks/useBoardsSocketSync
 import { SocketProvider } from '@/context/socket/SocketContext.tsx';
 import { MeProvider } from '@/context/me/MeContext.tsx';
 import { ThemeToggle } from '@/common/components/ThemeToggle.tsx';
+import { LogOutButton } from '@/features/auth/components/LogOutButton.tsx';
 
 const BoardLayoutWrapper = () => {
   return (
@@ -29,6 +30,7 @@ const BoardLayout = () => {
         <BoardsDropdown />
         <ThemeToggle />
         <CreateBoardButton />
+        <LogOutButton />
       </header>
       <div className="grid min-h-0 grid-cols-1 p-2">
         <Outlet />

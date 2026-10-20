@@ -5,7 +5,6 @@ import {
   getToken,
   setToken as setTokenStorage,
 } from '@/lib/TokenStorage.ts';
-import { useNavigate } from 'react-router-dom';
 
 type AuthContextValue = {
   token: string | null;
@@ -16,7 +15,6 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const navigate = useNavigate();
   const [token, setTokenState] = useState<string | null>(() => getToken());
 
   const setToken = (newToken: string | null) => {
@@ -30,7 +28,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logOut = () => {
     clearToken();
-    navigate('/');
   };
 
   return (

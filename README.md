@@ -225,7 +225,9 @@ $ turbo dev
     - return boards by last update
         - cascade updateat?
 
-- logout
+- bug:
+    - ticketview board null
+
 - auto go to /boards on token auth success
     - default layout -> auth layout -> auth page
     - auth layout check if user is already logged in, 
