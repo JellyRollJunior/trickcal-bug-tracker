@@ -2,7 +2,12 @@ import close from '@/assets/icons/close_white.svg';
 import edit from '@/assets/icons/edit_white.svg';
 import trash from '@/assets/icons/trash_white.svg';
 
-import { toSentenceCase, type BoardDto, type TicketDto } from '@trickcal-bug-tracker/shared';
+import {
+  toSentenceCase,
+  type BoardDto,
+  type BoardWithSectionsAndTicketsDto,
+  type TicketDto,
+} from '@trickcal-bug-tracker/shared';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -10,6 +15,7 @@ import { useBoardOutletContext } from '@/features/boards/context/useBoardOutletC
 import { useTicketView } from '@/features/tickets/components/TicketView/useTicketView.ts';
 import { TicketEditView } from '@/features/tickets/components/TicketEditView/TicketEditView.tsx';
 import { CautionModal } from '@/common/components/CautionModal.tsx';
+import { Spinner } from '@/common/components/Spinner.tsx';
 
 const TicketViewContainer = () => {
   const { boardId, ticketId } = useParams();
@@ -19,6 +25,16 @@ const TicketViewContainer = () => {
   }
 
   return <TicketView boardId={boardId} ticketId={ticketId} />;
+};
+
+const getTicketFromBoard = (
+  board: BoardWithSectionsAndTicketsDto | null,
+  ticketId: TicketDto['id']
+) => {
+  if (!board) return null;
+  return board.sections
+    .flatMap((section) => section.tickets)
+    .find((ticket) => ticket.id === ticketId);
 };
 
 const TicketView = ({
@@ -45,28 +61,22 @@ const TicketView = ({
   const closeDeleteTicket = () => setIsDeleteTicketOpen(false);
 
   // Get current ticket
-  const ticket = board.sections
-    .flatMap((section) => section.tickets)
-    .find((ticket) => ticket.id === ticketId);
+  const ticket = getTicketFromBoard(board, ticketId);
 
   // Redirect if invalid ticket id
   useEffect(() => {
-    if (boardId && ticketId && !ticket) {
-      toast.error('Invalid ticket id');
-      navigate(`/boards/${boardId}`);
+    if (board && !getTicketFromBoard(board, ticketId)) {
+      toast.error('Invalid ticket id', { id: ticketId });
+      navigate(`/boards/${board.id}`, { replace: true });
     }
-  }, [boardId, ticketId, ticket, navigate]);
-
-  if (!boardId || !ticketId) return <div>...loading</div>;
-  if (!ticket) return null;
+  }, [ticketId, ticket, board, navigate]);
 
   const formatDate = (iso: string) => new Date(iso).toLocaleString();
-  const allCollaborators = [board.owner, ...board.collaborators];
 
   return (
     <article className="block-container-primary flex min-h-0 flex-1 flex-col px-1 py-1.5">
       {/* Ticket data */}
-      {!isEditing && (
+      {ticket && !isEditing && (
         <>
           {/* Summary & Control Buttons */}
           <div className="flex items-center justify-end gap-2 px-1.5">
@@ -155,6 +165,7 @@ const TicketView = ({
             </section>
           </main>
 
+          {/* Remove ticket modal */}
           <CautionModal
             open={isDeleteTicketOpen}
             closeModal={closeDeleteTicket}
@@ -169,10 +180,10 @@ const TicketView = ({
       )}
 
       {/* Edit ticket page */}
-      {isEditing && (
+      {ticket && isEditing && (
         <>
           <Link
-            className="button-image ml-auto w-fit rounded-full"
+            className="button-image mr-1.5 ml-auto rounded-full"
             to={`/boards/${boardId}`}
           >
             <img src={close} />
@@ -180,10 +191,17 @@ const TicketView = ({
           <TicketEditView
             ticket={ticket}
             boardId={boardId}
-            collaborators={allCollaborators}
+            collaborators={board ? [board.owner, ...board.collaborators] : []}
             closeEditView={closeIsEditing}
           />
         </>
+      )}
+
+      {/* Loading */}
+      {!ticket && (
+        <div className="flex flex-1 items-center justify-center self-center justify-self-center">
+          <Spinner className="size-10 border-2" />
+        </div>
       )}
     </article>
   );

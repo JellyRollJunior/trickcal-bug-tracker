@@ -4,7 +4,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth/useAuth.ts';
 import { useMe } from '@/features/auth/hooks/useMe.ts';
 import { resolveError } from '@/lib/resolveError.ts';
-import { Spinner } from '@/common/components/Spinner';
+import { Spinner } from '@/common/components/Spinner.tsx';
 
 const AuthSessionCheck = () => {
   const { logOut } = useAuth();

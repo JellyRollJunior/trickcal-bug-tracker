@@ -222,7 +222,6 @@ $ turbo dev
     - redesign board page
 
 - bug:
-    - ticketview board null
     - invalid board id url
 
 ## Improvements
