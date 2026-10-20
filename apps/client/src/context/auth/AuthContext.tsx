@@ -27,6 +27,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logOut = () => {
+    setTokenState(null);
     clearToken();
   };
 

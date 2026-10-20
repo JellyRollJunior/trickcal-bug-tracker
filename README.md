@@ -217,13 +217,9 @@ $ turbo dev
 ## Todo list
 
 - Client
+    - optimistic updtes (?)
     - landing page images
-    - wait for socket connection before showing board (?)
     - redesign board page
-
-- server
-    - return boards by last update
-        - cascade updateat?
 
 - bug:
     - ticketview board null
@@ -235,6 +231,7 @@ $ turbo dev
             -> login & redirect to boards
             -> login fail -> delete token -> do nothing
         -> if no token, -> do nothing
+    - loading while configuring login status
 
 ## Improvements
 

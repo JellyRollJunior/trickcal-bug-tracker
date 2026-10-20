@@ -12,6 +12,7 @@ import { OAuthCallback } from '@/features/auth/components/OAuthCallback/OAuthCal
 import { BoardStartPage } from '@/features/boards/components/BoardStartPage.tsx';
 import { LandingPage } from '@/layout/LandingPage.tsx';
 import { ErrorDisplay } from '@/common/components/ErrorDisplay.tsx';
+import { AuthLayout } from '@/layout/AuthLayout';
 
 const routes: RouteObject[] = [
   {
@@ -25,43 +26,31 @@ const routes: RouteObject[] = [
           </DefaultLayout>
         ),
         children: [
+          { index: true, element: <LandingPage /> },
           {
-            index: true,
-            element: <LandingPage />,
-          },
-          {
+            path: 'auth',
             element: <DefaultLayout />,
             children: [
               {
-                path: '/auth/login',
-                element: <Login />,
+                element: <AuthLayout />,
+                children: [
+                  { path: 'login', element: <Login /> },
+                  { path: 'signup', element: <SignupForm /> },
+                ],
               },
-              {
-                path: '/auth/signup',
-                element: <SignupForm />,
-              },
-              {
-                path: '/auth/callback',
-                element: <OAuthCallback />,
-              },
+              { path: 'callback', element: <OAuthCallback /> },
             ],
           },
           {
             element: <BoardLayout />,
             children: [
-              {
-                path: '/boards',
-                element: <BoardStartPage />,
-              },
+              { path: '/boards', element: <BoardStartPage /> },
               {
                 path: '/boards/:boardId',
                 element: <BoardDataLayer />,
                 children: [
                   { index: true, element: <Board /> },
-                  {
-                    path: 'tickets/:ticketId',
-                    element: <BoardTicketLayout />,
-                  },
+                  { path: 'tickets/:ticketId', element: <BoardTicketLayout /> },
                 ],
               },
             ],
