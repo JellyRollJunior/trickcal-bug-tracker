@@ -11,8 +11,8 @@ import { SignupForm } from '@/features/auth/components/SignupForm/SignupForm.tsx
 import { OAuthCallback } from '@/features/auth/components/OAuthCallback/OAuthCallback.tsx';
 import { BoardStartPage } from '@/features/boards/components/BoardStartPage.tsx';
 import { LandingPage } from '@/layout/LandingPage.tsx';
-import { ErrorDisplay } from '@/common/components/ErrorDisplay.tsx';
-import { AuthLayout } from '@/layout/AuthLayout';
+import { AuthLayout } from '@/layout/AuthLayout.tsx';
+import { ErrorLayout } from '@/layout/ErrorLayout.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -20,11 +20,7 @@ const routes: RouteObject[] = [
     element: <App />,
     children: [
       {
-        errorElement: (
-          <DefaultLayout>
-            <ErrorDisplay />
-          </DefaultLayout>
-        ),
+        errorElement: <ErrorLayout />,
         children: [
           { index: true, element: <LandingPage /> },
           {
@@ -58,11 +54,7 @@ const routes: RouteObject[] = [
         ],
       },
     ],
-    errorElement: (
-      <DefaultLayout>
-        <ErrorDisplay />
-      </DefaultLayout>
-    ),
+    errorElement: <ErrorLayout />,
   },
 ];
 

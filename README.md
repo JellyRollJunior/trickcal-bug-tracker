@@ -223,6 +223,7 @@ $ turbo dev
 
 - bug:
     - ticketview board null
+    - invalid board id url
 
 - auto go to /boards on token auth success
     - default layout -> auth layout -> auth page
