@@ -220,9 +220,6 @@ $ turbo dev
     - optimistic updtes (?)
     - landing page images
 
-- qol
-    - click outside dropdown closes dropdown
-
 ## Improvements
 
 - assignedTo -> assigneeId
