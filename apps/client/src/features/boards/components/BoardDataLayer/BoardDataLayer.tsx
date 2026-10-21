@@ -13,11 +13,12 @@ const BoardDataLayerContainer = () => {
 
 type BoardDataLayerProps = { boardId: BoardDto['id'] };
 const BoardDataLayer = ({ boardId }: BoardDataLayerProps) => {
-  const { board, isPendingGetBoard, viewerList } = useBoardDataLayer(boardId);
+  const { board, isPendingGetBoard, isErrorGetBoard, viewerList } = useBoardDataLayer(boardId);
 
   const context: BoardOutletContext = {
     board: board ?? null,
     isPendingGetBoard,
+    isErrorGetBoard,
     viewerList,
   };
 

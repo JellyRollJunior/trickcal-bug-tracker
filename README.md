@@ -221,8 +221,8 @@ $ turbo dev
     - landing page images
     - redesign board page
 
-- bug:
-    - invalid board id url
+- qol
+    - click outside dropdown closes dropdown
 
 ## Improvements
 

@@ -9,7 +9,7 @@ import { SectionSettingsDrawer } from '@/features/sections/components/SectionSet
 import { Spinner } from '@/common/components/Spinner.tsx';
 
 const Board = () => {
-  const { board, viewerList } = useBoardOutletContext();
+  const { board, isPendingGetBoard, viewerList } = useBoardOutletContext();
 
   // Create Ticket Modal
   const [createTicketSectionId, setCreateTicketSectionId] = useState<
@@ -34,7 +34,11 @@ const Board = () => {
   return (
     <div className="relative flex min-h-0 flex-1 flex-col gap-2 overflow-hidden">
       {/* Board Data + controls */}
-      <BoardHeader board={board} viewerList={viewerList} />
+      <BoardHeader
+        board={board}
+        viewerList={viewerList}
+        isPendingGetBoard={isPendingGetBoard}
+      />
 
       <main className="flex min-h-0 flex-1">
         {board ? (
@@ -43,9 +47,13 @@ const Board = () => {
             openCreateTicket={openCreateTicket}
             openSectionSettings={openSectionSettings}
           />
-        ) : (
+        ) : isPendingGetBoard ? (
           <div className="block-container-primary flex h-full min-h-0 w-full items-center justify-center">
             <Spinner className="h-10 w-10 border-2" />
+          </div>
+        ) : (
+          <div className="block-container-primary flex h-full min-h-0 w-full items-center justify-center">
+            <h3 className="block-primary px-4 py-1">No board selected</h3>
           </div>
         )}
       </main>

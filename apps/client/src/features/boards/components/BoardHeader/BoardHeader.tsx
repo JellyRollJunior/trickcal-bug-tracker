@@ -12,8 +12,13 @@ import { BoardSettingsDrawer } from '@/features/boards/components/BoardSettingsD
 type BoardHeaderProps = {
   board: BoardWithSectionsAndTicketsDto | null;
   viewerList: UserDto[] | null;
+  isPendingGetBoard: boolean;
 };
-const BoardHeader = ({ board, viewerList }: BoardHeaderProps) => {
+const BoardHeader = ({
+  board,
+  viewerList,
+  isPendingGetBoard,
+}: BoardHeaderProps) => {
   const [isPatchBoardOpen, setIsPatchBoardOpen] = useState(false);
   const openPatchBoard = () => setIsPatchBoardOpen(true);
   const closePatchBoard = () => setIsPatchBoardOpen(false);
@@ -23,7 +28,7 @@ const BoardHeader = ({ board, viewerList }: BoardHeaderProps) => {
       <div className="block-container-primary flex w-full flex-col justify-between p-1">
         <div className="block-primary-title flex items-center justify-between p-1.5">
           <h2 className="flex w-full items-center justify-center text-center text-lg font-bold">
-            {board ? board.name : <Spinner />}
+            {board ? board.name : isPendingGetBoard ? <Spinner /> : ''}
           </h2>
           <button
             className="button-image rounded-full"

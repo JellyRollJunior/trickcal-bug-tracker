@@ -22,7 +22,7 @@ const BoardContent = ({
     dropTarget,
     setDropTarget,
     handleMoveTicket,
-    isPendingMoveTicketId
+    isPendingMoveTicketId,
   } = useBoardContent(board);
 
   // Create Section List Item

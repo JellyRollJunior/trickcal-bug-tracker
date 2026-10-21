@@ -5,6 +5,7 @@ import { useOutletContext } from 'react-router-dom';
 type BoardOutletContext = {
     board: BoardWithSectionsAndTicketsDto | null;
     isPendingGetBoard: boolean;
+    isErrorGetBoard: boolean;
     viewerList: ReturnType<typeof usePresenceTracking>['viewerList'] | null;
 };
 

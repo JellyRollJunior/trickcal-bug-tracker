@@ -8,6 +8,7 @@ const useBoardDataLayer = (boardId: BoardDto['id']) => {
     data: board,
     isSuccess: isSuccessGetBoard,
     isPending: isPendingGetBoard,
+    isError: isErrorGetBoard,
   } = useBoard(boardId);
   const { viewerList } = usePresenceTracking(boardId);
 
@@ -17,6 +18,7 @@ const useBoardDataLayer = (boardId: BoardDto['id']) => {
     board,
     isSuccessGetBoard,
     isPendingGetBoard,
+    isErrorGetBoard,
     viewerList,
   };
 };
