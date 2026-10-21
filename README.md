@@ -219,7 +219,6 @@ $ turbo dev
 - Client
     - optimistic updtes (?)
     - landing page images
-    - redesign board page
 
 - qol
     - click outside dropdown closes dropdown
