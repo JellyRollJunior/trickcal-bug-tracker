@@ -22,14 +22,14 @@ const Modal = ({ open, closeModal, title, children }: ModalProps) => {
 
   return (
     <dialog
-      className="xs:w-sm block-container-primary m-auto h-fit backdrop:bg-black/35 backdrop:backdrop-blur-xs"
+      className="xs:w-sm md:w-md block-container-primary m-auto h-fit backdrop:bg-black/35 backdrop:backdrop-blur-xs"
       ref={ref}
       onClick={(event) => {
         if (event.target === ref.current) closeModal();
       }}
     >
       <div className="flex h-full flex-col overflow-y-auto p-1">
-        <div className="block-primary-title flex items-center justify-between p-1.5 pl-2.5">
+        <div className="block-primary-title flex items-center justify-between p-1.5 pl-2.5 mb-2">
           <h3 className="w-full font-bold">{title}</h3>
           <button
             className="button-image h-7 w-7 rounded-full text-lg"

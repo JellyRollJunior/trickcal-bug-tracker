@@ -3,7 +3,7 @@ import { useState, type SubmitEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePostBoards } from '@/features/boards/hooks/usePostBoards.ts';
 
-const useCreateBoardButton = (closeUi: () => void) => {
+const useCreateBoardForm = () => {
     const [boardName, setBoardName] = useState('');
     const [description, setDescription] = useState('');
     const navigate = useNavigate();
@@ -21,7 +21,6 @@ const useCreateBoardButton = (closeUi: () => void) => {
             {
                 onSuccess: (board) => {
                     navigate(`/boards/${board.id}`);
-                    closeUi();
                 },
             }
         );
@@ -36,4 +35,4 @@ const useCreateBoardButton = (closeUi: () => void) => {
         isPendingCreateBoard,
     };
 };
-export { useCreateBoardButton };
+export { useCreateBoardForm };
