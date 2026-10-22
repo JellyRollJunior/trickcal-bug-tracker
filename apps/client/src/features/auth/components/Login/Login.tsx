@@ -41,7 +41,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex w-full items-center justify-center pt-45">
+      <div className="flex w-full items-center justify-center pt-20 md:pt-45">
         <LoginForm />
       </div>
       <section className="mt-6 flex w-full max-w-sm flex-col items-center">

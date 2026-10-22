@@ -7,19 +7,28 @@ import { Footer } from '@/layout/Footer.tsx';
 const LandingPage = () => {
   return (
     <div className="flex min-h-dvh w-full flex-col">
-      <nav className="fixed top-0 left-0 flex w-full px-5 py-3 backdrop-blur-xl">
-        <img src={kommy} className="size-8 md:ml-6 lg:ml-12" />
-        <p className="mt-0.5 ml-2 text-xl font-bold">Trickcal Bug Tracker</p>
-        <Link className="button-confirm ml-auto block" to={'/auth/login'}>
-          Login
-        </Link>
-        <Link className="button-special ml-3" to={'/auth/signup'}>
-          Get started
-        </Link>
+      {/* Header */}
+      <nav className="fixed top-0 left-0 w-full backdrop-blur-xl">
+        <div className="mx-auto grid w-full max-w-7xl grid-rows-2 gap-3 px-5 py-3 sm:grid-cols-2 sm:grid-rows-1 sm:py-6">
+          <div className="flex items-center justify-center sm:justify-start">
+            <img src={kommy} className="size-8" />
+            <p className="ml-2 text-xl font-bold">Trickcal Bug Tracker</p>
+          </div>
+          <div className="flex items-center justify-center gap-3 sm:justify-end">
+            <Link className="button-confirm" to={'/auth/login'}>
+              Login
+            </Link>
+            <Link className="button-special" to={'/auth/signup'}>
+              Get started
+            </Link>
+          </div>
+        </div>
       </nav>
-      <main className="flex-1">
+
+      {/* Content */}
+      <main className="mx-auto max-w-7xl flex-1">
         {/* Hero */}
-        <section className="w-full px-3 py-50">
+        <section className="w-full px-3 py-35 sm:py-50">
           <div className="flex w-full flex-col items-center gap-6">
             <h1 className="text-hero text-center text-4xl font-bold lg:text-7xl">
               Collaborate in Real Time and Launch Cleaner Apps
@@ -37,13 +46,14 @@ const LandingPage = () => {
                 Learn more
               </a>
             </div>
-            <div className="mt-3 h-80 w-xl border border-black text-center shadow-2xl">
+            {/* <div className="mt-3 h-80 w-xl border border-black text-center shadow-2xl">
               I am a placeholder image
-            </div>
+            </div> */}
           </div>
         </section>
+
         {/* Features */}
-        <section id="features">I am feature list!</section>
+        <section id="features"></section>
       </main>
       <Footer />
       <Background opacity={0.9} />

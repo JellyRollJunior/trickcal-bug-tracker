@@ -18,7 +18,7 @@ const SignupForm = () => {
   } = useSignupForm();
 
   return (
-    <div className="w-full max-w-sm pt-45">
+    <div className="w-full max-w-sm pt-20 md:pt-40">
       <form className="flex flex-col" onSubmit={handleSignup}>
         <h2 className="text-center text-xl">
           Get Started with Trickcal Bug Tracker

@@ -213,10 +213,7 @@ $ turbo dev
 ## Current
 
 - mobile view
-    - landing page
     - auth
-        - login
-        - signup
         - oauth
 
 ## Todo list
