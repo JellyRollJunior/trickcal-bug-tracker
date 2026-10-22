@@ -42,7 +42,7 @@ const SectionSettingsDrawer = ({
     >
       {/* Delete Section */}
       <button
-        className="button-caution w-full mt-1 rounded-md py-1 text-sm"
+        className="button-caution w-full mt-2 rounded-md py-1 text-sm"
         onClick={openDeleteSection}
         disabled={isPendingDeleteSection || isPendingPatchSection}
       >

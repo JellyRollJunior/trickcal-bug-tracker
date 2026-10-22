@@ -219,9 +219,6 @@ $ turbo dev
         - signup
         - oauth
 
-- bug
-    - modal border outlines vs caution modal no outlines
-
 ## Todo list
 
 - Client

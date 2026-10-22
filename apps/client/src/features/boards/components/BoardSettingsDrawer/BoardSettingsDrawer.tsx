@@ -50,7 +50,7 @@ const BoardSettingsDrawer = ({
     >
       {/* Delete Board */}
       {isOwner && (
-        <div className="mt-1">
+        <div className="mt-2">
           <DeleteBoardButton boardId={boardId} />
         </div>
       )}
