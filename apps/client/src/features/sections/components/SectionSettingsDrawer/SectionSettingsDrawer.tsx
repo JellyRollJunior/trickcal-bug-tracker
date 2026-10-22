@@ -42,7 +42,7 @@ const SectionSettingsDrawer = ({
     >
       {/* Delete Section */}
       <button
-        className="button-caution mt-2 w-full rounded-md py-1 text-sm"
+        className="button-caution w-full mt-1 rounded-md py-1 text-sm"
         onClick={openDeleteSection}
         disabled={isPendingDeleteSection || isPendingPatchSection}
       >
@@ -58,7 +58,7 @@ const SectionSettingsDrawer = ({
           Edit section name
         </label>
         <input
-          className="input block"
+          className="input"
           id="newSectionName"
           minLength={1}
           maxLength={26}

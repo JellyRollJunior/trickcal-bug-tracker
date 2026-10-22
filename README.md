@@ -218,23 +218,9 @@ $ turbo dev
         - login
         - signup
         - oauth
-    - /boards/ticket view
-        - data
-        - edit
-    - modals
-        - create board
-        - create ticket
-        - caution modals
-            - delete board
-            - delte section
-            - delete ticket
-    - drawers
-        - section settings
-        - board settings
 
 - bug
     - modal border outlines vs caution modal no outlines
-    - board ticket view header data squished on smaller screen
 
 ## Todo list
 
