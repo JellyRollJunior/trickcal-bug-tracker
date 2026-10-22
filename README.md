@@ -24,13 +24,14 @@ Typescript React Express monorepo v2
     - Horizontal Scaling On Sessions & SocketIO
 
 - Frontend
-    - Presence tracking with socket
-        - currents viewers by board
-    - CRUD Sections
-    - Move ticket on drag with live reordering
+    - Move ticket between sections on drag with live reordering
     - All actions update board in realtime for all viewers
         - actions: (create/edit/delete/move) ticket/section/board, (add/remove) collaborator
+    - CRUD Boards/Sections/Tickets
+    - Presence tracking with socket
+        - currents viewers by board
     - Dark mode & Light mode
+    - Github OAuth signup/login, Username & Password signup/login
 
 - Repository
     - PNPM workspaces monorepo using TurboRepo
@@ -194,6 +195,11 @@ $ turbo dev
 - Typing socket.io-client
 - Outlet contexts
 - Extract typed env variables using vite-env.d.ts
+- Handle OAuth login client side
+- Dark & Light mode themeing with css variables & tailwind utilities
+- Working with native drag
+    - onDragEnd doesn't fire if component is unmounted during drag...
+    - Use custom drag next time
 
 ## Neat Bugs
 
@@ -209,14 +215,6 @@ $ turbo dev
     - everytime a state updates, joinRoom is recreated
     - joinRoom is called again each time it is recreated
 - Debugging circular import with vite --debug hmr
-
-## Todo list
-
-- Client
-    - optimistic updtes (?)
-    - landing page images
-- bug
-    - move ot board on create
 
 ## Improvements
 
@@ -237,7 +235,8 @@ $ turbo dev
     - when updating board metadata, need to fetch /board/:boardId which also fetches data unnecessarily
 - Type controller response in controller param definition
 - Unique identifier for display name
+- Replace native drag with drag package
+    - native onDragEnd is finicky and does not always fire
+    - results in drag state & animation cleanup errors
 
 - collaborators -> rename to potentialAssignees
-- extract drawer
-- extract board data form

@@ -1,6 +1,8 @@
 import kommy from '@/assets/icons/favicon.png';
 import boards_dark from '@/assets/images/boards-dark.png';
 import boards_light from '@/assets/images/boards-light.png';
+import boards_ticket from '@/assets/images/boards-ticket.png';
+import move_ticket from '@/assets/images/move-ticket.gif';
 
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
@@ -100,6 +102,9 @@ const LandingPage = () => {
                 </li>
               ))}
             </ul>
+            <div className="mx-2 mt-8 h-fit w-full max-w-4xl shadow-2xl">
+              <img src={move_ticket} />
+            </div>
           </div>
         </section>
 
@@ -119,6 +124,9 @@ const LandingPage = () => {
             >
               Start today
             </Link>
+            <div className="mx-2 mt-8 h-fit w-full max-w-4xl shadow-2xl">
+              <img src={boards_ticket} />
+            </div>
           </div>
         </section>
       </main>
