@@ -67,11 +67,11 @@ const BoardsDropdown = () => {
         {isOpen && (
           <motion.div
             id={panelId}
+            className="select-primary absolute z-10 w-full overflow-hidden rounded-b-md border-t-0"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="select-primary absolute z-10 w-full overflow-hidden rounded-b-md border-t-0"
           >
             {isPending && (
               <div role="status" className="flex p-2">
