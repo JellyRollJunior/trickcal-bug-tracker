@@ -102,6 +102,25 @@ const LandingPage = () => {
             </ul>
           </div>
         </section>
+
+        {/* Call to Action */}
+        <section id="features" className="w-full pt-35 pb-30 sm:pt-40">
+          <div className="flex w-full flex-col items-center gap-6">
+            <h2 className="text-primary text-center text-2xl font-bold sm:text-4xl">
+              Ready to Ship Cleaner Apps?
+            </h2>
+            <p className="text-secondary max-w-xl text-center font-medium sm:text-lg md:text-xl">
+              Join developers who are already organizing their workflow with
+              Trickcal Bug Tracker
+            </p>
+            <Link
+              className="button-special block w-full max-w-sm"
+              to={'/auth/signup'}
+            >
+              Start today
+            </Link>
+          </div>
+        </section>
       </main>
 
       <Footer />
