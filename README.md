@@ -218,7 +218,6 @@ $ turbo dev
         - login
         - signup
         - oauth
-    - /boards/boardid
     - /boards/ticket view
         - data
         - edit

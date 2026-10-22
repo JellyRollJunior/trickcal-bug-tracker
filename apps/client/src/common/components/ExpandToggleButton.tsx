@@ -27,7 +27,7 @@ const ExpandToggleButton = ({
       className="button-image rounded-full"
       type="button"
       onClick={handleClick}
-      aria-label="Toggle board details"
+      aria-label="Toggle details"
     >
       {!isExpanded && <img src={circle_down} aria-hidden={true} />}
       {isExpanded && <img src={circle_up} aria-hidden={true} />}

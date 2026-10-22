@@ -51,13 +51,13 @@ const BoardHeader = ({
         <AnimatePresence>
           {isDetailsOpen && (
             <motion.section
-              className="mt-1 grid w-full grid-cols-6 gap-2"
+              className="mt-1 grid w-full grid-cols-3 grid-rows-2 gap-2 md:grid-cols-6 md:grid-rows-1"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
             >
-              <p className="block-primary col-span-3 h-20 w-full px-2 py-1 text-sm font-semibold">
+              <p className="block-primary col-span-3 h-20 w-full overflow-y-auto px-2 py-1 text-sm font-semibold">
                 {board && board.description}
               </p>
               <div className="block-primary flex h-20 flex-col px-2 py-1">
