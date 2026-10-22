@@ -1,4 +1,3 @@
-// ThemeToggle.tsx
 import light_mode from '@/assets/icons/light_mode_white.svg';
 import dark_mode from '@/assets/icons/dark_mode_white.svg';
 
@@ -7,7 +6,7 @@ import { useTheme } from '@/common/hooks/useTheme.ts';
 const ThemeToggle = () => {
   const { getIsCurrentThemeDark, setTheme } = useTheme();
 
-  function toggle() {
+  const toggle = () => {
     setTheme(getIsCurrentThemeDark() ? 'light' : 'dark');
   }
 

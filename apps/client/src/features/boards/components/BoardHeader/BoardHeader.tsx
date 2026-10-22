@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Spinner } from '@/common/components/Spinner.tsx';
 import { BoardSettingsDrawer } from '@/features/boards/components/BoardSettingsDrawer/BoardSettingsDrawer.tsx';
+import { ExpandToggleButton } from '@/common/components/ExpandToggleButton';
 
 type BoardHeaderProps = {
   board: BoardWithSectionsAndTicketsDto | null;
@@ -26,10 +27,12 @@ const BoardHeader = ({
   return (
     <>
       <div className="block-container-primary flex w-full flex-col justify-between p-1">
-        <div className="block-primary-title flex items-center justify-between p-1.5">
+        {/* Title & Control Buttons */}
+        <div className="block-primary-title flex items-center justify-between p-1.5 gap-1">
           <h2 className="flex w-full items-center justify-center text-center text-lg font-bold">
             {board ? board.name : isPendingGetBoard ? <Spinner /> : ''}
           </h2>
+          <ExpandToggleButton onClick={() => {}} />
           <button
             className="button-image rounded-full"
             onClick={openPatchBoard}
