@@ -27,9 +27,9 @@ Typescript React Express monorepo v2
     - Presence tracking with socket
         - currents viewers by board
     - CRUD Sections
-    - Move ticket on drag
-        - drag ticket item to drop areas located in gaps between tickets
-    - All actions (create/edit/delete/move) update board in realtime for all viewers
+    - Move ticket on drag with live reordering
+    - All actions update board in realtime for all viewers
+        - actions: (create/edit/delete/move) ticket/section/board, (add/remove) collaborator
     - Dark mode & Light mode
 
 - Repository
@@ -215,6 +215,8 @@ $ turbo dev
 - Client
     - optimistic updtes (?)
     - landing page images
+- bug
+    - move ot board on create
 
 ## Improvements
 

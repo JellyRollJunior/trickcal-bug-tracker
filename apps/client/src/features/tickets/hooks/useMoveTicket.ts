@@ -39,9 +39,7 @@ const useMoveTicket = () => {
                             resolveError(response.error);
                             return;
                         }
-                        toast(
-                            `ticket: ${ticketId} moved to section: ${sectionId}`
-                        );
+                        console.log(`ticket: ${ticketId} moved to section: ${sectionId}`);
                         queryClient.invalidateQueries({
                             queryKey: ['boards', boardId],
                         });
