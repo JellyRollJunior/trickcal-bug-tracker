@@ -213,6 +213,29 @@ $ turbo dev
 ## Current
 
 - mobile view
+    - landing page
+    - auth
+        - login
+        - signup
+        - oauth
+    - /boards
+    - /boards/boardid
+    - /boards/ticket view
+        - data
+        - edit
+    - modals
+        - create board
+        - create ticket
+        - caution modals
+            - delete board
+            - delte section
+            - delete ticket
+    - drawers
+        - section settings
+        - board settings
+
+- bug
+    - modal border outlines vs caution modal no outlines
 
 ## Todo list
 

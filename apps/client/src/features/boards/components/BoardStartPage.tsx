@@ -6,10 +6,22 @@ const BoardStartPage = () => {
   const { data: boards } = useBoards();
 
   return (
-    <div className="max-h-lg flex w-full max-w-5xl gap-2 self-center justify-self-center">
-      {/* Select Existing Board */}
-      <section className="block-container-primary w-full max-w-lg overflow-y-auto">
+    <div className="h-fit w-full max-w-5xl gap-2 self-center justify-self-center md:flex">
+      {/* Create Board Prompt */}
+      <section className="w-full max-w-lg self-center justify-self-center">
         <div className="block-container-primary p-1">
+          <h2 className="block-primary-title px-3 py-1 text-center text-xl font-semibold">
+            Create a new idea/bug tracking board
+          </h2>
+          <div className="mx-auto mt-1 w-full">
+            <CreateBoardForm onSubmitCleanup={() => {}} />
+          </div>
+        </div>
+      </section>
+
+      {/* Select Existing Board */}
+      <section className="block-container-primary w-full overflow-y-auto md:max-h-none md:contain-[size]">
+        <div className="block-container-primary w-full p-1">
           <h3 className="block-primary-title px-3 py-1 text-center text-xl font-semibold">
             Recent boards
           </h3>
@@ -26,18 +38,6 @@ const BoardStartPage = () => {
                 </li>
               ))}
           </ul>
-        </div>
-      </section>
-
-      {/* Create Board Prompt */}
-      <section className="col-span-4 w-full max-w-lg self-center justify-self-center">
-        <div className="block-container-primary p-1">
-          <h2 className="block-primary-title px-3 py-1 text-center text-xl font-semibold">
-            Create a new idea/bug tracking board
-          </h2>
-          <div className="mx-auto mt-1 w-full">
-            <CreateBoardForm onSubmitCleanup={() => {}} />
-          </div>
         </div>
       </section>
     </div>
