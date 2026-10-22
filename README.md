@@ -234,6 +234,7 @@ $ turbo dev
 
 - bug
     - modal border outlines vs caution modal no outlines
+    - board ticket view header data squished on smaller screen
 
 ## Todo list
 

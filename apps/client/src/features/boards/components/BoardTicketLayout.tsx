@@ -3,9 +3,13 @@ import { TicketView } from '@/features/tickets/components/TicketView/TicketView.
 
 const BoardTicketLayout = () => {
   return (
-    <div className="grid min-h-0 flex-1 gap-2 grid-cols-2">
-      <Board />
-      <TicketView />
+    <div className="grid min-h-0 flex-1 grid-cols-2 gap-2">
+      <div className="hidden h-full lg:block">
+        <Board />
+      </div>
+      <div className="col-span-2 lg:col-span-1">
+        <TicketView />
+      </div>
     </div>
   );
 };

@@ -74,7 +74,7 @@ const TicketView = ({
   const formatDate = (iso: string) => new Date(iso).toLocaleString();
 
   return (
-    <article className="block-container-primary flex min-h-0 flex-1 flex-col px-1 py-1.5">
+    <article className="block-container-primary flex h-full min-h-0 flex-1 flex-col px-1 py-1.5">
       {/* Ticket data */}
       {ticket && !isEditing && (
         <>

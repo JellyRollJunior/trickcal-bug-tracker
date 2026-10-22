@@ -6,7 +6,7 @@ const BoardStartPage = () => {
   const { data: boards } = useBoards();
 
   return (
-    <div className="h-fit w-full max-w-5xl gap-2 self-center justify-self-center md:flex">
+    <div className="h-fit w-full max-w-5xl gap-2 justify-self-center md:flex md:self-center">
       {/* Create Board Prompt */}
       <section className="w-full max-w-lg self-center justify-self-center">
         <div className="block-container-primary p-1">
@@ -20,7 +20,7 @@ const BoardStartPage = () => {
       </section>
 
       {/* Select Existing Board */}
-      <section className="block-container-primary w-full overflow-y-auto md:max-h-none md:contain-[size]">
+      <section className="block-container-primary w-full max-w-lg self-center justify-self-center overflow-y-auto md:max-h-none md:self-auto md:contain-[size]">
         <div className="block-container-primary w-full p-1">
           <h3 className="block-primary-title px-3 py-1 text-center text-xl font-semibold">
             Recent boards
