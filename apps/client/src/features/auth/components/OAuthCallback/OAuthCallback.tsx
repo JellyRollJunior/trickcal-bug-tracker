@@ -28,7 +28,7 @@ const OAuthCallback = () => {
   }, [setToken, navigate, storedToken]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-3 py-50">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3 py-40 md:py-50">
       <img src={kommyShocked} className="size-32" />
       <div className="flex items-center gap-3">
         <Spinner />

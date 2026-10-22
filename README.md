@@ -210,12 +210,6 @@ $ turbo dev
     - joinRoom is called again each time it is recreated
 - Debugging circular import with vite --debug hmr
 
-## Current
-
-- mobile view
-    - auth
-        - oauth
-
 ## Todo list
 
 - Client
