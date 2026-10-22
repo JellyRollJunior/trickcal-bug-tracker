@@ -29,7 +29,7 @@ const BoardContent = ({
   const lastSectionId = board?.sections.at(-1)?.id ?? '';
 
   return (
-    <ol className="flex h-full min-h-0 w-full flex-1 gap-3 overflow-x-auto">
+    <ol className="flex h-full min-h-0 w-full flex-1 gap-2 overflow-x-auto">
       {board.sections.map((section) => (
         <div className="min-h-0 max-w-100 min-w-75 flex-1" key={section.id}>
           <Section

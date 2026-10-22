@@ -51,7 +51,7 @@ const BoardHeader = ({
         <AnimatePresence>
           {isDetailsOpen && (
             <motion.section
-              className="mt-1 grid w-full grid-cols-3 grid-rows-2 gap-2 md:grid-cols-6 md:grid-rows-1"
+              className="mt-1 grid w-full grid-cols-3 grid-rows-2 gap-1 md:grid-cols-6 md:grid-rows-1"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}

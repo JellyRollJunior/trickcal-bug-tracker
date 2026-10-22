@@ -50,7 +50,7 @@ const TicketForm = ({
 
   return (
     <form
-      className="block-primary mt-2 h-fit w-full px-3 py-2"
+      className="block-primary h-fit w-full px-3 py-2"
       onSubmit={onSubmit}
     >
       <textarea
