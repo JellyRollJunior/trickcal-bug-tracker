@@ -21,18 +21,15 @@ const Board = () => {
   const closeCreateTicket = () => setCreateTicketSectionId(null);
 
   // Section Settings
-  const [settingsDrawerData, setSettingsDrawerData] = useState<Pick<
-    SectionDto,
-    'id' | 'name'
-  > | null>(null);
-  const openSectionSettings = (
-    id: SectionDto['id'],
-    name: SectionDto['name']
-  ) => setSettingsDrawerData({ id, name });
+  const [settingsDrawerData, setSettingsDrawerData] = useState<Pick<SectionDto,'id' | 'name'> | null>(null);
+  const openSectionSettings = (id: SectionDto['id'], name: SectionDto['name']) => {
+    if (settingsDrawerData) return setSettingsDrawerData(null);
+    setSettingsDrawerData({ id, name });
+  };
   const closeSectionSettings = () => setSettingsDrawerData(null);
 
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col gap-2 h-full overflow-hidden">
+    <div className="relative flex h-full min-h-0 flex-1 flex-col gap-2 overflow-hidden">
       {/* Board Data + controls */}
       <BoardHeader
         board={board}
