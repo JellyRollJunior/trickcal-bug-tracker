@@ -1,9 +1,11 @@
 import kommy from '@/assets/icons/favicon.png';
 import boards_dark from '@/assets/images/boards-dark.png';
+import boards_light from '@/assets/images/boards-light.png';
 
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
 import { Footer } from '@/layout/Footer.tsx';
+import { ThemeToggle } from '@/common/components/ThemeToggle';
 
 const features = [
   {
@@ -30,7 +32,7 @@ const features = [
 
 const LandingPage = () => {
   return (
-    <div className="dark flex min-h-dvh w-full flex-col">
+    <div className="flex min-h-dvh w-full flex-col">
       {/* Header */}
       <nav className="fixed top-0 left-0 z-10 w-full backdrop-blur-xl">
         <div className="mx-auto grid w-full max-w-7xl grid-rows-2 gap-3 px-5 py-3 sm:grid-cols-2 sm:grid-rows-1 sm:py-6">
@@ -69,8 +71,14 @@ const LandingPage = () => {
                 Learn more
               </a>
             </div>
-            <div className="mx-2 mt-8 h-fit max-w-4xl w-full shadow-2xl">
-              <img src={boards_dark} />
+            <div className="mx-2 mt-8 h-fit w-full max-w-4xl shadow-2xl">
+              <img className="hidden dark:block" src={boards_dark} />
+              <img className="block dark:hidden" src={boards_light} />
+            </div>
+            <div className="flex gap-3">
+              <ThemeToggle />
+              <span className="hidden dark:block">Preview light mode</span>
+              <span className="block dark:hidden">Preview dark mode</span>
             </div>
           </div>
         </section>
