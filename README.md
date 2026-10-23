@@ -24,8 +24,9 @@
 - Boards, sections, and tickets: create, edit, and delete them
 - Collaborators: add or remove people on a board
 - Ticket assignees: assign or unassign people on a ticket
-- Sign up / log in with Google OAuth, GitHub OAuth, or username and password
-- Dark and light mode
+- Auth: Sign up / log in with Google OAuth, GitHub OAuth, or username and password
+- Theming: Dark and light mode
+- Responsive design: works on both mobile and desktop screens
 
 <p align="center">
     <img align="center" width="700px" src="./apps/client/src/assets/images/move-ticket.gif" >
@@ -54,6 +55,7 @@
     - TanStack Query for API requests and caching, with query invalidation driven by Socket.IO events
     - Motion for animated entry/exit
     - Sonner for toast notifications
+    - Responsive layouts with Tailwind CSS breakpoint utilities
 - Repository / infrastructure
     - pnpm workspaces monorepo with Turborepo
     - Repo-wide build commands for local development
@@ -123,7 +125,6 @@ Auth required for all endpoints & socket events execept /auth routes
 | PATCH  | /tickets/:ticketId                             | update ticket              | { issueType, category, priority, severity, reproducibility, summary, description }             | ticketDto                      |                                                                                 |
 | PUT    | /tickets/:ticketId/assignee                    | update ticket assignee     | { assigneeId }                                                                                 | ticketDto                      | assignee must have board access                                                 |
 | DELETE | /tickets/:ticketId                             | delete ticket              |                                                                                                | ticketDto                      |                                                                                 |
-
 
 <br>
 
