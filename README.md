@@ -97,6 +97,8 @@ $ turbo dev
 
 Auth required for all endpoints & socket events execept /auth routes
 
+### Endpoints
+
 | Method | URI                                            | Function                   | Body (inputs)                                                                                  | Outputs                        | Notes                                                                           |
 | ------ | ---------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
 | POST   | /auth/signup                                   | Signup                     | { username, password, name }                                                                   | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
@@ -122,12 +124,21 @@ Auth required for all endpoints & socket events execept /auth routes
 | PUT    | /tickets/:ticketId/assignee                    | update ticket assignee     | { assigneeId }                                                                                 | ticketDto                      | assignee must have board access                                                 |
 | DELETE | /tickets/:ticketId                             | delete ticket              |                                                                                                | ticketDto                      |                                                                                 |
 
+
+<br>
+
+### Client to Server Socket Events
+
 | Client to server socket event | Arguments                                           | Use               | Callback args                            |
 | ----------------------------- | --------------------------------------------------- | ----------------- | ---------------------------------------- |
 | 'connection'                  | token                                               | connect socket    |                                          |
 | 'disconnect'                  |                                                     | disconnect socket |                                          |
 | 'board:join_room'             | { boardId }, callback                               | join board room   | { success: boolean, viewers: userDto[] } |
 | 'ticket:move'                 | { ticketId, sectionId, previousTicketId }, callback | move ticket       |                                          |
+
+<br>
+
+### Server to Client Socket Events
 
 | Server to client socket event | Payload                                 | Use                                 | Listener args   |
 | ----------------------------- | --------------------------------------- | ----------------------------------- | --------------- |
