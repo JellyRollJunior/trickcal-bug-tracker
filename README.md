@@ -243,4 +243,3 @@ $ turbo dev
 
 ## Bugs
 - auth refetch /me on revisit
-- board create does not redirect

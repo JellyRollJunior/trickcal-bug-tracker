@@ -1,12 +1,10 @@
 import type { PostBoardsRequestBody } from '@trickcal-bug-tracker/shared';
 import { useState, type SubmitEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { usePostBoards } from '@/features/boards/hooks/usePostBoards.ts';
 
 const useCreateBoardForm = () => {
     const [boardName, setBoardName] = useState('');
     const [description, setDescription] = useState('');
-    const navigate = useNavigate();
     const { mutate: createBoard, isPending: isPendingCreateBoard } =
         usePostBoards();
 
@@ -16,14 +14,7 @@ const useCreateBoardForm = () => {
     });
     const handlePostBoard = (event: SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
-        createBoard(
-            { data: toPostBoardsPayload() },
-            {
-                onSuccess: (board) => {
-                    navigate(`/boards/${board.id}`);
-                },
-            }
-        );
+        createBoard({ data: toPostBoardsPayload() });
     };
 
     return {
