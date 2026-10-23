@@ -2,13 +2,13 @@ import { AuthenticationError } from '@trickcal-bug-tracker/shared';
 import { useEffect } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth/useAuth.ts';
-import { useMe } from '@/features/auth/hooks/useMe.ts';
+import { useMeAuthCheck } from '@/features/auth/hooks/useMe.ts';
 import { resolveError } from '@/lib/resolveError.ts';
 import { Spinner } from '@/common/components/Spinner.tsx';
 
 const AuthSessionCheck = () => {
   const { logOut } = useAuth();
-  const { data: me, error, isPending } = useMe();
+  const { data: me, error, isPending } = useMeAuthCheck();
 
   useEffect(() => {
     if (!error) return;

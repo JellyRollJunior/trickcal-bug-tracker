@@ -240,6 +240,3 @@ $ turbo dev
     - results in drag state & animation cleanup errors
 
 - collaborators -> rename to potentialAssignees
-
-## Bugs
-- auth refetch /me on revisit
