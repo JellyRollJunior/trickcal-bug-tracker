@@ -1,0 +1,103 @@
+## Learning Outcomes
+
+- Solidify TypeScript Prisma Zod shared workflow
+    - Shared defines:
+        - Socket events
+        - DTO schema shape
+        - Request body schema for each route
+        - Response schema for each route
+        - Errors
+    - Server:
+        - Define data shape in prisma schema
+        - Imports DTO, Request, Response schemas to serve data
+    - Client:
+        - Imports Request, Response schemas to validate data & request bodies
+    - Think about what data is needed to make client side calculations easier & server side calcualtions easier
+
+- Prisma indexing
+    - foreign keys not indexed by default
+    - indexing based on actual query patterns, not defensively on every column
+- Prisma nested create
+- Solidify TypeScript data return workflow
+    - DB object in Prisma Schema - Type name: Base
+    - Query object with extras - Type name: BaseWithExtras
+        - Query using custom reusable selects w/ Prisma Validator
+        - Create intermediate types w/ Prisma GetPayload
+    - Manipulate data, do logic with data, etc.
+    - Map BaseWithExtras to dto & send to user - Type name: BaseDto or BaseWithExtrasDto
+- Socket event vs Route
+    - Does this need to happen many times per second/minute during normal use?
+    - Can the UI reasonably proceed optimistically without waiting for confirmation?
+- Solidify [router -> controller -> service -> query] architecture
+    - If service logic in minimal, just directly call query from controller
+        - Don't add extra layers to navigate for no reason
+- One Prisma query does not necessarily equal One SQL query
+- Prisma sorting -> PSQL uses local collation -> sorting string keys does not work as expect in JS
+    - solution: manually edit SQL field to sort as expected (see prisma migration files)
+- Docker & Docker compose
+    - Writing dockerfile, docker-compose.yaml, .dockerignore, .env.docker
+    - Containerizing PostgreSQL database, Node.js server, Vite ReactJs client
+    - Composing above 3 ^
+    - Multi stage builds to utilize layer caching
+    - NGINX to serve client static files & use smaller base image
+    - Workflow:
+        - Develop on local
+        - Periodically check everything works on container
+- Prisma update input
+    - Prisma generates a fully-optional "update input" type for every model
+    - Simplifies typing the edit object
+- Setup local Redis instance
+    - SSH into redis cli to view keys and values
+    - Tested local installation & redis docker image
+- Rate limiting
+    - Using [rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible) & Redis
+    - Only consume points on auth failure
+    - Reset points on auth success
+- Horizontal Scaling
+    - Sessions: redis + [connect-redis](https://github.com/tj/connect-redis) + express-session
+    - SocketIO: redis + [@socketio/redis-adapter](https://socket.io/docs/v4/redis-adapter/)
+
+- Background image component w/ fixed positioning
+- React Query (TanStack Query)
+    - Query client setup + defaults, useQuery, useMutation, query/cache invalidation
+    - Each query must have a unique queryKey (else bugs!)
+    - Triggering refresh on mutation by invalidating query key
+    - Capturing & handling errors (by toasting) in queryClient using queryCache & mutationCache
+- Solidify request pipeline
+    - Hook uses TanStack to make request using our resource retrieval function -> resource retrieval function calls base api request function
+    - On error, API request function uses resolveError to throw error returned by server -> resolved error is caught by useQuery so we can narrow the error using instanceof & handle
+- Extracting component logic into hook to separate logic and UI
+- Sonner toast library
+- Typing socket.io-client
+- Outlet contexts
+- Extract typed env variables using vite-env.d.ts
+- Handle OAuth login client side
+- Dark & Light mode themeing with css variables & tailwind utilities
+- Working with native drag
+    - onDragEnd doesn't fire if component is unmounted during drag...
+    - Use custom drag next time
+
+## Improvements
+
+- assignedTo -> assigneeId
+- set token to proper expire time
+- default board
+    - extract default board settings
+    - generate orders from fractional-indexing
+- empty payload 500 error expected?
+
+- UI
+    - dont let modal handle title -> delegate to children
+- Socket Response Type is incorrect
+    - should be SocketErrorResponse | SocketSuccessResponse & { data }
+    - I wrote SocketErrorResponse | SocketSuccessResponse | SocketSuccessResponse & { data }
+- Implement get board meta data & get board data
+    - can update only metadata
+    - when updating board metadata, need to fetch /board/:boardId which also fetches data unnecessarily
+- Type controller response in controller param definition
+- Unique identifier for display name
+- Replace native drag with drag package
+    - native onDragEnd is finicky and does not always fire
+    - results in drag state & animation cleanup errors
+
+- collaborators -> rename to potentialAssignees
