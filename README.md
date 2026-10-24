@@ -19,7 +19,7 @@
     - Every change appears instantly for everyone viewing the board
         - Changes: (create/edit/delete/move for tickets, sections, boards, plus adding/removing collaborators)
     - Toast notifications for who performed what action
-- Drag-and-drop: move tickets between sections with live reordering
+- Drag-and-drop: move tickets between sections with instant, live reordering
 - Presence tracking: see who is currently viewing a board
 - Boards, sections, and tickets: create, edit, and delete them
 - Collaborators: add or remove people on a board
@@ -53,9 +53,10 @@
     - Consumes shared DTOs for type-safe data handling
     - Validates server responses and outgoing payloads with shared Zod schemas
     - TanStack Query for API requests and caching, with query invalidation driven by Socket.IO events
+    - Optimistic updates on ticket move with rollback on failure
+    - Responsive layouts with Tailwind CSS breakpoint utilities
     - Motion for animated entry/exit
     - Sonner for toast notifications
-    - Responsive layouts with Tailwind CSS breakpoint utilities
 - Repository / infrastructure
     - pnpm workspaces monorepo with Turborepo
     - Repo-wide build commands for local development
