@@ -23,23 +23,19 @@ const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
         toSection: SectionWithTicketsDto,
         targetTicketId: TicketDto['id'] | null,
         beforeTargetTicketId: TicketDto['id'] | null,
+        afterTargetTicketId: TicketDto['id'] | null,
         position: Position
     ) => {
         if (!activeTicket) return;
         if (activeTicket.id === targetTicketId) return;
+        if (position === 'AFTER' && afterTargetTicketId === activeTicket.id) return;
+        if (position === 'BEFORE' && beforeTargetTicketId === activeTicket.id) return;
+        
+        const previousTicketId = position === 'AFTER' ? targetTicketId : beforeTargetTicketId;
+        moveTicket(activeTicket.id, toSection.id, board.id, previousTicketId);
 
-        if (position === 'AFTER') {
-            moveTicket(activeTicket.id, toSection.id, board.id, targetTicketId);
-            console.log(`Moving ${activeTicket.id} after ${targetTicketId}`);
-        } else if (position === 'BEFORE') {
-            moveTicket(
-                activeTicket.id,
-                toSection.id,
-                board.id,
-                beforeTargetTicketId
-            );
-            console.log(`Moving ${activeTicket.id} before ${targetTicketId}`);
-        }
+        setActiveTicket(null);
+        setDropTarget(null);
     };
 
     return {
@@ -48,7 +44,7 @@ const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
         dropTarget,
         setDropTarget,
         handleMoveTicket,
-        isPendingMoveTicketId
+        isPendingMoveTicketId,
     };
 };
 

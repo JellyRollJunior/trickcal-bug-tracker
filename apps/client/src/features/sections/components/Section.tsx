@@ -22,6 +22,7 @@ type SectionProps = {
     toSection: SectionWithTicketsDto,
     targetTicketId: TicketDto['id'] | null,
     beforeTargetTicketId: TicketDto['id'] | null,
+    afterTargetTicketId: TicketDto['id'] | null,
     position: Position
   ) => void;
   activeTicket: TicketDto | null;
@@ -46,23 +47,28 @@ const Section = ({
     setActiveTicket(ticket);
     console.log(ticket.id);
   };
+
   const handleTicketDragEnd = () => {
     setActiveTicket(null);
     setDropTarget(null);
   };
+
   const moveTicketBefore = (ticketId: TicketDto['id'], ticketIndex: number) => {
     handleMoveTicket(
       section,
       ticketId,
       ticketIndex === 0 ? null : section.tickets[ticketIndex - 1].id,
+      section.tickets[ticketIndex + 1]?.id ?? null,
       'BEFORE'
     );
   };
+
   const moveTicketAfter = (ticketId: TicketDto['id'], ticketIndex: number) => {
     handleMoveTicket(
       section,
       ticketId,
       ticketIndex === 0 ? null : section.tickets[ticketIndex - 1].id,
+      section.tickets[ticketIndex + 1]?.id ?? null,
       'AFTER'
     );
   };
@@ -78,8 +84,9 @@ const Section = ({
     }
     setDropTarget({ sectionId, ticketId: null, position: 'BEFORE' });
   };
+
   const handleEmptySectionDrop = () => {
-    handleMoveTicket(section, null, null, 'BEFORE');
+    handleMoveTicket(section, null, null, null, 'BEFORE');
   };
 
   const validateShowingTicketGhost = (
