@@ -22,7 +22,6 @@ const BoardContent = ({
     dropTarget,
     setDropTarget,
     handleMoveTicket,
-    isPendingMoveTicketId,
   } = useBoardContent(board);
 
   // Create Section List Item
@@ -44,7 +43,6 @@ const BoardContent = ({
             setActiveTicket={setActiveTicket}
             dropTarget={dropTarget}
             setDropTarget={setDropTarget}
-            isPendingMoveTicketId={isPendingMoveTicketId}
           />
         </div>
       ))}

@@ -11,7 +11,6 @@ type TicketProps = {
   moveActiveTicketBefore: () => void;
   moveActiveTicketAfter: () => void;
   setDropTarget: (dropTarget: DropTarget) => void;
-  isPendingMove: boolean;
 };
 const Ticket = ({
   ticket,
@@ -21,7 +20,6 @@ const Ticket = ({
   moveActiveTicketBefore,
   moveActiveTicketAfter,
   setDropTarget,
-  isPendingMove,
 }: TicketProps) => {
   const { boardId } = useParams();
 
@@ -60,7 +58,7 @@ const Ticket = ({
       onDragEnd={onDragEnd}
       draggable
       style={{
-        opacity: ticket.id === activeTicketId || isPendingMove ? 0.25 : 1,
+        opacity: ticket.id === activeTicketId ? 0.25 : 1,
       }}
     >
       <Link

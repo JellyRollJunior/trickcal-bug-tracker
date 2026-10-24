@@ -19,7 +19,6 @@ const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
     const {
         canMove,
         moveTicket,
-        isPending: isPendingMoveTicketId,
     } = useMoveTicket();
     const [activeTicket, setActiveTicket] = useState<TicketDto | null>(null);
     const [dropTarget, setDropTarget] = useState<DropTarget>(null);
@@ -54,7 +53,6 @@ const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
         dropTarget,
         setDropTarget,
         handleMoveTicket,
-        isPendingMoveTicketId,
     };
 };
 

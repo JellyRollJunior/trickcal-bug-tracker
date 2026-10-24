@@ -29,7 +29,6 @@ type SectionProps = {
   setActiveTicket: (ticketId: TicketDto | null) => void;
   dropTarget: DropTarget;
   setDropTarget: (dropTarget: DropTarget) => void;
-  isPendingMoveTicketId: TicketDto['id'] | null;
 };
 const Section = ({
   section,
@@ -40,7 +39,6 @@ const Section = ({
   setActiveTicket,
   dropTarget,
   setDropTarget,
-  isPendingMoveTicketId,
 }: SectionProps) => {
   /* Ticket drag handlers */
   const handleTicketDragStart = (ticket: TicketDto) => {
@@ -165,7 +163,6 @@ const Section = ({
               moveActiveTicketBefore={() => moveTicketBefore(ticket.id, index)}
               moveActiveTicketAfter={() => moveTicketAfter(ticket.id, index)}
               setDropTarget={setDropTarget}
-              isPendingMove={ticket.id === isPendingMoveTicketId}
             />
             {validateShowingTicketGhost(
               ticket.id,
