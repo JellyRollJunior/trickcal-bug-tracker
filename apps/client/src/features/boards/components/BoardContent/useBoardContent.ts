@@ -6,6 +6,7 @@ import type {
 } from '@trickcal-bug-tracker/shared';
 import { useState } from 'react';
 import { useMoveTicket } from '@/features/tickets/hooks/useMoveTicket.ts';
+import { toast } from 'sonner';
 
 type Position = 'BEFORE' | 'AFTER';
 type DropTarget = {
@@ -15,7 +16,11 @@ type DropTarget = {
 } | null;
 
 const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
-    const { moveTicket, isPending: isPendingMoveTicketId } = useMoveTicket();
+    const {
+        canMove,
+        moveTicket,
+        isPending: isPendingMoveTicketId,
+    } = useMoveTicket();
     const [activeTicket, setActiveTicket] = useState<TicketDto | null>(null);
     const [dropTarget, setDropTarget] = useState<DropTarget>(null);
 
@@ -30,7 +35,12 @@ const useBoardContent = (board: BoardWithSectionsAndTicketsDto) => {
         if (activeTicket.id === targetTicketId) return;
         if (position === 'AFTER' && afterTargetTicketId === activeTicket.id) return;
         if (position === 'BEFORE' && beforeTargetTicketId === activeTicket.id) return;
-        
+
+        if (!canMove) {
+            toast.error('Unable to move ticket');
+            return;
+        }
+
         const previousTicketId = position === 'AFTER' ? targetTicketId : beforeTargetTicketId;
         moveTicket(activeTicket.id, toSection.id, board.id, previousTicketId);
 

@@ -13,6 +13,7 @@ import { resolveError } from '@/lib/resolveError.ts';
 
 const useMoveTicket = () => {
     const { socket, isConnected } = useSocket();
+    const canMove = isConnected && !!socket;
     const queryClient = useQueryClient();
     const [isPending, setIsPending] = useState<TicketDto['id'] | null>(null);
 
@@ -39,7 +40,9 @@ const useMoveTicket = () => {
                             resolveError(response.error);
                             return;
                         }
-                        console.log(`ticket: ${ticketId} moved to section: ${sectionId}`);
+                        console.log(
+                            `ticket: ${ticketId} moved to section: ${sectionId}`
+                        );
                         queryClient.invalidateQueries({
                             queryKey: ['boards', boardId],
                         });
@@ -56,7 +59,7 @@ const useMoveTicket = () => {
         [socket, isConnected, queryClient]
     );
 
-    return { moveTicket, isPending };
+    return { canMove, moveTicket, isPending };
 };
 
 export { useMoveTicket };
