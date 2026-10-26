@@ -1,4 +1,3 @@
-import kommy from '@/assets/icons/favicon.png';
 import boards_dark from '@/assets/images/boards-dark.png';
 import boards_light from '@/assets/images/boards-light.png';
 import boards_ticket from '@/assets/images/boards-ticket.png';
@@ -8,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
 import { Footer } from '@/layout/Footer.tsx';
 import { ThemeToggle } from '@/common/components/ThemeToggle';
+import { Header } from '@/layout/Header.tsx';
 
 const features = [
   {
@@ -35,23 +35,7 @@ const features = [
 const LandingPage = () => {
   return (
     <div className="flex min-h-dvh w-full flex-col">
-      {/* Header */}
-      <nav className="fixed top-0 left-0 z-10 w-full backdrop-blur-xl">
-        <div className="mx-auto grid w-full max-w-7xl grid-rows-2 gap-3 px-5 py-3 sm:grid-cols-2 sm:grid-rows-1 sm:py-6">
-          <div className="flex items-center justify-center sm:justify-start">
-            <img src={kommy} className="size-8" />
-            <p className="ml-2 text-xl font-bold">Trickcal Bug Tracker</p>
-          </div>
-          <div className="flex items-center justify-center gap-3 sm:justify-end">
-            <Link className="button-confirm" to={'/auth/login'}>
-              Login
-            </Link>
-            <Link className="button-special" to={'/auth/signup'}>
-              Get started
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* Content */}
       <main className="mx-auto max-w-7xl flex-1 p-6">
