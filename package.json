@@ -6,8 +6,8 @@
   "packageManager": "pnpm@10.30.2",
   "scripts": {
     "build": "turbo run build",
-    "build:client": "turbo run build --filter=@trickcal-bug-tracker/client...",
-    "build:server": "turbo run build --filter=@trickcal-bug-tracker/server...",
+    "build:client": "turbo run build --filter=@trickcal-bug-tracker/client",
+    "build:server": "turbo run build --filter=@trickcal-bug-tracker/server",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "test": "turbo run test",

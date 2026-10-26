@@ -2,6 +2,7 @@
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
     "build": {
+      "passThroughEnv": ["DATABASE_URL", "REDIS_URL"],
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
