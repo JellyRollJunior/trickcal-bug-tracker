@@ -3,6 +3,10 @@ FROM node:24-alpine AS base
 RUN corepack enable
 WORKDIR /app
 
+# -- crashes without DATABASE_URL/REDIS_URL so set a placeholder before compose injects it
+ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
+ENV REDIS_URL="redis://placeholder:6379"
+
 # ---- Install stage ----
 FROM base AS deps
 COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
@@ -38,9 +42,6 @@ RUN chmod +x ./apps/server/entrypoint.sh
 
 # --prod: only install production dependencies
 RUN pnpm install --prod --frozen-lockfile
-# -- crashes without DATABASE_URL/REDIS_URL so set a placeholder before compose injects it
-ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
-ENV REDIS_URL="redis://placeholder:6379"
 RUN pnpm --filter @trickcal-bug-tracker/server exec prisma generate
 
 USER kommy
