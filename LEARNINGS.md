@@ -1,5 +1,6 @@
 ## Learning Outcomes
 
+#### Overarching
 - Solidify TypeScript Prisma Zod shared workflow
     - Shared defines:
         - Socket events
@@ -13,7 +14,14 @@
     - Client:
         - Imports Request, Response schemas to validate data & request bodies
     - Think about what data is needed to make client side calculations easier & server side calcualtions easier
+- deployment process
+    - Frontend (easy)
+    - Redis & DB (easy)
+    - Backend (HARD) -> setup server
+        - Configure OAuth URIs
+        - Configure frontend & backend URI values
 
+#### Backend
 - Prisma indexing
     - foreign keys not indexed by default
     - indexing based on actual query patterns, not defensively on every column
@@ -57,6 +65,7 @@
     - Sessions: redis + [connect-redis](https://github.com/tj/connect-redis) + express-session
     - SocketIO: redis + [@socketio/redis-adapter](https://socket.io/docs/v4/redis-adapter/)
 
+#### Frontend
 - Background image component w/ fixed positioning
 - React Query (TanStack Query)
     - Query client setup + defaults, useQuery, useMutation, query/cache invalidation
