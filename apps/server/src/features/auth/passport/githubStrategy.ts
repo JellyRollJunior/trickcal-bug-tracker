@@ -9,7 +9,7 @@ const GithubStrategy = passportGithub.Strategy;
 const options: passportGithub.StrategyOptions = {
     clientID: env.githubClientId,
     clientSecret: env.githubClientSecret,
-    callbackURL: env.githubCallbackUrl,
+    callbackURL: `${env.server_uri}/auth/github/callback`,
 };
 const githubStrategy = new GithubStrategy(
     options,

@@ -185,3 +185,6 @@ Auth required for all endpoints & socket events execept /auth routes
 # TODO
 
 - demo route
+    - /auth/demo
+    - populate demo data
+    - client try demo button

@@ -9,7 +9,7 @@ const GoogleStrategy = passportGoogle.Strategy;
 const options: passportGoogle.StrategyOptions = {
     clientID: env.googleClientId,
     clientSecret: env.googleClientSecret,
-    callbackURL: env.googleCallbackUrl,
+    callbackURL: `${env.server_uri}/auth/google/callback`,
 };
 const googleStrategy = new GoogleStrategy(
     options,
