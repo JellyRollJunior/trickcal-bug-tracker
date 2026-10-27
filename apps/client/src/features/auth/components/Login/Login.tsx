@@ -22,12 +22,8 @@ const oauthErrorMessages: Record<string, string> = {
 };
 
 const Login = () => {
-  const {
-    isPendingLoginDemo,
-    handleSubmit,
-    redirectError,
-    setParams,
-  } = useLogin();
+  const { isPendingLoginDemo, handleSubmit, redirectError, setParams } =
+    useLogin();
 
   useEffect(() => {
     if (!redirectError) return;
@@ -50,13 +46,31 @@ const Login = () => {
       <div className="flex w-full items-center justify-center pt-20 md:pt-40">
         <LoginForm />
       </div>
-      <section className="mt-6 flex w-full max-w-sm flex-col items-center">
+      <section className="mt-5 flex w-full max-w-sm flex-col items-center">
         <div className="flex w-full items-center gap-2">
           <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
-          <p className="mb-1">or sign in with</p>
+          <p className="mb-1">Try the demo</p>
           <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
         </div>
-        <div className="mt-4 flex w-full flex-col gap-2">
+        <form
+          className="mt-2 flex w-full flex-col gap-2"
+          onSubmit={handleSubmit}
+        >
+          <SpinnerButton
+            className="button-lowkey flex w-full items-center justify-center gap-1.5 py-1.5 text-center"
+            title="Try the demo"
+            isDisabled={isPendingLoginDemo}
+            isLoading={isPendingLoginDemo}
+          >
+            <img src={kommy} className="size-6" aria-hidden />
+          </SpinnerButton>
+        </form>
+        <div className="flex w-full items-center gap-2 mt-5">
+          <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
+          <p className="mb-1">Or sign in with</p>
+          <hr className="h-px w-full flex-1 border-0 bg-gray-300" />
+        </div>
+        <div className="mt-2 flex w-full flex-col gap-2">
           <a
             className="button-lowkey flex items-center justify-center text-center"
             href={GOOGLE_AUTH_URI}
@@ -71,16 +85,6 @@ const Login = () => {
             <img src={github_oauth} className="" aria-hidden />
             GitHub
           </a>
-          <form onSubmit={handleSubmit}>
-            <SpinnerButton
-              className="button-lowkey flex w-full items-center justify-center gap-1.5 py-1.5 text-center"
-              title="Continue as demo user"
-              isDisabled={isPendingLoginDemo}
-              isLoading={isPendingLoginDemo}
-            >
-              <img src={kommy} className="size-6" aria-hidden />
-            </SpinnerButton>
-          </form>
         </div>
       </section>
     </>
