@@ -23,7 +23,7 @@ const TicketEditView = ({
 
   return (
     <>
-      <h2 className="block-primary mt-2 px-4 py-3 text-xl font-bold">
+      <h2 className="block-primary my-2 px-4 py-3 text-xl font-bold">
         Edit Ticket
       </h2>
       <TicketForm
