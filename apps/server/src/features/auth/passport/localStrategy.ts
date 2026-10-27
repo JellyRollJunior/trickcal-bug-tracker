@@ -5,7 +5,7 @@ import { consumeLoginPoints, resetLoginPoints } from '@/lib/rate-limiting/login.
 import * as userQueries from '@/features/users/user.queries.js';
 
 const LocalStrategy = passportLocal.Strategy;
-const localStrategy = new LocalStrategy({passReqToCallback: true}, async (req, username, password, done) => {
+const localStrategy = new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
     try {
         const ip = req.ip;
         const data = await userQueries.getUserByUsername({ username: username });

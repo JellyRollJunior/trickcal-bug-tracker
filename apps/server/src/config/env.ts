@@ -53,4 +53,8 @@ export const env = {
     // Google OAuth
     googleClientId: process.env['GOOGLE_CLIENT_ID'],
     googleClientSecret: process.env['GOOGLE_CLIENT_SECRET'],
+
+    // Demo use credentials
+    demoUserUsername: process.env['DEMO_USER_USERNAME'],
+    demoUserPassword: process.env['DEMO_USER_PASSWORD']
 };

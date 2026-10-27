@@ -12,6 +12,9 @@ const authRouter: Router = CreateRouter();
 
 authRouter.post('/signup', validate(signupSchema), authController.postSignup);
 authRouter.post('/login', validate(loginSchema), authController.postLogin);
+authRouter.post('/login/demo', authController.injectDemoLoginCredentials, validate(loginSchema), authController.postLogin);
+
+// OAuth
 authRouter.get('/github', passport.authenticate('github'));
 authRouter.get('/github/callback', authController.getGithubCallback);
 authRouter.get('/google', passport.authenticate('google', { scope: ['profile'] }));

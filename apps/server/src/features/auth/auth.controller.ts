@@ -20,6 +20,7 @@ import {
     getLoginRedirectURL,
 } from '@/features/auth/auth.service.js';
 import * as userQueries from '@/features/users/user.queries.js';
+import { env } from '@/config/env.js';
 
 const postSignup = async (
     req: Request<{}, {}, Pick<User, 'username' | 'password' | 'name'>>,
@@ -113,4 +114,10 @@ const getGoogleCallback = (req: Request, res: Response, next: NextFunction) => {
     authMiddleware(req, res, next);
 };
 
-export { postSignup, postLogin, getGithubCallback, getGoogleCallback };
+const injectDemoLoginCredentials = async (req: Request, _res: Response, next: NextFunction) => {
+    req.body.username = env.demoUserUsername;
+    req.body.password = env.demoUserPassword;
+    next();
+}
+
+export { postSignup, postLogin, getGithubCallback, getGoogleCallback, injectDemoLoginCredentials };

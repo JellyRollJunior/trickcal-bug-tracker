@@ -7,6 +7,7 @@
 </p>
 
 ## Live Demo
+
 https://trickcal-bug-tracker.netlify.app/
 
 ## Tech Stack
@@ -109,6 +110,7 @@ Auth required for all endpoints & socket events execept /auth routes
 | ------ | ---------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
 | POST   | /auth/signup                                   | Signup                     | { username, password, name }                                                                   | userDto                        | password: { 8 - 16 characters, uppercase, lowercase, number, special character} |
 | POST   | /auth/login                                    | Login                      | { username, password }                                                                         | { token }                      |                                                                                 |
+| POST   | /auth/login/demo                               | Demo User Login            |                                                                                                | { token }                      |                                                                                 |
 | POST   | /auth/github                                   | GitHub oauth2 login/signup |                                                                                                |                                | Login with GitHub oauth. Creates an account if no account exists                |
 | POST   | /auth/github/callback                          | GitHub oauth2 callback     |                                                                                                | { token }                      | Callback to receive token after successful authorization                        |
 | POST   | /auth/google                                   | Google oauth2 login/signup |                                                                                                |                                | Login with Google oauth. Creates an account if no account exists                |
@@ -185,6 +187,5 @@ Auth required for all endpoints & socket events execept /auth routes
 # TODO
 
 - demo route
-    - /auth/demo
     - populate demo data
     - client try demo button
