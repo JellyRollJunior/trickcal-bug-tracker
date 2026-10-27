@@ -6,11 +6,14 @@
     <img align="center" width="700px" src="./apps/client/src/assets/images/boards-ticket.png" >
 </p>
 
+## Live Demo
+https://trickcal-bug-tracker.netlify.app/
+
 ## Tech Stack
 
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, TanStack Query, React Router, Motion, Sonner
-- **Backend:** Node.js, Express 5, Socket.IO, Passport.js, Prisma, Zod
-- **Data:** PostgreSQL, Redis
+- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, TanStack Query, React Router, Motion, Sonner (hosted on Netlify)
+- **Backend:** Node.js, Express 5, Socket.IO, Passport.js, Prisma, Zod (hosted on Suga)
+- **Data:** PostgreSQL (Neon), Redis (Redis Cloud)
 - **Tooling:** pnpm workspaces, Turborepo, Docker Compose, NGINX, Vitest
 
 ## App Features
