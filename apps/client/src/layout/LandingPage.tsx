@@ -53,6 +53,9 @@ const LandingPage = () => {
               <Link className="button-special ml-3" to={'/auth/signup'}>
                 Get started
               </Link>
+              <Link className="button-confirm ml-3" to={'/auth/login'}>
+                Try the demo
+              </Link>
               <a className="button-lowkey ml-3 block" href={'#features'}>
                 Learn more
               </a>

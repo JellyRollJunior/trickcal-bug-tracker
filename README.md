@@ -31,6 +31,7 @@ https://trickcal-bug-tracker.netlify.app/
 - Auth: Sign up / log in with Google OAuth, GitHub OAuth, or username and password
 - Theming: Dark and light mode
 - Responsive design: works on both mobile and desktop screens
+- Demo user: demo the app!
 
 <p align="center">
     <img align="center" width="700px" src="./apps/client/src/assets/images/move-ticket.gif" >
@@ -183,9 +184,3 @@ Auth required for all endpoints & socket events execept /auth routes
     - Tanstack refires on window refocus by default
     - Result: Loading animation displayed while auth checking displayed on every window refocus
     - Solution: create new query which doesnt refire on refocus for auth checking
-
-# TODO
-
-- demo route
-    - populate demo data
-    - client try demo button
