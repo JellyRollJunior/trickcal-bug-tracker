@@ -57,7 +57,7 @@ const Login = () => {
           onSubmit={handleSubmit}
         >
           <SpinnerButton
-            className="button-lowkey flex w-full items-center justify-center gap-1.5 py-1.5 text-center"
+            className="button-confirm flex w-full items-center justify-center gap-1.5 py-1.5 text-center"
             title="Try the demo"
             isDisabled={isPendingLoginDemo}
             isLoading={isPendingLoginDemo}

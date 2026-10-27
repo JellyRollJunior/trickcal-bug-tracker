@@ -2,6 +2,7 @@ import boards_dark from '@/assets/images/boards-dark.png';
 import boards_light from '@/assets/images/boards-light.png';
 import boards_ticket from '@/assets/images/boards-ticket.png';
 import move_ticket from '@/assets/images/move-ticket.gif';
+import kommy from '@/assets/icons/favicon.png';
 
 import { Link } from 'react-router-dom';
 import { Background } from '@/common/components/Background.tsx';
@@ -49,14 +50,16 @@ const LandingPage = () => {
               A Kanban board where your whole team stays in sync. Every change
               shows up instantly for everyone.
             </p>
+
             <div className="flex gap-2.5">
-              <Link className="button-special ml-3" to={'/auth/signup'}>
-                Get started
-              </Link>
-              <Link className="button-confirm ml-3" to={'/auth/login'}>
+              <Link
+                className="button-confirm flex items-center justify-center gap-1.5 py-1 text-center"
+                to={'/auth/login'}
+              >
+                <img src={kommy} className="size-6" aria-hidden />
                 Try the demo
               </Link>
-              <a className="button-lowkey ml-3 block" href={'#features'}>
+              <a className="button-lowkey flex items-center" href={'#features'}>
                 Learn more
               </a>
             </div>

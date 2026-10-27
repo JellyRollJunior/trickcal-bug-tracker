@@ -14,11 +14,11 @@ const Header = ({ isNavShown = true }) => {
         </div>
         {isNavShown && (
           <nav className="flex items-center justify-center gap-3 sm:justify-end">
-            <Link className="button-confirm" to={'/auth/login'}>
-              Login
+            <Link className="button-lowkey block" to={'/auth/login'}>
+              Log in
             </Link>
             <Link className="button-special" to={'/auth/signup'}>
-              Get started
+              Sign up
             </Link>
           </nav>
         )}
