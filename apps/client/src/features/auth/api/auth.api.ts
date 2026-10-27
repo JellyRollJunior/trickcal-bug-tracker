@@ -1,6 +1,7 @@
 import z from 'zod';
 import {
     getMeResponseSchema,
+    postLoginDemoResponseSchema,
     postLoginRequestBodySchema,
     postLoginResponseSchema,
     postSignupRequestBodySchema,
@@ -9,7 +10,6 @@ import {
 import { makeRequest, safeParse } from '@/lib/apiClient.ts';
 
 type PostLoginParams = z.infer<typeof postLoginRequestBodySchema>;
-
 const postLogin = async ({ username, password }: PostLoginParams) => {
     const path = '/auth/login';
     const payload = { username, password };
@@ -34,6 +34,13 @@ const postSignup = async ({ data }: { data: PostSignupRequestBody }) => {
     return parsedResponse;
 };
 
+const postLoginDemo = async () => {
+    const path = '/auth/login/demo';
+    const response = await makeRequest(path, { method: 'POST' });
+    const parsedResponse = safeParse(postLoginDemoResponseSchema, response);
+    return parsedResponse;
+};
+
 const getMe = async () => {
     const path = '/users/me';
     const response = await makeRequest(path, {
@@ -43,4 +50,4 @@ const getMe = async () => {
     return parsedResponse;
 };
 
-export { postLogin, postSignup, getMe };
+export { postLogin, postSignup, postLoginDemo, getMe };
