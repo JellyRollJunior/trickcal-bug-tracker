@@ -15,7 +15,7 @@ https://trickcal-bug-tracker.netlify.app/
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, TanStack Query, React Router, Motion, Sonner (hosted on Netlify)
 - **Backend:** Node.js, Express 5, Socket.IO, Passport.js, Prisma, Zod (hosted on Suga)
 - **Data:** PostgreSQL (Neon), Redis (Redis Cloud)
-- **Tooling:** pnpm workspaces, Turborepo, Docker Compose, NGINX, Vitest
+- **Tooling:** pnpm workspaces, Turborepo, Docker Compose, NGINX
 
 ## App Features
 
@@ -184,3 +184,10 @@ Auth required for all endpoints & socket events execept /auth routes
     - Tanstack refires on window refocus by default
     - Result: Loading animation displayed while auth checking displayed on every window refocus
     - Solution: create new query which doesnt refire on refocus for auth checking
+
+## New Bug
+
+- clicking esc closes modal forever
+    - probably closes dialog without modifying the modal state...
+- deleting current board redirects to landing page
+    - viewer redirected & board data does not refresh too
