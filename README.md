@@ -187,7 +187,5 @@ Auth required for all endpoints & socket events execept /auth routes
 
 ## New Bug
 
-- clicking esc closes modal forever
-    - probably closes dialog without modifying the modal state...
 - deleting current board redirects to landing page
     - viewer redirected & board data does not refresh too
