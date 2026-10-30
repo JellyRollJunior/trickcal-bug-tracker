@@ -27,6 +27,10 @@ const useBoardSocketSync = (boardId: BoardDto['id']) => {
     useEffect(() => {
         if (!isConnected || !socket || !user) return;
 
+        const refetchBoards = () => {
+            queryClient.invalidateQueries({ queryKey: ['boards'] });
+        };
+
         const refetchBoard = () => {
             queryClient.invalidateQueries({ queryKey: ['boards', boardId] });
         };
@@ -39,7 +43,8 @@ const useBoardSocketSync = (boardId: BoardDto['id']) => {
                     payload
                 );
                 toast(`Board: ${parsedPayload.board.name} was deleted`);
-                navigate('/');
+                navigate('/boards');
+                refetchBoards()
             }
         );
         const handleRemovedCollaborator = withSocketErrorHandling(

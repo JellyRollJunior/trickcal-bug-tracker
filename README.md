@@ -184,8 +184,3 @@ Auth required for all endpoints & socket events execept /auth routes
     - Tanstack refires on window refocus by default
     - Result: Loading animation displayed while auth checking displayed on every window refocus
     - Solution: create new query which doesnt refire on refocus for auth checking
-
-## New Bug
-
-- deleting current board redirects to landing page
-    - viewer redirected & board data does not refresh too
