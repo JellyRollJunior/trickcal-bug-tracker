@@ -7,13 +7,13 @@ type BoardOutletContext = {
     isPendingGetBoard: boolean;
     isErrorGetBoard: boolean;
     viewerList: ReturnType<typeof usePresenceTracking>['viewerList'] | null;
+    isDetailsOpen: boolean;
+    toggleDetails: () => void;
 };
 
 const useBoardOutletContext = () => {
     const context = useOutletContext<BoardOutletContext | undefined>();
-    if (!context) {
-        throw new Error('useBoardOutletContext must be used within a route rendered under BoardLayout');
-    }
+    if (!context) throw new Error('useBoardOutletContext must be used within a route rendered under BoardLayout');
     return context;
 };
 

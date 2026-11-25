@@ -14,16 +14,16 @@ type BoardHeaderProps = {
   board: BoardWithSectionsAndTicketsDto | null;
   viewerList: UserDto[] | null;
   isPendingGetBoard: boolean;
+  isDetailsOpen: boolean;
+  toggleDetails: () => void;
 };
 const BoardHeader = ({
   board,
   viewerList,
   isPendingGetBoard,
+  isDetailsOpen = true,
+  toggleDetails,
 }: BoardHeaderProps) => {
-  // Details section
-  const [isDetailsOpen, setIsDetailsOpen] = useState(true);
-  const toggleDetails = () => setIsDetailsOpen((prev) => !prev);
-
   // Patch board modal
   const [isPatchBoardOpen, setIsPatchBoardOpen] = useState(false);
   const openPatchBoard = () => setIsPatchBoardOpen(true);

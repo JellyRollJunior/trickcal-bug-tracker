@@ -18,4 +18,5 @@ const MeProvider = ({ children }: { children: ReactNode }) => {
     </MeContext.Provider>
   );
 };
+
 export { MeProvider, MeContext };

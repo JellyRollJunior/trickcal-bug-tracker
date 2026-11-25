@@ -9,7 +9,7 @@ import { SectionSettingsDrawer } from '@/features/sections/components/SectionSet
 import { Spinner } from '@/common/components/Spinner.tsx';
 
 const Board = () => {
-  const { board, isPendingGetBoard, viewerList } = useBoardOutletContext();
+  const { board, isPendingGetBoard, viewerList, isDetailsOpen, toggleDetails } = useBoardOutletContext();
 
   // Create Ticket Modal
   const [createTicketSectionId, setCreateTicketSectionId] = useState<
@@ -35,6 +35,8 @@ const Board = () => {
         board={board}
         viewerList={viewerList}
         isPendingGetBoard={isPendingGetBoard}
+        isDetailsOpen={isDetailsOpen}
+        toggleDetails={toggleDetails}
       />
 
       <main className="flex min-h-0 flex-1">
