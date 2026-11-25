@@ -21,7 +21,7 @@ const BoardHeader = ({
   board,
   viewerList,
   isPendingGetBoard,
-  isDetailsOpen = true,
+  isDetailsOpen,
   toggleDetails,
 }: BoardHeaderProps) => {
   // Patch board modal
@@ -48,7 +48,7 @@ const BoardHeader = ({
         </div>
 
         {/* Description, Viewer Count, Viewer List */}
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {isDetailsOpen && (
             <motion.section
               className="mt-1 grid w-full grid-cols-3 grid-rows-2 gap-1 md:grid-cols-6 md:grid-rows-1"
